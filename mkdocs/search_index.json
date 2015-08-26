@@ -2,23 +2,113 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Welcome to MkDocs\n\n\nFor full documentation visit \nmkdocs.org\n.\n\n\nCommands\n\n\n\n\nmkdocs new [dir-name]\n - Create a new project.\n\n\nmkdocs serve\n - Start the live-reloading docs server.\n\n\nmkdocs build\n - Build the documentation site.\n\n\nmkdocs help\n - Print this help message.\n\n\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
+            "text": "Machine Learning\n (41204) @ Chicago Booth\n\n\nIf you are visiting this site in Fall 2015, we predict with \n90% confidence that you're among the Booth students who, together with us, make some nice history. :)\n\n\nThis inaugural Machine Learning course specially tailored for MBAs is the \nvery first of its kind in any curricula of the leading U.S. and international business schools\n that we know of.\n\n\n[... more stuff ...]", 
             "title": "<i class=\"fa fa-home\"></i>"
         }, 
         {
-            "location": "/#welcome-to-mkdocs", 
-            "text": "For full documentation visit  mkdocs.org .", 
-            "title": "Welcome to MkDocs"
+            "location": "/#machine-learning-41204-chicago-booth", 
+            "text": "If you are visiting this site in Fall 2015, we predict with  90% confidence that you're among the Booth students who, together with us, make some nice history. :)  This inaugural Machine Learning course specially tailored for MBAs is the  very first of its kind in any curricula of the leading U.S. and international business schools  that we know of.  [... more stuff ...]", 
+            "title": "Machine Learning (41204) @ Chicago Booth"
         }, 
         {
-            "location": "/#commands", 
-            "text": "mkdocs new [dir-name]  - Create a new project.  mkdocs serve  - Start the live-reloading docs server.  mkdocs build  - Build the documentation site.  mkdocs help  - Print this help message.", 
-            "title": "Commands"
+            "location": "/Lectures/Lecture Week 01/", 
+            "text": "Lecture Week 01\n\n\nPlease view lecture slides \nhere\n.", 
+            "title": "Week 01"
         }, 
         {
-            "location": "/#project-layout", 
-            "text": "mkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
-            "title": "Project layout"
+            "location": "/Lectures/Lecture Week 01/#lecture-week-01", 
+            "text": "Please view lecture slides  here .", 
+            "title": "Lecture Week 01"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 02/", 
+            "text": "Lecture Week 02\n\n\nPlease view lecture slides \nhere\n.", 
+            "title": "Week 02"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 02/#lecture-week-02", 
+            "text": "Please view lecture slides  here .", 
+            "title": "Lecture Week 02"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 03/", 
+            "text": "Lecture Week 03\n\n\nPlease view lecture slides \nhere\n.", 
+            "title": "Week 03"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 03/#lecture-week-03", 
+            "text": "Please view lecture slides  here .", 
+            "title": "Lecture Week 03"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 04/", 
+            "text": "Lecture Week 04\n\n\nPlease view lecture slides \nhere\n.", 
+            "title": "Week 04"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 04/#lecture-week-04", 
+            "text": "Please view lecture slides  here .", 
+            "title": "Lecture Week 04"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 05/", 
+            "text": "Lecture Week 05\n\n\nPlease view lecture slides \nhere\n.", 
+            "title": "Week 05"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 05/#lecture-week-05", 
+            "text": "Please view lecture slides  here .", 
+            "title": "Lecture Week 05"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 06/", 
+            "text": "Lecture Week 06\n\n\nPlease view lecture slides \nhere\n.", 
+            "title": "Week 06"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 06/#lecture-week-06", 
+            "text": "Please view lecture slides  here .", 
+            "title": "Lecture Week 06"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 07/", 
+            "text": "Lecture Week 07\n\n\nPlease view lecture slides \nhere\n.", 
+            "title": "Week 07"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 07/#lecture-week-07", 
+            "text": "Please view lecture slides  here .", 
+            "title": "Lecture Week 07"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 08/", 
+            "text": "Lecture Week 08\n\n\nPlease view lecture slides \nhere\n.", 
+            "title": "Week 08"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 08/#lecture-week-08", 
+            "text": "Please view lecture slides  here .", 
+            "title": "Lecture Week 08"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 09/", 
+            "text": "Lecture Week 09\n\n\nPlease view lecture slides \nhere\n.", 
+            "title": "Week 09"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 09/#lecture-week-09", 
+            "text": "Please view lecture slides  here .", 
+            "title": "Lecture Week 09"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 10/", 
+            "text": "Lecture Week 10\n\n\nPlease view lecture slides \nhere\n.", 
+            "title": "Week 10"
+        }, 
+        {
+            "location": "/Lectures/Lecture Week 10/#lecture-week-10", 
+            "text": "Please view lecture slides  here .", 
+            "title": "Lecture Week 10"
         }
     ]
 }

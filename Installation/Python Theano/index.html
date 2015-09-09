@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Robert E. McCulloch, Mladen Kolar">
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<title>Python Theano package - Chicago Booth ML</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../styles.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">Chicago Booth ML</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../.."><i class="fa fa-home"></i></a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lectures <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../Lectures/Lecture Week 01/">Week 01</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../Lectures/Lecture Week 02/">Week 02</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../Lectures/Lecture Week 03/">Week 03</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../Lectures/Lecture Week 04/">Week 04</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../Lectures/Lecture Week 05/">Week 05</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../Lectures/Lecture Week 06/">Week 06</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../Lectures/Lecture Week 07/">Week 07</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../Lectures/Lecture Week 08/">Week 08</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../Lectures/Lecture Week 09/">Week 09</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../Lectures/Lecture Week 10/">Week 10</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Installation <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../Computer Operating System Requirements/">Computer Operating System Requirements</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../Cygwin/">Cygwin (for Windows users only)</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../Git, GitHub & SourceTree/">Git, GitHub & SourceTree</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../R, RStudio & CRAN Packages/">R, RStudio & CRAN Packages</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../Python Anaconda, PyCharm IDE, and Conda & PyPI Packages/">Python Anaconda, PyCharm IDE, and Conda & PyPI Packages</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Python Theano package</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                
+                    <li>
+                        <a href="http://github.com/ChicagoBoothML/MachineLearning_Fall2015">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#theano-overview">Theano: Overview</a></li>
+        
+    
+        <li class="main "><a href="#theano-installation-and-configuration-on-mac">￼Theano Installation and Configuration on Mac</a></li>
+        
+    
+        <li class="main "><a href="#theano-installation-and-configuration-on-windows">￼Theano Installation and Configuration on Windows</a></li>
+        
+    
+        <li class="main "><a href="#theano-configurations-for-info-only">￼Theano Configurations [for info only]</a></li>
+        
+    
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="theano-overview">Theano: Overview</h1>
+<p>Theano is a Python library that enables using a compatible GPU (Graphical Processing Unit) of the computer for numerical computation, which is far superior in performance terms to computation by the computer’s CPU (Central Processing Unit).</p>
+<ul>
+<li>
+<p><strong>Currently, the most, if not only, effectively Theano-supported GPUs are those by NVIDIA</strong></p>
+</li>
+<li>
+<p>Even if your machine do not have an NVIDIA graphics card, Theano is still useful in compiling complex calculations down to highly efficient C / C++ or machine code that can execute very fast
+￼￼￼</p>
+</li>
+</ul>
+<p>Because of its huge performance-boosting benefits, Theano is prominent in extremely data-intensive, large-scale Machine Learning applications such as those in cutting-edge Neural Networks-based Deep Learning.</p>
+<p>Having said that, Theano is still very young (<em>"young"</em> = nice word for <em>"buggy"</em>) and its setup, configuration and usage demand a high degree of risk-taking and perseverance. :( <em>(It helps if you are good with your friends and hence enjoy good karma)</em></p>
+<p>We will hence use Theano only on a <strong>limited, experimental basis</strong> for some exercises in Neural Networks, and we will install it in such a way that if your computer does not have an NVIDIA GPU, Theano will fall back to NumPy, which is Python’s default numerical computation library.</p>
+<p>In case you are unsuccessful in struggling through the Theano installation, we will use a non-Theano-dependent library for the Neural Networks exercises.</p>
+<p>￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼</p>
+<h1 id="theano-installation-and-configuration-on-mac">￼Theano Installation and Configuration on Mac</h1>
+<p>You may refer to the Theano installation and configuration guide for Mac <a href="http://deeplearning.net/software/theano/install.html#mac-os"><strong>here</strong></a>.</p>
+<p>Appropriate steps vary from machine to machine. Consult <strong><em>Dr. Google</em></strong> and <strong>*Prof. Stack Overflow</strong> whenever you get stuck.</p>
+<p>In the Teaching Assistants’ own experience, the recommended key steps include:</p>
+<ol>
+<li>Install the <strong>Anaconda Python v2.7 distribution</strong> *(this should be already done, per instructions in a previous section)</li>
+<li>Install the <strong>additional Conda &amp; PyPI packages</strong> per instructions in the previous section</li>
+<li>Install the Clang compiler through installing the <strong>XCode app</strong> from the Apple App Store and running XCode once to install its command-line tools</li>
+<li>Install the <a href="http://developer.nvidia.com/cuda-downloads"><strong>CUDA graphics driver and toolkit v7</strong></a> from NDIVIA in order to use the GPU to perform numerical computation</li>
+<li>Copy the <strong><code>.theanorc</code></strong> file in the <strong><em>[Your Course Repository Folder]</em>*/Software/Python/Theano/Mac</strong> folder to the <strong>/<em>[Your Username]</em>/</strong> home folder, customize the copied file (NOT the original file) according to the comments, and save it
+￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼
+One common source of error in setting up Theano on Mac concerns the BLAS (Basic Linear Algebra Subprograms) libraries</li>
+<li>Refer <a href="http://deeplearning.net/software/theano/install.html#troubleshooting-make-sure-you-have-a-blas-library"><strong>here</strong></a> for some troubleshooting guidance on this issue Verification steps:</li>
+</ol>
+<p>Run the <strong><code>TheanoTestScript.py</code></strong> file in the <strong><em>[Your Course Repository Folder]</em>/Software/Python/Theano/</strong> folder, either via your Python IDE or through the terminal, and verify that it completes successfully, giving your a comparison of speeds between NumPy and Theano
+￼
+￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼</p>
+<h1 id="theano-installation-and-configuration-on-windows">￼Theano Installation and Configuration on Windows</h1>
+<p>You may refer to the Theano installation and configuration guide for Windows <a href="http://deeplearning.net/software/theano/install_windows.html"><strong>here</strong></a>.</p>
+<p>Appropriate steps vary from machine to machine. Consult <strong><em>Dr. Google</em></strong> and <strong><em>Prof. Stack Overflow</em></strong> whenever you get stuck.</p>
+<p>In the Teaching Assistants’ own experience, the recommended key steps include:</p>
+<ol>
+<li>Install the <strong>Anaconda Python v2.7 distribution</strong> *(this should be already done, per instructions in a previous section)</li>
+<li>Install the <strong>additional Conda &amp; PyPI packages</strong> per instructions in the previous section</li>
+<li>Find and install <a href="http://www.visualstudio.com/downloads/download-visual-studio-vs"><strong>Visual Studio Community 2013</strong></a><ul>
+<li><em>do <strong>NOT</strong> install the 2015 version, which is not compatible with the CUDA software below</em></li>
+</ul>
+</li>
+<li>Install the <a href="http://developer.nvidia.com/cuda-downloads"><strong>CUDA graphics driver and toolkit v7</strong></a> from NDIVIA in order to use the GPU to perform numerical computation</li>
+<li>Install the <a href="http://www.microsoft.com/en-us/download/details.aspx?id=44266"><strong>Microsoft Visual C++ Compiler for Python v2.7</strong></a></li>
+<li>Install a <strong>GNU C Compiler (GCC)</strong> such as <a href="http://tdm-gcc.tdragon.net"><strong>this</strong></a></li>
+<li>Install <a href="http://www.graphviz.org/Download.php"><strong>GraphViz</strong></a> into a folder whose path has <strong><em>no blank spaces</em></strong></li>
+<li>Open the <strong><code>pydot.py</code></strong> file in the <strong><em>[Your Anaconda Installation Folder]</em>/lib/site-packages/</strong> folder. Locate the <code>_find_graphviz</code> function, comment its whole content out and replace with the following: <strong><code>return _find_executables(‘[YOUR GRAPHVIZ INSTALLATION FOLDER]/bin’)</code></strong></li>
+<li>
+<p>Copy the <strong><code>.theanorc</code></strong> file under <strong><em>[Your Course Repository Folder]</em>/Software Guides/Python/Theano/Windows/</strong> folder to <strong>C:/Users/<em>[Your Windows User Name]</em>/.theano/</strong> folder, customize the copied file (NOT the original file) according to the comments, and save it
+￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼
+Verification steps: open your <strong>*CygWin terminal</strong>and:</p>
+</li>
+<li>
+<p>run <strong><code>where gcc</code></strong> and verify that the path to your GCC installation’s <code>gcc.exe</code> file appears</p>
+</li>
+<li>run <strong><code>where nvcc</code></strong> and verify that the path to your CUDA installation’s <code>nvcc.exe</code> file appears</li>
+<li>run the <strong><code>TheanoTestScript.py</code></strong> file under <strong><em>[Your Course Repository Folder]</em>/Software Guides/Python/Theano/</strong>, either via your Python IDE or through the terminal, and verify that it completes successfully, giving your a comparison of speeds between NumPy and Theano
+￼￼
+￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼</li>
+</ol>
+<h1 id="theano-configurations-for-info-only">￼Theano Configurations <em>[for info only]</em></h1>
+<p>Theano has a large number of configuration levers, the most common of which are discussed <a href="http://deeplearning.net/software/theano/library/config.html"><strong>here</strong></a>.</p>
+<p>You do not need to pay attention to those for this course.</p></div>
+            
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script>
+        <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script src="../../mathjaxhelper.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

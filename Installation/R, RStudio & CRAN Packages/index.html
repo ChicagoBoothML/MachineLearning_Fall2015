@@ -9,7 +9,7 @@
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
 
-	<title>Week 03 - Chicago Booth ML</title>
+	<title>R, RStudio & CRAN Packages - Chicago Booth ML</title>
 
         <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -63,67 +63,67 @@
                 
                 
                 
-                    <li class="dropdown active">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lectures <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
 <li >
-    <a href="../Lecture Week 01/">Week 01</a>
+    <a href="../../Lectures/Lecture Week 01/">Week 01</a>
 </li>
 
                         
                             
 <li >
-    <a href="../Lecture Week 02/">Week 02</a>
-</li>
-
-                        
-                            
-<li class="active">
-    <a href="./">Week 03</a>
+    <a href="../../Lectures/Lecture Week 02/">Week 02</a>
 </li>
 
                         
                             
 <li >
-    <a href="../Lecture Week 04/">Week 04</a>
+    <a href="../../Lectures/Lecture Week 03/">Week 03</a>
 </li>
 
                         
                             
 <li >
-    <a href="../Lecture Week 05/">Week 05</a>
+    <a href="../../Lectures/Lecture Week 04/">Week 04</a>
 </li>
 
                         
                             
 <li >
-    <a href="../Lecture Week 06/">Week 06</a>
+    <a href="../../Lectures/Lecture Week 05/">Week 05</a>
 </li>
 
                         
                             
 <li >
-    <a href="../Lecture Week 07/">Week 07</a>
+    <a href="../../Lectures/Lecture Week 06/">Week 06</a>
 </li>
 
                         
                             
 <li >
-    <a href="../Lecture Week 08/">Week 08</a>
+    <a href="../../Lectures/Lecture Week 07/">Week 07</a>
 </li>
 
                         
                             
 <li >
-    <a href="../Lecture Week 09/">Week 09</a>
+    <a href="../../Lectures/Lecture Week 08/">Week 08</a>
 </li>
 
                         
                             
 <li >
-    <a href="../Lecture Week 10/">Week 10</a>
+    <a href="../../Lectures/Lecture Week 09/">Week 09</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../Lectures/Lecture Week 10/">Week 10</a>
 </li>
 
                         
@@ -132,43 +132,43 @@
                 
                 
                 
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Installation <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
 <li >
-    <a href="../../Installation/Computer Operating System Requirements/">Computer Operating System Requirements</a>
+    <a href="../Computer Operating System Requirements/">Computer Operating System Requirements</a>
 </li>
 
                         
                             
 <li >
-    <a href="../../Installation/Cygwin/">Cygwin (for Windows users only)</a>
+    <a href="../Cygwin/">Cygwin (for Windows users only)</a>
 </li>
 
                         
                             
 <li >
-    <a href="../../Installation/Git, GitHub & SourceTree/">Git, GitHub & SourceTree</a>
+    <a href="../Git, GitHub & SourceTree/">Git, GitHub & SourceTree</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">R, RStudio & CRAN Packages</a>
 </li>
 
                         
                             
 <li >
-    <a href="../../Installation/R, RStudio & CRAN Packages/">R, RStudio & CRAN Packages</a>
+    <a href="../Python Anaconda, PyCharm IDE, and Conda & PyPI Packages/">Python Anaconda, PyCharm IDE, and Conda & PyPI Packages</a>
 </li>
 
                         
                             
 <li >
-    <a href="../../Installation/Python Anaconda, PyCharm IDE, and Conda & PyPI Packages/">Python Anaconda, PyCharm IDE, and Conda & PyPI Packages</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../../Installation/Python Theano/">Python Theano package</a>
+    <a href="../Python Theano/">Python Theano package</a>
 </li>
 
                         
@@ -206,15 +206,70 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#lecture-week-03">Lecture Week 03</a></li>
+        <li class="main active"><a href="#r-installation">R Installation</a></li>
+        
+            <li><a href="#extra-steps-for-windows-users-only">Extra Steps for Windows Users Only</a></li>
+        
+    
+        <li class="main "><a href="#rstudio-installation">RStudio Installation</a></li>
+        
+    
+        <li class="main "><a href="#cran-packages-installation">CRAN Packages Installation</a></li>
         
     
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="lecture-week-03">Lecture Week 03</h1>
-<p>Please view lecture slides <a href="../Lecture Week 03.pdf"><strong>here</strong></a>.</p></div>
+<h1 id="r-installation">R Installation</h1>
+<p>Go <a href="http://cran.r-project.org"><strong>here</strong></a> to download a graphical installer of the latest R version appropriate for your machine’s</p>
+<ul>
+<li>processor (32-bit / 64-bit), and</li>
+<li>operating system (Mac / Windows).</li>
+</ul>
+<p>Run the installer and follow its instructions to install the software into a folder you prefer.</p>
+<p>It is preferred that the R installation folder path <strong>DO NOT CONTAIN BLANK SPACES</strong>, because spaces occasionally cause bugs in dependent open-source software packages.</p>
+<h2 id="extra-steps-for-windows-users-only"><em>Extra Steps for Windows Users Only</em></h2>
+<p>Windows users need one extra step to make sure you can run the command <code>Rscript.exe</code> from the command-line terminal.</p>
+<ul>
+<li>
+<p>Go to <strong><em>Control Panel</em></strong> &gt; <strong><em>System</em></strong> &gt; <strong><em>Advanced System Settings</em></strong> &gt; <strong><em>Environment Variables</em></strong>, look under the <strong><em>System Variable</em></strong> section for the variable <code>Path</code>, and append the following path to the existing text:</p>
+<p><strong><code>;&lt;Your R Installation Folder&gt;/bin</code></strong></p>
+<p>(note that there should be a semi-colon (<code>;</code>) separating the existing path and the appended path, and that there must be no space between that semi-colon and the appended path)</p>
+</li>
+<li>
+<p>Open the command-line terminal via <strong><em>Start Menu</em></strong> &gt; <strong><em>Run</em></strong> &gt; <code>cmd</code>. Enter the following command and verify that it returns the folder path containing the <code>Rscript.exe</code> file:</p>
+<p><strong><code>where Rscript</code></strong></p>
+</li>
+</ul>
+<h1 id="rstudio-installation">RStudio Installation</h1>
+<p>RStudio is the most popular integrated development environment (IDE) for R.</p>
+<p>Go <a href="http://www.rstudio.com/products/rstudio"><strong>here</strong></a> to download a graphical installer of RStudio appropriate for your machine’s</p>
+<ul>
+<li>processor (32-bit / 64-bit), and</li>
+<li>operating system (Mac / Windows).</li>
+</ul>
+<p>Run the installer and follow its instructions to install the software into a folder you prefer.</p>
+<h1 id="cran-packages-installation">CRAN Packages Installation</h1>
+<p>We need to install a number of packages from the <strong>Comprehensive R Archive Network</strong> (<strong>CRAN</strong>), a repository of open-source packages developed in R.</p>
+<ul>
+<li>
+<p>First, make sure you have cloned and synchronized the <a href="https://github.com/ChicagoBoothML/MachineLearning_Fall2015"><strong>course GitHub repository</strong></a> onto your machine;</p>
+</li>
+<li>
+<p>Open the command-line terminal:</p>
+<ul>
+<li><strong>Mac</strong>: via the <strong><em>iTerm</em></strong> app</li>
+<li><strong>Windows</strong>: via <strong><em>Start Menu</em></strong> &gt; <strong><em>Run</em></strong> &gt; <code>cmd</code>;</li>
+</ul>
+</li>
+<li>
+<p>Navigate to the <strong><em>[Your Course Repository Folder]</em>/Software/R/</strong> folder; and</p>
+</li>
+<li>
+<p>Run the command <strong><code>Rscript RInstallPackages.R</code></strong> to install the R packages necessary for this course</p>
+</li>
+</ul></div>
             
         </div>
 

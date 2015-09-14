@@ -56,6 +56,10 @@ docs/_build/
 # PyBuilder
 target/
 
+# R files
+*.Rhistory
+*.Rproj
+
 # IntelliJ IDEA files
 *.iml
 .idea/

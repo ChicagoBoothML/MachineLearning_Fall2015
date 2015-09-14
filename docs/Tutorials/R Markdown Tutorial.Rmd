@@ -6,7 +6,7 @@ output:
 fontsize: 12
 geometry: margin=1.0in
 ---
-<!-- comment the above block between the two sets of triple dashes specify the Title of the document and some common formatting settings --> 
+<!-- comment: the above block between the two sets of triple dashes specify the Title of the document and some common formatting settings --> 
 
 
 # What is Markdown

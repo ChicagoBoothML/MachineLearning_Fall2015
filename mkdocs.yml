@@ -1,10 +1,11 @@
-site_name: Chicago Booth ML
+site_name:  BUS 41204 Machine Learning 
 site_author: Robert E. McCulloch, Mladen Kolar
 
 include_nav: True
 include_next_prev: False
 pages:
   - <i class="fa fa-home"></i>: 'index.md'
+  - New Home: 'index1.md'
   - Syllabus & Lectures:
     - Syllabus: 'Syllabus.md'
     - Lecture 01: 'Lectures/Lecture Week 01.md'

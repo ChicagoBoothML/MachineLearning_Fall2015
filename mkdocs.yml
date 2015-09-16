@@ -4,7 +4,7 @@ site_author: Robert E. McCulloch, Mladen Kolar
 include_nav: True
 include_next_prev: False
 pages:
-  - Description: 'index1.md'
+  - Description: 'index.md'
   - Lectures: Syllabus.md
   - Project: Project.md
   - Computing: 'Computing.md'

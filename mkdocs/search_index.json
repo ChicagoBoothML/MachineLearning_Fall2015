@@ -2,123 +2,48 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Machine Learning\n (41204) @ Chicago Booth\n\n\nIf you are visiting this site in Fall 2015, we predict with \n90% confidence (and 110% excitement! \n) that you're among the Booth students who, together with us, make some nice history. \n\n\nThis inaugural Machine Learning course specially tailored for MBAs is the \nVERY FIRST OF ITS KIND in any curricula of the leading U.S. and international business schools\n that we know of.\n\n\nAdvanced Machine Learning is the very core of modern Data Analytics, which companies big and small are leveraging to mine commercial value out of their increasing vast troves of information.\n\n\nThis course aims to give you a 10-week tasting session on a diverse buffet of popular, powerful and highly practical Machine Learning algorithms, with the hope that what you take away here will help you rise up to data-enabled commercial opportunities in your later careers.\n\n\nThe main programming language for this course is \nR\n \n(which we are proposing to our Deans to be a strict Booth admission prerequisite in addition to GMAT from 2016-2017...)\n. In addition, another major innovation in this course is an option for you to do programming in \nPython\n if you so choose. That's double work for us, but hopefully more than double joy to you. \n\n\nEnjoy!\n\n\nP.S.\n: For this very first offering, we ask for your cooperation and patience if Murphy's Law ever gets activated.\n\n\nIMPORTANT: Course Materials Repository on GitHub.com\n\n\nAll of our course materials will be published through a this \nrepository on GitHub.com\n.\n\n\n\n\nThat means our UChicago Chalk site will be as quite as an autumn lake - it may only have your grades; for everything else, go to this repo.\n\n\n\n\nThe very first thing you should do is to follow to these \nGit, GitHub and SourceTree installation guides\n to install the necessary Git-related software, and then \nclone\n this online repo onto a folder on your machine's hard drive.\n\n\n\n\nWe will hitherto refer to that cloned folder \"\n[Your Course Repository Folder]\n\"\n\n\n\n\nThe \nSourceTree\n app has a simple \n\"Pull\"\n button for you to obtain any changes / updates / additions we make to the course materials. After each pull, you have 100% of whatever we have. No more sweat shed on manually downloading slides / files from Chalk.\n\n\nCourse Discussion Forum on Piazza.com\n\n\nOur discussion forum is hosted \nhere\n on Piazza.\n\n\nIf we answer your questions after 2am, consider sending a rose...", 
-            "title": "<i class=\"fa fa-home\"></i>"
+            "text": "BUS 41204: Machine Learning\n\n\nLectures\n\n\nThursday 08:30 AM-11:30 AM, Harper Center, HCC01 \n\nFriday 06:00 PM-09:00 PM, Gleacher Center, GC208 \n\nSaturday 06:00 PM-09:00 PM, Gleacher Center, GC208 \n\n\nPiazza Course page: \nhttps://piazza.com/chicagobooth/fall2015/bus41204/home\n\n\nPeople\n\n\nInstructors:\n \n\nMladen Kolar (\nmkolar@chicagobooth.edu\n) Office: HC 306 \n\nRob E. McCulloch (\nRobert.McCulloch@chicagobooth.edu\n) Office: HC 365\n\n\nTAs:\n  \n\nJuan Manuel Yrigoyen Capilla (\njyrigoyen@chicagobooth.edu\n)  \n\nDaniel Hedblom (\nhedblom@uchicago.edu\n)  \n\nVinh Luong (\nvinh.luong@chicagobooth.edu\n)\n\n\nOffice hours:\n by appointment \n\n\nCourse summary\n\n\nIf you are visiting this site in Fall 2015, we predict with \n90%\nconfidence (and 110% excitement!) that you're among the Booth students\nwho, together with us, are making some nice history.\nThis inaugural Machine Learning course specially tailored for MBAs is\nthe VERY FIRST OF ITS KIND in any curricula of the leading U.S. and\ninternational business schools that we know of.\n\n\nMachine Learning is the very core of modern Data Analytics, which\ncompanies big and small are leveraging to mine commercial value out of\ntheir increasingly vast troves of information.\nThis course aims to give you a 10-week tasting session on a diverse\nbuffet of popular, powerful and highly practical Machine Learning\nalgorithms, with the hope that what you take away here will help you\nrise up to data-enabled commercial opportunities in your later\ncareers.\n\n\nStudents will learn about state-of-the-art machine learning techniques\nand how to apply them in business related problems. Techniques will be\nintroduced in the context of business applications and the emphasis\nwill be put on how machine learning can be used to create value and\nprovide insights from data.\n\n\nFirst, and the biggest, part of the class will focus on predictive\nanalytics. Students will learn about decision trees, nearest neighbor\nclassifiers, boosting, random forests, deep neural networks, naive\nBayes and support vector machines. Among other examples, we will apply\nthese techniques to detecting spam in email, click-through rate\nprediction in online advertisement, image classification, face\nrecognition, sentiment analysis and churn prediction. Students will\nlearn what techniques to apply and why.\n\n\nIn the second part of the class, students will learn about\nunsupervised techniques for extracting actionable patterns from\ndata. Examples include clustering, collaborative filtering,\nprobabilistic graphical modeling and dimension reduction with\napplications to customer segmentation, recommender systems, graph and\ntime series mining, and anomaly detection.\n\n\nDiscussion forum\n\n\nWe will be using\n\nPiazza\n for\nclass discussion. Please post any questions that you may have there,\nrather than emailing TAs or instructors. All your classmates will\nbenefit from the public discussion.\n\n\nWe also encourage you to answer other students' questions. Answering\nquestion will reinforce your learning and understanding of the\nmaterial. We will carefully check all discussions and clarify any\nconfusion.\n\n\nIf we answer your questions after 2am, consider sending a rose...\n\n\nPrerequisites\n\n\nThe class does not require sophisticated mathematical knowledge nor\nextensive programming experience. However, the nature of the material\nis somewhat technical.\n\n\nBUS 41000 or BUS 41100. You should be familiar with basic probability\n  and linear regression. If you have not taken either of these\n  courses, you can still take Machine Learning if you have\n  quantitative background. However, in case there are gaps in your\n  background, we will expect that you fill those gaps as soon as\n  possible, or withdraw from the course otherwise.\n\n\nAddition, you should be familiar with R, a platform for statistical\nanalysis.\n\n\nComputing\n\n\nAll computing in class will be conducted in R. The focus of the class\nwill be on teaching machine learning concepts rather than how to use\nR. Some resources for learning R are provided \nhere\n.\n\n\nOther programming languages.\n There are many programming languages\nthat have readily available machine learning libraries. You are free\nto use any of them in your homeworks and projects. However, if you\nchoose to do so, we may not be able to provide much support. In\naddition to R, thanks to Vinh, we will provide some help with Python. \n\n\nTextbooks\n\n\nThere are no required textbooks. All materials notes will be available on the class website. \n\n\nOptional textbooks:\n Books below do not cover all the material we plan to cover in the class. We list both technical books and business related books.\n\n\nAn Introduction to Statistical Learning with Applications in R\n  \n\n\nGareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani\n \n\nThis book provides a great introduction to the of learning. Concepts are well explained, without too much technical details. \n\n\nPDF available online\n\n\nElements of Statistical Learning\n  \n\n\nTrevor Hastie, Robert Tibshirani and Jerome Friedman\n \n\nThis book covers similar material to the one above, however, it provides more technical material. \n\n\nPDF available online\n\n\nMachine Learning: a Probabilistic Perspective\n  \n\n\nKevin Murphy\n \n\nPhD level book. The book provides encyclopedic survey of the area.\n\n\nThe following two books are very light on technical details, but do talk applying machine learning in the context of business applications.\n\n\nData Science for Business\n \n\n\nFoster Provost and Tom Fawcett\n\n\nBig Data, Data Mining, and Machine Learning: Value Creation for Business Leaders and Practitioners\n\n\nJared Dean\n\n\nGrading\n\n\nHomework assignments (\n30%\n), Midterm (\n30%\n), Final project (\n40%\n)\n\n\nThere will be \n8 homework assignments\n that will be due weekly\nexcept week 1 and 6. These assignments can be done in groups (max size\n4). Students should submit only one write-up per group. Homework\nshould be submitted through Chalk.\n\n\nThere is a \ntake-home midterm\n that will be posted in week 5 and\nwill be due in week 6. Students must work individually on the midterm.\n\n\nThe \nfinal project\n can be done in a group. The goal will be to\napply machine learning to a particular business problem. More details\nabout the project can be found \nhere\n.", 
+            "title": "Description"
         }, 
         {
-            "location": "/#machine-learning-41204-chicago-booth", 
-            "text": "If you are visiting this site in Fall 2015, we predict with  90% confidence (and 110% excitement!  ) that you're among the Booth students who, together with us, make some nice history.   This inaugural Machine Learning course specially tailored for MBAs is the  VERY FIRST OF ITS KIND in any curricula of the leading U.S. and international business schools  that we know of.  Advanced Machine Learning is the very core of modern Data Analytics, which companies big and small are leveraging to mine commercial value out of their increasing vast troves of information.  This course aims to give you a 10-week tasting session on a diverse buffet of popular, powerful and highly practical Machine Learning algorithms, with the hope that what you take away here will help you rise up to data-enabled commercial opportunities in your later careers.  The main programming language for this course is  R   (which we are proposing to our Deans to be a strict Booth admission prerequisite in addition to GMAT from 2016-2017...) . In addition, another major innovation in this course is an option for you to do programming in  Python  if you so choose. That's double work for us, but hopefully more than double joy to you.   Enjoy!  P.S. : For this very first offering, we ask for your cooperation and patience if Murphy's Law ever gets activated.", 
-            "title": "Machine Learning (41204) @ Chicago Booth"
+            "location": "/Syllabus/", 
+            "text": "Lectures\n\n\nThe lecture schedule below is tentative and is subject to change,\ndepending on time and class interests.  We will move at a pace\ndictated by class discussions.  Check this page often for updates.\n\n\n\n\n\n\n\n\nWeek\n\n\nDate\n\n\nContent\n\n\n\n\n\n\n\n\n\n\n1\n\n\n9/24, 9/25, 9/26\n\n\nIntro to  ML, Nearest Neighbours, Bias-variance trade-off\n\n\n\n\n\n\n2\n\n\n10/1, 10/2, 10/3\n\n\nDecision Trees, Random forests\n\n\n\n\n\n\n3\n\n\n10/8, 10/9, 10/10\n\n\nBoosting\n\n\n\n\n\n\n4\n\n\n10/15, 10/16, 10/17\n\n\nReview of linear models, Neural networks\n\n\n\n\n\n\n5\n\n\n10/22, 10/23, 10/24\n\n\nMachine learning in the wild\n\n\n\n\n\n\n6\n\n\n10/29, 10/30, 10/31\n\n\nAnomaly detection\n\n\n\n\n\n\n7\n\n\n11/5, 11/6, 11/7\n\n\nRecommender systems\n\n\n\n\n\n\n8\n\n\n11/12, 11/13, 11/14\n\n\nMinning network data\n\n\n\n\n\n\n9\n\n\n11/19, 11/20, 11/21\n\n\nProbabilistic graphical models, HMMs, Naive Bayes\n\n\n\n\n\n\n10\n\n\n12/3, 12/4, 12/5\n\n\nMinning time series\n\n\n\n\n\n\n11\n\n\n12/11\n\n\nFinal Project Due\n\n\n\n\n\n\n\n\nWeek 1\n\n\nOptional textbook reading:\n\n\nAdditional reading:\n\n\nMachine learning: Trends, perspectives, and prospects\n \n\n\nM. I. Jordan and T. M. Mitchel\n \n\nA \nScience\n review article from two leading experts in Machine Learning.\n\n\nWeek 2\n\n\nWeek 3\n\n\nWeek 4\n\n\nWeek 5\n\n\nWeek 6\n\n\nWeek 7\n\n\nWeek 8\n\n\nWeek 9\n\n\nWeek 10", 
+            "title": "Lectures"
         }, 
         {
-            "location": "/#important-course-materials-repository-on-githubcom", 
-            "text": "All of our course materials will be published through a this  repository on GitHub.com .   That means our UChicago Chalk site will be as quite as an autumn lake - it may only have your grades; for everything else, go to this repo.   The very first thing you should do is to follow to these  Git, GitHub and SourceTree installation guides  to install the necessary Git-related software, and then  clone  this online repo onto a folder on your machine's hard drive.   We will hitherto refer to that cloned folder \" [Your Course Repository Folder] \"   The  SourceTree  app has a simple  \"Pull\"  button for you to obtain any changes / updates / additions we make to the course materials. After each pull, you have 100% of whatever we have. No more sweat shed on manually downloading slides / files from Chalk.", 
-            "title": "IMPORTANT: Course Materials Repository on GitHub.com"
+            "location": "/Syllabus/#lectures", 
+            "text": "The lecture schedule below is tentative and is subject to change,\ndepending on time and class interests.  We will move at a pace\ndictated by class discussions.  Check this page often for updates.     Week  Date  Content      1  9/24, 9/25, 9/26  Intro to  ML, Nearest Neighbours, Bias-variance trade-off    2  10/1, 10/2, 10/3  Decision Trees, Random forests    3  10/8, 10/9, 10/10  Boosting    4  10/15, 10/16, 10/17  Review of linear models, Neural networks    5  10/22, 10/23, 10/24  Machine learning in the wild    6  10/29, 10/30, 10/31  Anomaly detection    7  11/5, 11/6, 11/7  Recommender systems    8  11/12, 11/13, 11/14  Minning network data    9  11/19, 11/20, 11/21  Probabilistic graphical models, HMMs, Naive Bayes    10  12/3, 12/4, 12/5  Minning time series    11  12/11  Final Project Due     Week 1  Optional textbook reading:  Additional reading:  Machine learning: Trends, perspectives, and prospects    M. I. Jordan and T. M. Mitchel   \nA  Science  review article from two leading experts in Machine Learning.  Week 2  Week 3  Week 4  Week 5  Week 6  Week 7  Week 8  Week 9  Week 10", 
+            "title": "Lectures"
         }, 
         {
-            "location": "/#course-discussion-forum-on-piazzacom", 
-            "text": "Our discussion forum is hosted  here  on Piazza.  If we answer your questions after 2am, consider sending a rose...", 
-            "title": "Course Discussion Forum on Piazza.com"
+            "location": "/Project/", 
+            "text": "Project\n\n\nYour class project is an opportunity for you to explore an interesting\nmachine learning problem of your choice in the context of a real-world\ndata set. Your class project must be about new things you have done\nthis semester; you can't use results you have developed in previous\nsemesters. We will provide some project ideas here, but the best idea\nis to combine machine learning with a problem in your area.\n\n\nDeadlines:\n\n\n\n\nProject Proposal: week 7\n\n\nProject Write-up: week 11\n\n\n\n\nProject Proposal\n\n\nProposals should be one page maximum.\n\n\nInclude the following information: \n\n\n\n\nProject title \n\n\nData set \n\n\nProject idea. Describe what you want to achive. What machine learning tools are you going to use? How is the data set going to help you answer your question?\n\n\n\n\nProject Write-up\n\n\nTo be added...\n\n\nProject Ideas\n\n\nTo be added...", 
+            "title": "Project"
         }, 
         {
-            "location": "/Lectures/Lecture Week 01/", 
-            "text": "Lecture Week 01\n\n\nPlease view lecture slides \nhere\n.", 
-            "title": "Week 01"
+            "location": "/Project/#project", 
+            "text": "Your class project is an opportunity for you to explore an interesting\nmachine learning problem of your choice in the context of a real-world\ndata set. Your class project must be about new things you have done\nthis semester; you can't use results you have developed in previous\nsemesters. We will provide some project ideas here, but the best idea\nis to combine machine learning with a problem in your area.  Deadlines:   Project Proposal: week 7  Project Write-up: week 11   Project Proposal  Proposals should be one page maximum.  Include the following information:    Project title   Data set   Project idea. Describe what you want to achive. What machine learning tools are you going to use? How is the data set going to help you answer your question?   Project Write-up  To be added...  Project Ideas  To be added...", 
+            "title": "Project"
         }, 
         {
-            "location": "/Lectures/Lecture Week 01/#lecture-week-01", 
-            "text": "Please view lecture slides  here .", 
-            "title": "Lecture Week 01"
+            "location": "/Computing/", 
+            "text": "Computing Resources\n\n\nThis page contains some resources for R and Python. We will be using R\nto perform data analysis in the class, however, you are welcome to use\nany other tool/programming language you are familiar with.\n\n\nWe strongly encourage you to get familiar with the basics of R, so\nthat you can focus on machine learning.  We will go through examples\nin R in-class and we will provide some instructions.  We do not expect\nyou to have taken a class that uses R previously. That said, this\nclass is not a class on R.\n\n\nR Resources\n\n\n\n\nRob's notes on R\n\n\nR's Introduction to R\n This is written by stat/computing geeks for stat/computing geeks. It is not always the easiest thing to read. That being said, if you want to learn R, you should read at least the first bit of the chapter on major topics (e.g. data frames). \n\n\nThe optional textbook \nAn introduction to statistical learning\n has a section 2.3 dedicated to basics of R\n\n\nReference card\n\n\nGoogle Tutorial\n\n\nPrinceton Tutorail\n\n\nR Markdown\n Vinh's R Markdown tutorial\n\n\nR data.table\n Vinh's R data.table tutorial\n\n\nGoogle and question answering web-page \nstackoverflow.com\n\n\nThere are many books and tutorials on R. If you find something that you find particularly useful, share it with us on piazza.\n\n\n\n\nPython Resources", 
+            "title": "Computing"
         }, 
         {
-            "location": "/Lectures/Lecture Week 02/", 
-            "text": "Lecture Week 02\n\n\nPlease view lecture slides \nhere\n.", 
-            "title": "Week 02"
+            "location": "/Computing/#computing-resources", 
+            "text": "This page contains some resources for R and Python. We will be using R\nto perform data analysis in the class, however, you are welcome to use\nany other tool/programming language you are familiar with.  We strongly encourage you to get familiar with the basics of R, so\nthat you can focus on machine learning.  We will go through examples\nin R in-class and we will provide some instructions.  We do not expect\nyou to have taken a class that uses R previously. That said, this\nclass is not a class on R.", 
+            "title": "Computing Resources"
         }, 
         {
-            "location": "/Lectures/Lecture Week 02/#lecture-week-02", 
-            "text": "Please view lecture slides  here .", 
-            "title": "Lecture Week 02"
+            "location": "/Computing/#r-resources", 
+            "text": "Rob's notes on R  R's Introduction to R  This is written by stat/computing geeks for stat/computing geeks. It is not always the easiest thing to read. That being said, if you want to learn R, you should read at least the first bit of the chapter on major topics (e.g. data frames).   The optional textbook  An introduction to statistical learning  has a section 2.3 dedicated to basics of R  Reference card  Google Tutorial  Princeton Tutorail  R Markdown  Vinh's R Markdown tutorial  R data.table  Vinh's R data.table tutorial  Google and question answering web-page  stackoverflow.com  There are many books and tutorials on R. If you find something that you find particularly useful, share it with us on piazza.", 
+            "title": "R Resources"
         }, 
         {
-            "location": "/Lectures/Lecture Week 03/", 
-            "text": "Lecture Week 03\n\n\nPlease view lecture slides \nhere\n.", 
-            "title": "Week 03"
-        }, 
-        {
-            "location": "/Lectures/Lecture Week 03/#lecture-week-03", 
-            "text": "Please view lecture slides  here .", 
-            "title": "Lecture Week 03"
-        }, 
-        {
-            "location": "/Lectures/Lecture Week 04/", 
-            "text": "Lecture Week 04\n\n\nPlease view lecture slides \nhere\n.", 
-            "title": "Week 04"
-        }, 
-        {
-            "location": "/Lectures/Lecture Week 04/#lecture-week-04", 
-            "text": "Please view lecture slides  here .", 
-            "title": "Lecture Week 04"
-        }, 
-        {
-            "location": "/Lectures/Lecture Week 05/", 
-            "text": "Lecture Week 05\n\n\nPlease view lecture slides \nhere\n.", 
-            "title": "Week 05"
-        }, 
-        {
-            "location": "/Lectures/Lecture Week 05/#lecture-week-05", 
-            "text": "Please view lecture slides  here .", 
-            "title": "Lecture Week 05"
-        }, 
-        {
-            "location": "/Lectures/Lecture Week 06/", 
-            "text": "Lecture Week 06\n\n\nPlease view lecture slides \nhere\n.", 
-            "title": "Week 06"
-        }, 
-        {
-            "location": "/Lectures/Lecture Week 06/#lecture-week-06", 
-            "text": "Please view lecture slides  here .", 
-            "title": "Lecture Week 06"
-        }, 
-        {
-            "location": "/Lectures/Lecture Week 07/", 
-            "text": "Lecture Week 07\n\n\nPlease view lecture slides \nhere\n.", 
-            "title": "Week 07"
-        }, 
-        {
-            "location": "/Lectures/Lecture Week 07/#lecture-week-07", 
-            "text": "Please view lecture slides  here .", 
-            "title": "Lecture Week 07"
-        }, 
-        {
-            "location": "/Lectures/Lecture Week 08/", 
-            "text": "Lecture Week 08\n\n\nPlease view lecture slides \nhere\n.", 
-            "title": "Week 08"
-        }, 
-        {
-            "location": "/Lectures/Lecture Week 08/#lecture-week-08", 
-            "text": "Please view lecture slides  here .", 
-            "title": "Lecture Week 08"
-        }, 
-        {
-            "location": "/Lectures/Lecture Week 09/", 
-            "text": "Lecture Week 09\n\n\nPlease view lecture slides \nhere\n.", 
-            "title": "Week 09"
-        }, 
-        {
-            "location": "/Lectures/Lecture Week 09/#lecture-week-09", 
-            "text": "Please view lecture slides  here .", 
-            "title": "Lecture Week 09"
-        }, 
-        {
-            "location": "/Lectures/Lecture Week 10/", 
-            "text": "Lecture Week 10\n\n\nPlease view lecture slides \nhere\n.", 
-            "title": "Week 10"
-        }, 
-        {
-            "location": "/Lectures/Lecture Week 10/#lecture-week-10", 
-            "text": "Please view lecture slides  here .", 
-            "title": "Lecture Week 10"
+            "location": "/Computing/#python-resources", 
+            "text": "", 
+            "title": "Python Resources"
         }, 
         {
             "location": "/Installation/Computer Operating System Requirements/", 
@@ -142,12 +67,12 @@
         }, 
         {
             "location": "/Installation/Git, GitHub & SourceTree/", 
-            "text": "Git installation\n\n\nGit is the de facto go-to solution for version control.\n\n\nGo \nhere\n to download a graphical Git installer appropriate for your machine\u2019s operating system (Mac / Windows).\n\n\nRun the installer and follow its instructions to install the software. Usually the default options are all we need for configuring Git.\n\ufffc\ufffc\ufffc\n\ufffc\ufffc\ufffc\ufffc\n\n\n\ufffcGitHub installation\n\n\nGitHub is the leading online hosting service of Git repositories.\n\n\nGo \nhere\n to register an account if you have not got one.\n\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\n\n\nSourceTree installation\n\n\nAtlassian\u2019s SourceTree is one of the best desktop apps for managing Git repositories online and offline.\n\n\n\n\nGo \nhere\n to download a graphical installer of SourceTree appropriate for your machine\u2019s operating system (Mac / Windows).\n\n\nRun the installer and follow its instructions to install the software into a folder you prefer.\n\n\nLaunch SourceTree after installation, follow the default recommended basic configurations, and log in with your GitHub account.", 
+            "text": "Git installation\n\n\nGit is the \nde facto\n go-to solution for version control.\n\n\nGo \nhere\n to download a graphical Git installer appropriate for your machine\u2019s operating system (Mac / Windows).\n\n\nRun the installer and follow its instructions to install the software. Usually the default options are all we need for configuring Git.\n\ufffc\ufffc\ufffc\n\ufffc\ufffc\ufffc\ufffc\n\n\n\ufffcGitHub installation\n\n\nGitHub is the leading online hosting service of Git repositories.\n\n\nGo \nhere\n to register an account if you have not got one.\n\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\ufffc\n\n\nSourceTree installation\n\n\nAtlassian\u2019s SourceTree is one of the best desktop apps for managing Git repositories online and offline.\n\n\n\n\nGo \nhere\n to download a graphical installer of SourceTree appropriate for your machine\u2019s operating system (Mac / Windows).\n\n\nRun the installer and follow its instructions to install the software into a folder you prefer.\n\n\nLaunch SourceTree after installation, follow the default recommended basic configurations, and log in with your GitHub account.", 
             "title": "Git, GitHub & SourceTree"
         }, 
         {
             "location": "/Installation/Git, GitHub & SourceTree/#git-installation", 
-            "text": "Git is the de facto go-to solution for version control.  Go  here  to download a graphical Git installer appropriate for your machine\u2019s operating system (Mac / Windows).  Run the installer and follow its instructions to install the software. Usually the default options are all we need for configuring Git.\n\ufffc\ufffc\ufffc\n\ufffc\ufffc\ufffc\ufffc", 
+            "text": "Git is the  de facto  go-to solution for version control.  Go  here  to download a graphical Git installer appropriate for your machine\u2019s operating system (Mac / Windows).  Run the installer and follow its instructions to install the software. Usually the default options are all we need for configuring Git.\n\ufffc\ufffc\ufffc\n\ufffc\ufffc\ufffc\ufffc", 
             "title": "Git installation"
         }, 
         {
@@ -234,6 +159,36 @@
             "location": "/Installation/Python Theano/#theano-configurations-for-info-only", 
             "text": "Theano has a large number of configuration levers, the most common of which are discussed  here .  You do not need to pay attention to those for this course.", 
             "title": "\ufffcTheano Configurations [for info only]"
+        }, 
+        {
+            "location": "/Computing/R Markdown Tutorial/", 
+            "text": "R Markdown\n Tutorial\n\n\nR Markdown is a text file format that combines:\n\n\n\n\nR code for data analysis, and\n\n\ntext for telling a story / writing a report on your analysis\n\n\n\n\nThink of R Markdown as a way for you to write up your project report and code up your math at the same time, in the same place.\n\n\nThis tutorial provides an example script to illustrate how to use R Markdown. Please go through the following steps:\n\n\n\n\nDownload this \nR Markdown (.Rmd) script\n onto your local disk drive\n\n\nOpen the downloaded R Markdown script in RStudio\n\n\nMake sure the \nrmarkdown\n package is installed in R. If not, run the command \ninstall.packages('rmarkdown')\n in RStudio\n\n\nIn the text-editing window in RStudio, just below the file name, find and press the \"\nKnit PDF\n\" button, which will read the content of the script and convert it to a PDF document in the same folder as your R Markdown script file\n\n\nInspect the R Markdown script file thoroughly and look at the PDF output to see how the \n.Rmd\n input is rendered in the final output", 
+            "title": "R Markdown"
+        }, 
+        {
+            "location": "/Computing/R Markdown Tutorial/#r-markdown-tutorial", 
+            "text": "R Markdown is a text file format that combines:   R code for data analysis, and  text for telling a story / writing a report on your analysis   Think of R Markdown as a way for you to write up your project report and code up your math at the same time, in the same place.  This tutorial provides an example script to illustrate how to use R Markdown. Please go through the following steps:   Download this  R Markdown (.Rmd) script  onto your local disk drive  Open the downloaded R Markdown script in RStudio  Make sure the  rmarkdown  package is installed in R. If not, run the command  install.packages('rmarkdown')  in RStudio  In the text-editing window in RStudio, just below the file name, find and press the \" Knit PDF \" button, which will read the content of the script and convert it to a PDF document in the same folder as your R Markdown script file  Inspect the R Markdown script file thoroughly and look at the PDF output to see how the  .Rmd  input is rendered in the final output", 
+            "title": "R Markdown Tutorial"
+        }, 
+        {
+            "location": "/Computing/R data.table Tutorial/", 
+            "text": "R data.table\n tutorial\n\n\ndata.table\n is an advanced alternative to R's default data.frame. It offers enhanced time performance and additional capabilities that are useful in data processing tasks.\n\n\nDownload this \nR Markdown script file\n, open it in the RStudio IDE, and \"Knit PDF\" it to understand the notable features of data.table.", 
+            "title": "R data.table"
+        }, 
+        {
+            "location": "/Computing/R data.table Tutorial/#r-datatable-tutorial", 
+            "text": "data.table  is an advanced alternative to R's default data.frame. It offers enhanced time performance and additional capabilities that are useful in data processing tasks.  Download this  R Markdown script file , open it in the RStudio IDE, and \"Knit PDF\" it to understand the notable features of data.table.", 
+            "title": "R data.table tutorial"
+        }, 
+        {
+            "location": "/Links/", 
+            "text": "Links\n\n\n\n\nSyllabus\n\n\nCourse Materials repository\n on GitHub.com\n\n\nDiscussion Forum\n on Piazza.com", 
+            "title": "Resources"
+        }, 
+        {
+            "location": "/Links/#links", 
+            "text": "Syllabus  Course Materials repository  on GitHub.com  Discussion Forum  on Piazza.com", 
+            "title": "Links"
         }
     ]
 }

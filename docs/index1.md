@@ -100,19 +100,39 @@ All computing in class will be conducted in R. The focus of the class
 will be on teaching machine learning concepts rather than how to use
 R. Some resources for learning R are provided [here](..).
 
-_Other programming languages._ There are many programming languages for 
-In addition to R, thanks to Vinh, we will also provide 
-
+_Other programming languages._ There are many programming languages
+that have readily available machine learning libraries. You are free
+to use any of them in your homeworks and projects. However, if you
+choose to do so, we may not be able to provide much support. In
+addition to R, thanks to Vinh, we will provide some help with Python. 
 
 ### Textbooks
 
 There are no required textbooks. All materials notes will be available on the class website. 
 
-Some additional resources: ***move this to a separate page and complete***
+_Optional textbooks:_ Books below do not cover all the material we plan to cover in the class. We list both technical books and business related books.
 
 **[An Introduction to Statistical Learning with Applications in R](http://www-bcf.usc.edu/~gareth/ISL/)**  <br/>
 *Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani* <br/>
-PDF available online
+This book provides a great introduction to the of learning. Concepts are well explained, without too much technical details. <br/>
+_PDF available online_
+
+**[Elements of Statistical Learning](http://statweb.stanford.edu/~tibs/ElemStatLearn/)**  <br/>
+*Trevor Hastie, Robert Tibshirani and Jerome Friedman* <br/>
+This book covers similar material to the one above, however, it provides more technical material. <br/>
+_PDF available online_
+
+**[Machine Learning: a Probabilistic Perspective](http://www.cs.ubc.ca/~murphyk/MLbook/)**  <br/>
+*Kevin Murphy* <br/>
+PhD level book. The book provides encyclopedic survey of the area.
+
+The following two books are very light on technical details, but do talk applying machine learning in the context of business applications.
+
+**[Data Science for Business](http://data-science-for-biz.com/)** <br/>
+*Foster Provost and Tom Fawcett*<br/>
+
+**[Big Data, Data Mining, and Machine Learning: Value Creation for Business Leaders and Practitioners](http://www.amazon.com/gp/product/1502462915)**
+*Jared Dean*
 
 ### Grading
 
@@ -128,7 +148,7 @@ will be due in week 6. Students must work individually on the midterm.
 
 The **final project** can be done in a group. The goal will be to
 apply machine learning to a particular business problem. More details
-about the project can be found [here](..).
+about the project can be found [here](Project).
 
 
 

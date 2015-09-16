@@ -4,20 +4,10 @@ site_author: Robert E. McCulloch, Mladen Kolar
 include_nav: True
 include_next_prev: False
 pages:
-  - <i class="fa fa-home"></i>: 'index.md'
-  - New Home: 'index1.md'
-  - Syllabus & Lectures:
-    - Syllabus: 'Syllabus.md'
-    - Lecture 01: 'Lectures/Lecture Week 01.md'
-    - Lecture 02: 'Lectures/Lecture Week 02.md'
-    - Lecture 03: 'Lectures/Lecture Week 03.md'
-    - Lecture 04: 'Lectures/Lecture Week 04.md'
-    - Lecture 05: 'Lectures/Lecture Week 05.md'
-    - Lecture 06: 'Lectures/Lecture Week 06.md'
-    - Lecture 07: 'Lectures/Lecture Week 07.md'
-    - Lecture 08: 'Lectures/Lecture Week 08.md'
-    - Lecture 09: 'Lectures/Lecture Week 09.md'
-    - Lecture 10: 'Lectures/Lecture Week 10.md'
+  - Description: 'index1.md'
+  - Lectures: Syllabus.md
+  - Project: Project.md
+  - Computing: 'Computing.md'
   - Installation:
     - Computer Operating System Requirements: 'Installation/Computer Operating System Requirements.md'
     - Cygwin (for Windows users only): 'Installation/Cygwin.md'
@@ -26,9 +16,9 @@ pages:
     - Python Anaconda, PyCharm IDE, and Conda & PyPI Packages: 'Installation/Python Anaconda, PyCharm IDE, and Conda & PyPI Packages.md'
     - Python Theano package: 'Installation/Python Theano.md'
   - Tutorials:
-    - R - R Markdown: 'Tutorials/R Markdown Tutorial.md'
-    - R - data.table: 'Tutorials/R data.table Tutorial.md'
-  - Links: 'Links.md'
+    - R Markdown: 'Computing/R Markdown Tutorial.md'
+    - R data.table: 'Computing/R data.table Tutorial.md'
+  - Resources: 'Links.md'
 
 repo_url: 'http://github.com/ChicagoBoothML/MachineLearning_Fall2015'
 

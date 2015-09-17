@@ -1,11 +1,31 @@
 # **Computing Resources**
 
-This page contains links to software installation guides and some resources for R and Python.
+This page contains links to software installation guides and some resources for R (our main computing platform)
+and Python (the best alternative).
+
+There is a great deal of parallelism between the R and Python ecosystems
+of Machine Learning / Data Science and related software.
+Here is a brief table of comparison between the two ecosystems,
+including the leading who's-whos and what's-whats in various aspects:
+
+|                                             | R                                                      | PYTHON                              |
+|:--------------------------------------------|:-------------------------------------------------------|:------------------------------------|
+| **Linear Algebra**                          | *(built-in)*                                           | NumPy                               |
+| **Go-To Package for Popular ML Algos**      | caret                                                  | SciKit-Learn                        |
+| **Data Frame for Data Processing**          | data.frame, data.table                                 | Pandas                              |
+| **Visualization**                           | ggplot2, ggvis, dygraphs                               | MatPlotLib, GGPlot, Bokeh           |
+| **Large-Scale Parallel Computation**        | parallel, doMC, doParallel, snow                       | Apache Spark, Theano, Numba         |
+| **Symbolic Math**                           | Ryacas, rSymPy                                         | SymPy                               |
+| **Dynamic Document Editors / Generators**   | R Markdown, Slidify                                    | iPython Notebook                    |
+| **App Development Frameworks**              | Shiny                                                  | Django                              |
+| **Unit-Testing Frameworks**                 | testthat                                               | Nose, DocTest, Py.Test, PyUnit, Tox |                        
+| **Leading Developers**                      | RStudio, Revolution Analytics *(Microsoft subsidiary)* | Continuum Analytics, Enthought      | 
+| **Popular Integrated Devt. Envirs. (IDEs)** | RStudio                                                | PyCharm, Spyder, Rodeo              |
 
 
 ## R Resources 
 
-We will be using R to perform data analysis in the class, however, you are welcome to use
+We will be using R as the main platform to perform data analysis in the class, however, you are welcome to use
 any other tool/programming language you are familiar with.
 
 We strongly encourage you to get familiar with the basics of R, so that you can focus on Machine Learning.

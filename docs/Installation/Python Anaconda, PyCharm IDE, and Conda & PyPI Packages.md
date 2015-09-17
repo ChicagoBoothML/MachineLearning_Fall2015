@@ -44,6 +44,6 @@ We need to install a number of packages from both Continuum Analytics’ Anacond
     - **Mac**: via the ***iTerm*** app
     - **Windows**: via the ***Cygwin*** terminal;
 
-* Navigate to the ***[Your Course Repository Folder]*/Software/Python/** folder; and
+* Navigate to the ***[Your Course Repository Folder]*/Computing/Python/** folder; and
 
 * Run the folllowing command: **`sh PythonInstallPackages.sh`**

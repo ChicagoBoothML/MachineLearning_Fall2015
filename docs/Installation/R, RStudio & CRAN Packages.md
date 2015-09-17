@@ -47,6 +47,6 @@ We need to install a number of packages from the **Comprehensive R Archive Netwo
     - **Mac**: via the ***iTerm*** app
     - **Windows**: via ***Start Menu*** > ***Run*** > `cmd`;
     
-* Navigate to the ***[Your Course Repository Folder]*/Software/R/** folder; and
+* Navigate to the ***[Your Course Repository Folder]*/Computing/R/** folder; and
 
 * Run the command **`Rscript RInstallPackages.R`** to install the R packages necessary for this course

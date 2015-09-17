@@ -13,7 +13,7 @@ including the leading who's-whos and what's-whats in various aspects:
 | **Linear Algebra**                          | *(built-in)*                                           | NumPy                               |
 | **Go-To Package for Popular ML Algos**      | caret                                                  | SciKit-Learn                        |
 | **Data Frame for Data Processing**          | data.frame, data.table                                 | Pandas                              |
-| **Visualization**                           | ggplot2, ggvis, dygraphs                               | MatPlotLib, GGPlot, Bokeh           |
+| **Visualization**                           | ggplot2, ggvis, dygraphs                               | MatPlotLib, GGPlot, Bokeh, Pyxley   |
 | **Large-Scale Parallel Computation**        | parallel, doMC, doParallel, snow                       | Apache Spark, Theano, Numba         |
 | **Symbolic Math**                           | Ryacas, rSymPy                                         | SymPy                               |
 | **Dynamic Document Editors / Generators**   | R Markdown, Slidify                                    | iPython Notebook                    |
@@ -47,6 +47,9 @@ It will save you a ton of time, and its output will be easy on the eye,
 adding extra shine to your already brilliant analysis...
 - [**R data.table** tutorial](Tutorials/R data.table Tutorial.md): a tutorial by Vinh on R data.table,
 an advanced, high-performance alternative to R's default data.frame
+- [**Introduction to the *caret* Package**](http://cran.r-project.org/web/packages/caret/vignettes/caret.pdf):
+***caret*** is a popular R package providing standardized interfaces with about 200 Machine Learning algorithms
+and many related data-processing procedures
 - Google and question answering web-page [StackOverflow](http://stackoverflow.com)
 - There are many books and tutorials on R.
 If you find something that you find particularly useful, please share it with us on Piazza.
@@ -56,6 +59,9 @@ If you find something that you find particularly useful, please share it with us
 
 - [**Anaconda Python, PyCharm IDE, and Conda & PyPI Packages** installation guides](Installation/Python Anaconda, PyCharm IDE, and Conda & PyPI Packages.md)
 - [**Theano package** installation guide](Installation/Python Theano.md)
+- [**A Basic Tutorial on SciKit-Learn**](http://scikit-learn.org/stable/tutorial/basic/tutorial.html):
+***SciKit-Learn*** is the most popular Python package providing
+standardized interfaces with over 100 Machine Learning algorithms and many related data-processing procedures
 
 ## Other Software Installation
 

@@ -28,12 +28,12 @@ In the Teaching Assistants’ own experience, the recommended key steps include:
 2. Install the **additional Conda & PyPI packages** per instructions in the previous section
 3. Install the Clang compiler through installing the **XCode app** from the Apple App Store and running XCode once to install its command-line tools
 4. Install the [**CUDA graphics driver and toolkit v7**](http://developer.nvidia.com/cuda-downloads) from NDIVIA in order to use the GPU to perform numerical computation
-5. Copy the **`.theanorc`** file in the ***[Your Course Repository Folder]**/Software/Python/Theano/Mac** folder to the **/*[Your Username]*/** home folder, customize the copied file (NOT the original file) according to the comments, and save it
+5. Copy the **`.theanorc`** file in the ***[Your Course Repository Folder]**/Computing/Python/Theano/Mac** folder to the **/*[Your Username]*/** home folder, customize the copied file (NOT the original file) according to the comments, and save it
 ￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼
 One common source of error in setting up Theano on Mac concerns the BLAS (Basic Linear Algebra Subprograms) libraries
 * Refer [**here**](http://deeplearning.net/software/theano/install.html#troubleshooting-make-sure-you-have-a-blas-library) for some troubleshooting guidance on this issue Verification steps:
 
-Run the **`TheanoTestScript.py`** file in the ***[Your Course Repository Folder]*/Software/Python/Theano/** folder, either via your Python IDE or through the terminal, and verify that it completes successfully, giving your a comparison of speeds between NumPy and Theano
+Run the **`TheanoTestScript.py`** file in the ***[Your Course Repository Folder]*/Computing/Python/Theano/** folder, either via your Python IDE or through the terminal, and verify that it completes successfully, giving your a comparison of speeds between NumPy and Theano
 ￼
 ￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼
 #￼Theano Installation and Configuration on Windows
@@ -53,13 +53,13 @@ In the Teaching Assistants’ own experience, the recommended key steps include:
 6. Install a **GNU C Compiler (GCC)** such as [**this**](http://tdm-gcc.tdragon.net)
 7. Install [**GraphViz**](http://www.graphviz.org/Download.php) into a folder whose path has ***no blank spaces***
 8. Open the **`pydot.py`** file in the ***[Your Anaconda Installation Folder]*/lib/site-packages/** folder. Locate the `_find_graphviz` function, comment its whole content out and replace with the following: **`return _find_executables(‘[YOUR GRAPHVIZ INSTALLATION FOLDER]/bin’)`**
-9. Copy the **`.theanorc`** file under ***[Your Course Repository Folder]*/Software Guides/Python/Theano/Windows/** folder to **C:/Users/*[Your Windows User Name]*/.theano/** folder, customize the copied file (NOT the original file) according to the comments, and save it
+9. Copy the **`.theanorc`** file under ***[Your Course Repository Folder]*/Computing/Python/Theano/Windows/** folder to **C:/Users/*[Your Windows User Name]*/.theano/** folder, customize the copied file (NOT the original file) according to the comments, and save it
 ￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼
 Verification steps: open your ***CygWin terminal**and:
 
 * run **`where gcc`** and verify that the path to your GCC installation’s `gcc.exe` file appears
 * run **`where nvcc`** and verify that the path to your CUDA installation’s `nvcc.exe` file appears
-* run the **`TheanoTestScript.py`** file under ***[Your Course Repository Folder]*/Software Guides/Python/Theano/**, either via your Python IDE or through the terminal, and verify that it completes successfully, giving your a comparison of speeds between NumPy and Theano
+* run the **`TheanoTestScript.py`** file under ***[Your Course Repository Folder]*/Computing/Python/Theano/**, either via your Python IDE or through the terminal, and verify that it completes successfully, giving your a comparison of speeds between NumPy and Theano
 ￼￼
 ￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼
 #￼Theano Configurations *[for info only]*

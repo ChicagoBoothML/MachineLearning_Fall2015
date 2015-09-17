@@ -87,6 +87,18 @@
      <changefreq>daily</changefreq>
     </url>
         
+    <url>
+     <loc>None/Tutorials/Python iPython Notebook tutorial/</loc>
+     <lastmod>2015-09-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/Tutorials/Python Pandas tutorial/</loc>
+     <lastmod>2015-09-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     
 
 </urlset>

@@ -71,4 +71,8 @@ site/
 *.ini
 
 # Specific files & folders
+docs/Tutorials/R_Markdown_Tutorial.pdf
+docs/Tutorials/R_data.table_Tutorial.pdf
 docs/Tutorials/.ipynb_checkpoints/
+docs/Tutorials/Python iPython Notebook tutorial.pdf
+docs/Tutorials/Python Pandas tutorial.pdf

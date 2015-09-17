@@ -87,7 +87,7 @@
                         
                             
 <li >
-    <a href="../Installation/Computer%20Operating%20System%20Requirements/">Computer Operating System Requirements</a>
+    <a href="../Installation/Computer Operating System Requirements/">Computer Operating System Requirements</a>
 </li>
 
                         
@@ -99,25 +99,25 @@
                         
                             
 <li >
-    <a href="../Installation/Git%2C%20GitHub%20%26%20SourceTree/">Git, GitHub & SourceTree</a>
+    <a href="../Installation/Git, GitHub & SourceTree/">Git, GitHub & SourceTree</a>
 </li>
 
                         
                             
 <li >
-    <a href="../Installation/R%2C%20RStudio%20%26%20CRAN%20Packages/">R, RStudio & CRAN Packages</a>
+    <a href="../Installation/R, RStudio & CRAN Packages/">R, RStudio & CRAN Packages</a>
 </li>
 
                         
                             
 <li >
-    <a href="../Installation/Python%20Anaconda%2C%20PyCharm%20IDE%2C%20and%20Conda%20%26%20PyPI%20Packages/">Python Anaconda, PyCharm IDE, and Conda & PyPI Packages</a>
+    <a href="../Installation/Python Anaconda, PyCharm IDE, and Conda & PyPI Packages/">Python Anaconda, PyCharm IDE, and Conda & PyPI Packages</a>
 </li>
 
                         
                             
 <li >
-    <a href="../Installation/Python%20Theano/">Python Theano package</a>
+    <a href="../Installation/Python Theano/">Python Theano package</a>
 </li>
 
                         
@@ -132,13 +132,13 @@
                         
                             
 <li >
-    <a href="../Tutorials/R%20Markdown%20Tutorial/">R Markdown</a>
+    <a href="../Tutorials/R Markdown Tutorial/">R Markdown</a>
 </li>
 
                         
                             
 <li >
-    <a href="../Tutorials/R%20data.table%20Tutorial/">R data.table</a>
+    <a href="../Tutorials/R data.table Tutorial/">R data.table</a>
 </li>
 
                         
@@ -190,15 +190,86 @@
                 <div class="col-md-9" role="main">
 
 <h1 id="computing-resources"><strong>Computing Resources</strong></h1>
-<p>This page contains links to software installation guides and some resources for R and Python.</p>
+<p>This page contains links to software installation guides and some resources for R (our main computing platform)
+and Python (the best alternative).</p>
+<p>There is a great deal of parallelism between the R and Python ecosystems
+of Machine Learning / Data Science and related software.
+Here is a brief table of comparison between the two ecosystems,
+including the leading who's-whos and what's-whats in various aspects:</p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">R</th>
+<th align="left">PYTHON</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><strong>Linear Algebra</strong></td>
+<td align="left"><em>(built-in)</em></td>
+<td align="left">NumPy</td>
+</tr>
+<tr>
+<td align="left"><strong>Go-To Package for Popular ML Algos</strong></td>
+<td align="left">caret</td>
+<td align="left">SciKit-Learn</td>
+</tr>
+<tr>
+<td align="left"><strong>Data Frame for Data Processing</strong></td>
+<td align="left">data.frame, data.table</td>
+<td align="left">Pandas</td>
+</tr>
+<tr>
+<td align="left"><strong>Visualization</strong></td>
+<td align="left">ggplot2, ggvis, dygraphs</td>
+<td align="left">MatPlotLib, GGPlot, Bokeh</td>
+</tr>
+<tr>
+<td align="left"><strong>Large-Scale Parallel Computation</strong></td>
+<td align="left">parallel, doMC, doParallel, snow</td>
+<td align="left">Apache Spark, Theano, Numba</td>
+</tr>
+<tr>
+<td align="left"><strong>Symbolic Math</strong></td>
+<td align="left">Ryacas, rSymPy</td>
+<td align="left">SymPy</td>
+</tr>
+<tr>
+<td align="left"><strong>Dynamic Document Editors / Generators</strong></td>
+<td align="left">R Markdown, Slidify</td>
+<td align="left">iPython Notebook</td>
+</tr>
+<tr>
+<td align="left"><strong>App Development Frameworks</strong></td>
+<td align="left">Shiny</td>
+<td align="left">Django</td>
+</tr>
+<tr>
+<td align="left"><strong>Unit-Testing Frameworks</strong></td>
+<td align="left">testthat</td>
+<td align="left">Nose, DocTest, Py.Test, PyUnit, Tox</td>
+</tr>
+<tr>
+<td align="left"><strong>Leading Developers</strong></td>
+<td align="left">RStudio, Revolution Analytics <em>(Microsoft subsidiary)</em></td>
+<td align="left">Continuum Analytics, Enthought</td>
+</tr>
+<tr>
+<td align="left"><strong>Popular Integrated Devt. Envirs. (IDEs)</strong></td>
+<td align="left">RStudio</td>
+<td align="left">PyCharm, Spyder, Rodeo</td>
+</tr>
+</tbody>
+</table>
 <h2 id="r-resources">R Resources</h2>
-<p>We will be using R to perform data analysis in the class, however, you are welcome to use
+<p>We will be using R as the main platform to perform data analysis in the class, however, you are welcome to use
 any other tool/programming language you are familiar with.</p>
 <p>We strongly encourage you to get familiar with the basics of R, so that you can focus on Machine Learning.
 We will go through examples in R in-class and we will provide some instructions. We do not expect
 you to have taken a class that uses R previously. That said, this class is not a class on R.</p>
 <ul>
-<li><a href="../Installation/R%2C%20RStudio%20%26%20CRAN%20Packages/"><strong>R, RStudio and CRAN Packages</strong> installation guides</a></li>
+<li><a href="../Installation/R, RStudio &amp; CRAN Packages/"><strong>R, RStudio and CRAN Packages</strong> installation guides</a></li>
 <li><a href="http://www.rob-mcculloch.org/2015_exec_data_mining/Simple-R-Introduction.pdf"><strong>Rob's notes on R</strong></a></li>
 <li><a href="http://www.rob-mcculloch.org/2015_exec_data_mining/R-intro.pdf"><strong>R's Introduction to R</strong></a>:
 This is written by stat/computing geeks for stat/computing geeks. It is not always the easiest thing to read.
@@ -207,11 +278,11 @@ That being said, if you want to learn R, you should read at least the first bit 
 <li><a href="http://cran.r-project.org/doc/contrib/Short-refcard.pdf"><strong>R Reference Card</strong></a></li>
 <li><a href="http://www.youtube.com/playlist?list=PLOU2XLYxmsIK9qQfztXeybpHvru-TrqAP"><strong>Google's R Tutorial</strong></a></li>
 <li><a href="http://data.princeton.edu/R"><strong>Princeton's R Tutorial</strong></a></li>
-<li><a href="../Tutorials/R%20Markdown%20Tutorial/"><strong>R Markdown</strong> tutorial</a>: a tutorial by Vinh on R Markdown,
+<li><a href="../Tutorials/R Markdown Tutorial/"><strong>R Markdown</strong> tutorial</a>: a tutorial by Vinh on R Markdown,
 an excellent dynamic document generator that <strong>we strongly recommend that you use to do your homework</strong>.
 It will save you a ton of time, and its output will be easy on the eye,
 adding extra shine to your already brilliant analysis...</li>
-<li><a href="../Tutorials/R%20data.table%20Tutorial/"><strong>R data.table</strong> tutorial</a>: a tutorial by Vinh on R data.table,
+<li><a href="../Tutorials/R data.table Tutorial/"><strong>R data.table</strong> tutorial</a>: a tutorial by Vinh on R data.table,
 an advanced, high-performance alternative to R's default data.frame</li>
 <li>Google and question answering web-page <a href="http://stackoverflow.com">StackOverflow</a></li>
 <li>There are many books and tutorials on R.
@@ -219,14 +290,14 @@ If you find something that you find particularly useful, please share it with us
 </ul>
 <h2 id="python-resources">Python Resources</h2>
 <ul>
-<li><a href="../Installation/Python%20Anaconda%2C%20PyCharm%20IDE%2C%20and%20Conda%20%26%20PyPI%20Packages/"><strong>Anaconda Python, PyCharm IDE, and Conda &amp; PyPI Packages</strong> installation guides</a></li>
-<li><a href="../Installation/Python%20Theano/"><strong>Theano package</strong> installation guide</a></li>
+<li><a href="../Installation/Python Anaconda, PyCharm IDE, and Conda &amp; PyPI Packages/"><strong>Anaconda Python, PyCharm IDE, and Conda &amp; PyPI Packages</strong> installation guides</a></li>
+<li><a href="../Installation/Python Theano/"><strong>Theano package</strong> installation guide</a></li>
 </ul>
 <h2 id="other-software-installation">Other Software Installation</h2>
 <ul>
 <li><a href="../Installation/Cygwin/"><strong>Cygwin</strong> installation guide (for Windows users only)</a>:
 Cygwin is a Unix-style command-line terminal for Windows</li>
-<li><a href="../Installation/Git%2C%20GitHub%20%26%20SourceTree/"><strong>Git</strong>, <strong>GitHub</strong> &amp; <strong>SourceTree</strong> installation guides</a></li>
+<li><a href="../Installation/Git, GitHub &amp; SourceTree/"><strong>Git</strong>, <strong>GitHub</strong> &amp; <strong>SourceTree</strong> installation guides</a></li>
 </ul></div>
             
         </div>

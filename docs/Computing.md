@@ -24,7 +24,7 @@ That being said, if you want to learn R, you should read at least the first bit 
 - [**R Markdown** tutorial](Tutorials/R Markdown Tutorial.md): a tutorial by Vinh on R Markdown,
 an excellent dynamic document generator that **we strongly recommend that you use to do your homework**.
 It will save you a ton of time, and its output will be easy on the eye,
-adding extra shine on your already brilliant analysis...
+adding extra shine to your already brilliant analysis...
 - [**R data.table** tutorial](Tutorials/R data.table Tutorial.md): a tutorial by Vinh on R data.table,
 an advanced, high-performance alternative to R's default data.frame
 - Google and question answering web-page [StackOverflow](http://stackoverflow.com)

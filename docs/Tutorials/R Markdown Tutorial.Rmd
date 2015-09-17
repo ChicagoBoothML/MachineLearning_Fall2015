@@ -42,7 +42,7 @@ Make an unordered list by putting "-" and a space in front of each item, like so
 - Unordered item
 - Unordered item
 
-Make [hyperlinked text, e.g. referring to Google.com](www.google.com) like this.
+Make [hyperlinked text, e.g. referring to Google.com](http://www.google.com) like this.
 
 Images can be embedded easily, with a caption too, like so:
 

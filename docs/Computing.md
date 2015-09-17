@@ -45,8 +45,8 @@ That being said, if you want to learn R, you should read at least the first bit 
 an excellent dynamic document generator that **we strongly recommend that you use to do your homework**.
 It will save you a ton of time, and its output will be easy on the eye,
 adding extra shine to your already brilliant analysis...
-- [**R data.table** tutorial](Tutorials/R data.table Tutorial.md): a tutorial by Vinh on R data.table,
-an advanced, high-performance alternative to R's default data.frame
+- [**R data.table** tutorial](Tutorials/R data.table Tutorial.md): a tutorial by Vinh on R `data.table`,
+an advanced, high-performance alternative to R's default `data.frame`
 - [**Introduction to the *caret* Package**](http://cran.r-project.org/web/packages/caret/vignettes/caret.pdf):
 ***caret*** is a popular R package providing standardized interfaces with about 200 Machine Learning algorithms
 and many related data-processing procedures
@@ -59,6 +59,12 @@ If you find something that you find particularly useful, please share it with us
 
 - [**Anaconda Python, PyCharm IDE, and Conda & PyPI Packages** installation guides](Installation/Python Anaconda, PyCharm IDE, and Conda & PyPI Packages.md)
 - [**Theano package** installation guide](Installation/Python Theano.md)
+- [**iPython Notebook** tutorial](Tutorials/Python iPython Notebook tutorial.md): a tutorial by Vinh on
+iPython Notebook, an super-excellent dynamic document editor / generator built on Python,
+and a perfect answer to the aforementioned excellent R Markdown. If you do your homework or final project in Python,
+we encourage you to use iPython Notebook to generate your reports
+- [**Pandas** tutorial](Tutorials/Python Pandas tutorial.md): a tutorial by Vinh on `pandas`,
+a data frame solution in Python that is an answer to R's `data.frame` and `data.table`
 - [**A Basic Tutorial on SciKit-Learn**](http://scikit-learn.org/stable/tutorial/basic/tutorial.html):
 ***SciKit-Learn*** is the most popular Python package providing
 standardized interfaces with over 100 Machine Learning algorithms and many related data-processing procedures

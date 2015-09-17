@@ -67,5 +67,8 @@ target/
 # site folder
 site/
 
-* .ini files
+# .ini files
 *.ini
+
+# Specific files & folders
+docs/Tutorials/.ipynb_checkpoints/

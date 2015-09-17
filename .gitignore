@@ -66,3 +66,6 @@ target/
 
 # site folder
 site/
+
+* .ini files
+*.ini

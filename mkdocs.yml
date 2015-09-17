@@ -1,12 +1,13 @@
-site_name:  BUS 41204 Machine Learning 
-site_author: Robert E. McCulloch, Mladen Kolar
+site_name: BUS 41204 Machine Learning
+site_author: Mladen Kolar, Robert E. McCulloch
 
 include_nav: True
 include_next_prev: False
+
 pages:
   - Description: 'index.md'
-  - Lectures: Syllabus.md
-  - Project: Project.md
+  - Lectures: 'Syllabus.md'
+  - Project: 'Project.md'
   - Computing: 'Computing.md'
   - Installation:
     - Computer Operating System Requirements: 'Installation/Computer Operating System Requirements.md'
@@ -16,9 +17,8 @@ pages:
     - Python Anaconda, PyCharm IDE, and Conda & PyPI Packages: 'Installation/Python Anaconda, PyCharm IDE, and Conda & PyPI Packages.md'
     - Python Theano package: 'Installation/Python Theano.md'
   - Tutorials:
-    - R Markdown: 'Computing/R Markdown Tutorial.md'
-    - R data.table: 'Computing/R data.table Tutorial.md'
-  - Resources: 'Links.md'
+    - R Markdown: 'Tutorials/R Markdown Tutorial.md'
+    - R data.table: 'Tutorials/R data.table Tutorial.md'
 
 repo_url: 'http://github.com/ChicagoBoothML/MachineLearning_Fall2015'
 

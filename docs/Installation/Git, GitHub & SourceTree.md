@@ -29,7 +29,7 @@ Atlassian’s SourceTree is one of the best desktop apps for managing Git reposi
 
 - Open the SourceTree app
 - Press "**Clone** / **New**" button; go to "**Clone Repository**" tab
-- In "**Source Path** / **URL**", paste: <span style="background-color: PowderBlue"><b>http://GitHub.com/ChicagoBoothML/MachineLearning_Fall2015</b></span>
+- In "**Source Path** / **URL**", paste: <span style="background-color: #FFFF00"><b>http://GitHub.com/ChicagoBoothML/MachineLearning_Fall2015</b></span>
 - In "**Destination Path**", select a folder on your local disk drive you prefer
 - Press "**Clone**" button
 

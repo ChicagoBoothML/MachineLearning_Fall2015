@@ -113,8 +113,8 @@ and for you to keep in-sync with the latest version of the materials.
 For this reason, we have decided to distribute materials through this
 [**GitHub repository**](http://github.com/ChicagoBoothML/MachineLearning_Fall2015).
   
-We ask that you follow these [**instructions**](Installation/Git, GitHub & SourceTree.md) to install Git, sign up for a GitHub.com account,
-install an app called SourceTree and sync this repo down to a folder on your computer.
+We ask that you follow these [**instructions**](Installation/Git, GitHub & SourceTree.md) to install Git,
+sign up for a GitHub.com account, install an app called SourceTree and sync this repo down to a folder on your computer.
 
 
 ## Discussion Forum

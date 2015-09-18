@@ -8,19 +8,19 @@ of Machine Learning / Data Science and related software.
 Here is a brief table of comparison between the two ecosystems,
 including the leading who's-whos and what's-whats in various aspects:
 
-|                                             | R                                                      | PYTHON                              |
-|:--------------------------------------------|:-------------------------------------------------------|:------------------------------------|
-| **Linear Algebra**                          | *(built-in)*                                           | NumPy                               |
-| **Go-To Package for Popular ML Algos**      | caret                                                  | SciKit-Learn                        |
-| **Data Frame for Data Processing**          | data.frame, data.table                                 | Pandas                              |
-| **Visualization**                           | ggplot2, ggvis, dygraphs                               | MatPlotLib, GGPlot, Bokeh, Pyxley   |
-| **Large-Scale Parallel Computation**        | parallel, doMC, doParallel, snow                       | Apache Spark, Theano, Numba         |
-| **Symbolic Math**                           | Ryacas, rSymPy                                         | SymPy                               |
-| **Dynamic Document Editors / Generators**   | R Markdown, Slidify                                    | iPython Notebook                    |
-| **App Development Frameworks**              | Shiny                                                  | Django                              |
-| **Software Unit-Testing Frameworks**        | testthat                                               | Nose, DocTest, Py.Test, PyUnit, Tox |
-| **Leading Developers**                      | RStudio, Revolution Analytics *(Microsoft subsidiary)* | Continuum Analytics, Enthought      |
-| **Popular Integrated Devt. Envirs. (IDEs)** | RStudio                                                | PyCharm, Spyder, Rodeo              |
+|                                             | R                                                      | PYTHON                                    |
+|:--------------------------------------------|:-------------------------------------------------------|:------------------------------------------|
+| **Linear Algebra**                          | *(built-in)*                                           | NumPy                                     |
+| **Go-To Package for Popular ML Algos**      | caret                                                  | SciKit-Learn                              |
+| **Data Frame for Data Processing**          | data.frame, data.table                                 | Pandas                                    |
+| **Visualization**                           | ggplot2, ggvis, dygraphs                               | MatPlotLib, GGPlot, Bokeh, Plotly, Pyxley |
+| **Large-Scale Parallel Computation**        | parallel, doMC, doParallel, snow                       | Apache Spark, Theano, Numba               |
+| **Symbolic Math**                           | Ryacas, rSymPy                                         | SymPy                                     |
+| **Dynamic Document Editors / Generators**   | R Markdown, Slidify                                    | iPython Notebook                          |
+| **App Development Frameworks**              | Shiny                                                  | Django                                    |
+| **Software Unit-Testing Frameworks**        | testthat                                               | Nose, DocTest, Py.Test, PyUnit, Tox       |
+| **Leading Developers**                      | RStudio, Revolution Analytics *(Microsoft subsidiary)* | Continuum Analytics, Enthought            |
+| **Popular Integrated Devt. Envirs. (IDEs)** | RStudio                                                | PyCharm, Spyder, Rodeo                    |
 
 
 ## R Resources 

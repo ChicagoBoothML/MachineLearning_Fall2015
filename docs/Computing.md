@@ -18,8 +18,8 @@ including the leading who's-whos and what's-whats in various aspects:
 | **Symbolic Math**                           | Ryacas, rSymPy                                         | SymPy                               |
 | **Dynamic Document Editors / Generators**   | R Markdown, Slidify                                    | iPython Notebook                    |
 | **App Development Frameworks**              | Shiny                                                  | Django                              |
-| **Unit-Testing Frameworks**                 | testthat                                               | Nose, DocTest, Py.Test, PyUnit, Tox |                        
-| **Leading Developers**                      | RStudio, Revolution Analytics *(Microsoft subsidiary)* | Continuum Analytics, Enthought      | 
+| **Software Unit-Testing Frameworks**        | testthat                                               | Nose, DocTest, Py.Test, PyUnit, Tox |
+| **Leading Developers**                      | RStudio, Revolution Analytics *(Microsoft subsidiary)* | Continuum Analytics, Enthought      |
 | **Popular Integrated Devt. Envirs. (IDEs)** | RStudio                                                | PyCharm, Spyder, Rodeo              |
 
 
@@ -62,12 +62,13 @@ If you find something that you find particularly useful, please share it with us
 - [**iPython Notebook** tutorial](Tutorials/Python iPython Notebook tutorial.md): a tutorial by Vinh on
 iPython Notebook, an super-excellent dynamic document editor / generator built on Python,
 and a perfect answer to the aforementioned excellent R Markdown. If you do your homework or final project in Python,
-we encourage you to use iPython Notebook to generate your reports
+**we encourage you to use iPython Notebook to generate your analysis reports**
 - [**Pandas** tutorial](Tutorials/Python Pandas tutorial.md): a tutorial by Vinh on `pandas`,
-a data frame solution in Python that is an answer to R's `data.frame` and `data.table`
+a data frame solution in Python that is the answer to R's `data.frame` and `data.table`
 - [**A Basic Tutorial on SciKit-Learn**](http://scikit-learn.org/stable/tutorial/basic/tutorial.html):
 ***SciKit-Learn*** is the most popular Python package providing
 standardized interfaces with over 100 Machine Learning algorithms and many related data-processing procedures
+
 
 ## Other Software Installation
 

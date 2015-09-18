@@ -14,7 +14,7 @@
 
 **Instructors:** <br>
 Mladen Kolar ([MKolar@chicagobooth.edu](mailto:MKolar@chicagobooth.edu)), office: Harper Center 306 <br>
-Rob E. McCulloch ([Robert.McCulloch@chicagobooth.edu](mailto:Robert.McCulloch@chicagobooth.edu)), office: Harper Center 365
+Robert E. McCulloch ([Robert.McCulloch@chicagobooth.edu](mailto:Robert.McCulloch@chicagobooth.edu)), office: Harper Center 365
 
 **Teaching Assistants:** <br>
 Daniel Hedblom ([Hedblom@uchicago.edu](mailto:Hedblom@uchicago.edu)) <br>

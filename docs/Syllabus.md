@@ -28,6 +28,7 @@ _Additional reading:_
 *M. I. Jordan and T. M. Mitchel* <br>
 A *Science* review article from two leading experts in Machine Learning
 
+[Economist on AI](http://www.economist.com/news/briefing/21650526-artificial-intelligence-scares-peopleexcessively-so-rise-machines)
 
 ## Week 2
 

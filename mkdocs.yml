@@ -8,6 +8,7 @@ pages:
   - Description: 'index.md'
   - Lectures: 'Syllabus.md'
   - Project: 'Project.md'
+  - Data Sets: 'DataSets.md'
   - Computing: 'Computing.md'
   - Installation:
     - Computer Operating System Requirements: 'Installation/Computer Operating System Requirements.md'

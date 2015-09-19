@@ -5,7 +5,7 @@ include_nav: True
 include_next_prev: False
 
 pages:
-  - Description: 'index.md'
+  - <i class="fa fa-home"></i>: 'index.md'
   - Lectures: 'Syllabus.md'
   - Project: 'Project.md'
   - Data Sets: 'DataSets.md'

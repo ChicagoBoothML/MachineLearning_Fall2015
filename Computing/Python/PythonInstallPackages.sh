@@ -15,6 +15,7 @@ pip install --upgrade pip
 
 pip install --upgrade Bokeh
 pip install --upgrade GGPlot
+pip install --upgrade GitPython
 pip install --upgrade GraphViz
 pip install --upgrade Jupyter
 pip install --upgrade NeuroLab

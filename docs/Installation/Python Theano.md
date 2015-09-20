@@ -36,7 +36,7 @@ In the Teaching Assistants’ own experience, the recommended key steps include:
         - `export DYLD_LIBRARY_PATH=/Developer/NVIDIA/CUDA-7.5/lib:$DYLD_LIBRARY_PATH`
 5. Copy the **`.theanorc`** file in the **_[Your Course Repository Folder]_/Computing/Python/Theano/Mac** folder to the **/*[Your Username]*/** home folder, customize the copied file (NOT the original file) according to the comments, and save it
 6. Restart your machine for changes to take effect
-￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼
+
 One common source of error in setting up Theano on Mac concerns the BLAS (Basic Linear Algebra Subprograms) libraries
 * Refer [**here**](http://deeplearning.net/software/theano/install.html#troubleshooting-make-sure-you-have-a-blas-library) for some troubleshooting guidance on this issue
 

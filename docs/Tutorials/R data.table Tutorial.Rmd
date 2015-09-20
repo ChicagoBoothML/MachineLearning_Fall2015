@@ -17,7 +17,7 @@ HeadAndTime <- function(data) {
 }
 ```
 
-*(This tutorial is adapted from a technical presentation by Vinh's fellow data scientist Brian Silva at Uptake, LLC, a Chicago-based analytics firm focusing on heavy industry)*
+*(This tutorial is adapted from a technical presentation by Vinh's fellow data scientist Brian Silva at Uptake, LLC, a Chicago-based analytics firm focusing on heavy industry and the industrial internet-of-things)*
 
 This tutorial presents [**`data.table`**](http://cran.r-project.org/web/packages/data.table/index.html), an R package by Matt Dowle, which is an extension on R's default `data.frame` used for fast aggregation of large data (e.g. 100GB in RAM). We will compare its speed and syntax with that of data.frame.
 

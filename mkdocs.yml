@@ -22,7 +22,6 @@ pages:
     - R Markdown: 'Tutorials/R Markdown Tutorial.md'
     - R data.table: 'Tutorials/R data.table Tutorial.md'
     - Python iPython Notebook: 'Tutorials/Python iPython Notebook tutorial.md'
-    - Python Pandas: 'Tutorials/Python Pandas tutorial.md'
 
 
 repo_url: 'http://github.com/ChicagoBoothML/MachineLearning_Fall2015'

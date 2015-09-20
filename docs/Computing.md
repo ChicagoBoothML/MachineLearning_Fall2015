@@ -65,8 +65,8 @@ iPython Notebook, an super-excellent dynamic document editor / generator built o
 and a perfect answer to the aforementioned excellent R Markdown. If you do your homework or final project in Python,
 **we encourage you to use iPython Notebook to generate your analysis reports**
     - Please note that iPython Notebook requires [**TeX**](Installation/TeX) for conversion to PDF
-- [**Pandas** tutorial](Tutorials/Python Pandas tutorial.md): a tutorial by Vinh on `pandas`,
-a data frame solution in Python that is the answer to R's `data.frame` and `data.table`
+- [**Pandas** tutorials](http://pandas.pydata.org/pandas-docs/stable/tutorials.html):
+`pandas` is a data frame solution in Python &ndash; Python's answer to R's `data.frame` and `data.table`
 - [**A Basic Tutorial on SciKit-Learn**](http://scikit-learn.org/stable/tutorial/basic/tutorial.html):
 ***SciKit-Learn*** is the most popular Python package providing
 standardized interfaces with over 100 Machine Learning algorithms and many related data-processing procedures

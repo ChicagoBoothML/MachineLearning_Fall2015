@@ -1,5 +1,6 @@
 ---
 title: 'This is the Title of Your Report Generated from R Markdown'
+author: 'Vinh "MBALearnsToCode" Luong'
 output:
   pdf_document:
     fig_caption: yes

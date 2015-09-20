@@ -1,5 +1,6 @@
 ---
 title: "R data.table Tutorial"
+author: 'Vinh "MBALearnsToCode" Luong'
 output: pdf_document
 fontsize: 12
 geometry: margin=1.0in

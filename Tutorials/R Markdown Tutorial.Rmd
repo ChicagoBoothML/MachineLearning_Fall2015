@@ -9,14 +9,14 @@ geometry: margin=1.0in
 <!-- comment: the above block between the two sets of triple dashes specify the Title of the document and some common formatting settings --> 
 
 
-# What is Markdown
+# What is Markdown?
 
 [**Markdown**](http://daringfireball.net/projects/markdown) is an easy text file format that allows you to write up a document and apply stylings to create highly presentable output that can be published in various ways, including as PDF and as HTML webpages.
 
 
 # Common Markdown syntax
 
-Refer to the PDF output (created by "Knit PDF" in this RStudio window) to see how the below inputs are rendered in the final PDF output
+Refer to the PDF output (created by "**Knit PDF**" in this RStudio window) to see how the below inputs are rendered in the final PDF output:
 
 # Make a 1st-Level Header by inserting 1 hash character in front
 
@@ -44,7 +44,7 @@ Make an unordered list by putting "-" and a space in front of each item, like so
 
 Make [hyperlinked text, e.g. referring to Google.com](http://www.google.com) like this.
 
-Images can be embedded easily, with a caption too, like so:
+Images can be embedded easily, with a caption too, like Figure 1 below:
 
 ![Chicago Booth logo](http://pbs.twimg.com/profile_images/447102503071789057/J_XkI6lI.jpeg)
 

@@ -45,6 +45,7 @@ That being said, if you want to learn R, you should read at least the first bit 
 an excellent dynamic document generator that **we strongly recommend that you use to do your homework**.
 It will save you a ton of time, and its output will be easy on the eye,
 adding extra shine to your already brilliant analysis...
+    - Please note that R Markdown requires [**TeX**](Installation/TeX) for conversion to PDF
 - [**R data.table** tutorial](Tutorials/R data.table Tutorial.md): a tutorial by Vinh on R `data.table`,
 an advanced, high-performance alternative to R's default `data.frame`
 - [**Introduction to the *caret* Package**](http://cran.r-project.org/web/packages/caret/vignettes/caret.pdf):
@@ -63,6 +64,7 @@ If you find something that you find particularly useful, please share it with us
 iPython Notebook, an super-excellent dynamic document editor / generator built on Python,
 and a perfect answer to the aforementioned excellent R Markdown. If you do your homework or final project in Python,
 **we encourage you to use iPython Notebook to generate your analysis reports**
+    - Please note that iPython Notebook requires [**TeX**](Installation/TeX) for conversion to PDF
 - [**Pandas** tutorial](Tutorials/Python Pandas tutorial.md): a tutorial by Vinh on `pandas`,
 a data frame solution in Python that is the answer to R's `data.frame` and `data.table`
 - [**A Basic Tutorial on SciKit-Learn**](http://scikit-learn.org/stable/tutorial/basic/tutorial.html):
@@ -72,6 +74,7 @@ standardized interfaces with over 100 Machine Learning algorithms and many relat
 
 ## Other Software Installation
 
+- [**Git**, **GitHub** & **SourceTree** installation guides](Installation/Git, GitHub & SourceTree.md)
+- 
 - [**Cygwin** installation guide (for Windows users only)](Installation/Cygwin.md):
 Cygwin is a Unix-style command-line terminal for Windows
-- [**Git**, **GitHub** & **SourceTree** installation guides](Installation/Git, GitHub & SourceTree.md)

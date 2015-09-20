@@ -12,11 +12,12 @@ pages:
   - Computing: 'Computing.md'
   - Installation:
     - Computer Operating System Requirements: 'Installation/Computer Operating System Requirements.md'
-    - Cygwin (for Windows users only): 'Installation/Cygwin.md'
     - Git, GitHub & SourceTree: 'Installation/Git, GitHub & SourceTree.md'
     - R, RStudio & CRAN Packages: 'Installation/R, RStudio & CRAN Packages.md'
     - Python Anaconda, PyCharm IDE, and Conda & PyPI Packages: 'Installation/Python Anaconda, PyCharm IDE, and Conda & PyPI Packages.md'
     - Python Theano package: 'Installation/Python Theano.md'
+    - TeX for rendering math: 'Installation/TeX.md'
+    - Cygwin (for Windows users only): 'Installation/Cygwin.md'
   - Tutorials:
     - R Markdown: 'Tutorials/R Markdown Tutorial.md'
     - R data.table: 'Tutorials/R data.table Tutorial.md'

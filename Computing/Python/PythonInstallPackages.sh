@@ -18,7 +18,9 @@ pip install --upgrade GGPlot
 pip install --upgrade GitPython
 pip install --upgrade GraphViz
 pip install --upgrade Jupyter
+pip install --upgrade MkDocs
 pip install --upgrade NeuroLab
+pip install --upgrade Python-Markdown-Math
 
 pip uninstall PyParsing   # to install an older version compatible with PyDot (see Stack Overflow thread:
 # http://stackoverflow.com/questions/15951748/pydot-and-graphviz-error-couldnt-import-dot-parser-loading-of-dot-files-will)

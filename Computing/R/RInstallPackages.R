@@ -6,4 +6,5 @@ install.packages(c(
   'knitr',
   'markdown',
   'rmarkdown'),
-  dependencies = TRUE)
+  dependencies = TRUE,
+  repos="http://cran.rstudio.com")

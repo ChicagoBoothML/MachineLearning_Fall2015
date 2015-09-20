@@ -29,7 +29,7 @@ Windows users need one extra step to make sure you can run the command `Rscript.
 
 RStudio is the most popular integrated development environment (IDE) for R.
 
-Go [**here**](http://www.rstudio.com/products/rstudio) to download a graphical installer of RStudio appropriate for your machine’s
+Go [**here**](http://www.rstudio.com/products/rstudio/download) to download a graphical installer of RStudio Desktop appropriate for your machine’s
 
 * processor (32-bit / 64-bit), and
 * operating system (Mac / Windows).

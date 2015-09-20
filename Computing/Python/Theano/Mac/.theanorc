@@ -6,14 +6,13 @@ floatX = float32
 reoptimize_unpickled_function = False
 
 [cuda]
-# change to <Your CUDA Installation Folder>/bin
 root = /usr/local/cuda/bin
 
 [nvcc]
 # change the part after -L to <Your Anaconda Installation Folder>/lib
 flags = -L/Applications/anaconda/lib
 
-# change to /bin folder containing "clang.exe", usually /usr/bin
+# change to /bin folder containing "clang.exe", usually "/usr/bin"
 compiler_bindir = /usr/bin
 
 fastmath = True

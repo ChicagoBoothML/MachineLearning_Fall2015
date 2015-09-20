@@ -26,12 +26,20 @@ In the Teaching Assistants’ own experience, the recommended key steps include:
 
 1. Install the **Anaconda Python v2.7 distribution** *(this should be already done, per instructions in a previous section)
 2. Install the **additional Conda & PyPI packages** per instructions in the previous section
-3. Install the Clang compiler through installing the **XCode app** from the Apple App Store and running XCode once to install its command-line tools
+3. Install the Clang compiler through installing the **Xcode app VERSION 6.2** from the [Apple Developer site](http://developer.apple.com/downloads) and running XCode once to install its command-line tools
+    - _if you have Xcode version >6.2, uninstall / delete it and install v6.2_
+    - copy the app to the **/Applications/** folder and rename it "**Xcode_6.2.app**"
 4. Install the [**CUDA graphics driver and toolkit v7**](http://developer.nvidia.com/cuda-downloads) from NDIVIA in order to use the GPU to perform numerical computation
-5. Copy the **`.theanorc`** file in the ***[Your Course Repository Folder]**/Computing/Python/Theano/Mac** folder to the **/*[Your Username]*/** home folder, customize the copied file (NOT the original file) according to the comments, and save it
+    - CUDA Toolkit installation manual [here](http://developer.download.nvidia.com/compute/cuda/7.5/Prod/docs/sidebar/CUDA_Installation_Guide_Mac.pdf)
+    - add the following to the **`.bash_profile`** file in your home folder:
+        - `export PATH=/Developer/NVIDIA/CUDA-7.5/bin:$PATH`
+        - `export DYLD_LIBRARY_PATH=/Developer/NVIDIA/CUDA-7.5/lib:$DYLD_LIBRARY_PATH`
+5. Copy the **`.theanorc`** file in the **_[Your Course Repository Folder]_/Computing/Python/Theano/Mac** folder to the **/*[Your Username]*/** home folder, customize the copied file (NOT the original file) according to the comments, and save it
 ￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼
 One common source of error in setting up Theano on Mac concerns the BLAS (Basic Linear Algebra Subprograms) libraries
-* Refer [**here**](http://deeplearning.net/software/theano/install.html#troubleshooting-make-sure-you-have-a-blas-library) for some troubleshooting guidance on this issue Verification steps:
+* Refer [**here**](http://deeplearning.net/software/theano/install.html#troubleshooting-make-sure-you-have-a-blas-library) for some troubleshooting guidance on this issue
+
+Verification steps:
 
 Run the **`TheanoTestScript.py`** file in the ***[Your Course Repository Folder]*/Computing/Python/Theano/** folder, either via your Python IDE or through the terminal, and verify that it completes successfully, giving your a comparison of speeds between NumPy and Theano
 ￼

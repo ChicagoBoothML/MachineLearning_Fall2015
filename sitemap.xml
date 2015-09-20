@@ -50,12 +50,6 @@
     </url>
         
     <url>
-     <loc>None/Installation/Cygwin/</loc>
-     <lastmod>2015-09-20</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
      <loc>None/Installation/Git, GitHub & SourceTree/</loc>
      <lastmod>2015-09-20</lastmod>
      <changefreq>daily</changefreq>
@@ -75,6 +69,18 @@
         
     <url>
      <loc>None/Installation/Python Theano/</loc>
+     <lastmod>2015-09-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/Installation/TeX/</loc>
+     <lastmod>2015-09-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/Installation/Cygwin/</loc>
      <lastmod>2015-09-20</lastmod>
      <changefreq>daily</changefreq>
     </url>

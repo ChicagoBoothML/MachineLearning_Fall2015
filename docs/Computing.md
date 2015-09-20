@@ -75,6 +75,6 @@ standardized interfaces with over 100 Machine Learning algorithms and many relat
 ## Other Software Installation
 
 - [**Git**, **GitHub** & **SourceTree** installation guides](Installation/Git, GitHub & SourceTree.md)
-- 
+- [**TeX**]: for rendering math equations in various document formats
 - [**Cygwin** installation guide (for Windows users only)](Installation/Cygwin.md):
 Cygwin is a Unix-style command-line terminal for Windows

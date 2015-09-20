@@ -1,4 +1,4 @@
-# TeX
+# **TeX**
 
 TeX is a typesetting system that enables the rendering of math equations in various types of documents.
 
@@ -12,4 +12,4 @@ Mac users please download and install the complete version of [**MacTeX**](http:
 
 ## Windows
 
-Windows users please download and install the complete version of [**MikTeX**](http://miktex.org/download)
+Windows users please download and install the complete version of [**MikTeX**](http://miktex.org/download).

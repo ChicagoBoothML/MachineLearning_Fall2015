@@ -248,15 +248,14 @@
 </ul>
 </li>
 <li>Copy the <strong><code>.theanorc</code></strong> file in the <strong><em>[Your Course Repository Folder]</em>/Computing/Python/Theano/Mac</strong> folder to the <strong>/<em>[Your Username]</em>/</strong> home folder, customize the copied file (NOT the original file) according to the comments, and save it</li>
-<li>Restart your machine for changes to take effect
-￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼
-One common source of error in setting up Theano on Mac concerns the BLAS (Basic Linear Algebra Subprograms) libraries</li>
-<li>Refer <a href="http://deeplearning.net/software/theano/install.html#troubleshooting-make-sure-you-have-a-blas-library"><strong>here</strong></a> for some troubleshooting guidance on this issue</li>
+<li>Restart your machine for changes to take effect</li>
 </ol>
+<p>One common source of error in setting up Theano on Mac concerns the BLAS (Basic Linear Algebra Subprograms) libraries
+* Refer <a href="http://deeplearning.net/software/theano/install.html#troubleshooting-make-sure-you-have-a-blas-library"><strong>here</strong></a> for some troubleshooting guidance on this issue</p>
 <p>Verification steps:</p>
 <p>Run the <strong><code>TheanoTestScript.py</code></strong> file in the <strong><em>[Your Course Repository Folder]</em>/Computing/Python/Theano/</strong> folder, either via your Python IDE or through the terminal, and verify that it completes successfully, giving your a comparison of speeds between NumPy and Theano
-    - if your machine does not have a compatible GPU, the two speeds should be similar
-    - if your machine does have a compatible GPU, for this small test, the Theano time may be <em>slower</em> than the NumPy time because of data transfer overhead from and to the GPU; Theano saves time for much larger operations
+- if your machine does not have a compatible GPU, the two speeds should be similar
+- if your machine does have a compatible GPU, for this small test, the Theano time may be <em>slower</em> than the NumPy time because of data transfer overhead from and to the GPU; Theano saves time for much larger operations
 ￼
 ￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼</p>
 <h1 id="theano-installation-and-configuration-on-windows">￼Theano Installation and Configuration on Windows</h1>

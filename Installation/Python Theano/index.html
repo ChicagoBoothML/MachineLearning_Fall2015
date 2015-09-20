@@ -93,7 +93,7 @@
                         
                             
 <li >
-    <a href="../Computer%20Operating%20System%20Requirements/">Computer Operating System Requirements</a>
+    <a href="../Computer Operating System Requirements/">Computer Operating System Requirements</a>
 </li>
 
                         
@@ -105,19 +105,19 @@
                         
                             
 <li >
-    <a href="../Git%2C%20GitHub%20%26%20SourceTree/">Git, GitHub & SourceTree</a>
+    <a href="../Git, GitHub & SourceTree/">Git, GitHub & SourceTree</a>
 </li>
 
                         
                             
 <li >
-    <a href="../R%2C%20RStudio%20%26%20CRAN%20Packages/">R, RStudio & CRAN Packages</a>
+    <a href="../R, RStudio & CRAN Packages/">R, RStudio & CRAN Packages</a>
 </li>
 
                         
                             
 <li >
-    <a href="../Python%20Anaconda%2C%20PyCharm%20IDE%2C%20and%20Conda%20%26%20PyPI%20Packages/">Python Anaconda, PyCharm IDE, and Conda & PyPI Packages</a>
+    <a href="../Python Anaconda, PyCharm IDE, and Conda & PyPI Packages/">Python Anaconda, PyCharm IDE, and Conda & PyPI Packages</a>
 </li>
 
                         
@@ -138,25 +138,25 @@
                         
                             
 <li >
-    <a href="../../Tutorials/R%20Markdown%20Tutorial/">R Markdown</a>
+    <a href="../../Tutorials/R Markdown Tutorial/">R Markdown</a>
 </li>
 
                         
                             
 <li >
-    <a href="../../Tutorials/R%20data.table%20Tutorial/">R data.table</a>
+    <a href="../../Tutorials/R data.table Tutorial/">R data.table</a>
 </li>
 
                         
                             
 <li >
-    <a href="../../Tutorials/Python%20iPython%20Notebook%20tutorial/">Python iPython Notebook</a>
+    <a href="../../Tutorials/Python iPython Notebook tutorial/">Python iPython Notebook</a>
 </li>
 
                         
                             
 <li >
-    <a href="../../Tutorials/Python%20Pandas%20tutorial/">Python Pandas</a>
+    <a href="../../Tutorials/Python Pandas tutorial/">Python Pandas</a>
 </li>
 
                         
@@ -233,14 +233,30 @@
 <ol>
 <li>Install the <strong>Anaconda Python v2.7 distribution</strong> *(this should be already done, per instructions in a previous section)</li>
 <li>Install the <strong>additional Conda &amp; PyPI packages</strong> per instructions in the previous section</li>
-<li>Install the Clang compiler through installing the <strong>XCode app</strong> from the Apple App Store and running XCode once to install its command-line tools</li>
-<li>Install the <a href="http://developer.nvidia.com/cuda-downloads"><strong>CUDA graphics driver and toolkit v7</strong></a> from NDIVIA in order to use the GPU to perform numerical computation</li>
-<li>Copy the <strong><code>.theanorc</code></strong> file in the <strong><em>[Your Course Repository Folder]</em>*/Computing/Python/Theano/Mac</strong> folder to the <strong>/<em>[Your Username]</em>/</strong> home folder, customize the copied file (NOT the original file) according to the comments, and save it
+<li>Install the Clang compiler through installing the <strong>Xcode app VERSION 6.2</strong> from the <a href="http://developer.apple.com/downloads">Apple Developer site</a> and running XCode once to install its command-line tools<ul>
+<li><em>if you have Xcode version &gt;6.2, uninstall / delete it and install v6.2</em></li>
+<li>copy the app to the <strong>/Applications/</strong> folder and rename it "<strong>Xcode_6.2.app</strong>"</li>
+</ul>
+</li>
+<li>Install the <a href="http://developer.nvidia.com/cuda-downloads"><strong>CUDA graphics driver and toolkit v7</strong></a> from NDIVIA in order to use the GPU to perform numerical computation<ul>
+<li>CUDA Toolkit installation manual <a href="http://developer.download.nvidia.com/compute/cuda/7.5/Prod/docs/sidebar/CUDA_Installation_Guide_Mac.pdf">here</a></li>
+<li>add the following to the <strong><code>.bash_profile</code></strong> file in your home folder:<ul>
+<li><code>export PATH=/Developer/NVIDIA/CUDA-7.5/bin:$PATH</code></li>
+<li><code>export DYLD_LIBRARY_PATH=/Developer/NVIDIA/CUDA-7.5/lib:$DYLD_LIBRARY_PATH</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Copy the <strong><code>.theanorc</code></strong> file in the <strong><em>[Your Course Repository Folder]</em>/Computing/Python/Theano/Mac</strong> folder to the <strong>/<em>[Your Username]</em>/</strong> home folder, customize the copied file (NOT the original file) according to the comments, and save it</li>
+<li>Restart your machine for changes to take effect
 ￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼
 One common source of error in setting up Theano on Mac concerns the BLAS (Basic Linear Algebra Subprograms) libraries</li>
-<li>Refer <a href="http://deeplearning.net/software/theano/install.html#troubleshooting-make-sure-you-have-a-blas-library"><strong>here</strong></a> for some troubleshooting guidance on this issue Verification steps:</li>
+<li>Refer <a href="http://deeplearning.net/software/theano/install.html#troubleshooting-make-sure-you-have-a-blas-library"><strong>here</strong></a> for some troubleshooting guidance on this issue</li>
 </ol>
+<p>Verification steps:</p>
 <p>Run the <strong><code>TheanoTestScript.py</code></strong> file in the <strong><em>[Your Course Repository Folder]</em>/Computing/Python/Theano/</strong> folder, either via your Python IDE or through the terminal, and verify that it completes successfully, giving your a comparison of speeds between NumPy and Theano
+    - if your machine does not have a compatible GPU, the two speeds should be similar
+    - if your machine does have a compatible GPU, for this small test, the Theano time may be <em>slower</em> than the NumPy time because of data transfer overhead from and to the GPU; Theano saves time for much larger operations
 ￼
 ￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼</p>
 <h1 id="theano-installation-and-configuration-on-windows">￼Theano Installation and Configuration on Windows</h1>
@@ -268,9 +284,13 @@ Verification steps: open your <strong>*CygWin terminal</strong>and:</p>
 <p>run <strong><code>where gcc</code></strong> and verify that the path to your GCC installation’s <code>gcc.exe</code> file appears</p>
 </li>
 <li>run <strong><code>where nvcc</code></strong> and verify that the path to your CUDA installation’s <code>nvcc.exe</code> file appears</li>
-<li>run the <strong><code>TheanoTestScript.py</code></strong> file under <strong><em>[Your Course Repository Folder]</em>/Computing/Python/Theano/</strong>, either via your Python IDE or through the terminal, and verify that it completes successfully, giving your a comparison of speeds between NumPy and Theano
+<li>run the <strong><code>TheanoTestScript.py</code></strong> file under <strong><em>[Your Course Repository Folder]</em>/Computing/Python/Theano/</strong>, either via your Python IDE or through the terminal, and verify that it completes successfully, giving your a comparison of speeds between NumPy and Theano<ul>
+<li>if your machine does not have a compatible GPU, the two speeds should be similar</li>
+<li>if your machine does have a compatible GPU, for this small test, the Theano time may be <em>slower</em> than the NumPy time because of data transfer overhead from and to the GPU; Theano saves time for much larger operations
 ￼￼
 ￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼</li>
+</ul>
+</li>
 </ol>
 <h1 id="theano-configurations-for-info-only">￼Theano Configurations <em>[for info only]</em></h1>
 <p>Theano has a large number of configuration levers, the most common of which are discussed <a href="http://deeplearning.net/software/theano/library/config.html"><strong>here</strong></a>.</p>

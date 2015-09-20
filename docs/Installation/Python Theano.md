@@ -43,6 +43,8 @@ One common source of error in setting up Theano on Mac concerns the BLAS (Basic 
 Verification steps:
 
 Run the **`TheanoTestScript.py`** file in the ***[Your Course Repository Folder]*/Computing/Python/Theano/** folder, either via your Python IDE or through the terminal, and verify that it completes successfully, giving your a comparison of speeds between NumPy and Theano
+    - if your machine does not have a compatible GPU, the two speeds should be similar
+    - if your machine does have a compatible GPU, for this small test, the Theano time may be _slower_ than the NumPy time because of data transfer overhead from and to the GPU; Theano saves time for much larger operations
 ￼
 ￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼
 #￼Theano Installation and Configuration on Windows
@@ -69,6 +71,8 @@ Verification steps: open your ***CygWin terminal**and:
 * run **`where gcc`** and verify that the path to your GCC installation’s `gcc.exe` file appears
 * run **`where nvcc`** and verify that the path to your CUDA installation’s `nvcc.exe` file appears
 * run the **`TheanoTestScript.py`** file under ***[Your Course Repository Folder]*/Computing/Python/Theano/**, either via your Python IDE or through the terminal, and verify that it completes successfully, giving your a comparison of speeds between NumPy and Theano
+    - if your machine does not have a compatible GPU, the two speeds should be similar
+    - if your machine does have a compatible GPU, for this small test, the Theano time may be _slower_ than the NumPy time because of data transfer overhead from and to the GPU; Theano saves time for much larger operations
 ￼￼
 ￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼
 #￼Theano Configurations *[for info only]*

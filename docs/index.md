@@ -39,6 +39,7 @@ to sync course materials down to a folder on your computer.*
 
 [**http://Piazza.com/ChicagoBooth/Fall2015/BUS41204/home**](http://Piazza.com/ChicagoBooth/Fall2015/BUS41204/home)
 
+You can add yourself to the course here: [**http://Piazza.com/ChicagoBooth/Fall2015/BUS41204**](http://Piazza.com/ChicagoBooth/Fall2015/BUS41204)
 
 ## Course Summary
 

@@ -59,14 +59,14 @@ You will learn about state-of-the-art Machine Learning techniques and how to app
 We will introduce techniques in the context of business applications and
 emphasize how Machine Learning can be used to provide insights and create value from data.
 
-The first, and biggest, part of the course will focus on **predictive analytics** / **supervised learning**.
+The first, and biggest, part of the course will focus on **Predictive Analytics** / **Supervised Learning**.
 You will learn about Decision Trees, Nearest-Neighbor Classifiers, Boosting, Random Forests,
 Deep Neural Networks, Naive Bayes and Support Vector Machines.
 Among other examples, we will apply these techniques to detecting spam in email,
 click-through rate prediction in online advertisement, image classification, face recognition,
 sentiment analysis and churn prediction. You will learn what techniques to apply and why.
 
-In the second part of the class, you will learn about **unsupervised learning** techniques for
+In the second part of the class, you will learn about **Unsupervised Learning** techniques for
 extracting actionable patterns from data. Examples include Clustering, Collaborative Filtering,
 Probabilistic Graphical Models and Dimensionality Reduction with applications to customer segmentation,
 recommender systems, graph and time series mining, and anomaly detection.

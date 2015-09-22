@@ -3,6 +3,7 @@ install.packages(c(
   'caret',
   'data.table',
   'devtools',
+  'kknn',
   'knitr',
   'markdown',
   'rmarkdown'),

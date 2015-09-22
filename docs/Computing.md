@@ -3,26 +3,6 @@
 This page contains links to software installation guides and some resources for R (our main computing platform)
 and Python (the best alternative).
 
-There is a great deal of parallelism between the R and Python ecosystems
-of Machine Learning / Data Science and related software.
-Here is a brief table of comparison between the two ecosystems,
-including the leading who's-whos and what's-whats in various aspects:
-
-|                                             | R                                                      | PYTHON                                    |
-|:--------------------------------------------|:-------------------------------------------------------|:------------------------------------------|
-| **Linear Algebra**                          | *(built-in)*                                           | NumPy                                     |
-| **Go-To Package for Popular ML Algos**      | caret                                                  | SciKit-Learn                              |
-| **Data Frame for Data Processing**          | data.frame, data.table                                 | Pandas                                    |
-| **Visualization**                           | ggplot2, ggvis, dygraphs                               | MatPlotLib, GGPlot, Bokeh, Plotly, Pyxley |
-| **Large-Scale Parallel Computation**        | parallel, doMC, doParallel, snow                       | Apache Spark, Theano, Numba               |
-| **Symbolic Math**                           | Ryacas, rSymPy                                         | SymPy                                     |
-| **Dynamic Document Editors / Generators**   | R Markdown, Slidify                                    | iPython Notebook                          |
-| **App Development Frameworks**              | Shiny                                                  | Django                                    |
-| **Software Unit-Testing Frameworks**        | testthat                                               | Nose, DocTest, Py.Test, PyUnit, Tox       |
-| **Leading Developers**                      | RStudio, Revolution Analytics *(Microsoft subsidiary)* | Continuum Analytics, Enthought            |
-| **Popular Integrated Devt. Envirs. (IDEs)** | RStudio                                                | PyCharm, Spyder, Rodeo                    |
-
-
 ## R Resources 
 
 We will be using R as the main platform to perform data analysis in the class, however, you are welcome to use
@@ -70,6 +50,29 @@ and a perfect answer to the aforementioned excellent R Markdown. If you do your 
 - [**A Basic Tutorial on SciKit-Learn**](http://scikit-learn.org/stable/tutorial/basic/tutorial.html):
 ***SciKit-Learn*** is the most popular Python package providing
 standardized interfaces with over 100 Machine Learning algorithms and many related data-processing procedures
+
+
+## Comparison between R and Python
+
+There is a great deal of parallelism between the R and Python ecosystems
+of Machine Learning / Data Science and related software.
+Here is a brief table of comparison between the two ecosystems,
+including the leading who's-whos and what's-whats in various aspects:
+
+|                                             | R                                                      | PYTHON                                    |
+|:--------------------------------------------|:-------------------------------------------------------|:------------------------------------------|
+| **Linear Algebra**                          | *(built-in)*                                           | NumPy                                     |
+| **Go-To Package for Popular ML Algos**      | caret                                                  | SciKit-Learn                              |
+| **Data Frame for Data Processing**          | data.frame, data.table                                 | Pandas                                    |
+| **Visualization**                           | ggplot2, ggvis, dygraphs                               | MatPlotLib, GGPlot, Bokeh, Plotly, Pyxley |
+| **Large-Scale Parallel Computation**        | parallel, doMC, doParallel, snow                       | Apache Spark, Theano, Numba               |
+| **Symbolic Math**                           | Ryacas, rSymPy                                         | SymPy                                     |
+| **Dynamic Document Editors / Generators**   | R Markdown, Slidify                                    | iPython Notebook                          |
+| **App Development Frameworks**              | Shiny                                                  | Django                                    |
+| **Software Unit-Testing Frameworks**        | testthat                                               | Nose, DocTest, Py.Test, PyUnit, Tox       |
+| **Leading Developers**                      | RStudio, Revolution Analytics *(Microsoft subsidiary)* | Continuum Analytics, Enthought            |
+| **Popular Integrated Devt. Envirs. (IDEs)** | RStudio                                                | PyCharm, Spyder, Rodeo                    |
+
 
 
 ## Other Software Installation

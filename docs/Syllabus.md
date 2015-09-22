@@ -5,7 +5,7 @@ We will move at a pace dictated by class discussions. Please check this page oft
 
 | Week | Date                | Content                                                                 |
 |:-----|:--------------------|:------------------------------------------------------------------------|
-| 1    | 9/24 &ndash; 9/26   | Intro to  Machine Learning; Nearest Neighbours; Bias-Variance Trade-Off |
+| [1](#week-1)    | 9/24 &ndash; 9/26   | Intro to  Machine Learning; Nearest Neighbours; Bias-Variance Trade-Off |
 | 2    | 10/1 &ndash; 10/3   | Decision Trees & Random Forests                                         |
 | 3    | 10/8 &ndash; 10/10  | Boosting                                                                |
 | 4    | 10/15 &ndash; 10/17 | Review of Linear Models; Neural Networks                                |
@@ -20,9 +20,10 @@ We will move at a pace dictated by class discussions. Please check this page oft
 
 ## Week 1
 
-[Overview](Syllabus/01_overview.pdf)
+_Lecture Slides:_ [Overview](Syllabus/01_overview.pdf)
 
-_Optional textbook reading:_
+_Optional textbook reading:_ 
+An Introduction to Statistical Learning: Section 2 and Section 5.1 
 
 _Additional reading:_
 
@@ -30,22 +31,4 @@ _Additional reading:_
 *M. I. Jordan and T. M. Mitchel* <br>
 A *Science* review article from two leading experts in Machine Learning
 
-[Economist on AI](http://www.economist.com/news/briefing/21650526-artificial-intelligence-scares-peopleexcessively-so-rise-machines)
 
-## Week 2
-
-## Week 3
-
-## Week 4
-
-## Week 5
-
-## Week 6
-
-## Week 7
-
-## Week 8
-
-## Week 9
-
-## Week 10

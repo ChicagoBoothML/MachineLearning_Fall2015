@@ -26,13 +26,27 @@ Vinh Luong ([MBALearnsToCode@uchicago.edu](mailto:MBALearnsToCode@uchicago.edu))
 
 ## Course Materials
 
-[**http://GitHub.com/ChicagoBoothML/MachineLearning_Fall2015**](http://GitHub.com/ChicagoBoothML/MachineLearning_Fall2015)
+Will be available on this website:
+[Lectures](Syllabus), [Data Sets](DataSets)
 
-*Please take special note that we will be distributing all course materials through this GitHub repository,
-while Chalk will only be used for assignment submission and grading information.*
+### Course Materials on GitHub (optional)
 
-*Please follow [**instructions below**](#NoteOnGitHubRepo) to install Git, GitHub and SourceTree
-to sync course materials down to a folder on your computer.*
+GitHub Repository: [**http://GitHub.com/ChicagoBoothML/MachineLearning_Fall2015**](http://GitHub.com/ChicagoBoothML/MachineLearning_Fall2015)
+
+*Please follow instructions below to install Git, GitHub and SourceTree to sync course materials down to a folder on your computer.*
+
+[GitHub.com](http://github.com), built based on version-control
+ software Git, is the most popular platform nowadays for hosting
+ open-source software code and related documentation and teaching
+ materials.
+ 
+Git and GitHub offer a very efficient means for us to keep track of changes and updates to our course materials,
+and for you to keep in-sync with the latest version of the materials.
+For this reason, we have decided to also distribute materials through this
+[**GitHub repository**](http://github.com/ChicagoBoothML/MachineLearning_Fall2015).
+  
+We ask that you follow these [**instructions**](Installation/Git, GitHub & SourceTree.md) to install Git,
+sign up for a GitHub.com account, install an app called SourceTree and sync this repo down to a folder on your computer.
 
 
 ## Piazza Discussion Forum
@@ -40,6 +54,20 @@ to sync course materials down to a folder on your computer.*
 [**http://Piazza.com/ChicagoBooth/Fall2015/BUS41204/home**](http://Piazza.com/ChicagoBooth/Fall2015/BUS41204/home)
 
 You can add yourself to the course here: [**http://Piazza.com/ChicagoBooth/Fall2015/BUS41204**](http://Piazza.com/ChicagoBooth/Fall2015/BUS41204)
+
+We will be using Piazza for class discussion.
+Please post any questions that you may have there, rather than emailing TAs or instructors.
+All of your classmates will benefit from the public discussions.
+
+We also encourage you to answer other students' questions.
+Answering question will reinforce your learning and understanding of the material.
+We will carefully check all discussions and give clarification in case of any confusion.
+Sometimes the best answer may be "Let me Google that for you..."
+
+_If we answer your questions after 2am, consider sending a rose..._
+
+
+
 
 ## Course Summary
 
@@ -101,34 +129,6 @@ However, if you opt to do so, we may not be able to provide much support.
 One particular language with which we can offer you substantial help is **Python**,
 which has a strong Machine Learning software ecosystem with much paralellism to that of R.
 Our TA [Vinh](mailto:MBALearnsToCode@uchicago.edu) is your go-to pal if you want to try out Python.
-
-
-<a name="NoteOnGitHubRepo"></a>
-## _IMPORTANT:_ Course Materials GitHub Repository
-
-[GitHub.com](http://github.com), built based on version-control software Git, is the most popular platform nowadays
- for hosting open-source software code and related documentation and teaching materials.
- 
-Git and GitHub offer a very efficient means for us to keep track of changes and updates to our course materials,
-and for you to keep in-sync with the latest version of the materials.
-For this reason, we have decided to distribute materials through this
-[**GitHub repository**](http://github.com/ChicagoBoothML/MachineLearning_Fall2015).
-  
-We ask that you follow these [**instructions**](Installation/Git, GitHub & SourceTree.md) to install Git,
-sign up for a GitHub.com account, install an app called SourceTree and sync this repo down to a folder on your computer.
-
-
-## Discussion Forum
-
-We will be using [**Piazza**](https://piazza.com/chicagobooth/fall2015/bus41204/home) for class discussion.
-Please post any questions that you may have there, rather than emailing TAs or instructors.
-All of your classmates will benefit from the public discussions.
-
-We also encourage you to answer other students' questions.
-Answering question will reinforce your learning and understanding of the material.
-We will carefully check all discussions and give clarification in case of any confusion.
-
-_If we answer your questions after 2am, consider sending a rose..._
 
 
 ## Textbooks

@@ -33,7 +33,7 @@ We will go through examples in R in-class and we will provide some instructions.
 you to have taken a class that uses R previously. That said, this class is not a class on R.
 
 - [**R, RStudio and CRAN Packages** installation guides](Installation/R, RStudio & CRAN Packages.md)
-- [**Rob's notes on R**](http://www.rob-mcculloch.org/2015_exec_data_mining/Simple-R-Introduction.pdf)
+- [**Rob's notes on R**](Tutorials/RobsR.pdf)
 - [**R's Introduction to R**](https://cran.r-project.org/doc/manuals/R-intro.pdf):
 This is written by stat/computing geeks for stat/computing geeks. It is not always the easiest thing to read.
 That being said, if you want to learn R, you should read at least the first bit of the chapter on major topics (e.g. data frames).

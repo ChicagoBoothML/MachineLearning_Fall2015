@@ -162,6 +162,13 @@ but do talk about applying Machine Learning in the context of business applicati
 [**Big Data, Data Mining, and Machine Learning: Value Creation for Business Leaders and Practitioners**](http://www.amazon.com/gp/product/1502462915) <br>
 *Jared Dean*
 
+Optional references on R. [Here](Computing) are additional resources.
+
+[**R in a Nutshell**](http://shop.oreilly.com/product/0636920022008.do) <br>
+*Joseph Adler*
+
+[**A Beginner's Guide to R**](http://www.amazon.com/Beginners-Guide-Use-Alain-Zuur/dp/0387938362) <br>
+*Alain Zuur, Elena N. Ieno, Erik Meesters*
 
 ## Grading
 

@@ -20,6 +20,8 @@ We will move at a pace dictated by class discussions. Please check this page oft
 
 ## Week 1
 
+[Overview](Syllabus/01_overview.pdf)
+
 _Optional textbook reading:_
 
 _Additional reading:_

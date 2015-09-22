@@ -4,7 +4,7 @@ iPython Notebook is an interactive scientific computing environment built on Pyt
 It enables us to create documents combining text for reporting / story-telling and Python code for data analysis.
 
 An iPython notebook can be run to render a beautiful report in its native _\*.ipynb_ format itself.
-If necessary, notebooks can also be converted to other publication formats such as HTML and PDF
+If necessary, notebooks can also be converted to other publication formats such as HTML and PDF.
 
 - Please note that iPython Notebook requires [**TeX**](Installation/TeX) for conversion to PDF
 

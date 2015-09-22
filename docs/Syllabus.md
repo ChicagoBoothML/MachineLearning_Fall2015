@@ -20,9 +20,13 @@ We will move at a pace dictated by class discussions. Please check this page oft
 
 ## Week 1
 
-_Lecture Slides:_ [Overview](Syllabus/01_overview.pdf) [kNN](Syllabus/01_knn.pdf)
+_Lecture Slides:_ <br>
+[Overview](Syllabus/01_overview.pdf) <br>
+[Introduction to Predictive Models and kNN](Syllabus/01_knn.pdf)
 
 _R Code:_ [docv.R](Syllabus/docv.R)
+
+_Homework assignment:_
 
 _Optional textbook reading:_ 
 An Introduction to Statistical Learning: Section 2 and Section 5.1 
@@ -32,5 +36,4 @@ _Additional reading:_
 [**Machine Learning: Trends, Perspectives, and Prospects**](http://www.sciencemag.org/content/349/6245/255.full.pdf) <br>
 *M. I. Jordan and T. M. Mitchel* <br>
 A *Science* review article from two leading experts in Machine Learning
-
 

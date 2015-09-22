@@ -20,7 +20,9 @@ We will move at a pace dictated by class discussions. Please check this page oft
 
 ## Week 1
 
-_Lecture Slides:_ [Overview](Syllabus/01_overview.pdf)
+_Lecture Slides:_ [Overview](Syllabus/01_overview.pdf) [kNN](Syllabus/01_knn.pdf)
+
+_R Code:_ [docv.R](Syllabus/docv.R)
 
 _Optional textbook reading:_ 
 An Introduction to Statistical Learning: Section 2 and Section 5.1 

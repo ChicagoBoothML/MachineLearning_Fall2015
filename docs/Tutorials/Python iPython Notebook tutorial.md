@@ -6,8 +6,7 @@ It enables us to create documents combining text for reporting / story-telling a
 An iPython notebook can be run to render a beautiful report in its native _\*.ipynb_ format itself.
 If necessary, notebooks can also be converted to other publication formats such as HTML and PDF
 
-- _**note**: at the point of writing of this tutorial, conversion to the PDF format is not mature and done in a rather
-complex manner through LaTeX document interpreters._
+- Please note that iPython Notebook requires [**TeX**](Installation/TeX) for conversion to PDF
 
 To understand iPython Notebook through a demo example:
 

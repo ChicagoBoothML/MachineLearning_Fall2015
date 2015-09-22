@@ -13,4 +13,5 @@ This tutorial provides an example script to illustrate how to use R Markdown. Pl
 - Open the downloaded R Markdown script in RStudio
 - Make sure the `rmarkdown` package is installed in R. If not, run the command **`install.packages('rmarkdown')`** in RStudio
 - In the text-editing window in RStudio, just below the file name, find and press the "**Knit PDF**" button, which will read the content of the script and convert it to a PDF document in the same folder as your R Markdown script file
+     - Please note that R Markdown requires [**TeX**](Installation/TeX) for conversion to PDF
 - Inspect the R Markdown script file thoroughly and look at the PDF output to see how the *.Rmd* input is rendered in the final output

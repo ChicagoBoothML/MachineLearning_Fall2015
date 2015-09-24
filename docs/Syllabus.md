@@ -26,7 +26,7 @@ _Lecture Slides:_ <br>
 
 _R Code:_ [docv.R](Syllabus/docv.R)
 
-_Homework assignment:_
+_Homework assignment:_ [01_hw.pdf](Syllabus/01_hw.pdf)
 
 _Optional textbook reading:_ 
 An Introduction to Statistical Learning: Section 2 and Section 5.1 

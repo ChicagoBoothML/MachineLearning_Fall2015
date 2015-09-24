@@ -73,6 +73,9 @@ site/
 # iPython Notebook checkpoints
 *.ipynb_checkpoints*
 
+# Rplots.pdf
+*Rplots.pdf*
+
 # Specific files & folders
 docs/Tutorials/R_Markdown_Tutorial.pdf
 docs/Tutorials/R_data.table_Tutorial.pdf

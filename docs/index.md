@@ -153,11 +153,14 @@ _PDF available online_
 *Kevin Murphy* <br>
 PhD-level book, providing a encyclopedic survey of the area.
 
-The following two books are very light on technical details,
+The following three books are very light on technical details,
 but do talk about applying Machine Learning in the context of business applications.
 
 [**Data Science for Business**](http://data-science-for-biz.com) <br>
 *Foster Provost and Tom Fawcett* <br>
+
+[**Predictive analytics**](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1118416856.html) <br>
+*Eric Siegel*
 
 [**Big Data, Data Mining, and Machine Learning: Value Creation for Business Leaders and Practitioners**](http://www.amazon.com/gp/product/1502462915) <br>
 *Jared Dean*

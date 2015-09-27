@@ -175,7 +175,7 @@ Optional references on R. [Here](Computing) are additional resources.
 
 ## Grading
 
-Homework assignments: **30%**; Midterm: **30%**; Final Project: **40%**
+Homework assignments: **20%**; Midterm: **40%**; Final Project: **40%**
 
 There will be **8 homework assignments** that will be due weekly except week 1 and 6.
 These assignments can be done in groups (max size 4).

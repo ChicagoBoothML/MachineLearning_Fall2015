@@ -20,6 +20,7 @@ pip install --upgrade GraphViz
 pip install --upgrade Jupyter
 pip install --upgrade MkDocs
 pip install --upgrade NeuroLab
+pip install --upgrade PyReadLine
 pip install --upgrade Python-Markdown-Math
 
 pip uninstall PyParsing   # to install an older version compatible with PyDot (see Stack Overflow thread:

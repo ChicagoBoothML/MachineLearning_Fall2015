@@ -44,7 +44,7 @@ _Lecture Slides:_ <br>
 
 _R Code:_ [bias-variance-illustration.R](Syllabus/bias-variance-illustration.R)
 
-_Homework assignment:_ 
+_Homework assignment:_ [02_hw.pdf](Syllabus/02_hw.pdf)
 
 _Optional textbook reading:_ 
 An Introduction to Statistical Learning: Section 8

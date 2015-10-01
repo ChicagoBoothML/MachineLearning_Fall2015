@@ -8,12 +8,12 @@ conda install IOPro
 conda install MKL
 conda install Numba
 conda install MinGW LibPython
+conda update bokeh
 conda update scikit-learn
 
 # Install packages from PyPI (Python Package Index)
 pip install --upgrade pip
 
-pip install --upgrade Bokeh
 pip install --upgrade GGPlot
 pip install --upgrade GitPython
 pip install --upgrade GraphViz

@@ -1,13 +1,13 @@
 ######################################################################
-if(0) {cat("###load data and libs\n")
+cat("###load data and libs\n")
 #load knn library (need to have installed this with install.packages("kknn"))
 library(kknn)
 #get Boston data
 library(MASS) ## a library of example datasets
 attach(Boston)
-}
+
 ######################################################################
-if(1) {cat("### run sim\n")
+cat("### run sim\n")
 kvec=c(4,40,200)
 nsim=100
 fit1=rep(0,nsim)
@@ -56,4 +56,4 @@ for(i in 1:nsim) {
 
    #readline("go?")
 }
-}
+

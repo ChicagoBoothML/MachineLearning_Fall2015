@@ -47,3 +47,26 @@ Every now and then, when you want to make sure you have the latest updated mater
 
 "Pull" will grab all the changes to the source GitHub repository _since your last clone / pull_,
 and apply those changes to your local cloned copy, so that you'll end up with exactly the latest content. 
+
+
+# _**Note**: GitHub connectivity restrictions by certain company internet networks_
+
+In some rare circumstances, we have encountered company internet networks that block transactions with GitHub.com.
+
+The recommended immediate quick fix is as follows:
+
+- Leave your office early right now, beat the traffic, and arrive in your more GitHub-friendly home;
+- Have a meal - _a proper big meal_ - to fuel your brain;
+- Connect with GitHub with peace, and work on your ML homework _till sunbeams find you..._
+
+Having said that, a company blocking GitHub can be symptomatic of some serious, deep-rooted problems;
+reflect on the following possibilities:
+
+- Your CTO may be ignorant;
+- Worse, your CTO may be even evil;
+- Your CEO may be ignorant of your CTO being ignorant or evil;
+- Worse, it may be even the case that your CEO is evil;
+- You yourself may be ignorant of your CEO and/or CTO being ignorant or evil...
+
+If the GitHub issue helps you uncover such scares, leave your job, do a Machine Learning PhD,
+and come back to boss the world! ;)

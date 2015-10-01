@@ -21,9 +21,7 @@ That being said, if you want to learn R, you should read at least the first bit 
 - [**R Reference Card**](http://cran.r-project.org/doc/contrib/Short-refcard.pdf)
 - [**Google's R Tutorial**](http://www.youtube.com/playlist?list=PLOU2XLYxmsIK9qQfztXeybpHvru-TrqAP)
 - [**Princeton's R Tutorial**](http://data.princeton.edu/R)
-- [**R Markdown** tutorial](Tutorials/R Markdown Tutorial.md): a tutorial by Vinh on R Markdown,
-an excellent dynamic document generator that **we strongly recommend that you use to do your homework**.
-It will save you a ton of time, and its output will be easy on the eye,
+- [**R Markdown** tutorial](Tutorials/R Markdown Tutorial.md): a tutorial by Vinh on R Markdown, an excellent dynamic document generator. We recommend you to try and use it to do your homework. It will save you a ton of time, and its output will be easy on the eye,
 adding extra shine to your already brilliant analysis...
     - Please note that R Markdown requires [**TeX**](Installation/TeX) for conversion to PDF
 - [**R data.table** tutorial](Tutorials/R data.table Tutorial.md): a tutorial by Vinh on R `data.table`,

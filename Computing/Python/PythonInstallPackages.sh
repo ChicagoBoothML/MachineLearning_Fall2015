@@ -14,7 +14,7 @@ conda update scikit-learn
 # Install packages from PyPI (Python Package Index)
 pip install --upgrade pip
 
-pip install --upgrade GGPlot
+pip install --upgrade GGPlot   # git+git://github.com/yhat/ggplot.git
 pip install --upgrade GitPython
 pip install --upgrade GraphViz
 pip install --upgrade Jupyter

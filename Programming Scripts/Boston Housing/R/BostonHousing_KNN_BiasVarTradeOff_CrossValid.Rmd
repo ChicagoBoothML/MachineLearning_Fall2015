@@ -13,7 +13,7 @@ This R Markdown script uses the **_Boston Housing_** data set to illustrate the 
 
 - The **$k$-Nearest Neighbors** (**KNN**) algorithm;
 - The **Bias-Variance Trade-Off**; and
-- The use of **Cross Validation** to estimate Out-of-Sample (OOS) prediction error and determine optimal hyper-parameters, in this case the number of nearest neighbors $k$. 
+- The use of **Cross Validation** to estimate Out-of-Sample (OOS) prediction error and determine optimal hyper-parameters, in this case the number of nearest neighbors $k$.
 
 
 # _first, some boring logistics..._
@@ -42,9 +42,8 @@ Let's then look at the **Boston Housing** data set from the _MASS_ package:
 
 ```{r results='hold'}
 # download data and read data into data.table format
-data_url <-
-  'https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/DATA_BostonHousing.csv'
-boston_housing <- fread(data_url)
+boston_housing <- fread(
+  'https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/DATA_BostonHousing.csv')
 # count number of samples
 nb_samples <- nrow(boston_housing)
 # sort data set by increasing lstat
@@ -157,19 +156,19 @@ To **quantify the generalizability of a predictor**, we need to estimate its **o
 A popular way to produce such OOS error estimates is to perform **cross validation**. Refer to lecture slides or [here](http://en.wikipedia.org/wiki/Cross-validation_(statistics)) for discussions on cross validation.
 
 ```{r}
-nb_cross_validation_folds <- 5
-nb_cross_validations <- 6
+NB_CROSS_VALIDATION_FOLDS <- 5
+NB_CROSS_VALIDATIONS <- 6
 ```
 
-Now, let's consider [**Root Mean Square Error** (**RMSE**)](http://en.wikipedia.org/wiki/Root-mean-square_deviation) as our predictor-goodness evaluation criterion and use `r nb_cross_validation_folds`-fold cross validation `r nb_cross_validations` times to pick a KNN predictor that has satisfactory RMSE.
+Now, let's consider [**Root Mean Square Error** (**RMSE**)](http://en.wikipedia.org/wiki/Root-mean-square_deviation) as our predictor-goodness evaluation criterion and use `r NB_CROSS_VALIDATION_FOLDS`-fold cross validation `r NB_CROSS_VALIDATIONS` times to pick a KNN predictor that has satisfactory RMSE.
 
 ```{r results='hide'}
 k_range = 2 : 200
 cross_validations_rmse = data.table(k=k_range, cv_avg_rmse=0.)
-for (i in 1 : nb_cross_validations) {
+for (i in 1 : NB_CROSS_VALIDATIONS) {
   this_cross_validation_rmse =
     sqrt(docvknn(boston_housing[, .(lstat)], boston_housing$medv,
-                 k=k_range, nfold=nb_cross_validation_folds,
+                 k=k_range, nfold=NB_CROSS_VALIDATION_FOLDS,
                  verbose=FALSE) / nb_samples)
   cross_validations_rmse[, (paste('cv_',  i, '_rmse', sep=''))] =
     this_cross_validation_rmse
@@ -184,7 +183,7 @@ cross_validations_rmse
 
 ```{r}
 g <- ggplot(cross_validations_rmse)
-for (i in 1 : nb_cross_validations) {
+for (i in 1 : NB_CROSS_VALIDATIONS) {
   g <- g + geom_line(aes_string(x='-log(k)', y=(paste('cv_',  i, '_rmse', sep='')),
                                 color=i), linetype='dotted', size=0.6)
 }
@@ -241,8 +240,8 @@ cross_validated_knn_model =
                              kernel='rectangular',
                              distance=2),
         trControl=trainControl(method='repeatedcv',
-                               number=nb_cross_validation_folds,
-                               repeats=nb_cross_validations,
+                               number=NB_CROSS_VALIDATION_FOLDS,
+                               repeats=NB_CROSS_VALIDATIONS,
                                allowParallel=TRUE))
 
 cross_validated_knn_model

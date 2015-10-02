@@ -1,3 +1,3 @@
-# BUS 41204: Machine Learning (Fall 2015)
+# _BUS 41204_ Machine Learning _(Fall 2015)_
 
-Repository for [BUS 41204: Machine Learning](http://chicagoboothml.github.io/MachineLearning_Fall2015/)
+Repository for [**_BUS 41204_ Machine Learning**](http://ChicagoBoothML.GitHub.io/MachineLearning_Fall2015)

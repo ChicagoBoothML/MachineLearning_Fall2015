@@ -3,9 +3,11 @@ install.packages(c(
   'caret',
   'data.table',
   'devtools',
+  'ggplot2',
   'kknn',
   'knitr',
   'markdown',
+  'MASS',
   'rmarkdown'),
   dependencies = TRUE,
   repos="http://cran.rstudio.com")

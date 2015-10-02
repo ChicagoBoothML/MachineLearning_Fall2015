@@ -10,7 +10,8 @@ from sklearn.neighbors import KNeighborsRegressor
 NB_CROSS_VALIDATION_FOLDS = 5
 
 # read Boston Housing data into data frame
-boston_housing_data = read_csv('DATA_BostonHousing.csv')
+boston_housing_data = read_csv(
+    'https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/DATA_BostonHousing.csv')
 boston_housing_data.sort(columns='lstat', inplace=True)
 print("BOSTON HOUSING data frame's top rows:")
 print(boston_housing_data[:6])

@@ -21,12 +21,23 @@ We will move at a pace dictated by class discussions. Please check this page oft
 ## Week 1
 
 _Lecture Slides:_ <br>
-[Overview](Syllabus/01_overview.pdf) <br>
-[Introduction to Predictive Models and kNN](Syllabus/01_knn.pdf)
+[**Overview**](Syllabus/01_overview.pdf) <br>
+[**Introduction to Predictive Models and kNN**](Syllabus/01_knn.pdf)
 
-_R Code:_ [docv.R](Syllabus/docv.R)
+_**R code**:_ [BostonHousing_KNN_BiasVarTradeOff_CrossValid.Rmd](http://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/R/BostonHousing_KNN_BiasVarTradeOff_CrossValid.Rmd)
 
-_Homework assignment:_ [01_hw.pdf](Syllabus/01_hw.pdf)
+- please save as a R Markdown (_.Rmd_) file on your computer, open in RStudio, and run by "Knit PDF"; OR:
+- you may also find it in the **Programming Scripts** > **Boston Housing** > **R** folder
+if you have cloned and synced the course GitHub repo down to your computer
+- _**note**: R Markdown requires [**TeX**](Installation/TeX) for conversion to PDF_
+
+_**Python code**:_ [BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb](http://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/Python/BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb)
+ 
+- please save as an iPython Notebook (_.ipynb_) file on your computer and open in an iPython Notebook server session; OR:
+- you may also find it in the **Programming Scripts** > **Boston Housing** > **Python** folder
+if you have cloned and synced the course GitHub repo down to your computer
+
+_Homework assignment:_ [**01_hw.pdf**](Syllabus/01_hw.pdf)
 
 _Optional textbook reading:_ 
 An Introduction to Statistical Learning: Section 2 and Section 5.1 

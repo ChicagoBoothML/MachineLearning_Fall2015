@@ -38,7 +38,7 @@ set.seed(99)   # Gretzky was #99
 
 # **Boston Housing** Data Set
 
-Let's then look at the **Boston Housing** data set from the _MASS_ package:
+Let's then look at the **Boston Housing** data set:
 
 ```{r results='hold'}
 # download data and read data into data.table format

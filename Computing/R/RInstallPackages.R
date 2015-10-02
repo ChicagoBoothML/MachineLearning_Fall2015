@@ -8,6 +8,7 @@ install.packages(c(
   'knitr',
   'markdown',
   'MASS',
+  'RCurl',
   'rmarkdown'),
   dependencies = TRUE,
   repos="http://cran.rstudio.com")

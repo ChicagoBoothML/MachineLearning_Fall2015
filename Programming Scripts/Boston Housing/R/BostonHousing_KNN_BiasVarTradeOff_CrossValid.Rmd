@@ -54,14 +54,33 @@ This data set has **`r formatC(nb_samples, big.mark=',')`** samples.
 We'll focus on **using the _lstat_ variable to predict the _medv_ variable**. Let's first plot them against each other:
 
 ```{r fig.width=8, fig.heigth=6}
-ggplot(boston_housing) +
-  geom_point(aes(x=lstat, y=medv, color='actual'), size=3) +
-  ggtitle('Boston Housing: medv vs. lstat') +
-  xlab('lstat') + ylab('medv') +
-  scale_colour_manual(name="medv",
-                      values=c(actual="deepskyblue")) +
-  theme(plot.title=element_text(face="bold", size=24),
+plot_boston_housing_data <- function(boston_housing_data,
+                                     title='Boston Housing: medv vs. lstat',
+                                     plot_predicted=TRUE) {
+  g <- ggplot(boston_housing_data) +
+    geom_point(aes(x=lstat, y=medv, color='actual'), size=2) +
+    ggtitle(title) +
+    xlab('medv') + ylab('lstat')
+  
+  if (plot_predicted) {
+    g <- g +
+      geom_line(aes(x=lstat, y=predicted_medv, color='predicted'), size=0.6) +
+      scale_colour_manual(name='medv',
+                          values=c(actual='blue', predicted='darkorange'))
+  } else {
+    g <- g +
+      scale_colour_manual(name='medv',
+                          values=c(actual='blue'))
+  }
+  
+  g <- g +
+    theme(plot.title=element_text(face='bold', size=24),
         axis.title=element_text(face='italic', size=18))
+  
+  g
+}
+
+plot_boston_housing_data(boston_housing, plot_predicted=FALSE)
 ```
 
 
@@ -76,18 +95,10 @@ Let's now try fitting a KNN predictor, with $k$ = `r try_k`, of _medv_ from _lst
 ```{r fig.width=8, fig.height=6}
 knn_model <- kknn(medv ~ lstat,
                   train=boston_housing, test=boston_housing[ , .(lstat)],
-                  k=try_k, kernel = "rectangular")
+                  k=try_k, kernel = 'rectangular')
 boston_housing[, predicted_medv := knn_model$fitted.values]
 
-ggplot(boston_housing) +
-  geom_point(aes(x=lstat, y=medv, color="actual"), size=3) +
-  geom_line(aes(x=lstat, y=predicted_medv, color="predicted"), size=1) +
-  ggtitle(paste('KNN predictor with k =', try_k)) +
-  xlab('lstat') + ylab('medv') +
-  scale_colour_manual(name="medv",
-                      values=c(actual="deepskyblue", predicted="darkorange")) +
-  theme(plot.title=element_text(face="bold", size=24),
-        axis.title=element_text(face='italic', size=18))
+plot_boston_housing_data(boston_housing, title=paste('KNN Model with k =', try_k))
 ```
 
 With $k$ = `r try_k` &ndash; a small number of nearest neighbors &ndash; we have a very "squiggly" predictor, which **fits the training data well** but is **over-sensitive to small changes** in the _lstat_ variable. We call this a **LOW-BIAS**, **HIGH-VARIANCE** predictor. We don't like it.
@@ -101,18 +112,10 @@ Now, with, say, $k$ = `r try_k`, we have the following:
 ```{r fig.width=8, fig.height=6}
 knn_model <- kknn(medv ~ lstat,
                   train=boston_housing, test=boston_housing[ , .(lstat)],
-                  k=try_k, kernel = "rectangular")
+                  k=try_k, kernel = 'rectangular')
 boston_housing[, predicted_medv := knn_model$fitted.values]
 
-ggplot(boston_housing) +
-  geom_point(aes(x=lstat, y=medv, color="actual"), size=3) +
-  geom_line(aes(x=lstat, y=predicted_medv, color="predicted"), size=1) +
-  ggtitle(paste('KNN predictor with k =', try_k)) +
-  xlab('lstat') + ylab('medv') +
-  scale_colour_manual(name="medv",
-                      values=c(actual="deepskyblue", predicted="darkorange")) +
-  theme(plot.title=element_text(face="bold", size=24),
-        axis.title=element_text(face='italic', size=18))
+plot_boston_housing_data(boston_housing, title=paste('KNN Model with k =', try_k))
 ```
 
 _Meh..._, we're not exactly jumping around with joy with this one, either. The predictor line is **not over-sensitive**, but **too "smooth" and too simple**, **not responding sufficiently to significant changes** in _lstat_. We call this a **HIGH-BIAS, LOW-VARIANCE** predictor.
@@ -126,18 +129,10 @@ Let's try something in between, say, $k$ = `r try_k`, to see if we have any bett
 ```{r fig.width=8, fig.height=6}
 knn_model <- kknn(medv ~ lstat,
                   train=boston_housing, test=boston_housing[ , .(lstat)],
-                  k=try_k, kernel = "rectangular")
+                  k=try_k, kernel = 'rectangular')
 boston_housing[, predicted_medv := knn_model$fitted.values]
 
-ggplot(boston_housing) +
-  geom_point(aes(x=lstat, y=medv, color="actual"), size=3) +
-  geom_line(aes(x=lstat, y=predicted_medv, color="predicted"), size=1) +
-  ggtitle(paste('KNN predictor with k =', try_k)) +
-  xlab('lstat') + ylab('medv') +
-  scale_colour_manual(name="medv",
-                      values=c(actual="deepskyblue", predicted="darkorange")) +
-  theme(plot.title=element_text(face="bold", size=24),
-        axis.title=element_text(face='italic', size=18))
+plot_boston_housing_data(boston_housing, title=paste('KNN Model with k =', try_k))
 ```
 
 Now, this looks pretty reasonable, and we'd think this predictor would **generalize well** when facing new, not yet seen, data. This is a **low-bias**, **low-variance** predictor. We love ones like this.
@@ -189,7 +184,7 @@ g <- g +
   ggtitle('Cross Validations') +
   xlab('Model Complexity (-log K)') + ylab('OOS RMSE') +
   guides(color=FALSE) + 
-  theme(plot.title=element_text(face="bold", size=24),
+  theme(plot.title=element_text(face='bold', size=24),
         axis.title=element_text(face='italic', size=18))
 
 g
@@ -204,18 +199,10 @@ From the above plot, the best $k$, one that minimizes the average cross-validati
 ```{r fig.width=8, fig.height=6}
 knn_model <- kknn(medv ~ lstat,
                   train=boston_housing, test=boston_housing[ , .(lstat)],
-                  k=best_k, kernel = "rectangular")
+                  k=best_k, kernel = 'rectangular')
 boston_housing[, predicted_medv := knn_model$fitted.values]
 
-ggplot(boston_housing) +
-  geom_point(aes(x=lstat, y=medv, color="actual"), size=3) +
-  geom_line(aes(x=lstat, y=predicted_medv, color="predicted"), size=1) +
-  ggtitle(paste('KNN predictor with k =', best_k)) +
-  xlab('lstat') + ylab('medv') +
-  scale_colour_manual(name="medv",
-                      values=c(actual="deepskyblue", predicted="darkorange")) +
-  theme(plot.title=element_text(face="bold", size=24),
-        axis.title=element_text(face='italic', size=18))
+plot_boston_housing_data(boston_housing, title=paste('KNN Model with k =', best_k))
 ```
 
 

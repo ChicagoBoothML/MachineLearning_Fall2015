@@ -24,7 +24,9 @@ _Lecture Slides:_ <br>
 [**Overview**](Syllabus/01_overview.pdf) <br>
 [**Introduction to Predictive Models and kNN**](Syllabus/01_knn.pdf)
 
-_**R code**:_ [BostonHousing_KNN_BiasVarTradeOff_CrossValid.Rmd](http://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/R/BostonHousing_KNN_BiasVarTradeOff_CrossValid.Rmd)
+_**R code**:_  <br>
+[docv.R](Syllabus/docv.R) <br>
+[BostonHousing_KNN_BiasVarTradeOff_CrossValid.Rmd](http://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/R/BostonHousing_KNN_BiasVarTradeOff_CrossValid.Rmd)
 
 - please save as a R Markdown (_.Rmd_) file on your computer, open in RStudio, and run by "Knit PDF"; OR:
 - you may also find it in the **Programming Scripts** > **Boston Housing** > **R** folder

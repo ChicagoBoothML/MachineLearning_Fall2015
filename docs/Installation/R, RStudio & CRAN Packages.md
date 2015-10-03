@@ -1,6 +1,6 @@
 # R Installation
 
-Go [**here**](http://cran.r-project.org) to download a graphical installer of the latest R version appropriate for your machine’s
+Go [**here**](http://cran.r-project.org) to download a graphical installer of the latest R version (**at least v3.2.2**) appropriate for your machine’s
 
 * processor (32-bit / 64-bit), and
 * operating system (Mac / Windows).

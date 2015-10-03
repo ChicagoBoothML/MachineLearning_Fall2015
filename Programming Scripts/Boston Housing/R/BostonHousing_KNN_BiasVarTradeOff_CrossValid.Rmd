@@ -25,11 +25,9 @@ Let's first load some necessary R packages and helper functions and set the rand
 library(data.table)
 library(ggplot2)
 library(kknn)
-# load modules from the common 'zzz Utility Code' folder
-r_utility_code_folder_path <-
-  'https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/zzz%20Utility%20Code/R'
-source(file.path(r_utility_code_folder_path, 'HelpR.R'))   # common helper functions
-source(file.path(r_utility_code_folder_path, 'docv.R'))   # this has docvknn used below
+# load modules from the common HelpR repo
+helpr_repo_raw_url <- 'https://raw.githubusercontent.com/ChicagoBoothML/HelpR/master'
+source(file.path(helpr_repo_raw_url, 'docv.R'))   # this has docvknn used below
 
 # set randomizer's seed
 set.seed(99)   # Gretzky was #99

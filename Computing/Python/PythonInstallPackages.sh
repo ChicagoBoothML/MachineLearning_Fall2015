@@ -32,3 +32,5 @@ pip install PyDot
 
 pip install --upgrade Theano
 pip install --upgrade Keras   # depends on Theano
+
+pip install --upgrade git+git://GitHub.com/ChicagoBoothML/Helpy --no-dependencies

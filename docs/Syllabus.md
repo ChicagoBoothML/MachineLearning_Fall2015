@@ -24,7 +24,7 @@ _Lecture Slides:_ <br>
 [**Overview**](Syllabus/01_overview.pdf) <br>
 [**Introduction to Predictive Models and kNN**](Syllabus/01_knn.pdf)
 
-_**R code**:_  <br>
+_**R code**:_ <br>
 [docv.R](Syllabus/docv.R) <br>
 [BostonHousing_KNN_BiasVarTradeOff_CrossValid.Rmd](http://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/R/BostonHousing_KNN_BiasVarTradeOff_CrossValid.Rmd)
 
@@ -33,11 +33,13 @@ _**R code**:_  <br>
 if you have cloned and synced the course GitHub repo down to your computer
 - _**note**: R Markdown requires [**TeX**](Installation/TeX) for conversion to PDF_
 
-_**Python code**:_ [BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb](http://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/Python/BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb)
+_**Python code**:_ <br>
+[BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb](http://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/Python/BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb)
  
 - please save as an iPython Notebook (_.ipynb_) file on your computer and open in an iPython Notebook server session; OR:
 - you may also find it in the **Programming Scripts** > **Boston Housing** > **Python** folder
 if you have cloned and synced the course GitHub repo down to your computer
+- if you want to view the notebook in a read-only mode, you can do that on the iPython NBviewer website [**here**](http://nbviewer.ipython.org/github/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Boston%20Housing/Python/BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb)
 
 _Homework assignment:_ [**01_hw.pdf**](Syllabus/01_hw.pdf)
 

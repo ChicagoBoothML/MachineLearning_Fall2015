@@ -15,6 +15,8 @@ conda update scikit-learn
 pip install --upgrade pip
 
 pip install --upgrade GGPlot   # git+git://github.com/yhat/ggplot.git
+conda update scipy   # GGPlot installation may break SciPy
+
 pip install --upgrade GitPython
 pip install --upgrade GraphViz
 pip install --upgrade Jupyter

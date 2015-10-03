@@ -94,8 +94,8 @@ Let's now try fitting a KNN predictor, with $k$ = `r try_k`, of _medv_ from _lst
 
 ```{r fig.width=8, fig.height=6}
 knn_model <- kknn(medv ~ lstat,
-                  train=boston_housing, test=boston_housing[ , .(lstat)],
-                  k=try_k, kernel = 'rectangular')
+                  train=boston_housing, test=boston_housing[, .(lstat)],
+                  k=try_k, kernel='rectangular')
 boston_housing[, predicted_medv := knn_model$fitted.values]
 
 plot_boston_housing_data(boston_housing, title=paste('KNN Model with k =', try_k))
@@ -111,8 +111,8 @@ Now, with, say, $k$ = `r try_k`, we have the following:
 
 ```{r fig.width=8, fig.height=6}
 knn_model <- kknn(medv ~ lstat,
-                  train=boston_housing, test=boston_housing[ , .(lstat)],
-                  k=try_k, kernel = 'rectangular')
+                  train=boston_housing, test=boston_housing[, .(lstat)],
+                  k=try_k, kernel='rectangular')
 boston_housing[, predicted_medv := knn_model$fitted.values]
 
 plot_boston_housing_data(boston_housing, title=paste('KNN Model with k =', try_k))
@@ -128,8 +128,8 @@ Let's try something in between, say, $k$ = `r try_k`, to see if we have any bett
 
 ```{r fig.width=8, fig.height=6}
 knn_model <- kknn(medv ~ lstat,
-                  train=boston_housing, test=boston_housing[ , .(lstat)],
-                  k=try_k, kernel = 'rectangular')
+                  train=boston_housing, test=boston_housing[, .(lstat)],
+                  k=try_k, kernel='rectangular')
 boston_housing[, predicted_medv := knn_model$fitted.values]
 
 plot_boston_housing_data(boston_housing, title=paste('KNN Model with k =', try_k))
@@ -198,8 +198,8 @@ From the above plot, the best $k$, one that minimizes the average cross-validati
 
 ```{r fig.width=8, fig.height=6}
 knn_model <- kknn(medv ~ lstat,
-                  train=boston_housing, test=boston_housing[ , .(lstat)],
-                  k=best_k, kernel = 'rectangular')
+                  train=boston_housing, test=boston_housing[, .(lstat)],
+                  k=best_k, kernel='rectangular')
 boston_housing[, predicted_medv := knn_model$fitted.values]
 
 plot_boston_housing_data(boston_housing, title=paste('KNN Model with k =', best_k))

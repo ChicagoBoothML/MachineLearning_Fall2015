@@ -178,15 +178,13 @@ for (i in 1 : NB_CROSS_VALIDATIONS) {
 ```
 
 ```{r}
-cross_validations_rmse
-```
-
-```{r}
 g <- ggplot(cross_validations_rmse)
+
 for (i in 1 : NB_CROSS_VALIDATIONS) {
   g <- g + geom_line(aes_string(x='-log(k)', y=(paste('cv_',  i, '_rmse', sep='')),
                                 color=i), linetype='dotted', size=0.6)
 }
+
 g <- g +
   geom_line(aes(x=-log(k), y=cv_avg_rmse),
             color='black', size=1) +
@@ -195,6 +193,7 @@ g <- g +
   guides(color=FALSE) + 
   theme(plot.title=element_text(face="bold", size=24),
         axis.title=element_text(face='italic', size=18))
+
 g
 ```
 

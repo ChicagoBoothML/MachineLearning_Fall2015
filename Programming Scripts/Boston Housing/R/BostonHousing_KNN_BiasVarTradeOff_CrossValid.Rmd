@@ -43,7 +43,7 @@ Let's then look at the **Boston Housing** data set:
 ```{r results='hold'}
 # download data and read data into data.table format
 boston_housing <- fread(
-  'https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/DATA_BostonHousing.csv')
+  'https://raw.githubusercontent.com/ChicagoBoothML/DATA___BostonHousing/master/BostonHousing.csv')
 # count number of samples
 nb_samples <- nrow(boston_housing)
 # sort data set by increasing lstat

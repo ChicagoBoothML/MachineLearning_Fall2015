@@ -7,7 +7,7 @@ We will move at a pace dictated by class discussions. Please check this page oft
 |:-----|:--------------------|:-----------------------------------------------------------------------------------|
 | [1](#week-1)    | 9/24 &ndash; 9/26   | Intro to  Machine Learning; Nearest Neighbours; Bias-Variance Trade-Off |
 | [2](#week-2)    | 10/1 &ndash; 10/3   | Cross-validation & Decision Trees                                       |
-| 3    | 10/8 &ndash; 10/10  | Random forests & Boosting                                               |
+| [3](#week-3)    | 10/8 &ndash; 10/10  | Random forests & Boosting                                               |
 | 4    | 10/15 &ndash; 10/17 | Review of Linear Models; Neural Networks                                |
 | 5    | 10/22 &ndash; 10/24 | Machine Learning in the Wild                                            |
 | 6    | 10/29 &ndash; 10/31 | Anomaly Detection                                                       | 
@@ -64,3 +64,17 @@ _Homework assignment:_ [02_hw.pdf](Syllabus/02_hw.pdf)
 
 _Optional textbook reading:_ 
 An Introduction to Statistical Learning: Section 8.1
+
+## Week 3
+
+
+_Lecture Slides:_ <br>
+[Trees, Bagging, Random Forests and Boosting](Syllabus/03_trees_bag_boost.pdf)  <br>
+Note that the first part of the slides are the same as trees in the week 2.
+
+_R Code:_ [knn-bagging.R](Syllabus/knn-bagging.R)
+
+_Homework assignment:_ See Problem 9.1 in Lecture notes for this week.
+
+_Optional textbook reading:_ 
+An Introduction to Statistical Learning: Chapter 8

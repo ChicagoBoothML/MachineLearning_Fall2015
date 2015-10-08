@@ -1,0 +1,131 @@
+---
+title: 'Used Cars: Homework 01'
+author: 'Chicago Booth ML Team'
+output: pdf_document
+fontsize: 12
+geometry: margin=0.6in
+---
+
+
+# Load Libraries
+
+```{r}
+library(data.table)
+library(ggplot2)
+library(kknn)
+```
+
+
+# Data Import
+
+```{r}
+# download data and read data into data.table format
+used_cars <- fread(
+  'https://raw.githubusercontent.com/ChicagoBoothML/DATA___UsedCars/master/UsedCars_small.csv')
+# count number of samples
+nb_samples <- nrow(used_cars)
+# sort data set by increasing mileage
+setkey(used_cars, mileage)
+used_cars
+```
+
+
+# Plot $x = mileage$ vs. $y = price$
+
+```{r fig.width=8, fig.heigth=6}
+plot_used_cars_data <- function(used_cars_data,
+                                title='Used Cars: price vs. mileage',
+                                plot_predicted=TRUE) {
+  g <- ggplot(used_cars_data) +
+    geom_point(aes(x=mileage, y=price, color='actual'), size=1) +
+    ggtitle(title) +
+    xlab('milage') + ylab('price')
+  
+  if (plot_predicted) {
+    g <- g +
+      geom_line(aes(x=mileage, y=predicted_price, color='predicted'), size=0.6) +
+      scale_colour_manual(name='price',
+                          values=c(actual='blue', predicted='darkorange'))
+  } else {
+    g <- g +
+      scale_colour_manual(name='price',
+                          values=c(actual='blue'))
+  }
+  
+  g <- g +
+    theme(plot.title=element_text(face='bold', size=24),
+        axis.title=element_text(face='italic', size=18))
+  
+  g
+}
+
+plot_used_cars_data(used_cars, plot_predicted=FALSE)
+```
+
+The relationship looks downward-sloping, with cars with more mileage having lower prices. This is expected.
+
+
+# Linear Regression
+
+```{r fig.width=8, fig.heigth=6}
+linear_model <- lm(price ~ mileage, data=used_cars)
+used_cars[, predicted_price := predict(linear_model, newdata=used_cars)]
+
+plot_used_cars_data(used_cars, title='Linear Model')
+```
+
+
+# KNN Regressions for various $k$
+
+```{r}
+k <- 5
+knn_model <- kknn(price ~ mileage,
+                  train=used_cars, test=used_cars[ , .(mileage)],
+                  k=k, kernel='rectangular')
+used_cars[, predicted_price := knn_model$fitted.values]
+
+plot_used_cars_data(used_cars, title=paste('KNN Model with k =', k))
+```
+
+With $k =$ `r k`, the predictor suffers from **high-variance**, being overly-sensitive to small changes in the _mileage_ variable.
+
+
+```{r}
+k <- 300
+knn_model <- kknn(price ~ mileage,
+                  train=used_cars, test=used_cars[ , .(mileage)],
+                  k=k, kernel='rectangular')
+used_cars[, predicted_price := knn_model$fitted.values]
+
+plot_used_cars_data(used_cars, title=paste('KNN Model with k =', k))
+```
+
+With $k =$ `r k`, the predictor seems to be a bit too simple and does not do well in the highest and lowest extremes. This is a **high-bias** predictor.
+
+
+```{r}
+k <- 30
+knn_model <- kknn(price ~ mileage,
+                  train=used_cars, test=used_cars[ , .(mileage)],
+                  k=k, kernel='rectangular')
+used_cars[, predicted_price := knn_model$fitted.values]
+
+plot_used_cars_data(used_cars, title=paste('KNN Model with k =', k))
+```
+
+$k =$ `r k` seems to produce a reasonable, **low-bias**, **low-variance** predictor.
+
+
+# Predicted Price of Used Car with 100,000 Miles
+
+```{r}
+test_case <- data.table(mileage=1e5)
+
+knn_model <- kknn(price ~ mileage,
+                  train=used_cars, test=test_case,
+                  k=k, kernel='rectangular')
+```
+
+The Linear Model predicts price of $**`r formatC(predict(linear_model, newdata=test_case), format='f', digits=2, big.mark=',')`**.
+
+The KNN Model with $k =$ `r k` predicts price of $**`r formatC(knn_model$fitted.values, format='f', digits=2, big.mark=',')`**.

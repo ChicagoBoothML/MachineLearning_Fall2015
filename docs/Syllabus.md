@@ -18,14 +18,15 @@ We will move at a pace dictated by class discussions. Please check this page oft
 | 11   | 12/11               | Final Project due                                                       |
 
 
-## Week 1
+## Weeks 1-2
 
 _Lecture Slides:_ <br>
 [**Overview**](Syllabus/01_overview.pdf) <br>
 [**Introduction to Predictive Models and kNN**](Syllabus/01_knn.pdf)
 
 _**R code**:_ <br>
-[docv.R](Syllabus/docv.R) <br>
+[docv.R](https://github.com/ChicagoBoothML/HelpR/blob/master/docv.R) <br>
+[bias-variance-illustration.R](Syllabus/bias-variance-illustration.R) <br>
 [BostonHousing_KNN_BiasVarTradeOff_CrossValid.Rmd](http://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/R/BostonHousing_KNN_BiasVarTradeOff_CrossValid.Rmd)
 
 - please save as a R Markdown (_.Rmd_) file on your computer, open in RStudio, and run by "Knit PDF"; OR:
@@ -34,18 +35,27 @@ if you have cloned and synced the course GitHub repo down to your computer
 - _**note**: R Markdown requires [**TeX**](Installation/TeX) for conversion to PDF_
 
 _**Python code**:_ <br>
-[Notebook](http://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/Python/BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb)<br>
-[NBviewer](http://nbviewer.ipython.org/github/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Boston%20Housing/Python/BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb)
+[BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb](http://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/Python/BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb)<br>
+_(you can view a read-only version through [NBviewer](http://nbviewer.ipython.org/github/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Boston%20Housing/Python/BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb))_
  
 - please save as an iPython Notebook (_.ipynb_) file on your computer and open in an iPython Notebook server session; OR:
 - you may also find it in the **Programming Scripts** > **Boston Housing** > **Python** folder
 if you have cloned and synced the course GitHub repo down to your computer
 - The iPython NBviewer website allows you to view the notebook in a read-only mode
 
-_Homework assignment:_ [**01_hw.pdf**](Syllabus/01_hw.pdf)
+_Homework assignments:_ <br>
 
-_Optional textbook reading:_ 
-An Introduction to Statistical Learning: Section 2 and Section 5.1 
+[**01_hw.pdf**](Syllabus/01_hw.pdf)
+
+- [model answers in R Markdown](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Used%20Cars/R/UsedCars_HW01ans.Rmd)
+- [model answers in iPython Notebook](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Used%20Cars/Python/UsedCars_HW01ans.ipynb)
+    - view through [NBViewer](http://nbviewer.ipython.org/github/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Used%20Cars/Python/UsedCars_HW01ans.ipynb)
+
+[**02_hw.pdf**](Syllabus/02_hw.pdf)
+
+
+_Optional textbook reading:_ <br>
+An Introduction to Statistical Learning: Section 2, Section 5.1, Section 8.1
 
 _Additional reading:_
 
@@ -53,20 +63,8 @@ _Additional reading:_
 *M. I. Jordan and T. M. Mitchel* <br>
 A *Science* review article from two leading experts in Machine Learning
 
-## Week 2
-
-_Lecture Slides:_ <br>
-[Introduction to Regression and Classification Trees (CART)](Syllabus/02_intro_trees.pdf)
-
-_R Code:_ [bias-variance-illustration.R](Syllabus/bias-variance-illustration.R)
-
-_Homework assignment:_ [02_hw.pdf](Syllabus/02_hw.pdf)
-
-_Optional textbook reading:_ 
-An Introduction to Statistical Learning: Section 8.1
 
 ## Week 3
-
 
 _Lecture Slides:_ <br>
 [Trees, Bagging, Random Forests and Boosting](Syllabus/03_trees_bag_boost.pdf)  <br>

@@ -7,7 +7,7 @@
 |:---------|:-----------------------------------|:--------------------|
 | 41204-01 | Thursday 08:30 AM &ndash; 11:30 AM | Harper Center C01   |
 | 41204-81 | Friday 06:00 PM &ndash; 09:00 PM   | Gleacher Center 208 |
-| 41204-85 | Saturday 01:30PM &ndash; 04:30PM     | Gleacher Center 208 |
+| 41204-85 | Saturday 01:30PM &ndash; 04:30PM   | Gleacher Center 208 |
 
 
 ## People

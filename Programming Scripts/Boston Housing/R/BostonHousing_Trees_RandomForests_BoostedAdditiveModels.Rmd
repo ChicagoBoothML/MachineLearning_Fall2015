@@ -105,8 +105,8 @@ plot_boston_housing_data(boston_housing, plot_predicted=FALSE)
 Let's now play with a few single decision trees:
 
 ```{r}
-mincut <- 50   # smallest allowed node size
-minsize <- 100   # minimum number of observations to include in either child node; NOTE: minsize >= 2x mincut
+mincut <- 100   # smallest allowed node size
+minsize <- 200   # minimum number of observations to include in either child node; NOTE: minsize >= 2x mincut
 mindev <- 1e-6   # minimum deviance gain for further tree split
 
 tree_model <- tree(medv ~ lstat, data=boston_housing,

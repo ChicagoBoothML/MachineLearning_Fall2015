@@ -72,9 +72,9 @@ Note that the first part of the slides are the same as trees in the week 2.
 
 _**R code**:_ <br>
 [knn-bagging.R](Syllabus/knn-bagging.R) <br>
-[BostonHousing_DecTrees_RandomForests_BoostedAdditiveModels.Rmd](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/R/BostonHousing_DecTrees_RandomForests_BoostedAdditiveModels.Rmd)
+[BostonHousing_Trees_RandomForests_BoostedAdditiveModels.Rmd](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/R/BostonHousing_Trees_RandomForests_BoostedAdditiveModels.Rmd)
 
-- you can find an advanced version featuring the popular **caret** package and **parallel computation** here: [BostonHousing_DecTrees_RandomForests_BoostedAdditiveModels_usingCaretPackage.Rmd](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/R/BostonHousing_DecTrees_RandomForests_BoostedAdditiveModels_usingCaretPackage.Rmd)
+- you can find an advanced version featuring the popular **caret** package and **parallel computation** here: [BostonHousing_Trees_RandomForests_BoostedAdditiveModels_usingCaretPackage.Rmd](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/R/BostonHousing_Trees_RandomForests_BoostedAdditiveModels_usingCaretPackage.Rmd)
 
 _**Python code**:_ <br>
 

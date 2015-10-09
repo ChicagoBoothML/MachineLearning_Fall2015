@@ -8,7 +8,7 @@
 
 ## California Housing
 
-[**CAhousing.csv**](https://raw.githubusercontent.com/ChicagoBoothML/DATA___CaliforniaHousing/master/CAhousing.csv) 
+[**CaliforniaHousing.csv**](https://raw.githubusercontent.com/ChicagoBoothML/DATA___CaliforniaHousing/master/CaliforniaHousing.csv) 
 
 
 ## Used Cars

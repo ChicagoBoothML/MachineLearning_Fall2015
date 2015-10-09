@@ -70,7 +70,12 @@ _Lecture Slides:_ <br>
 [Trees, Bagging, Random Forests and Boosting](Syllabus/03_trees_bag_boost.pdf)  <br>
 Note that the first part of the slides are the same as trees in the week 2.
 
-_R Code:_ [knn-bagging.R](Syllabus/knn-bagging.R)
+_**R code**:_ <br>
+[knn-bagging.R](Syllabus/knn-bagging.R)
+[BostonHousing_DecTrees_RandomForests_BoostedAdditiveModels.Rmd](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/R/BostonHousing_DecTrees_RandomForests_BoostedAdditiveModels.Rmd)
+
+_**Python code**:_ <br>
+
 
 _Homework assignment:_ See Problem 9.1 in Lecture notes for this week.
 

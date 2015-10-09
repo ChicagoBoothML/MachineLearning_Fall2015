@@ -1,8 +1,23 @@
 # **Data Sets**
 
 
+## Boston Housing
+
+[**BostonHousing.csv**](https://raw.githubusercontent.com/ChicagoBoothML/DATA___BostonHousing/master/BostonHousing.csv)
+
+
+## California Housing
+
+[**CAhousing.csv**](https://raw.githubusercontent.com/ChicagoBoothML/DATA___CaliforniaHousing/master/CAhousing.csv) 
+
+
 ## Used Cars
 
-[**susedcars.csv**](http://www.rob-mcculloch.org/data/susedcars.csv) &ndash; small subset of the data
+[**UsedCars_small.csv**](https://raw.githubusercontent.com/ChicagoBoothML/DATA___UsedCars/master/UsedCars_small.csv) &ndash; small subset of the data
 
-[**usedcars.csv**](http://www.rob-mcculloch.org/data/usedcars.csv) &ndash; complete data set
+[**UsedCars.csv**](https://raw.githubusercontent.com/ChicagoBoothML/DATA___UsedCars/master/UsedCars.csv) &ndash; complete data set
+
+
+## Hockey data 
+
+[**pen2ref.dat**](https://raw.githubusercontent.com/ChicagoBoothML/DATA___Hockey/master/pen2ref.dat)

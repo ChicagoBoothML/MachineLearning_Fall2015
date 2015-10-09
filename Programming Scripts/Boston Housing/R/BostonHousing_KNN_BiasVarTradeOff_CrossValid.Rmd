@@ -20,6 +20,12 @@ This R Markdown script uses the **_Boston Housing_** data set to illustrate the 
 
 Let's first load some necessary R packages and helper functions and set the random number generator's seed:
 
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+install.packages(c('data.table', 'ggplot2', 'kknn'),
+                 dependencies=TRUE,
+                 repos='http://cran.rstudio.com')
+```
+
 ```{r message=FALSE}
 # load CRAN libraries from CRAN packages
 library(data.table)

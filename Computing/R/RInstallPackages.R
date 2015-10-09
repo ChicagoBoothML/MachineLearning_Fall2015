@@ -14,9 +14,12 @@ install.packages(c(
   'knitr',
   'markdown',
   'MASS',
+  'parRF',
   'randomForest',
+  'rpart',
   'RCurl',
   'rmarkdown',
+  'tree',
   'yaml'),
   dependencies = TRUE,
   repos="http://cran.rstudio.com")

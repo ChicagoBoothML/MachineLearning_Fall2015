@@ -5,6 +5,7 @@ install.packages(c(
   'caret',
   'data.table',
   'devtools',
+  'foreach',
   'gbm',
   'ggplot2',
   'h2o',

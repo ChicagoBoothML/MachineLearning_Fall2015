@@ -1,0 +1,135 @@
+---
+title: 'Boston Housing: Random Forests & Boosted Trees Models (through Caret package)'
+author: 'Chicago Booth ML Team'
+output: pdf_document
+fontsize: 12
+geometry: margin=0.6in
+---
+
+
+# OVERVIEW
+
+This R Markdown script uses the **_Boston Housing_** data set to illustrate
+
+- **Decision Trees** and trees-related **_ensemble modelling_** methods:
+- **Random Forests**, which are based on **Bootstrap Aggregating** ("**Bagging**") applied to trees; and 
+- **Boosted Additive (Trees) Models**.
+
+This is an advanced script that uses the popular [**caret**](http://topepo.github.io/caret) package, which provides standardized interfaces with 200+ popular Machine Learning algorithms and data processing procedures, and which is capable of leveraging **parallel computation** where applicable.
+
+We shall skip the simple univariate models in this script.
+
+
+# _first, some boring logistics..._
+
+Let's first load some necessary R packages and set the random number generator's seed:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+# Install necessary packages, just in case they are not yet installed
+install.packages(c('caret',
+                   'data.table',
+                   'doParallel',
+                   'foreach'),
+                 dependencies=TRUE,
+                 repos='http://cran.rstudio.com')
+```
+
+```{r message=FALSE}
+# load CRAN libraries from CRAN packages
+library(caret)
+library(data.table)
+library(doParallel)
+
+# set randomizer's seed
+set.seed(99)   # Gretzky was #99
+```
+
+
+# Parallel Computation Setup
+
+Let's set up a parallel computing infrastructure (thanks to the excellent **`doParallel`** package by Microsoft subsidiary **Revolution Analytics**) to allow more efficient computation in the rest of this exercise:
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+cl <- makeCluster(detectCores() - 2)   # create a compute cluster using all CPU cores but 
+clusterEvalQ(cl, library(foreach))
+registerDoParallel(cl)   # register this cluster
+```
+
+We have set up a compute cluster with **`r getDoParWorkers()`** worker nodes for computing.
+
+
+# Boston Housing Data Set
+
+Let's then look at the **Boston Housing** data set:
+
+```{r results='hold'}
+# download data and read data into data.table format
+boston_housing <- fread(
+  'https://raw.githubusercontent.com/ChicagoBoothML/DATA___BostonHousing/master/BostonHousing.csv')
+
+# count number of samples
+nb_samples <- nrow(boston_housing)
+
+# shuffle data set
+boston_housing <- boston_housing[sample.int(nb_samples), ]
+
+boston_housing
+```
+
+
+# Random Forest model
+
+```{r message=FALSE}
+B <- 10000   # number of trees in the Random Forest
+
+rf_train <- train(medv ~ ., data=boston_housing,
+                  method='parRF',  # parallel Random Forest
+                  ntree=B,         # number of trees in the Random Forest
+                  nodesize=25,     # minimum node size set small enough to allow for complex trees,
+                                   # but not so small as to require too large B to eliminate high variance
+                  importance=TRUE, # evaluate importance of predictors
+                  keep.inbag=TRUE,
+                  trControl=trainControl(
+                    method='oob',  # Out-of-Bag RMSE estimation
+                    allowParallel=TRUE),
+                  tuneGrid=NULL)
+
+rf_predict <- predict(rf_train$finalModel, newdata=boston_housing)
+```
+
+This Random Forest model has an estimated OOB RMSE of **`r formatC(min(rf_train$results$RMSE), format='f', digits=3)`**.
+
+
+# Boosted Trees model
+
+```{r message=FALSE}
+boost_train <- train(medv ~ ., data=boston_housing,
+                     method='gbm',               # Generalized Boosted Models
+                     verbose=FALSE,
+                     trControl=trainControl(
+                       method='repeatedcv',                     # repeated Cross Validation
+                       number=5,                                # number of CV folds
+                       repeats=6,                               # number of CV repeats
+                       allowParallel=TRUE),
+                     tuneGrid=expand.grid(n.trees=B,            # number of trees
+                                          interaction.depth=10, # max tree depth,
+                                          n.minobsinnode=40,    # minimum node size
+                                          shrinkage=0.01))      # shrinkage parameter, a.k.a. "learning rate"
+
+boost_predict <- predict(boost_train$finalModel, newdata=boston_housing, n.trees=B)
+```
+
+This Boosted Trees model has an estimated OOS RMSE of **`r formatC(boost_train$results$RMSE, format='f', digits=3)`**.
+
+
+## Prediction Comparison and Variable Importance
+
+```{r}
+plot(rf_predict, boost_predict, main="Ranfom Forest vs. Boosted Trees predictions")
+varImpPlot(rf_train$finalModel, main="Random Forest's Variable Importance")
+plot(summary(boost_train$finalModel, plotit=FALSE), main="Boosted Trees Model's Variable Importance")
+```
+
+```{r}
+stopCluster(cl)   # shut down the parallel computing cluster
+```

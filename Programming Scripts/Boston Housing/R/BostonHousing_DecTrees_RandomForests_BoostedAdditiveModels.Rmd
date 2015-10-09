@@ -224,9 +224,9 @@ Let's build multivariate Random Forest and Boosted Trees models to predict _medv
 
 ```{r}
 boston_housing[, predicted_medv := NULL]   # remove prediction results column
-boston_housing = boston_housing[sample.int(nb_samples), ]   # shuffle data for more accurate Cross Validation
+boston_housing <- boston_housing[sample.int(nb_samples), ]   # shuffle data for more accurate Cross Validation
 
-B = 10000
+B <- 10000
 
 rf_model <- randomForest(medv ~ ., data=boston_housing,
                          ntree=B,     # number of trees in the Random Forest

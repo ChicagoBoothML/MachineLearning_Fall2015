@@ -50,7 +50,7 @@ set.seed(99)   # Gretzky was #99
 Let's set up a parallel computing infrastructure (thanks to the excellent **`doParallel`** package by Microsoft subsidiary **Revolution Analytics**) to allow more efficient computation in the rest of this exercise:
 
 ```{r message=FALSE, warning=FALSE, results='hide'}
-cl <- makeCluster(detectCores() - 2)   # create a compute cluster using all CPU cores but 
+cl <- makeCluster(detectCores() - 2)   # create a compute cluster using all CPU cores but 2
 clusterEvalQ(cl, library(foreach))
 registerDoParallel(cl)   # register this cluster
 ```

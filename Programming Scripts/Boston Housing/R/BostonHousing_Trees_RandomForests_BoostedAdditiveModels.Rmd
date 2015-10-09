@@ -11,7 +11,7 @@ geometry: margin=0.6in
 
 This R Markdown script uses the **_Boston Housing_** data set to illustrate
 
-- **Decision Trees** and trees-related **_ensemble modelling_** methods:
+- **Decision Trees** and trees-related **_ensemble modeling_** methods:
 - **Random Forests**, which are based on **Bootstrap Aggregating** ("**Bagging**") applied to trees; and 
 - **Boosted Additive (Trees) Models**.
 

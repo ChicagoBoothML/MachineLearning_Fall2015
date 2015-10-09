@@ -11,8 +11,7 @@ geometry: margin=0.6in
 
 This R Markdown script uses the **_Boston Housing_** data set to illustrate
 
-- **Decision Trees** and trees-related **_ensemble modelling_** methods:
-- **Random Forests**, which are based on **Bootstrap Aggregating** ("**Bagging**") applied to trees; and 
+- **Random Forests**, which are based on **Bootstrap Aggregating** ("**Bagging**") applied to Decision Trees; and 
 - **Boosted Additive (Trees) Models**.
 
 This is an advanced script that uses the popular [**caret**](http://topepo.github.io/caret) package, which provides standardized interfaces with 200+ popular Machine Learning algorithms and data processing procedures, and which is capable of leveraging **parallel computation** where applicable.

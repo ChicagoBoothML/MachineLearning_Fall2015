@@ -18,6 +18,6 @@
 [**UsedCars.csv**](https://raw.githubusercontent.com/ChicagoBoothML/DATA___UsedCars/master/UsedCars.csv) &ndash; complete data set
 
 
-## Hockey data 
+## Hockey
 
 [**pen2ref.dat**](https://raw.githubusercontent.com/ChicagoBoothML/DATA___Hockey/master/pen2ref.dat)

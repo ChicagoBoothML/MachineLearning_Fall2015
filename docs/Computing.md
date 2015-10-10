@@ -60,6 +60,7 @@ including the leading who's-whos and what's-whats in various aspects:
 |                                             | R                                                      | PYTHON                                    |
 |:--------------------------------------------|:-------------------------------------------------------|:------------------------------------------|
 | **Linear Algebra**                          | *(built-in)*                                           | NumPy                                     |
+| **Packages Respository**                    | Comprehensive R Archive Network (CRAN)                 | Python Package Index (PyPI)               |         
 | **Go-To Package for Popular ML Algos**      | caret                                                  | SciKit-Learn                              |
 | **Data Frame for Data Processing**          | data.frame, data.table                                 | Pandas                                    |
 | **Visualization**                           | ggplot2, ggvis, dygraphs                               | MatPlotLib, GGPlot, Bokeh, Plotly, Pyxley |

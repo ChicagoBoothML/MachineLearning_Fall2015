@@ -67,7 +67,7 @@ including the leading who's-whos and what's-whats in various aspects:
 | **Large-Scale Parallel Computation**        | parallel, doMC, doParallel, snow                       | Apache Spark, Theano, Numba               |
 | **Symbolic Math**                           | Ryacas, rSymPy                                         | SymPy                                     |
 | **Dynamic Document Editors / Generators**   | R Markdown, Slidify                                    | iPython Notebook                          |
-| **App Development Frameworks**              | Shiny                                                  | Django                                    |
+| **App Development Frameworks**              | Shiny                                                  | Django, Flask, Jinja2                     |
 | **Software Unit-Testing Frameworks**        | testthat                                               | Nose, DocTest, Py.Test, PyUnit, Tox       |
 | **Leading Developers**                      | RStudio, Revolution Analytics *(Microsoft subsidiary)* | Continuum Analytics, Enthought            |
 | **Popular Integrated Devt. Envirs. (IDEs)** | RStudio                                                | PyCharm, Spyder, Rodeo                    |

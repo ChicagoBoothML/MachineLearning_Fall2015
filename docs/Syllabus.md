@@ -35,8 +35,7 @@ if you have cloned and synced the course GitHub repo down to your computer
 - _**note**: R Markdown requires [**TeX**](Installation/TeX) for conversion to PDF_
 
 _**Python code**:_ <br>
-[BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb](http://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/Python/BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb)<br>
-_(you can view a read-only version through [NBviewer](http://nbviewer.ipython.org/github/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Boston%20Housing/Python/BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb))_
+[BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Boston%20Housing/Python/BostonHousing_KNN_BiasVarTradeOff_CrossValid.ipynb)
  
 - please save as an iPython Notebook (_.ipynb_) file on your computer and open in an iPython Notebook server session; OR:
 - you may also find it in the **Programming Scripts** > **Boston Housing** > **Python** folder
@@ -48,8 +47,7 @@ _Homework assignments:_ <br>
 [**01_hw.pdf**](Syllabus/01_hw.pdf)
 
 - [model answers in R Markdown](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Used%20Cars/R/UsedCars_HW01ans.Rmd)
-- [model answers in iPython Notebook](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Used%20Cars/Python/UsedCars_HW01ans.ipynb)
-    - view through [NBViewer](http://nbviewer.ipython.org/github/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Used%20Cars/Python/UsedCars_HW01ans.ipynb)
+- [model answers in iPython Notebook](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Used%20Cars/Python/UsedCars_HW01ans.ipynb)
 
 [**02_hw.pdf**](Syllabus/02_hw.pdf)
 
@@ -77,6 +75,8 @@ _**R code**:_ <br>
 - you can find an advanced version featuring the popular **caret** package and **parallel computation** here: [BostonHousing_Trees_RandomForests_BoostedAdditiveModels_usingCaretPackage.Rmd](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/R/BostonHousing_Trees_RandomForests_BoostedAdditiveModels_usingCaretPackage.Rmd)
 
 _**Python code**:_ <br>
+[BostonHousing_Trees_RandomForests_BoostedAdditiveModels.ipynb](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Boston%20Housing/Python/BostonHousing_Trees_RandomForests_BoostedAdditiveModels.ipynb)
+
 
 
 _Homework assignment:_ See Problem 9.1 in Lecture notes for this week.

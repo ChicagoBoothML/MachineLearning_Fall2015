@@ -9,7 +9,7 @@
         
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>Computing - <b>BUS41204 Machine Learning</b></title>
+	<title>Applications - <b>BUS41204 Machine Learning</b></title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -81,14 +81,14 @@
                 
                 
                 
-                    <li >
-                        <a href="../Applications/">Applications</a>
+                    <li class="active">
+                        <a href="./">Applications</a>
                     </li>
                 
                 
                 
-                    <li class="active">
-                        <a href="./">Computing</a>
+                    <li >
+                        <a href="../Computing/">Computing</a>
                     </li>
                 
                 
@@ -200,154 +200,18 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#computing-resources">Computing Resources</a></li>
+        <li class="main active"><a href="#machine-learning-applications-in-business">Machine Learning Applications in Business</a></li>
         
-            <li><a href="#r-resources">R Resources</a></li>
-        
-            <li><a href="#python-resources">Python Resources</a></li>
-        
-            <li><a href="#comparison-between-r-and-python">Comparison between R and Python</a></li>
-        
-            <li><a href="#other-software-installation">Other Software Installation</a></li>
+            <li><a href="#airbnb">Airbnb</a></li>
         
     
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="computing-resources"><strong>Computing Resources</strong></h1>
-<p>This page contains links to software installation guides and some resources for R (our main computing platform)
-and Python (the best alternative).</p>
-<h2 id="r-resources">R Resources</h2>
-<p>We will be using R as the main platform to perform data analysis in the class, however, you are welcome to use
-any other tool/programming language you are familiar with.</p>
-<p>We strongly encourage you to get familiar with the basics of R, so that you can focus on Machine Learning.
-We will go through examples in R in-class and we will provide some instructions. We do not expect
-you to have taken a class that uses R previously. That said, this class is not a class on R.</p>
-<ul>
-<li><a href="../Installation/R%2C%20RStudio%20%26%20CRAN%20Packages/"><strong>R, RStudio and CRAN Packages</strong> installation guides</a></li>
-<li><a href="../Tutorials/RobsR.pdf"><strong>Rob's notes on R</strong></a></li>
-<li><a href="https://cran.r-project.org/doc/manuals/R-intro.pdf"><strong>R's Introduction to R</strong></a>:
-This is written by stat/computing geeks for stat/computing geeks. It is not always the easiest thing to read.
-That being said, if you want to learn R, you should read at least the first bit of the chapter on major topics (e.g. data frames).</li>
-<li>The optional textbook <strong><em>An Introduction to Statistical Learning</em></strong> has a section 2.3 dedicated to the basics of R</li>
-<li><a href="http://cran.r-project.org/doc/contrib/Short-refcard.pdf"><strong>R Reference Card</strong></a></li>
-<li><a href="http://www.youtube.com/playlist?list=PLOU2XLYxmsIK9qQfztXeybpHvru-TrqAP"><strong>Google's R Tutorial</strong></a></li>
-<li><a href="http://data.princeton.edu/R"><strong>Princeton's R Tutorial</strong></a></li>
-<li><a href="../Tutorials/R%20Markdown%20Tutorial/"><strong>R Markdown</strong> tutorial</a>: a tutorial by Vinh on R Markdown, an excellent dynamic document generator. We recommend you to try and use it to do your homework. It will save you a ton of time, and its output will be easy on the eye,
-adding extra shine to your already brilliant analysis...<ul>
-<li>Please note that R Markdown requires <a href="../Installation/TeX"><strong>TeX</strong></a> for conversion to PDF</li>
-</ul>
-</li>
-<li><a href="../Tutorials/R%20data.table%20Tutorial/"><strong>R data.table</strong> tutorial</a>: a tutorial by Vinh on R <code>data.table</code>,
-an advanced, high-performance alternative to R's default <code>data.frame</code></li>
-<li><a href="http://cran.r-project.org/web/packages/caret/vignettes/caret.pdf"><strong>Introduction to the <em>caret</em> Package</strong></a>:
-<strong><em>caret</em></strong> is a popular R package providing standardized interfaces with about 200 Machine Learning algorithms
-and many related data-processing procedures</li>
-<li>Google and question answering web-page <a href="http://stackoverflow.com">StackOverflow</a></li>
-<li>There are many books and tutorials on R.
-If you find something that you find particularly useful, please share it with us on Piazza.</li>
-</ul>
-<h2 id="python-resources">Python Resources</h2>
-<ul>
-<li><a href="../Installation/Python%20Anaconda%2C%20PyCharm%20IDE%2C%20and%20Conda%20%26%20PyPI%20Packages/"><strong>Anaconda Python, PyCharm IDE, and Conda &amp; PyPI Packages</strong> installation guides</a></li>
-<li><a href="../Installation/Python%20Theano/"><strong>Theano package</strong> installation guide</a></li>
-<li><a href="../Tutorials/Python%20iPython%20Notebook%20tutorial/"><strong>iPython Notebook</strong> tutorial</a>: a tutorial by Vinh on
-iPython Notebook, an super-excellent dynamic document editor / generator built on Python,
-and a perfect answer to the aforementioned excellent R Markdown. If you do your homework or final project in Python,
-<strong>we encourage you to use iPython Notebook to generate your analysis reports</strong><ul>
-<li>Please note that iPython Notebook requires <a href="../Installation/TeX"><strong>TeX</strong></a> for conversion to PDF</li>
-</ul>
-</li>
-<li><a href="http://pandas.pydata.org/pandas-docs/stable/tutorials.html"><strong>Pandas</strong> tutorials</a>:
-<code>pandas</code> is a data frame solution in Python &ndash; Python's answer to R's <code>data.frame</code> and <code>data.table</code></li>
-<li><a href="http://scikit-learn.org/stable/tutorial/basic/tutorial.html"><strong>A Basic Tutorial on SciKit-Learn</strong></a>:
-<strong><em>SciKit-Learn</em></strong> is the most popular Python package providing
-standardized interfaces with over 100 Machine Learning algorithms and many related data-processing procedures</li>
-</ul>
-<h2 id="comparison-between-r-and-python">Comparison between R and Python</h2>
-<p>There is a great deal of parallelism between the R and Python ecosystems
-of Machine Learning / Data Science and related software.
-Here is a brief table of comparison between the two ecosystems,
-including the leading who's-whos and what's-whats in various aspects:</p>
-<table>
-<thead>
-<tr>
-<th align="left"></th>
-<th align="left">R</th>
-<th align="left">PYTHON</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><strong>Linear Algebra</strong></td>
-<td align="left"><em>(built-in)</em></td>
-<td align="left">NumPy</td>
-</tr>
-<tr>
-<td align="left"><strong>Packages Respository</strong></td>
-<td align="left">Comprehensive R Archive Network (CRAN)</td>
-<td align="left">Python Package Index (PyPI)</td>
-</tr>
-<tr>
-<td align="left"><strong>Go-To Package for Popular ML Algos</strong></td>
-<td align="left">caret</td>
-<td align="left">SciKit-Learn</td>
-</tr>
-<tr>
-<td align="left"><strong>Data Frame for Data Processing</strong></td>
-<td align="left">data.frame, data.table</td>
-<td align="left">Pandas</td>
-</tr>
-<tr>
-<td align="left"><strong>Visualization</strong></td>
-<td align="left">ggplot2, ggvis, dygraphs</td>
-<td align="left">MatPlotLib, GGPlot, Bokeh, Plotly, Pyxley</td>
-</tr>
-<tr>
-<td align="left"><strong>Large-Scale Parallel Computation</strong></td>
-<td align="left">parallel, doMC, doParallel, snow</td>
-<td align="left">Apache Spark, Theano, Numba</td>
-</tr>
-<tr>
-<td align="left"><strong>Symbolic Math</strong></td>
-<td align="left">Ryacas, rSymPy</td>
-<td align="left">SymPy</td>
-</tr>
-<tr>
-<td align="left"><strong>Dynamic Document Editors / Generators</strong></td>
-<td align="left">R Markdown, Slidify</td>
-<td align="left">iPython Notebook</td>
-</tr>
-<tr>
-<td align="left"><strong>App Development Frameworks</strong></td>
-<td align="left">Shiny</td>
-<td align="left">Django, Flask, Jinja2</td>
-</tr>
-<tr>
-<td align="left"><strong>Software Unit-Testing Frameworks</strong></td>
-<td align="left">testthat</td>
-<td align="left">Nose, DocTest, Py.Test, PyUnit, Tox</td>
-</tr>
-<tr>
-<td align="left"><strong>Leading Developers</strong></td>
-<td align="left">RStudio, Revolution Analytics <em>(Microsoft subsidiary)</em></td>
-<td align="left">Continuum Analytics, Enthought</td>
-</tr>
-<tr>
-<td align="left"><strong>Popular Integrated Devt. Envirs. (IDEs)</strong></td>
-<td align="left">RStudio</td>
-<td align="left">PyCharm, Spyder, Rodeo</td>
-</tr>
-</tbody>
-</table>
-<h2 id="other-software-installation">Other Software Installation</h2>
-<ul>
-<li><a href="../Installation/Git%2C%20GitHub%20%26%20SourceTree/"><strong>Git</strong>, <strong>GitHub</strong> &amp; <strong>SourceTree</strong> installation guides</a></li>
-<li><a href="../Installation/TeX"><strong>TeX</strong></a>: for rendering math equations in various document formats</li>
-<li><a href="../Installation/Cygwin/"><strong>Cygwin</strong> installation guide (for Windows users only)</a>:
-Cygwin is a Unix-style command-line terminal for Windows</li>
-</ul></div>
+<h1 id="machine-learning-applications-in-business"><strong>Machine Learning Applications in Business</strong></h1>
+<h2 id="airbnb"><strong>Airbnb</strong></h2>
+<p><a href="http://nerds.airbnb.com/unboxing-the-random-forest-classifier"><strong><em>Unboxing the Random Forest Classifier</em></strong></a>, 2015-10-01</p></div>
             
         </div>
 

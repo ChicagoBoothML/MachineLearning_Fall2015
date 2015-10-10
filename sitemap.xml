@@ -35,6 +35,14 @@
 
     
     <url>
+     <loc>None/Applications/</loc>
+     <lastmod>2015-10-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
      <loc>None/Computing/</loc>
      <lastmod>2015-10-10</lastmod>
      <changefreq>daily</changefreq>

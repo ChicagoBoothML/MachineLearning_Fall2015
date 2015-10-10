@@ -65,8 +65,7 @@ A *Science* review article from two leading experts in Machine Learning
 ## Week 3
 
 _Lecture Slides:_ <br>
-[**Trees, Bagging, Random Forests and Boosting**](Syllabus/03_trees_bag_boost.pdf) <br>
-Note that the first part of the slides are the same as trees in the week 2.
+[**Trees, Bagging, Random Forests and Boosting**](Syllabus/03_trees_bag_boost.pdf)
 
 _**R code**:_ <br>
 [knn-bagging.R](Syllabus/knn-bagging.R) <br>

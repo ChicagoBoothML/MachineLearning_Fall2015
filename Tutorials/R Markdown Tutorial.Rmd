@@ -25,11 +25,11 @@ Refer to the PDF output (created by "**Knit PDF**" in this RStudio window) to se
 
 ### Make a 3rd-Level Header by inserting 3 hash characters in front
 
-*make italic text by putting 1 star character at each end*
+_make italic text by putting 1 underline character at each end_
 
 **make bold text by putting 2 star characters at each end**
 
-***then, obviously, this is how to make bold italic text***
+**_then, obviously, this is how to make bold italic text_**
 
 Make an numbered (ordered) list by simply putting "1."", "2."", "3.", etc., like so:
 

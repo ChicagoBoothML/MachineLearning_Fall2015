@@ -51,6 +51,8 @@ _Homework assignments:_ <br>
 
 [**02_hw.pdf**](Syllabus/02_hw.pdf)
 
+- [model answers in R Markdown](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Used%20Cars/R/UsedCars_HW02ans.Rmd)
+- [model answers in iPython Notebook](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Used%20Cars/Python/UsedCars_HW02ans.ipynb)
 
 _Optional textbook reading:_ <br>
 An Introduction to Statistical Learning: Section 2, Section 5.1, Section 8.1

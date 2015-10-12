@@ -1,0 +1,252 @@
+---
+title: 'Used Cars: Homework 02'
+author: 'Chicago Booth ML Team'
+output: pdf_document
+fontsize: 12
+geometry: margin=0.6in
+---
+
+
+# Load Libraries & Modules; Set Randomizer Seed
+
+```{r}
+library(data.table)
+library(ggplot2)
+library(kknn)
+# load modules from the common HelpR repo
+helpr_repo_raw_url <- 'https://raw.githubusercontent.com/ChicagoBoothML/HelpR/master'
+source(file.path(helpr_repo_raw_url, 'docv.R'))   # this has docvknn used below
+
+# set randomizer's seed
+set.seed(99)   # Gretzky was #99
+```
+
+
+# Data Import
+
+```{r}
+# download data and read data into data.table format
+used_cars <- fread(
+  'https://raw.githubusercontent.com/ChicagoBoothML/DATA___UsedCars/master/UsedCars_small.csv')
+# count number of samples
+nb_samples <- nrow(used_cars)
+# sort data set by increasing mileage
+setkey(used_cars, mileage)
+used_cars
+```
+
+
+# Create Plotting Function for repeated calls
+
+```{r}
+plot_used_cars_data <- function(used_cars_data,
+                                title='Used Cars: price vs. mileage',
+                                plot_predicted=TRUE) {
+  g <- ggplot(used_cars_data) +
+    geom_point(aes(x=mileage, y=price, color='actual'), size=1) +
+    ggtitle(title) +
+    xlab('mileage') + ylab('price')
+  
+  if (plot_predicted) {
+    g <- g +
+      geom_line(aes(x=mileage, y=predicted_price, color='predicted'), size=0.6) +
+      scale_colour_manual(name='price',
+                          values=c(actual='blue', predicted='darkorange'))
+  } else {
+    g <- g +
+      scale_colour_manual(name='price',
+                          values=c(actual='blue'))
+  }
+  
+  g <- g +
+    theme(plot.title=element_text(face='bold', size=24),
+        axis.title=element_text(face='italic', size=18))
+  
+  g
+}
+```
+
+
+
+# Models with 1 Predictor Variable (_mileage_) only
+
+## "Eye-Ball" KNN
+
+```{r}
+k <- 30
+eyeball_knn_model <- kknn(price ~ mileage,
+                          train=used_cars, test=used_cars[ , .(mileage)],
+                          k=k, kernel='rectangular')
+used_cars[, predicted_price := eyeball_knn_model$fitted.values]
+
+plot_used_cars_data(used_cars, title=paste('KNN Model with k =', k))
+```
+
+
+## Select $k$ by Cross Validation
+
+```{r}
+NB_CROSS_VALIDATION_FOLDS <- 5
+NB_CROSS_VALIDATIONS <- 6
+```
+
+```{r results='hide'}
+k_range <- 2 : 200
+cross_validations_avg_rmse___1predictor <- data.table(k=k_range, cv_avg_rmse=0.)
+for (i in 1 : NB_CROSS_VALIDATIONS) {
+  this_cross_validation_rmse <-
+    sqrt(docvknn(used_cars[, .(mileage)], used_cars$price,
+                 k=k_range, nfold=NB_CROSS_VALIDATION_FOLDS,
+                 verbose=FALSE) / nb_samples)
+  cross_validations_avg_rmse___1predictor[, (paste('cv_',  i, '_rmse', sep=''))] <-
+    this_cross_validation_rmse
+  cross_validations_avg_rmse___1predictor[, cv_avg_rmse := cv_avg_rmse +
+                                            (this_cross_validation_rmse - cv_avg_rmse) / i]
+}
+```
+
+```{r}
+g <- ggplot(cross_validations_avg_rmse___1predictor)
+
+for (i in 1 : NB_CROSS_VALIDATIONS) {
+  g <- g + geom_line(aes_string(x='-log(k)', y=(paste('cv_',  i, '_rmse', sep='')),
+                                color=i), linetype='dotted', size=0.6)
+}
+
+g <- g +
+  geom_line(aes(x=-log(k), y=cv_avg_rmse),
+            color='black', size=1) +
+  ggtitle('Cross Validations') +
+  xlab('Model Complexity (-log K)') + ylab('OOS RMSE') +
+  guides(color=FALSE) + 
+  theme(plot.title=element_text(face='bold', size=24),
+        axis.title=element_text(face='italic', size=18))
+
+g
+```
+
+```{r}
+best_k <- k_range[which.min(cross_validations_avg_rmse___1predictor$cv_avg_rmse)]
+```
+
+The best $k$ that minimizes the average cross-validation RMSE is `r best_k`.
+
+```{r}
+k <- best_k
+eyeball_knn_model <- kknn(price ~ mileage,
+                          train=used_cars, test=used_cars[ , .(mileage)],
+                          k=k, kernel='rectangular')
+used_cars[, predicted_price := eyeball_knn_model$fitted.values]
+
+plot_used_cars_data(used_cars, title=paste('KNN Model with k =', k))
+```
+
+
+## Predict Price of Used Car with 100,000 Miles
+
+```{r}
+test_case <- data.table(mileage=1e5)
+
+knn_model <- kknn(price ~ mileage,
+                  train=used_cars, test=test_case,
+                  k=best_k, kernel='rectangular')
+```
+
+The KNN Model with $k =$ `r best_k` predicts price of $**`r formatC(knn_model$fitted.values, format='f', digits=2, big.mark=',')`**.
+
+
+# Models with 2 Predictors (_mileage_ & _year_)
+
+Let's now use 2 predictors _mileage_ & _year_ to predict the variable _price_.
+
+```{r}
+predictors_scaled <- scale(used_cars[, .(mileage, year)])
+
+used_cars_scaled <- used_cars[, .(mileage, year, price)]
+used_cars_scaled[, `:=`(mileage = predictors_scaled[, 1],
+                        year = predictors_scaled[, 2])]
+
+ggplot(used_cars_scaled) +
+  geom_point(aes(x=mileage, y=year), size=1.3) +
+  ggtitle('Predictors after Standard Scaling') +
+  xlab('mileage') + ylab('year') +
+  theme(plot.title=element_text(face='bold', size=24),
+        axis.title=element_text(face='italic', size=18))
+```
+
+```{r results='hide'}
+cross_validations_avg_rmse___2predictors = data.table(k=k_range, cv_avg_rmse=0.)
+for (i in 1 : NB_CROSS_VALIDATIONS) {
+  this_cross_validation_rmse =
+    sqrt(docvknn(used_cars_scaled[, .(mileage, year)], used_cars_scaled$price,
+                 k=k_range, nfold=NB_CROSS_VALIDATION_FOLDS,
+                 verbose=FALSE) / nb_samples)
+  cross_validations_avg_rmse___2predictors[, (paste('cv_',  i, '_rmse', sep=''))] =
+    this_cross_validation_rmse
+  cross_validations_avg_rmse___2predictors[, cv_avg_rmse := cv_avg_rmse +
+                                             (this_cross_validation_rmse - cv_avg_rmse) / i]
+}
+```
+
+```{r}
+g <- ggplot(cross_validations_avg_rmse___2predictors)
+
+for (i in 1 : NB_CROSS_VALIDATIONS) {
+  g <- g + geom_line(aes_string(x='-log(k)', y=(paste('cv_',  i, '_rmse', sep='')),
+                                color=i), linetype='dotted', size=0.6)
+}
+
+g <- g +
+  geom_line(aes(x=-log(k), y=cv_avg_rmse),
+            color='black', size=1) +
+  ggtitle('Cross Validations') +
+  xlab('Model Complexity (-log K)') + ylab('OOS RMSE') +
+  guides(color=FALSE) + 
+  theme(plot.title=element_text(face='bold', size=24),
+        axis.title=element_text(face='italic', size=18))
+
+g
+```
+
+With 2 predictor variables, the out-of-sample predictive performance seems to have improved:
+
+```{r}
+cross_validations_avg_rmse <- data.table(k=k_range)
+cross_validations_avg_rmse[,
+  `:=`(one_predictor = cross_validations_avg_rmse___1predictor$cv_avg_rmse,
+       two_predictors = cross_validations_avg_rmse___2predictors$cv_avg_rmse)]
+
+ggplot(cross_validations_avg_rmse) +
+  geom_line(aes(x=-log(k), y=one_predictor, color='one_predictor'), size=1) +
+  geom_line(aes(x=-log(k), y=two_predictors, color='two_predictors'), size=1) +
+  ggtitle('KNN Models with 1 vs. 2 Predictors') +
+  xlab('Model Complexity (-log K)') + ylab('OOS RMSE') +
+  scale_colour_manual(name='OOS RMSE',
+                      values=c(one_predictor="red", two_predictors='blue')) +
+  theme(plot.title=element_text(face='bold', size=24),
+        axis.title=element_text(face='italic', size=18))
+```
+
+```{r}
+best_k <- k_range[which.min(cross_validations_avg_rmse___2predictors$cv_avg_rmse)]
+```
+
+In the 2-predictor case, the best $k$ that minimizes the average cross-validation RMSE is now `r best_k`.
+
+
+## Predict Price of Used Car of Year 2008 with 75,000 Miles
+
+```{r}
+test_case <- data.table(mileage=75000, year=2008)
+test_case_scaled <-
+  data.table(scale(test_case,
+                   center=attributes(predictors_scaled)$'scaled:center',
+                   scale=attributes(predictors_scaled)$'scaled:scale'))
+
+k <- best_k
+knn_model <- kknn(price ~ mileage + year,
+                  train=used_cars_scaled, test=test_case_scaled,
+                  k=k, kernel='rectangular')
+```
+
+The 2-predictor KNN model predicts price of $**`r formatC(knn_model$fitted.values, format='f', digits=2, big.mark=',')`**.

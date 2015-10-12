@@ -132,13 +132,23 @@
         }, 
         {
             "location": "/Applications/", 
-            "text": "ML Applications in Business\n\n\nUnboxing the Random Forest Classifier\n, 2015-10-01\n\n\n\n\nThe post talks about making random forests more interpretable at airbnb.\n\n\n\n\nImproving YouTube video thumbnails with deep neural nets\n, 2015-10-08", 
+            "text": "ML Applications in Business\n\n\nAirbnb\n\n\nUnboxing the Random Forest Classifier\n, 2015-10-01\n\n\n\n\nThe post talks about making random forests more interpretable at Airbnb\n\n\n\n\nGoogle\n\n\nImproving YouTube Video Thumbnails with Deep Neural Nets\n, 2015-10-08", 
             "title": "Applications"
         }, 
         {
             "location": "/Applications/#ml-applications-in-business", 
-            "text": "Unboxing the Random Forest Classifier , 2015-10-01   The post talks about making random forests more interpretable at airbnb.   Improving YouTube video thumbnails with deep neural nets , 2015-10-08", 
+            "text": "", 
             "title": "ML Applications in Business"
+        }, 
+        {
+            "location": "/Applications/#airbnb", 
+            "text": "Unboxing the Random Forest Classifier , 2015-10-01   The post talks about making random forests more interpretable at Airbnb", 
+            "title": "Airbnb"
+        }, 
+        {
+            "location": "/Applications/#google", 
+            "text": "Improving YouTube Video Thumbnails with Deep Neural Nets , 2015-10-08", 
+            "title": "Google"
         }, 
         {
             "location": "/Computing/", 

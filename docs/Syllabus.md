@@ -44,12 +44,12 @@ if you have cloned and synced the course GitHub repo down to your computer
 
 _Homework assignments:_ <br>
 
-[**01_hw.pdf**](Syllabus/01_hw.pdf)
+[**Homework 01**](Syllabus/01_hw.pdf)
 
 - [model answers in R Markdown](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Used%20Cars/R/UsedCars_HW01ans.Rmd)
 - [model answers in iPython Notebook](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Used%20Cars/Python/UsedCars_HW01ans.ipynb)
 
-[**02_hw.pdf**](Syllabus/02_hw.pdf)
+[**Homework 02**](Syllabus/02_hw.pdf)
 
 - [model answers in R Markdown](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Used%20Cars/R/UsedCars_HW02ans.Rmd)
 - [model answers in iPython Notebook](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Used%20Cars/Python/UsedCars_HW02ans.ipynb)

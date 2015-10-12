@@ -10,4 +10,4 @@
 
 ## Google
 
-[**Improving YouTube video thumbnails with deep neural nets**](http://youtube-eng.blogspot.com/2015/10/improving-youtube-video-thumbnails-with_8.html), 2015-10-08
+[**_Improving YouTube Video Thumbnails with Deep Neural Nets_**](http://youtube-eng.blogspot.com/2015/10/improving-youtube-video-thumbnails-with_8.html), 2015-10-08

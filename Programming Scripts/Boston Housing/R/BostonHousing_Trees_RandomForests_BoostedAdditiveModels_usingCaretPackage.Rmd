@@ -81,7 +81,7 @@ boston_housing
 ```{r message=FALSE}
 B <- 10000   # number of trees in the Random Forest
 
-rf_train <- train(medv ~ ., data=boston_housing,
+rf_model <- train(medv ~ ., data=boston_housing,
                   method='parRF',  # parallel Random Forest
                   ntree=B,         # number of trees in the Random Forest
                   nodesize=25,     # minimum node size set small enough to allow for complex trees,
@@ -93,16 +93,18 @@ rf_train <- train(medv ~ ., data=boston_housing,
                     allowParallel=TRUE),
                   tuneGrid=NULL)
 
-rf_predict <- predict(rf_train$finalModel, newdata=boston_housing)
+# CARET note: always do predict with the "train" object, not its $finalModel
+# ref: http://stackoverflow.com/questions/21096909/difference-betweeen-predictmodel-and-predictmodelfinalmodel-using-caret-for
+rf_predict <- predict(rf_model, newdata=boston_housing)
 ```
 
-This Random Forest model has an estimated OOB RMSE of **`r formatC(min(rf_train$results$RMSE), format='f', digits=3)`**.
+This Random Forest model has an estimated OOB RMSE of **`r formatC(min(rf_model$results$RMSE), format='f', digits=3)`**.
 
 
 # Boosted Trees model
 
 ```{r message=FALSE}
-boost_train <- train(medv ~ ., data=boston_housing,
+boost_model <- train(medv ~ ., data=boston_housing,
                      method='gbm',               # Generalized Boosted Models
                      verbose=FALSE,
                      trControl=trainControl(
@@ -115,18 +117,18 @@ boost_train <- train(medv ~ ., data=boston_housing,
                                           n.minobsinnode=40,    # minimum node size
                                           shrinkage=0.01))      # shrinkage parameter, a.k.a. "learning rate"
 
-boost_predict <- predict(boost_train$finalModel, newdata=boston_housing, n.trees=B)
+boost_predict <- predict(boost_model, newdata=boston_housing)
 ```
 
-This Boosted Trees model has an estimated OOS RMSE of **`r formatC(boost_train$results$RMSE, format='f', digits=3)`**.
+This Boosted Trees model has an estimated OOS RMSE of **`r formatC(boost_model$results$RMSE, format='f', digits=3)`**.
 
 
 ## Prediction Comparison and Variable Importance
 
 ```{r}
 plot(rf_predict, boost_predict, main="Ranfom Forest vs. Boosted Trees predictions")
-varImpPlot(rf_train$finalModel, main="Random Forest's Variable Importance")
-plot(summary(boost_train$finalModel, plotit=FALSE), main="Boosted Trees Model's Variable Importance")
+varImpPlot(rf_model$finalModel, main="Random Forest's Variable Importance")
+plot(summary(boost_model$finalModel, plotit=FALSE), main="Boosted Trees Model's Variable Importance")
 ```
 
 ```{r}

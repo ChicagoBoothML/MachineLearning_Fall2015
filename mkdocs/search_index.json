@@ -137,7 +137,7 @@
         }, 
         {
             "location": "/Applications/", 
-            "text": "ML Applications in Business\n\n\nAirbnb\n\n\nUnboxing the Random Forest Classifier\n, 2015-10-01\n\n\n\n\nThe post talks about making random forests more interpretable at Airbnb\n\n\n\n\nGoogle\n\n\nImproving YouTube Video Thumbnails with Deep Neural Nets\n, 2015-10-08\n\n\nOther\n\n\n4 Ways Cognitive Technologies Can Add Value to Consumer Products\n, 2015-06-03, Deloitte", 
+            "text": "ML Applications in Business\n\n\nAirbnb\n\n\nUnboxing the Random Forest Classifier\n, 2015-10-01\n\n\n\n\nThe post talks about making random forests more interpretable at Airbnb\n\n\n\n\nGoogle\n\n\nImproving YouTube Video Thumbnails with Deep Neural Nets\n, 2015-10-08 \n(conbributed by Mike Joyce)\n\n\nQuantitative Insights \n(medical company)\n\n\nUse of Machine Learning and Computer Vision to predict probability of breast cancer\n \n(contributed by Benjamin Collins)\n\n\nL'Oreal\n\n\nL'Oreal's MakeUp Genius app\n based on on advanced Machine Learning-powered face recoginition technologies\n \n(conbributed by Mike Joyce)\n\n\nOther\n\n\n4 Ways Cognitive Technologies Can Add Value to Consumer Products\n, 2015-06-03, Deloitte", 
             "title": "Applications"
         }, 
         {
@@ -152,8 +152,18 @@
         }, 
         {
             "location": "/Applications/#google", 
-            "text": "Improving YouTube Video Thumbnails with Deep Neural Nets , 2015-10-08", 
+            "text": "Improving YouTube Video Thumbnails with Deep Neural Nets , 2015-10-08  (conbributed by Mike Joyce)", 
             "title": "Google"
+        }, 
+        {
+            "location": "/Applications/#quantitative-insights-medical-company", 
+            "text": "Use of Machine Learning and Computer Vision to predict probability of breast cancer   (contributed by Benjamin Collins)", 
+            "title": "Quantitative Insights (medical company)"
+        }, 
+        {
+            "location": "/Applications/#loreal", 
+            "text": "L'Oreal's MakeUp Genius app  based on on advanced Machine Learning-powered face recoginition technologies   (conbributed by Mike Joyce)", 
+            "title": "L'Oreal"
         }, 
         {
             "location": "/Applications/#other", 

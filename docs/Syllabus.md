@@ -8,7 +8,7 @@ We will move at a pace dictated by class discussions. Please check this page oft
 | [**1**](#weeks-1-2) | 9/24 &ndash; 9/26   | Intro to  Machine Learning; Nearest Neighbours; Bias-Variance Trade-Off          |
 | [**2**](#weeks-1-2) | 10/1 &ndash; 10/3   | Cross Validation                                                                 |
 | [**3**](#week-3)    | 10/8 &ndash; 10/10  | Decision Trees; Bagging and Random Forests; Boosting and Boosted Additive Models |
-| [**4**] (#week-4)   | 10/15 &ndash; 10/17 | Categorical Outcomes and Classification Models                                   |
+| [**4**](#week-4)    | 10/15 &ndash; 10/17 | Categorical Outcomes and Classification Models                                   |
 | 5                   | 10/22 &ndash; 10/24 | Neural Networks                                                                  |
 | 6                   | 10/29 &ndash; 10/31 | Recommender Systems                                                              | 
 | 7                   | 11/5 &ndash; 11/7   | Anomaly Detection                                                                |
@@ -89,13 +89,20 @@ An Introduction to Statistical Learning: Chapter 8
 ## Week 4
 
 _Lecture Slides:_ <br>
-[**Classification**]()
+[**Classification**](Syllabus//04_classification.pdf)
+[**Perceptron**](Syllabus//04_perceptron.pdf)
 
 _**R code**:_ <br>
+[boosting_demo_1D.R](Syllabus/boosting_demo_1D.R) <br>
+[boosting_demo_2D.R](Syllabus/boosting_demo_2D.R) <br>
+[do-class.R](Syllabus/do-class.R) <br>
+
 
 _**Python code**:_ <br>
 
-_Homework assignment:_ 
+_Homework assignment:_  <br>
+[04_hw.pdf](Syllabus/04_hw.pdf) <br>
+Start early.
 
 _Optional textbook reading:_ 
 An Introduction to Statistical Learning: Chapter 4 (we will not talk about linear discriminant analysis)

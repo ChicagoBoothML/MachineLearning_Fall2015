@@ -89,7 +89,7 @@ An Introduction to Statistical Learning: Chapter 8
 ## Week 4
 
 _Lecture Slides:_ <br>
-[**Classification**](Syllabus//04_classification.pdf)
+[**Classification**](Syllabus//04_classification.pdf) <br>
 [**Perceptron**](Syllabus//04_perceptron.pdf)
 
 _**R code**:_ <br>

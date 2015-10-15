@@ -20,7 +20,12 @@
 
 ## L'Oreal
 
-[**L'Oreal's MakeUp Genius app** based on on advanced Machine Learning-powered face recoginition technologies](http://www.lorealparisusa.com/en/beauty-library/articles/makeupgenius-changes-makeup-application-forever.aspx) _(conbributed by Mike Joyce)_
+[**L'Oreal's MakeUp Genius app** based on on advanced Machine Learning-powered face recoginition technologies](http://www.lorealparisusa.com/en/beauty-library/articles/makeupgenius-changes-makeup-application-forever.aspx) _(conbributed by Yoni Sarason)_
+
+
+## Netflix
+
+[**Netflix Prize**](http://en.wikipedia.org/wiki/Netflix_Prize), a famous historical Machine Learning / Predictive Analytics competion with $1M prize for those who could beat Netflix's in-house movie recommendation engine by 10% in terms of accuracy. A brilliant marketing stunt. A academic sweatshop that made dozens of thousands of data scientists work for much less than what they could have made flipping burgers at the local McDonald's...
 
 
 ## Other

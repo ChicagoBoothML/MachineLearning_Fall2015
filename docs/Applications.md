@@ -10,7 +10,17 @@
 
 ## Google
 
-[**_Improving YouTube Video Thumbnails with Deep Neural Nets_**](http://youtube-eng.blogspot.com/2015/10/improving-youtube-video-thumbnails-with_8.html), 2015-10-08
+[**_Improving YouTube Video Thumbnails with Deep Neural Nets_**](http://youtube-eng.blogspot.com/2015/10/improving-youtube-video-thumbnails-with_8.html), 2015-10-08 _(conbributed by Mike Joyce)_
+
+
+## Quantitative Insights _(medical company)_
+
+[**Use of Machine Learning and Computer Vision to predict probability of breast cancer**](https://www.quantinsights.com) _(contributed by Benjamin Collins)_
+
+
+## L'Oreal
+
+[**L'Oreal's MakeUp Genius app** based on on advanced Machine Learning-powered face recoginition technologies](http://www.lorealparisusa.com/en/beauty-library/articles/makeupgenius-changes-makeup-application-forever.aspx) _(conbributed by Mike Joyce)_
 
 
 ## Other

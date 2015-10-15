@@ -96,6 +96,7 @@ _**R code**:_ <br>
 [boosting_demo_1D.R](Syllabus/boosting_demo_1D.R) <br>
 [boosting_demo_2D.R](Syllabus/boosting_demo_2D.R) <br>
 [do-class.R](Syllabus/do-class.R) <br>
+[fglass.R](Syllabus/fglass.R) <br>
 
 
 _**Python code**:_ <br>

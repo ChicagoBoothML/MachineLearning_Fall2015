@@ -95,8 +95,10 @@ _Lecture Slides:_ <br>
 _**R code**:_ <br>
 [boosting_demo_1D.R](Syllabus/boosting_demo_1D.R) <br>
 [boosting_demo_2D.R](Syllabus/boosting_demo_2D.R) <br>
-[do-class.R](Syllabus/do-class.R) <br>
 [fglass.R](Syllabus/fglass.R) <br>
+[04_kaggle_logit_rf_boost.R](Syllabus/04_kaggle_logit_rf_boost.R) <br>
+[04_simulation_logit_rf_boost.R](Syllabus/04_simulation_logit_rf_boost.R) <br>
+[04_tabloid_logit_rf_boost.R](Syllabus/04_tabloid_logit_rf_boost.R) <br>
 
 
 _**Python code**:_ <br>

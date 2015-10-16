@@ -1,16 +1,5 @@
 ######################################################################
-if(0) {cat("### read in tabloid data from web\n")
-trainDf = read.csv("http://www.rob-mcculloch.org/data/td1.csv")
-testDf = read.csv("http://www.rob-mcculloch.org/data/td2.csv")
-trainDf$purchase = as.factor(trainDf$purchase)
-testDf$purchase = as.factor(testDf$purchase)
-names(trainDf)[1]="y"
-names(testDf)[1]="y"
-
-pnm="tabloid"
-}
-######################################################################
-if(1) {cat("### simulate data from a logit with 2 x's\n")
+cat("### simulate data from a logit with 2 x's\n")
 set.seed(99)
 beta=matrix(c(2,2),ncol=1)
 trainn=10000
@@ -30,9 +19,8 @@ testDf = data.frame(y=rbinom(testn,1,pvecte),x=x)
 testDf$y = as.factor(testDf$y)
 
 pnm = "sim"
-}
 ######################################################################
-if(1) {cat("### load librairies and make loss and lift functions\n")
+cat("### load librairies and make loss and lift functions\n")
 library(tree)
 library(randomForest)
 library(gbm)
@@ -61,13 +49,13 @@ liftf = function(yl,phatl,dopl=TRUE) {
    }
    return(sy)
 }
-}
+
 ######################################################################
-if(1) {cat("### setup storage for results\n")
+cat("### setup storage for results\n")
 phatL = list() #store the test phat for the different methods here
-}
+
 ######################################################################
-if(1) {cat("### fit logit\n")
+cat("### fit logit\n")
 ###settings for logit (just one of course)
 phatL$logit = matrix(0.0,nrow(testDf),1) #only one logit fit 
 
@@ -81,9 +69,9 @@ phatL$logit = matrix(phat,ncol=1) #logit phat
 
 ##do lift
 junk=liftf(testDf$y,phatL$logit[,1])
-}
+
 ######################################################################
-if(1) {cat("### fit random Forests\n")
+cat("### fit random Forests\n")
 set.seed(99)
 
 ##settings for randomForest
@@ -105,9 +93,9 @@ for(i in 1:nrow(setrf)) {
 
    phatL$rf[,i]=phat
 }
-}
+
 ######################################################################
-if(1) {cat("### fit boosting\n")
+cat("### fit boosting\n")
 
 ##settings for boosting
 idv = c(2,4)
@@ -132,9 +120,9 @@ for(i in 1:nrow(setboost)) {
 
    phatL$boost[,i] = phat
 }
-}
+
 ######################################################################
-if(1) {cat("### plot loss\n")
+cat("### plot loss\n")
 lossL = list()
 nmethod = length(phatL)
 for(i in 1:nmethod) {
@@ -153,10 +141,10 @@ for(i in 1:nmethod) {
    nloss = nloss + ncol(phatL[[i]])
 }
 legend("topright",legend=names(phatL),col=1:nmethod,pch=rep(17,nmethod))
-#dev.copy2pdf(file=paste(pnm,"_loss.pdf",sep=""),height=8,width=12)
-}
+
+
 ######################################################################
-if(1) {cat("### lift\n")
+cat("### lift\n")
 nmethod = length(phatL)
 phatBest = matrix(0.0,nrow(testDf),nmethod) #pick off best from each method
 colnames(phatBest) = names(phatL)
@@ -172,7 +160,6 @@ for(i in 1:nmethod) {
    phatBest[,i] = phatL[[i]][,1]
 }
 pairs(phatBest)
-#dev.copy2pdf(file=paste(pnm,"_fit-on-test_best-setting.pdf",sep=""),height=10,width=12)
 
 dfrac = (1:nrow(testDf))/nrow(testDf)
 plot(c(0,1),c(0,1),xlab='% tried',ylab='% of successes',cex.lab=2,type="n")
@@ -182,11 +169,4 @@ for(i in 1:ncol(phatBest)) {
 }
 abline(0,1,lty=2)
 legend("topleft",legend=names(phatL),col=1:nmethod,lty=rep(1,nmethod))
-dev.copy2pdf(file=paste(pnm,"_lift-on-test_best-setting.pdf",sep=""),height=8,width=12)
-}
-######################################################################
-if(1) {cat("### write results\n")
-dput(phatBest,paste(pnm,"_phatBest.r",sep=""))
-dput(trainDf,paste(pnm,"_trainDf.r",sep=""))
-dput(testDf,paste(pnm,"_testDf.r",sep=""))
-}
+

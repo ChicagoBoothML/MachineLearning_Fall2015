@@ -89,8 +89,9 @@ An Introduction to Statistical Learning: Chapter 8
 ## Week 4
 
 _Lecture Slides:_ <br>
-[**Classification**](Syllabus//04_classification.pdf) <br>
-[**Perceptron**](Syllabus//04_perceptron.pdf)
+[**Classification**](Syllabus/04_classification.pdf) <br>
+[**Perceptron**](Syllabus/04_perceptron.pdf)  
+[**Perceptron -- R Markdown Script to recreate slides**](Syllabus/Perceptron.Rmd.zip)
 
 _**R code**:_ <br>
 [boosting_demo_1D.R](Syllabus/boosting_demo_1D.R) <br>

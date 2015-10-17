@@ -90,7 +90,7 @@ An Introduction to Statistical Learning: Chapter 8
 
 _Lecture Slides:_ <br>
 [**Classification**](Syllabus/04_classification.pdf) <br>
-[**Perceptron**](Syllabus/04_perceptron.pdf)  
+[**Perceptron**](Syllabus/04_perceptron.pdf) <br>
 [**Perceptron -- R Markdown Script to recreate slides**](Syllabus/Perceptron.Rmd.zip)
 
 _**R code**:_ <br>
@@ -100,6 +100,9 @@ _**R code**:_ <br>
 [04_kaggle_logit_rf_boost.R](Syllabus/04_kaggle_logit_rf_boost.R) <br>
 [04_simulation_logit_rf_boost.R](Syllabus/04_simulation_logit_rf_boost.R) <br>
 [04_tabloid_logit_rf_boost.R](Syllabus/04_tabloid_logit_rf_boost.R) <br>
+[KaggleCreditScoring_usingCaretPackage.Rmd](http://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Kaggle%20Credit%20Scoring/R/KaggleCreditScoring_usingCaretPackage.Rmd)
+
+- use of **`caret`** package and **parallel computing** is highly encouraged from this point on, especially if you decide to train models on a sizeable Training data set
 
 
 _**Python code**:_ <br>

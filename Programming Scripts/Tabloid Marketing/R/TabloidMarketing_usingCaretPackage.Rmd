@@ -1,0 +1,252 @@
+---
+title: "Classfication Exercise: Tabloid Marketing Response Prediction"
+author: 'Chicago Booth ML Team'
+output: pdf_document
+fontsize: 12
+geometry: margin=0.6in
+---
+
+
+_**Note**: In order to illustrate the best practices, this script utilizes the popular [**caret**](http://topepo.github.io/caret) package, which wraps around underlying algorithms such as randomForest and GBM with a consistent interface. It's not hard to figure out how you could have written all this with the original randomForest / GBM packages. We also illutrate the use of **multi-core parallel computation** to speed up computer run-time._
+
+
+#
+
+This script illustrates the use of various algorithms to build **classification** models, using a tabloid marketing response prediction example.
+
+
+# Load Libraries & Modules; Set Randomizer Seed
+
+```{r message=FALSE, warning=FALSE}
+library(caret)
+library(data.table)
+library(doParallel)
+
+# load modules from the common HelpR repo
+helpr_repo_raw_url <- 'https://raw.githubusercontent.com/ChicagoBoothML/HelpR/master'
+source(file.path(helpr_repo_raw_url, 'EvaluationMetrics.R'))
+
+# set randomizer's seed
+set.seed(99)   # Gretzky was #99
+```
+
+
+# Parallel Computation Setup
+
+Let's set up a parallel computing infrastructure (thanks to the excellent **`doParallel`** package by Microsoft subsidiary **Revolution Analytics**) to allow more efficient computation in the rest of this exercise:
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+cl <- makeCluster(detectCores() - 2)   # create a compute cluster using all CPU cores but 2
+clusterEvalQ(cl, library(foreach))
+registerDoParallel(cl)   # register this cluster
+```
+
+We have set up a compute cluster with **`r getDoParWorkers()`** worker nodes for computing.
+
+
+# Data Import & Pre-Processing
+
+```{r}
+# download data and read data into data.table format
+y_var_name <- 'purchase'
+y_classes <- c('not_responsive', 'responsive')
+
+X_var_names <- c(
+  'nTab',
+  'moCbook',
+  'iRecMer1',
+  'llDol')
+column_classes <- c(
+  purchase='integer',
+  nTab='numeric',
+  moCbook='numeric',
+  iRecMer1='numeric',
+  llDol='numeric')
+
+
+data_repo_raw_path <- 'https://raw.githubusercontent.com/ChicagoBoothML/DATA__Tabloid/master'
+tabloid_train <- fread(
+  file.path(data_repo_raw_path, 'Tabloid_train.csv'),
+  colClasses=column_classes)
+tabloid_train[ , purchase := factor(purchase,
+                                    levels=c(0, 1), labels=y_classes)]
+
+nb_train_samples <- nrow(tabloid_train)
+
+tabloid_train
+```
+
+Just to sanity-check, the classes of the variables are:
+
+```{r}
+sapply(tabloid_train, class)
+```
+
+Out of the **`r formatC(nb_train_samples, format='d', big.mark=',')`** samples, the incidence of marketing-responsive purchase is **`r formatC(100 * sum(tabloid_train$purchase == 'responsive') / nb_train_samples, format='f', digits=2, big.mark=',')`%**. Note that this creates a "**skewed classes**" problem: one of the classes of cases (here the "delinquent" class) is significantly rarer than the other.
+
+_(**note**: in more extreme cases where one class is much, much rarer than the other to the order of 1000 or 10,000 times, our model fitting procedures would need to be tweaked; but this case is not so extreme)_
+
+Let's split a Validation set out from the Training data, for use in estimating OOS performance:
+
+```{r}
+valid_proportion <- 1 / 3
+valid_indices <- createDataPartition(
+  y=tabloid_train$purchase,
+  p=valid_proportion,
+  list=FALSE)
+
+tabloid_valid <- tabloid_train[valid_indices, ]
+tabloid_train <- tabloid_train[-valid_indices, ]
+```
+
+Just to sanity-check that the data sets have been split representatively by **`caret`**: the responsive incidences in the Training and Validation sets are **`r formatC(100 * sum(tabloid_train$purchase == 'responsive') / nrow(tabloid_train), format='f', digits=2, big.mark=',')`** and **`r formatC(100 * sum(tabloid_valid$purchase == 'responsive') / nrow(tabloid_valid), format='f', digits=2, big.mark=',')`**, respectively.
+
+
+# Classification Models
+
+Let's train 3 types of classification models: a Random Forest, a Boosted Trees model and a Logistic Regression.
+
+```{r}
+caret_optimized_metric <- 'logLoss'   # equivalent to 1 / 2 of Deviance
+
+caret_train_control <- trainControl(
+  classProbs=TRUE,             # compute class probabilities
+  summaryFunction=mnLogLoss,   # equivalent to 1 / 2 of Deviance
+  method='repeatedcv',         # repeated Cross Validation
+  number=5,                    # 5 folds
+  repeats=6,                   # 3 repeats
+  allowParallel=TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+B <- 1200
+
+rf_model <- train(
+  x=tabloid_train[, X_var_names, with=FALSE],
+  y=tabloid_train$purchase,
+  method='parRF',     # parallel Random Forest
+  metric=caret_optimized_metric,
+  ntree=B,            # number of trees in the Random Forest
+  nodesize=30,        # minimum node size set small enough to allow for complex trees,
+                      # but not so small as to require too large B to eliminate high variance
+  importance=TRUE,    # evaluate importance of predictors
+  keep.inbag=TRUE,
+  trControl=caret_train_control,
+  tuneGrid=NULL)
+```
+
+```{r message=FALSE, warning=FALSE}
+B <- 2400
+
+boost_model <- train(
+  x=tabloid_train[, X_var_names, with=FALSE],
+  y=tabloid_train$purchase,
+  method='gbm',       # Generalized Boosted Models
+  metric=caret_optimized_metric,
+  verbose=FALSE,
+  trControl=caret_train_control,
+  tuneGrid=expand.grid(
+    n.trees=B,              # number of trees
+    interaction.depth=10,   # max tree depth,
+    n.minobsinnode=100,     # minimum node size
+    shrinkage=0.01))        # shrinkage parameter, a.k.a. "learning rate"
+```
+
+```{r message=FALSE, warning=FALSE}
+log_reg_model <- train(
+  x=tabloid_train[, X_var_names, with=FALSE],
+  y=tabloid_train$purchase,
+  preProcess=c('center', 'scale'), 
+  method='plr',    # Penalized Logistic Regression
+  metric=caret_optimized_metric,
+  trControl=caret_train_control,
+  tuneGrid=expand.grid(
+    lambda=0,      # weight penalty parameter
+    cp='aic'))     # complexity parameter (AIC / BIC)
+```
+
+We'll now evaluate the OOS performances of these 3 models on the Validation set to select a model we think is best:
+
+```{r}
+small_p <- 1e-6
+low_log_odds <- log(small_p / (1 - small_p))
+high_log_odds <- log((1 - small_p) / small_p)
+log_odds_thresholds <- seq(from=low_log_odds, to=high_log_odds, length.out=1000)
+prob_thresholds <- exp(log_odds_thresholds)
+
+rf_pred_probs <- predict(
+  rf_model, newdata=tabloid_valid[ , X_var_names, with=FALSE], type='prob')
+rf_oos_performance <- bin_classif_eval(
+  rf_pred_probs$responsive, tabloid_valid$purchase, thresholds=prob_thresholds)
+
+boost_pred_probs <- predict(
+  boost_model, newdata=tabloid_valid[ , X_var_names, with=FALSE], type='prob')
+boost_oos_performance <- bin_classif_eval(
+  boost_pred_probs$responsive, tabloid_valid$purchase, thresholds=prob_thresholds)
+
+log_reg_pred_probs <- predict(
+  log_reg_model, newdata=tabloid_valid[, X_var_names, with=FALSE], type='prob')
+log_reg_oos_performance <- bin_classif_eval(
+  log_reg_pred_probs$responsive, tabloid_valid$purchase, thresholds=prob_thresholds)
+
+
+plot(x=1 - rf_oos_performance$specificity,
+     y=rf_oos_performance$sensitivity,
+     type = "l", col='darkgreen', lwd=3,
+     xlim = c(0., 1.), ylim = c(0., 1.),
+     main = "ROC Curves (Validation Data)",
+     xlab = "1 - Specificity", ylab = "Sensitivity")
+abline(a=0,b=1,lty=2,col=8)
+lines(x=1 - boost_oos_performance$specificity,
+      y=boost_oos_performance$sensitivity,
+      col='green', lwd=3)
+lines(x=1 - log_reg_oos_performance$specificity,
+      y=log_reg_oos_performance$sensitivity,
+      col='red', lwd=3)
+legend('right', c('Random Forest', 'Boosted Trees', 'Logistic Regression'), 
+   lty=1, col=c('darkgreen', 'green', 'red'), lwd=3, cex=1.)
+```
+
+Here, the Logistic Regression seems to do really well! - it seems to offer the best classification performance frontier. We now need to pick a decision threshold for the Logistic Regression model. If we are to be really rigorous, we'll need to inject some business knowledge, e.g. balancing the costs opportunity costs of missing out lucrative customers and the costs of targeted marketing. Here, to make life simple, we'll pick a subjective threshold that enables us to anticipate **80%** of the responsive cases:
+
+```{r}
+sensitivity_threshold <- .8
+i <- min(which(log_reg_oos_performance$sensitivity < sensitivity_threshold)) - 1
+selected_prob_threshold <- prob_thresholds[i]
+```
+
+The selected decision threshold is **`r formatC(selected_prob_threshold, format='f', digits=3)`** &ndash; meaning when we use the Logistic Regression model to predict on new data, we'll predict "responsive" when the predicted probability exceeds that threshold. The expected performance of the model at that threshold is as follows:
+
+```{r}
+log_reg_oos_performance[i, ]
+```
+
+Note that there is trade-off: the precision of the model at this sensitivity threshold is rather low, meaning that there'll be many false positives, i.e. we may be spamming and annoying lots of people.
+
+
+# Test Performance of Selected Model
+
+Let's now evaluate the performance of the selected Logistic Regression model, with a decision threshold at **`r formatC(selected_prob_threshold, format='f', digits=3)`**:
+
+```{r}
+tabloid_test <- fread(
+  file.path(data_repo_raw_path, 'Tabloid_test.csv'),
+  colClasses=column_classes)
+tabloid_test[ , purchase := factor(purchase,
+                                   levels=c(0, 1), labels=y_classes)]
+
+boost_test_pred_probs <- predict(
+  boost_model, newdata=tabloid_test[, X_var_names, with=FALSE], type='prob')
+
+boost_test_performance <- bin_classif_eval(
+  boost_test_pred_probs$responsive, tabloid_test$purchase,
+  thresholds=selected_prob_threshold)
+boost_test_performance
+```
+
+We can see that the Test performance is broadly similar to what we've estimated from the Validation set. The selected model works as expected: we'll get responsiveness from >70% of the targeted customers, but our reputation as a spamming organization will also be reinforced...
+
+
+```{r}
+stopCluster(cl)   # shut down the parallel computing cluster
+```

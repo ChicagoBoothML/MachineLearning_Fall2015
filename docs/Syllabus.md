@@ -100,9 +100,10 @@ _**R code**:_ <br>
 [04_kaggle_logit_rf_boost.R](Syllabus/04_kaggle_logit_rf_boost.R) <br>
 [04_simulation_logit_rf_boost.R](Syllabus/04_simulation_logit_rf_boost.R) <br>
 [04_tabloid_logit_rf_boost.R](Syllabus/04_tabloid_logit_rf_boost.R) <br>
-[KaggleCreditScoring_usingCaretPackage.Rmd](http://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Kaggle%20Credit%20Scoring/R/KaggleCreditScoring_usingCaretPackage.Rmd)
+[KaggleCreditScoring_usingCaretPackage.Rmd](http://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Kaggle%20Credit%20Scoring/R/KaggleCreditScoring_usingCaretPackage.Rmd) <br>
+[TabloidMarketing_usingCaretPackage.Rmd](http://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Tabloid%20Marketing/R/TabloidMarketing_usingCaretPackage.Rmd)
 
-- use of **`caret`** package and **parallel computing** is highly encouraged from this point on, especially if you decide to train models on a sizeable Training data set
+- The use of **`caret`** package and **parallel computing** is highly encouraged from this point on, especially if you decide to train models on a sizeable Training data set
 
 
 _**Python code**:_ <br>

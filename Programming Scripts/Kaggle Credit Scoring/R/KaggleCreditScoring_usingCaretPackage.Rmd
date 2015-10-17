@@ -48,8 +48,8 @@ We have set up a compute cluster with **`r getDoParWorkers()`** worker nodes for
 
 ```{r}
 # download data and read data into data.table format
-y_var_name = 'SeriousDlqin2yrs'
-X_var_names = c(
+y_var_name <- 'SeriousDlqin2yrs'
+X_var_names <- c(
   'RevolvingUtilizationOfUnsecuredLines',
   'age',
   'NumberOfTime30-59DaysPastDueNotWorse',
@@ -94,7 +94,7 @@ sapply(cs, class)
 
 Out of the **`r formatC(nb_samples, format='d', big.mark=',')`** samples, the incidence of loan delinquency is **`r formatC(100 * sum(cs$SeriousDlqin2yrs == 'delinquent') / nb_samples, format='f', digits=2, big.mark=',')`%**. Note that this creates a "**skewed classes**" problem: one of the classes of cases (here the "delinquent" class) is significantly rarer than the other.
 
-_(**note**: in more extreme cases where one class is much, much rarer than the other to the order of 1000 or 10,000 times, our model fitting procedures would need to be tweaked too; but this case is not so extreme)_
+_(**note**: in more extreme cases where one class is much, much rarer than the other to the order of 1000 or 10,000 times, our model fitting procedures would need to be tweaked; but this case is not so extreme)_
 
 Let's split the data into a Training set and a Test set:
 
@@ -250,7 +250,7 @@ It seems the Boosted Trees model offers the best classification performance fron
 
 ```{r}
 sensitivity_threshold <- .75
-i <- min(which(boost_oos_performance$sensitivity < sensitivity_threshold))
+i <- min(which(boost_oos_performance$sensitivity < sensitivity_threshold)) - 1
 selected_prob_threshold <- prob_thresholds[i]
 ```
 

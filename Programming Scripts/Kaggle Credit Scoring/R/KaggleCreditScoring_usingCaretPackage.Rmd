@@ -109,7 +109,7 @@ cs_train <- cs[train_indices, ]
 cs_test <- cs[-train_indices, ]
 ```
 
-The proportions of missing data points per column are as follows:
+The proportions of missing data points per column in the Training set are as follows:
 
 ```{r}
 sapply(cs_train, function(col) sum(is.na(col))) / nrow(cs_train)
@@ -118,8 +118,8 @@ sapply(cs_train, function(col) sum(is.na(col))) / nrow(cs_train)
 Let's not throw away valuable data just because of _N.A._ values; let's impute _N.A._ with the means of the respective columns in the _Training_ set:
 
 ```{r}
-cs_train_mean_MonthlyIncome = mean(cs$MonthlyIncome, na.rm=TRUE)
-cs_train_mean_NumberOfDependents = mean(cs$NumberOfDependents, na.rm=TRUE)
+cs_train_mean_MonthlyIncome = mean(cs_train$MonthlyIncome, na.rm=TRUE)
+cs_train_mean_NumberOfDependents = mean(cs_train$NumberOfDependents, na.rm=TRUE)
 
 cs_train[is.na(MonthlyIncome), MonthlyIncome := cs_train_mean_MonthlyIncome]
 cs_train[is.na(NumberOfDependents), NumberOfDependents := cs_train_mean_NumberOfDependents]

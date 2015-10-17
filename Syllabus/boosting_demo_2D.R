@@ -18,14 +18,14 @@ boost.fit = gbm(Y~.,
                 distribution = "adaboost", 
                 data=df, 
                 n.trees=MAX_TREES, 
-                interaction.depth = 1,
-                shrinkage = 0.01)
+                interaction.depth = 2,
+                shrinkage = 0.1)
   
 x1 = seq(-1,1,length.out = GRID_SIZE)
 x2 = seq(-1,1,length.out = GRID_SIZE)
 z = rep(0, GRID_SIZE*GRID_SIZE)
 
-for (ntree in seq(1,MAX_TREES, by = 30)) {
+for (ntree in seq(1,MAX_TREES, by = 100)) {
   for (i in 1:GRID_SIZE) {
     for (j in 1:GRID_SIZE) {
       z[(i-1)*GRID_SIZE+j] = predict(boost.fit, data.frame(X1=x1[i],X2=x2[j]), n.trees = ntree)

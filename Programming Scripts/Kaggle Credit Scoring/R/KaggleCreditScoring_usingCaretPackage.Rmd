@@ -1,0 +1,291 @@
+---
+title: "Classfication Exercise: Credit Scoring Kaggle Competition"
+author: 'Chicago Booth ML Team'
+output: pdf_document
+fontsize: 12
+geometry: margin=0.6in
+---
+
+
+_**Note**: In order to illustrate the best practices in life (remember our dear prof McC's worldview: "in life" = "in R"), this script utilizes the popular [**caret**](http://topepo.github.io/caret) package, which wraps around underlying algorithms such as randomForest and GBM with a consistent interface. It's not hard to figure out how you could have written all this with the original randomForest / GBM packages. We also illutrate the use of **multi-core parallel computation** to speed up computer run-time (and, yes, salvage a bit of your laptop's subsequent eBay / Craigslist value...)._
+
+
+#
+
+This script illustrates the use of various algorithms to build **classification** models, using data from a [**Credit Scoring** competition on Kaggle.com](http://www.kaggle.com/c/GiveMeSomeCredit).
+
+
+# Load Libraries & Modules; Set Randomizer Seed
+
+```{r message=FALSE, warning=FALSE}
+library(caret)
+library(data.table)
+library(doParallel)
+
+# load modules from the common HelpR repo
+helpr_repo_raw_url <- 'https://raw.githubusercontent.com/ChicagoBoothML/HelpR/master'
+source(file.path(helpr_repo_raw_url, 'EvaluationMetrics.R'))
+
+# set randomizer's seed
+set.seed(99)   # Gretzky was #99
+```
+
+
+# Parallel Computation Setup
+
+Let's set up a parallel computing infrastructure (thanks to the excellent **`doParallel`** package by Microsoft subsidiary **Revolution Analytics**) to allow more efficient computation in the rest of this exercise:
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+cl <- makeCluster(detectCores() - 2)   # create a compute cluster using all CPU cores but 2
+clusterEvalQ(cl, library(foreach))
+registerDoParallel(cl)   # register this cluster
+```
+
+We have set up a compute cluster with **`r getDoParWorkers()`** worker nodes for computing.
+
+
+# Data Import & Pre-Processing
+
+```{r}
+# download data and read data into data.table format
+y_var_name = 'SeriousDlqin2yrs'
+X_var_names = c(
+  'RevolvingUtilizationOfUnsecuredLines',
+  'age',
+  'NumberOfTime30-59DaysPastDueNotWorse',
+  'DebtRatio',
+  'MonthlyIncome',
+  'NumberOfOpenCreditLinesAndLoans',
+  'NumberOfTimes90DaysLate',
+  'NumberRealEstateLoansOrLines',
+  'NumberOfTime60-89DaysPastDueNotWorse',
+  'NumberOfDependents')
+
+cs <- fread(
+  'https://raw.githubusercontent.com/ChicagoBoothML/DATA___Kaggle___GiveMeSomeCredit/master/CreditScoring.csv',
+  drop=c(1),   # drop column #1, which just contains row numbers
+  colClasses=c(
+    'SeriousDlqin2yrs'='integer',
+    'RevolvingUtilizationOfUnsecuredLines'='numeric',
+    'age'='numeric',
+    'NumberOfTime30-59DaysPastDueNotWorse'='numeric',
+    'DebtRatio'='numeric',
+    'MonthlyIncome'='numeric',
+    'NumberOfOpenCreditLinesAndLoans'='numeric',
+    'NumberOfTimes90DaysLate'='numeric',
+    'NumberRealEstateLoansOrLines'='numeric',
+    'NumberOfTime60-89DaysPastDueNotWorse'='numeric',
+    'NumberOfDependents'='numeric'),
+  na.strings='NA')
+
+cs[ , SeriousDlqin2yrs := factor(SeriousDlqin2yrs,
+                                 levels=c(0, 1), labels=c("ok", "delinquent"))]
+
+nb_samples <- nrow(cs)
+
+cs
+```
+
+Just to sanity-check, the classes of the variables are:
+
+```{r}
+sapply(cs, class)
+```
+
+Out of the **`r formatC(nb_samples, format='d', big.mark=',')`** samples, the incidence of loan delinquency is **`r formatC(100 * sum(cs$SeriousDlqin2yrs == 'delinquent') / nb_samples, format='f', digits=2, big.mark=',')`%**. Note that this creates a "**skewed classes**" problem: one of the classes of cases (here the "delinquent" class) is significantly rarer than the other.
+
+_(**note**: in more extreme cases where one class is much, much rarer than the other to the order of 1000 or 10,000 times, our model fitting procedures would need to be tweaked too; but this case is not so extreme)_
+
+Let's split the data into a Training set and a Test set:
+
+```{r}
+train_proportion <- .2
+train_indices <- createDataPartition(
+  y=cs$SeriousDlqin2yrs,
+  p=train_proportion,
+  list=FALSE)
+
+cs_train <- cs[train_indices, ]
+cs_test <- cs[-train_indices, ]
+```
+
+The proportions of missing data points per column are as follows:
+
+```{r}
+sapply(cs_train, function(col) sum(is.na(col))) / nrow(cs_train)
+```
+
+Let's not throw away valuable data just because of _N.A._ values; let's impute _N.A._ with the means of the respective columns in the _Training_ set:
+
+```{r}
+cs_train_mean_MonthlyIncome = mean(cs$MonthlyIncome, na.rm=TRUE)
+cs_train_mean_NumberOfDependents = mean(cs$NumberOfDependents, na.rm=TRUE)
+
+cs_train[is.na(MonthlyIncome), MonthlyIncome := cs_train_mean_MonthlyIncome]
+cs_train[is.na(NumberOfDependents), NumberOfDependents := cs_train_mean_NumberOfDependents]
+```
+
+Let's now split a bit of data from the Training set as a Validation set for the purpose of estimating OOS performance metrics:
+
+```{r}
+valid_proportion_of_train <- 1 / 3
+valid_indices <- createDataPartition(
+  y=cs_train$SeriousDlqin2yrs,
+  p=valid_proportion_of_train,
+  list=FALSE)
+
+cs_valid <- cs_train[valid_indices, ]
+cs_train <- cs_train[-valid_indices, ]
+```
+
+Just to sanity-check that the data sets have been split representatively by **`caret`**: the delinquency incidences in the Training, Validation and Test sets are **`r formatC(100 * sum(cs_train$SeriousDlqin2yrs == 'delinquent') / nrow(cs_train), format='f', digits=2, big.mark=',')`**, **`r formatC(100 * sum(cs_valid$SeriousDlqin2yrs == 'delinquent') / nrow(cs_valid), format='f', digits=2, big.mark=',')`** and **`r formatC(100 * sum(cs_test$SeriousDlqin2yrs == 'delinquent') / nrow(cs_test), format='f', digits=2, big.mark=',')`** respectively.
+
+
+# Classification Models
+
+Let's train 3 types of classification models: a Random Forest, a Boosted Trees model and a Logistic Regression.
+
+```{r}
+caret_optimized_metric <- 'logLoss'   # equivalent to 1 / 2 of Deviance
+
+caret_train_control <- trainControl(
+  classProbs=TRUE,             # compute class probabilities
+  summaryFunction=mnLogLoss,   # equivalent to 1 / 2 of Deviance
+  method='repeatedcv',         # repeated Cross Validation
+  number=5,                    # 5 folds
+  repeats=2,                   # 3 repeats
+  allowParallel=TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+B <- 600
+
+rf_model <- train(
+  x=cs_train[, X_var_names, with=FALSE],
+  y=cs_train$SeriousDlqin2yrs,
+  method='parRF',     # parallel Random Forest
+  metric=caret_optimized_metric,
+  ntree=B,            # number of trees in the Random Forest
+  nodesize=100,       # minimum node size set small enough to allow for complex trees,
+                      # but not so small as to require too large B to eliminate high variance
+  importance=TRUE,    # evaluate importance of predictors
+  keep.inbag=TRUE,
+  trControl=caret_train_control,
+  tuneGrid=NULL)
+```
+
+```{r message=FALSE, warning=FALSE}
+B <- 1200
+
+boost_model <- train(
+  x=cs_train[, X_var_names, with=FALSE],
+  y=cs_train$SeriousDlqin2yrs,
+  method='gbm',       # Generalized Boosted Models
+  metric=caret_optimized_metric,
+  verbose=FALSE,
+  trControl=caret_train_control,
+  tuneGrid=expand.grid(
+    n.trees=B,              # number of trees
+    interaction.depth=10,   # max tree depth,
+    n.minobsinnode=100,     # minimum node size
+    shrinkage=0.01))        # shrinkage parameter, a.k.a. "learning rate"
+```
+
+```{r message=FALSE, warning=FALSE}
+log_reg_model <- train(
+  x=cs_train[, X_var_names, with=FALSE],
+  y=cs_train$SeriousDlqin2yrs,
+  preProcess=c('center', 'scale'), 
+  method='plr',       # Penalized Logistic Regression
+  metric=caret_optimized_metric,
+  trControl=caret_train_control,
+  tuneGrid=expand.grid(
+    lambda=0,   # weight penalty parameter
+    cp='aic'))     # complexity parameter (AIC / BIC)
+```
+
+We'll now evaluate the OOS performances of these 3 models on the Validation set to select a model we think is best:
+
+```{r}
+small_p <- 1e-6
+low_log_odds <- log(small_p / (1 - small_p))
+high_log_odds <- log((1 - small_p) / small_p)
+log_odds_thresholds <- seq(from=low_log_odds, to=high_log_odds, length.out=1000)
+prob_thresholds <- exp(log_odds_thresholds)
+
+rf_pred_probs <- predict(
+  rf_model, newdata=cs_valid[ , X_var_names, with=FALSE], type='prob')
+rf_oos_performance <- bin_classif_eval(
+  rf_pred_probs$delinquent, cs_valid$SeriousDlqin2yrs, thresholds=prob_thresholds)
+
+boost_pred_probs <- predict(
+  boost_model, newdata=cs_valid[ , X_var_names, with=FALSE], type='prob')
+boost_oos_performance <- bin_classif_eval(
+  boost_pred_probs$delinquent, cs_valid$SeriousDlqin2yrs, thresholds=prob_thresholds)
+
+log_reg_pred_probs <- predict(
+  log_reg_model, newdata=cs_valid[, X_var_names, with=FALSE], type='prob')
+log_reg_oos_performance <- bin_classif_eval(
+  log_reg_pred_probs$delinquent, cs_valid$SeriousDlqin2yrs, thresholds=prob_thresholds)
+
+
+plot(x=1 - rf_oos_performance$specificity,
+     y=rf_oos_performance$sensitivity,
+     type = "l", col='darkgreen', lwd=3,
+     xlim = c(0., 1.), ylim = c(0., 1.),
+     main = "ROC Curves (Validation Data)",
+     xlab = "1 - Specificity", ylab = "Sensitivity")
+abline(a=0,b=1,lty=2,col=8)
+lines(x=1 - boost_oos_performance$specificity,
+      y=boost_oos_performance$sensitivity,
+      col='green', lwd=3)
+lines(x=1 - log_reg_oos_performance$specificity,
+      y=log_reg_oos_performance$sensitivity,
+      col='red', lwd=3)
+legend('right', c('Random Forest', 'Boosted Trees', 'Logistic Regression'), 
+   lty=1, col=c('darkgreen', 'green', 'red'), lwd=3, cex=1.)
+```
+
+It seems the Boosted Trees model offers the best classification performance frontier. We now need to pick a decision threshold for the Boosted Trees model. If we are to be really rigorous, we'll need to pose this trade-off in the context of a financial firm extending loans, e.g. balancing the costs of bad debt and the costs of auditing loans that are healthy. Here, to make life simple, we'll pick a subjective threshold that enables us to anticipate **75%** of the delinquency cases:
+
+```{r}
+sensitivity_threshold <- .75
+i <- min(which(boost_oos_performance$sensitivity < sensitivity_threshold))
+selected_prob_threshold <- prob_thresholds[i]
+```
+
+The selected decision threshold is **`r formatC(selected_prob_threshold, format='f', digits=3)`** &ndash; meaning when we use the Boosted Tree model to predict on new data, we'll predict "Delinquent" when the predicted probability exceeds that threshold. The expected performance of the model at that threshold is as follows:
+
+```{r}
+boost_oos_performance[i, ]
+```
+
+Note that there is trade-off: the precision of the model at this sensitivity threshold is rather low, meaning that there'll be many false positives, i.e. cases with lower financial risk being classified as likely to be delinquent.
+
+
+# Test Performance of Selected Model
+
+Remember that the Test data may have some missing values; let's first impute those missing values by the relevant means we've derived from the Training data:
+
+```{r}
+cs_test[is.na(MonthlyIncome), MonthlyIncome := cs_train_mean_MonthlyIncome]
+cs_test[is.na(NumberOfDependents), NumberOfDependents := cs_train_mean_NumberOfDependents]
+```
+
+Let's then evaluate the performance of the selected Boosted Trees model, with a decision threshold at **`r formatC(selected_prob_threshold, format='f', digits=3)`**:
+
+```{r}
+boost_test_pred_probs <- predict(
+  boost_model, newdata=cs_test[, X_var_names, with=FALSE], type='prob')
+
+boost_test_performance <- bin_classif_eval(
+  boost_test_pred_probs$delinquent, cs_test$SeriousDlqin2yrs, thresholds=selected_prob_threshold)
+boost_test_performance
+```
+
+We can see that the Test performance is very similar to what we've estimated from the Validation set. The selected model works as expected.
+
+
+```{r}
+stopCluster(cl)   # shut down the parallel computing cluster
+```

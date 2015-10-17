@@ -20,6 +20,8 @@ install.packages(c(
   'rpart',
   'RCurl',
   'rmarkdown',
+  'ROCR'
+  'stepPlr',
   'tree',
   'yaml'),
   dependencies = TRUE,

@@ -107,6 +107,8 @@ _**R code**:_ <br>
 
 
 _**Python code**:_ <br>
+[KaggleCreditScoring.ipynb](http://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Kaggle%20Credit%20Scoring/Python/KaggleCreditScoring.ipynb) <br>
+
 
 _Homework assignment:_  <br>
 [04_hw.pdf](Syllabus/04_hw.pdf) <br>

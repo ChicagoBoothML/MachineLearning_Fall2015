@@ -108,6 +108,7 @@ _**R code**:_ <br>
 
 _**Python code**:_ <br>
 [KaggleCreditScoring.ipynb](http://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Kaggle%20Credit%20Scoring/Python/KaggleCreditScoring.ipynb) <br>
+[TabloidMarketing.ipynb](http://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Tabloid%20Marketing/Python/TabloidMarketing.ipynb)
 
 
 _Homework assignment:_  <br>

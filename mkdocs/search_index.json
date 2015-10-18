@@ -152,7 +152,7 @@
         }, 
         {
             "location": "/Applications/", 
-            "text": "ML Applications in Business\n\n\nAirbnb\n\n\nUnboxing the Random Forest Classifier\n, 2015-10-01\n\n\n\n\nThe post talks about making random forests more interpretable at Airbnb\n\n\n\n\nGoogle\n\n\nImproving YouTube Video Thumbnails with Deep Neural Nets\n, 2015-10-08 \n(conbributed by Mike Joyce)\n\n\nQuantitative Insights \n(medical company)\n\n\nUse of Machine Learning and Computer Vision to predict probability of breast cancer\n \n(contributed by Benjamin Collins)\n\n\nL'Oreal\n\n\nL'Oreal's MakeUp Genius app\n based on on advanced Machine Learning-powered face recoginition technologies\n \n(conbributed by Yoni Sarason)\n\n\nNetflix\n\n\nNetflix Prize\n, a famous historical Machine Learning / Predictive Analytics competion with $1M prize for those who could beat Netflix's in-house movie recommendation engine by 10% in terms of accuracy. A brilliant marketing stunt. A academic sweatshop that made dozens of thousands of data scientists work for much less than what they could have made flipping burgers at the local McDonald's...\n\n\nOther\n\n\n4 Ways Cognitive Technologies Can Add Value to Consumer Products\n, 2015-06-03, Deloitte", 
+            "text": "ML Applications in Business\n\n\nAirbnb\n\n\nUnboxing the Random Forest Classifier\n, 2015-10-01\n\n\n\n\nThe post talks about making random forests more interpretable at Airbnb\n\n\n\n\nFacebook\n\n\nPractical Lessons from Prediction Clicks on Ads at Facebook\n, 2014-08-24\n\n\nGoogle\n\n\nImproving YouTube Video Thumbnails with Deep Neural Nets\n, 2015-10-08 \n(conbributed by Mike Joyce)\n\n\nQuantitative Insights \n(medical company)\n\n\nUse of Machine Learning and Computer Vision to predict probability of breast cancer\n \n(contributed by Benjamin Collins)\n\n\nL'Oreal\n\n\nL'Oreal's MakeUp Genius app\n based on on advanced Machine Learning-powered face recoginition technologies\n \n(conbributed by Yoni Sarason)\n\n\nNetflix\n\n\nNetflix Prize\n, a famous historical Machine Learning / Predictive Analytics competion with $1M prize for those who could beat Netflix's in-house movie recommendation engine by 10% in terms of accuracy. A brilliant marketing stunt. A academic sweatshop that made dozens of thousands of data scientists work for much less than what they could have made flipping burgers at the local McDonald's...\n\n\nOther\n\n\n4 Ways Cognitive Technologies Can Add Value to Consumer Products\n, 2015-06-03, Deloitte", 
             "title": "Applications"
         }, 
         {
@@ -164,6 +164,11 @@
             "location": "/Applications/#airbnb", 
             "text": "Unboxing the Random Forest Classifier , 2015-10-01   The post talks about making random forests more interpretable at Airbnb", 
             "title": "Airbnb"
+        }, 
+        {
+            "location": "/Applications/#facebook", 
+            "text": "Practical Lessons from Prediction Clicks on Ads at Facebook , 2014-08-24", 
+            "title": "Facebook"
         }, 
         {
             "location": "/Applications/#google", 

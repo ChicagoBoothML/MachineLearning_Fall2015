@@ -8,6 +8,11 @@
 - The post talks about making random forests more interpretable at Airbnb
 
 
+## Facebook
+
+[_**Practical Lessons from Prediction Clicks on Ads at Facebook**_](References/Facebook (2014.08.24) -- Practical Lessons from Prediction Clicks on Ads at Facebook.pdf), 2014-08-24
+
+
 ## Google
 
 [**_Improving YouTube Video Thumbnails with Deep Neural Nets_**](http://youtube-eng.blogspot.com/2015/10/improving-youtube-video-thumbnails-with_8.html), 2015-10-08 _(conbributed by Mike Joyce)_

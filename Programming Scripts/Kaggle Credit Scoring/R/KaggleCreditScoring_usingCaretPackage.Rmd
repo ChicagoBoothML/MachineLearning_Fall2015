@@ -207,11 +207,12 @@ log_reg_model <- train(
 We'll now evaluate the OOS performances of these 3 models on the Validation set to select a model we think is best:
 
 ```{r}
-small_p <- 1e-6
-low_log_odds <- log(small_p / (1 - small_p))
-high_log_odds <- log((1 - small_p) / small_p)
-log_odds_thresholds <- seq(from=low_log_odds, to=high_log_odds, length.out=1000)
-prob_thresholds <- exp(log_odds_thresholds)
+low_prob <- 1e-6
+high_prob <- 1 - low_prob
+log_low_prob <- log(low_prob)
+log_high_prob <- log(high_prob)
+log_prob_thresholds <- seq(from=log_low_prob, to=log_high_prob, length.out=1000)
+prob_thresholds <- exp(log_prob_thresholds)
 
 rf_pred_probs <- predict(
   rf_model, newdata=cs_valid[ , X_var_names, with=FALSE], type='prob')

@@ -109,6 +109,21 @@ cs_train <- cs[train_indices, ]
 cs_test <- cs[-train_indices, ]
 ```
 
+Let's also split a bit of data from the Training set as a Validation set for the purpose of estimating OOS performance metrics:
+
+```{r}
+valid_proportion_of_train <- 1 / 3
+valid_indices <- createDataPartition(
+  y=cs_train$SeriousDlqin2yrs,
+  p=valid_proportion_of_train,
+  list=FALSE)
+
+cs_valid <- cs_train[valid_indices, ]
+cs_train <- cs_train[-valid_indices, ]
+```
+
+Just to sanity-check that the data sets have been split representatively by **`caret`**: the delinquency incidences in the Training, Validation and Test sets are **`r formatC(100 * sum(cs_train$SeriousDlqin2yrs == 'delinquent') / nrow(cs_train), format='f', digits=2, big.mark=',')`**, **`r formatC(100 * sum(cs_valid$SeriousDlqin2yrs == 'delinquent') / nrow(cs_valid), format='f', digits=2, big.mark=',')`** and **`r formatC(100 * sum(cs_test$SeriousDlqin2yrs == 'delinquent') / nrow(cs_test), format='f', digits=2, big.mark=',')`** respectively.
+
 The proportions of missing data points per column in the Training set are as follows:
 
 ```{r}
@@ -124,21 +139,6 @@ cs_train_mean_NumberOfDependents = mean(cs_train$NumberOfDependents, na.rm=TRUE)
 cs_train[is.na(MonthlyIncome), MonthlyIncome := cs_train_mean_MonthlyIncome]
 cs_train[is.na(NumberOfDependents), NumberOfDependents := cs_train_mean_NumberOfDependents]
 ```
-
-Let's now split a bit of data from the Training set as a Validation set for the purpose of estimating OOS performance metrics:
-
-```{r}
-valid_proportion_of_train <- 1 / 3
-valid_indices <- createDataPartition(
-  y=cs_train$SeriousDlqin2yrs,
-  p=valid_proportion_of_train,
-  list=FALSE)
-
-cs_valid <- cs_train[valid_indices, ]
-cs_train <- cs_train[-valid_indices, ]
-```
-
-Just to sanity-check that the data sets have been split representatively by **`caret`**: the delinquency incidences in the Training, Validation and Test sets are **`r formatC(100 * sum(cs_train$SeriousDlqin2yrs == 'delinquent') / nrow(cs_train), format='f', digits=2, big.mark=',')`**, **`r formatC(100 * sum(cs_valid$SeriousDlqin2yrs == 'delinquent') / nrow(cs_valid), format='f', digits=2, big.mark=',')`** and **`r formatC(100 * sum(cs_test$SeriousDlqin2yrs == 'delinquent') / nrow(cs_test), format='f', digits=2, big.mark=',')`** respectively.
 
 
 # Classification Models
@@ -213,6 +213,10 @@ log_low_prob <- log(low_prob)
 log_high_prob <- log(high_prob)
 log_prob_thresholds <- seq(from=log_low_prob, to=log_high_prob, length.out=1000)
 prob_thresholds <- exp(log_prob_thresholds)
+
+# Fill missing value for Validation data
+cs_valid[is.na(MonthlyIncome), MonthlyIncome := cs_train_mean_MonthlyIncome]
+cs_valid[is.na(NumberOfDependents), NumberOfDependents := cs_train_mean_NumberOfDependents]
 
 # *** NOTE: **
 # the below "bin_classif_eval" function is from the "EvaluationMetrics.R" helper script

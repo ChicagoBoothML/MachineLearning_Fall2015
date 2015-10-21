@@ -86,6 +86,12 @@ Out of the **`r formatC(nb_train_samples, format='d', big.mark=',')`** samples, 
 
 _(**note**: in more extreme cases where one class is much, much rarer than the other to the order of 1000 or 10,000 times, our model fitting procedures would need to be tweaked; but this case is not so extreme)_
 
+We don't have a missing data problem with this data set:
+
+```{r}
+sapply(tabloid_train, function(col) sum(is.na(col)))
+```
+
 Let's split a Validation set out from the Training data, for use in estimating OOS performance:
 
 ```{r}

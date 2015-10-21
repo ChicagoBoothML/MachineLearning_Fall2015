@@ -214,6 +214,10 @@ log_high_prob <- log(high_prob)
 log_prob_thresholds <- seq(from=log_low_prob, to=log_high_prob, length.out=1000)
 prob_thresholds <- exp(log_prob_thresholds)
 
+# *** NOTE: **
+# the below "bin_classif_eval" function is from the "EvaluationMetrics.R" helper script
+# in the "HelpR" GitHub repo
+
 rf_pred_probs <- predict(
   rf_model, newdata=cs_valid[ , X_var_names, with=FALSE], type='prob')
 rf_oos_performance <- bin_classif_eval(

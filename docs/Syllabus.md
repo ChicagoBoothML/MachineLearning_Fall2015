@@ -121,3 +121,33 @@ An Introduction to Statistical Learning: Chapter 4 (we will not talk about linea
 Pedro Domingos: A Few Useful Things to Know about Machine Learning [PDF](http://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf)
 
 D. Sculley et al.: Machine Learning: The High Interest Credit Card of Technical Debt [PDF](http://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43146.pdf)
+
+
+## Week 4
+
+_Lecture Slides:_ <br>
+[**Neural networks**](Syllabus/05_nn.pdf) <br>
+[**MNIST example**](Syllabus/05_mnist_example.pdf) <br>
+
+_**R code**:_ <br>
+
+[Syllabus/05_h2o_install.R](Syllabus/05_h2o_install.R) <br>
+[05_tabloid_h2o.R](Syllabus/05_tabloid_h2o.R) <br>
+[05_tabloid_nnet.R](Syllabus/05_tabloid_nnet.R) <br>
+[05_we8there.R](Syllabus/05_we8there.R) <br>
+[05_helper.R](Syllabus/05_helper.R) <br>
+[05_h2o_mnist.R](Syllabus/05_h2o_mnist.R) <br>
+
+_Optional textbook reading:_ 
+An Introduction to Statistical Learning: Chapter 4, Section 6.2
+
+The Elements of Statistical Learning: Sections 11.3 - 11.5
+
+_Some h2o resources:_
+
+[h2o package](http://h2o-release.s3.amazonaws.com/h2o/master/3229/docs-website/h2o-r/h2o_package.pdf)
+
+[Deep Learning](http://h2o-release.s3.amazonaws.com/h2o/master/3229/docs-website/h2o-docs/booklets/DeepLearning_Vignette.pdf)
+
+[GLM](http://h2o-release.s3.amazonaws.com/h2o/master/3229/docs-website/h2o-docs/booklets/GLM_Vignette.pdf)
+

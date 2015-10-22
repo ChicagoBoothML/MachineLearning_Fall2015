@@ -308,8 +308,6 @@ Building models with all of them will still be quite clunky. Let's try to select
 2. Pick pairs of higher OOB performances
 3. Pick variables that appear in many well-performing pairs
 
-_**NOTE**: because some sections below take quite long to run, we've commented them out. The script will jump straight to the selected X variables._
-
 ```{r message=FALSE, warning=FALSE, results='hide'}
 feature_pair_performances <- data.table(
   feature_1=character(),
@@ -415,7 +413,7 @@ It seems that **all of the remaining `r nb_input_features` strong features** are
 
 
 ```{r}
-# Prepare Validation Data for evaluation
+# Prepare Validation & Test Data for evaluation
 prepare_oos_input_features <- function(X_OOS) {
   X_OOS <- X_OOS[ , input_feature_names, with=FALSE]
   for (numeric_col in input_feature_names) {

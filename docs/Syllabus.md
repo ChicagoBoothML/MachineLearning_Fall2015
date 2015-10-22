@@ -9,7 +9,7 @@ We will move at a pace dictated by class discussions. Please check this page oft
 | [**2**](#weeks-1-2) | 10/1 &ndash; 10/3   | Cross Validation                                                                 |
 | [**3**](#week-3)    | 10/8 &ndash; 10/10  | Decision Trees; Bagging and Random Forests; Boosting and Boosted Additive Models |
 | [**4**](#week-4)    | 10/15 &ndash; 10/17 | Categorical Outcomes and Classification Models                                   |
-| 5                   | 10/22 &ndash; 10/24 | Neural Networks                                                                  |
+| [**5**](#week-5)    | 10/22 &ndash; 10/24 | Neural Networks                                                                  |
 | 6                   | 10/29 &ndash; 10/31 | Recommender Systems                                                              | 
 | 7                   | 11/5 &ndash; 11/7   | Anomaly Detection                                                                |
 | 8                   | 11/12 &ndash; 11/14 | Mining Network Data                                                              |
@@ -123,7 +123,7 @@ Pedro Domingos: A Few Useful Things to Know about Machine Learning [PDF](http://
 D. Sculley et al.: Machine Learning: The High Interest Credit Card of Technical Debt [PDF](http://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43146.pdf)
 
 
-## Week 4
+## Week 5
 
 _Lecture Slides:_ <br>
 [**Neural networks**](Syllabus/05_nn.pdf) <br>

@@ -13,7 +13,7 @@ n = length(df$lstat)
 MAX_DEPTH = 1
 NUM_GRID = 100  # number of points on which we evaluate the fit
 MAX_B = 100
-lambda = 0.01
+lambda = 0.02
 
 residuals = rep(0, n)
 range.x = range(df$lstat)

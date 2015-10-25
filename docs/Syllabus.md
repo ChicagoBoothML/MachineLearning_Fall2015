@@ -127,9 +127,13 @@ D. Sculley et al.: Machine Learning: The High Interest Credit Card of Technical 
 
 _Lecture Slides:_ <br>
 [**Logistic regression**](Syllabus/05_logistic_regression.pdf) <br>
+[**RMarkdown -- Logistic regression**](Syllabus/05_logistic_regression.zip) <br>
+
 
 _**R code**:_ <br>
-[we8there.R](Syllabus/05_we8there.R) <br>
+[lr_decision_surface.R](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Lecture05/lr_decision_surface.R) <br>
+[we8there.R](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Lecture05/we8there_text.R) <br>
+
 
 Optional textbook reading:_ 
 An Introduction to Statistical Learning: Chapter 4, Section 6.2
@@ -153,9 +157,7 @@ The Elements of Statistical Learning: Sections 11.3 - 11.5
 
 _Some h2o resources:_
 
-[h2o package](http://h2o-release.s3.amazonaws.com/h2o/master/3229/docs-website/h2o-r/h2o_package.pdf)
-
-[Deep Learning](http://h2o-release.s3.amazonaws.com/h2o/master/3229/docs-website/h2o-docs/booklets/DeepLearning_Vignette.pdf)
-
-[GLM](http://h2o-release.s3.amazonaws.com/h2o/master/3229/docs-website/h2o-docs/booklets/GLM_Vignette.pdf)
+[h2o package](http://h2o-release.s3.amazonaws.com/h2o/master/3232/docs-website/h2o-r/h2o_package.pdf) <br>
+[Deep Learning](http://h2o-release.s3.amazonaws.com/h2o/master/3232/docs-website/h2o-docs/booklets/DeepLearning_Vignette.pdf) <br>
+[GLM](http://h2o-release.s3.amazonaws.com/h2o/master/3232/docs-website/h2o-docs/booklets/GLM_Vignette.pdf) <br>
 

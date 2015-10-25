@@ -70,14 +70,15 @@ _Lecture Slides:_ <br>
 [**Trees, Bagging, Random Forests and Boosting**](Syllabus/03_trees_bag_boost.pdf)
 
 _**R code**:_ <br>
-[knn-bagging.R](Syllabus/knn-bagging.R) <br>
+[knn-bagging.R]() <br>
+[boosting_demo_1D.R]() <br>
+[boosting_demo_2D.R]() <br>
 [BostonHousing_Trees_RandomForests_BoostedAdditiveModels.Rmd](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/R/BostonHousing_Trees_RandomForests_BoostedAdditiveModels.Rmd)
 
 - you can find an advanced version featuring the popular **caret** package and **parallel computation** here: [BostonHousing_Trees_RandomForests_BoostedAdditiveModels_usingCaretPackage.Rmd](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Boston%20Housing/R/BostonHousing_Trees_RandomForests_BoostedAdditiveModels_usingCaretPackage.Rmd)
 
 _**Python code**:_ <br>
 [BostonHousing_Trees_RandomForests_BoostedAdditiveModels.ipynb](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Boston%20Housing/Python/BostonHousing_Trees_RandomForests_BoostedAdditiveModels.ipynb)
-
 
 
 _Homework assignment:_ See Problem 9.1 in Lecture notes for this week.
@@ -94,8 +95,6 @@ _Lecture Slides:_ <br>
 [**Perceptron -- R Markdown Script to recreate slides**](Syllabus/Perceptron.Rmd.zip)
 
 _**R code**:_ <br>
-[boosting_demo_1D.R](Syllabus/boosting_demo_1D.R) <br>
-[boosting_demo_2D.R](Syllabus/boosting_demo_2D.R) <br>
 [fglass.R](Syllabus/fglass.R) <br>
 [04_kaggle_logit_rf_boost.R](Syllabus/04_kaggle_logit_rf_boost.R) <br>
 [04_simulation_logit_rf_boost.R](Syllabus/04_simulation_logit_rf_boost.R) <br>

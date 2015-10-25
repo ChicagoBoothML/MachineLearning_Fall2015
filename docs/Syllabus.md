@@ -9,9 +9,9 @@ We will move at a pace dictated by class discussions. Please check this page oft
 | [**2**](#weeks-1-2) | 10/1 &ndash; 10/3   | Cross Validation                                                                 |
 | [**3**](#week-3)    | 10/8 &ndash; 10/10  | Decision Trees; Bagging and Random Forests; Boosting and Boosted Additive Models |
 | [**4**](#week-4)    | 10/15 &ndash; 10/17 | Categorical Outcomes and Classification Models                                   |
-| [**5**](#week-5)    | 10/22 &ndash; 10/24 | Neural Networks                                                                  |
-| 6                   | 10/29 &ndash; 10/31 | Recommender Systems                                                              | 
-| 7                   | 11/5 &ndash; 11/7   | Anomaly Detection                                                                |
+| [**5**](#week-5)    | 10/22 &ndash; 10/24 | Logistic regression and Intro to Neural networks                                 |
+| [**6**](#week-6)    | 10/29 &ndash; 10/31 | Neural Networks                                                                  | 
+| 7                   | 11/5 &ndash; 11/7   | Recommender Systems                                                              |
 | 8                   | 11/12 &ndash; 11/14 | Mining Network Data                                                              |
 | 9                   | 11/19 &ndash; 11/21 | Probabilistic Graphical Models; Hidden Markov Models; Naive Bayes                |
 | 10                  | 12/3 &ndash; 12/5   | Mining Time Series                                                               |
@@ -126,21 +126,29 @@ D. Sculley et al.: Machine Learning: The High Interest Credit Card of Technical 
 ## Week 5
 
 _Lecture Slides:_ <br>
+[**Logistic regression**](Syllabus/05_logistic_regression.pdf) <br>
+
+_**R code**:_ <br>
+[we8there.R](Syllabus/05_we8there.R) <br>
+
+Optional textbook reading:_ 
+An Introduction to Statistical Learning: Chapter 4, Section 6.2
+
+
+## Week 6
+
+_Lecture Slides:_ <br>
 [**Neural networks**](Syllabus/05_nn.pdf) <br>
 [**MNIST example**](Syllabus/05_mnist_example.pdf) <br>
 
 _**R code**:_ <br>
 
-[Syllabus/05_h2o_install.R](Syllabus/05_h2o_install.R) <br>
 [05_tabloid_h2o.R](Syllabus/05_tabloid_h2o.R) <br>
 [05_tabloid_nnet.R](Syllabus/05_tabloid_nnet.R) <br>
-[05_we8there.R](Syllabus/05_we8there.R) <br>
 [05_helper.R](Syllabus/05_helper.R) <br>
 [05_h2o_mnist.R](Syllabus/05_h2o_mnist.R) <br>
 
 _Optional textbook reading:_ 
-An Introduction to Statistical Learning: Chapter 4, Section 6.2
-
 The Elements of Statistical Learning: Sections 11.3 - 11.5
 
 _Some h2o resources:_

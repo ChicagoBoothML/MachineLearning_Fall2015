@@ -1,0 +1,440 @@
+---
+title: "Homework 04: Orange's Customer Relationships: DATA PREPROCESSING Steps"
+author: 'Chicago Booth ML Team'
+output: pdf_document
+fontsize: 12
+geometry: margin=0.6in
+---
+
+
+_**Note**: In order to illustrate the best practices, this script utilizes the popular [**caret**](http://topepo.github.io/caret) package, which wraps around underlying algorithms such as randomForest and GBM with a consistent interface. We also illutrate the use of **multi-core parallel computation** to speed up computer run-time._
+
+
+#
+
+This KDD challenge as 3 predictive tasks, addressing **`churn`**, **`appetency`** and **`upselling`**. We'll tackle **`churn`** in this script. Doing **`appetency`** and **`upselling`** would be very similar.
+
+
+# Load Libraries & Modules; Set Randomizer Seed
+
+```{r message=FALSE, warning=FALSE}
+library(caret)
+library(data.table)
+library(doParallel)
+
+# load modules from the common HelpR repo
+helpr_repo_raw_url <- 'https://raw.githubusercontent.com/ChicagoBoothML/HelpR/master'
+source(file.path(helpr_repo_raw_url, 'EvaluationMetrics.R'))
+
+# set randomizer's seed
+set.seed(99)   # Gretzky was #99
+```
+
+
+# Parallel Computation Setup
+
+Let's set up a parallel computing infrastructure (thanks to the excellent **`doParallel`** package by Microsoft subsidiary **Revolution Analytics**) to allow more efficient computation in the rest of this exercise:
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+cl <- makeCluster(detectCores() - 2)   # create a compute cluster using all CPU cores but 2
+clusterEvalQ(cl, library(foreach))
+registerDoParallel(cl)   # register this cluster
+```
+
+We have set up a compute cluster with **`r getDoParWorkers()`** worker nodes for computing.
+
+
+# Data Import & Cleaning
+
+```{r}
+# download data and read data into data.table format
+
+# *******************************************************************************************
+# NOTE: the following path is specific to my computer
+# You need to change it to a relevant folder on your computer containing the Orange data
+
+data_folder_path <- '/Cloud/Box Sync/Repos/DATA/DATA___KDDCup2009_OrangeCustomerRelationship'
+
+# *******************************************************************************************
+
+# Common NAs:
+na_strings <- c(
+  '',
+  'na', 'n.a', 'n.a.',
+  'nan', 'n.a.n', 'n.a.n.',
+  'NA', 'N.A', 'N.A.',
+  'NaN', 'N.a.N', 'N.a.N.',
+  'NAN', 'N.A.N', 'N.A.N.',
+  'nil', 'Nil', 'NIL',
+  'null', 'Null', 'NULL')
+
+X <- as.data.table(read.table(
+  file.path(data_folder_path, 'orange_small_train.data.gz'),
+  header=TRUE, sep='\t', stringsAsFactors=TRUE, na.strings=na_strings))
+
+nb_input_features <- ncol(X)
+input_feature_names <- names(X)
+nb_samples <- nrow(X)
+
+churn <- factor(
+  read.table(
+    file.path(data_folder_path, 'orange_small_train_churn.labels.txt'),
+    header=FALSE, sep='\t')[[1]],
+  levels=c(-1, 1),
+  labels=c('no', 'yes'))
+```
+
+In total, there are **`r formatC(nb_samples, big.mark=',')`** samples of **`r formatC(nb_input_features, big.mark=',')`** possible _anonymized_ input features that can be used to predict the outcome of interest **`churn`**.
+
+Let's split the data into a Training set and a Test set:
+
+```{r}
+train_proportion <- .4
+train_indices <- createDataPartition(
+  y=churn,
+  p=train_proportion,
+  list=FALSE)
+
+X_train <- X[train_indices, ]
+X_test <- X[-train_indices, ]
+churn_train <- churn[train_indices]
+churn_test <- churn[-train_indices]
+
+nb_test_samples <- length(churn_test)
+```
+
+Let's also split out a Validation set for the purpose of estimating OOS performance of trained models before testing:
+
+```{r}
+valid_proportion <- .25
+valid_indices <- createDataPartition(
+  y=churn_train,
+  p=valid_proportion,
+  list=FALSE)
+
+X_valid <- X_train[valid_indices, ]
+X_train <- X_train[-valid_indices, ]
+churn_valid <- churn_train[valid_indices]
+churn_train <- churn_train[-valid_indices]
+
+nb_train_samples <- length(churn_train)
+nb_valid_samples <- length(churn_valid)
+```
+
+The numbers of samples in the Training, Validation and Test sets are **`r nb_train_samples`**, **`r nb_valid_samples`** and **`r nb_test_samples`** respectively. Just to sanity-check that the data sets have been split representatively by **`caret`**: the **`churn`** incidences in the Training, Validation and Test sets are **`r formatC(100 * sum(churn_train == 'yes') / nrow(X_train), format='f', digits=2, big.mark=',')`**, **`r formatC(100 * sum(churn_valid == 'yes') / nrow(X_valid), format='f', digits=2, big.mark=',')`** and **`r formatC(100 * sum(churn_test == 'yes') / nrow(X_test), format='f', digits=2, big.mark=',')`** respectively.
+
+
+## Getting Rid of Input Features $x$'s with Too Many Missing Values
+
+First of all, let's look at the proportions of missing values per input feature column $x$:
+
+```{r}
+input_features_missing_proportions <-
+  sapply(X_train, function(col) sum(is.na(col))) / nb_train_samples
+
+hist(input_features_missing_proportions)
+```
+
+We can see that there are an awful lot of features with all missing data!! We'll kick them out, for sure. Also, there are a small handful of features that have over 20% missing data; since those are few and we are unlikely to miss out too many signals by removing them, let's not mess around with them either. In sum, we'll remove all features that have over 20% missing value:
+
+```{r}
+input_feature_names <-
+  input_feature_names[input_features_missing_proportions <= .2]
+
+nb_input_features <- length(input_feature_names)
+
+X_train <- X_train[ , input_feature_names, with=FALSE]
+```
+
+We're left with the following **`r nb_input_features`** input features $x$'s:
+
+```{r}
+input_feature_names
+```
+
+The classes of these remaining $x$'s are:
+
+```{r}
+input_feature_classes <- factor(sapply(X_train, class))
+
+input_feature_classes
+```
+
+
+## Filling Missing Numeric $x$'s with Means
+
+The following $x$'s are **integer** or **numeric**:
+
+```{r}
+numeric_input_feature_names <-
+  input_feature_names[input_feature_classes != 'factor']
+
+numeric_input_feature_names
+```
+
+It seems we don't have a problem with numeric columns made up of non-changing values:
+
+```{r}
+numeric_input_feature_standard_deviations <-
+  sapply(X_train[ , numeric_input_feature_names, with=FALSE],
+         function(col) sd(col, na.rm=TRUE))
+
+numeric_input_feature_standard_deviations
+```
+
+Let's fill up the missing values with the means of the respective columns:
+
+```{r}
+numeric_input_feature_means <-
+  sapply(X_train[ , numeric_input_feature_names, with=FALSE],
+         function(col) mean(col, na.rm=TRUE))
+
+for (numeric_col in numeric_input_feature_names) {
+  x <- X_train[[numeric_col]]
+  missing_value_row_yesno <- is.na(x)
+  if (sum(missing_value_row_yesno) > 0) {
+    X_train[ , numeric_col := as.numeric(x), with=FALSE]
+    mu <- numeric_input_feature_means[numeric_col]
+    X_train[missing_value_row_yesno, numeric_col := mu, with=FALSE]
+  }
+}
+```
+
+Let's double check to see that the numeric columns have all been filled and that their means stay the same as before the filling:
+
+```{r}
+all.equal(
+  numeric_input_feature_means,
+  sapply(X_train[ , numeric_input_feature_names, with=FALSE], mean))
+```
+
+
+## Cleaning Categorical Variables
+
+Below are categorical features and their number of categories:
+
+```{r}
+categorical_input_feature_names <-
+  input_feature_names[input_feature_classes == 'factor']
+
+categorical_input_feature_nb_levels <-
+  sapply(X_train[ , categorical_input_feature_names, with=FALSE],
+         function(col) length(levels(col)))
+
+categorical_input_feature_nb_levels
+```
+
+Those variables having over 500 categories are likely to be just text / character data. Let's get rid of them:
+
+```{r}
+categorical_input_feature_names <-
+  categorical_input_feature_names[categorical_input_feature_nb_levels <= 500]
+
+X_train <-
+  X_train[ , c(numeric_input_feature_names, categorical_input_feature_names), with=FALSE]
+```
+
+For the remaining categorical variables, let's:
+
+- Make their missing values another category _**zzzMISSING**_; and
+
+- Try to consolidate the categories, as having too many categories make modeling less meaningful and numerically more difficult; for each variable, we'll collapse all categories with prevalence of under 5% together into a _**zzzOTHER**_ category;
+
+- Drop categorical variables with only one category _(obviously)_; and
+
+- Drop categorical variables with only one non-_**zzzMISSING**_ category.
+
+```{r}
+collapsed_categories <- list()
+
+for (cat_col in categorical_input_feature_names) {
+  
+  missing_value_row_yesno <- is.na(X_train[[cat_col]])
+  if (sum(missing_value_row_yesno) > 0) {
+    X_train[missing_value_row_yesno, cat_col := 'zzzMISSING', with=FALSE]
+  }
+  
+  x <- X_train[[cat_col]]
+  for (cat in levels(x)) {
+    cat_rows_yesno <- x == cat
+    if (sum(cat_rows_yesno) < .05 * nb_train_samples) {
+      if (!(cat_col %in% names(collapsed_categories))) {
+        collapsed_categories[[cat_col]] <- character()
+      }
+      collapsed_categories[[cat_col]] <- c(collapsed_categories[[cat_col]], cat)
+      X_train[cat_rows_yesno, cat_col := 'zzzOTHER', with=FALSE]
+      levels(X_train[[cat_col]])[levels(X_train[[cat_col]]) == cat] <- NA
+    }
+  }
+  
+  cats <- levels(X_train[[cat_col]]) 
+  if ((length(cats) == 1) ||
+    (length(cats[(cats != 'zzzMISSING') & (cats != 'zzzOTHER')]) < 2)) {
+    categorical_input_feature_names <- setdiff(categorical_input_feature_names, cat_col)
+  }
+}
+```
+
+Let's double-check by looking at the prevalence of the categories of the remaining categorical variables now:
+
+```{r}
+lapply(X_train[ , categorical_input_feature_names, with=FALSE],
+      function(col) summary(col) / nb_train_samples)
+```
+
+Not bad, _eh_?, not bad... It seems we can embark now on the next steps: variable selection.
+
+
+# Selecting Candidate Input Features $x$'s
+
+```{r}
+input_feature_names <-
+  c(numeric_input_feature_names, categorical_input_feature_names)
+
+nb_input_features <- length(input_feature_names)
+
+X_train <- X_train[ , input_feature_names, with=FALSE]
+```
+
+After data cleaning, we have **`r nb_input_features`** numeric and categorical input features left:
+
+```{r}
+sapply(X_train, class)
+```
+
+Building models with all of them will still be quite clunky. Let's try to select features containing good amounts of "signals" by:
+
+1. Fitting Random Forests on pairs of features and measuring the OOS performances of such Random Forests
+2. Pick pairs of higher OOB performances
+3. Pick variables that appear in many well-performing pairs
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+feature_pair_performances <- data.table(
+  feature_1=character(),
+  feature_2=character(),
+  deviance=numeric())
+
+caret_optimized_metric <- 'logLoss'   # equivalent to 1 / 2 of Deviance
+
+caret_train_control <- trainControl(
+  classProbs=TRUE,             # compute class probabilities
+  summaryFunction=mnLogLoss,   # equivalent to 1 / 2 of Deviance
+  method='repeatedcv',         # repeated Cross Validation
+  number=5,                    # number of folds
+  repeats=1,                   # number of repeats
+  allowParallel=TRUE)
+
+B <- 30
+
+for (i in 1 : (nb_input_features - 1)) {
+ 
+  feature_1 <- input_feature_names[i]
+  
+  for (j in (i + 1) : nb_input_features) {
+   
+    cat('pair: ', i, ', ', j, '\n')
+   
+    feature_2 <- input_feature_names[j]
+   
+    rf_model <- train(
+      x=X_train[, c(feature_1, feature_2), with=FALSE],
+      y=churn_train,
+      method='parRF',     # parallel Random Forest
+      metric=caret_optimized_metric,
+      ntree=B,            # number of trees in the Random Forest
+      nodesize=300,       # minimum node size set small enough to allow for complex trees,
+                          # but not so small as to require too large B to eliminate high variance
+      importance=FALSE,   # skip evaluate importance of predictors
+      keep.inbag=FALSE,   # not relevant as we're using Cross Validation
+      trControl=caret_train_control,
+      tuneGrid=NULL)
+   
+    feature_pair_performances <- rbind(
+      feature_pair_performances,
+      data.table(
+        feature_1=feature_1,
+        feature_2=feature_2,
+        deviance=2 * rf_model$results$logLoss))
+  }
+}
+```
+
+```{r}
+feature_pair_performances_top_half <-
+  feature_pair_performances[order(deviance), ][1 : round(nrow(feature_pair_performances) / 2), ]
+
+good_feature_appearance_counts <- list()
+
+for (i in 1: nrow(feature_pair_performances_top_half)) {
+  
+  feature_1 <- feature_pair_performances_top_half[i, feature_1]
+  if (!(feature_1 %in% names(good_feature_appearance_counts))) {
+    good_feature_appearance_counts[[feature_1]] <- 1
+  } else {
+    good_feature_appearance_counts[[feature_1]] <-
+      good_feature_appearance_counts[[feature_1]] + 1
+  }
+  
+  feature_2 <- feature_pair_performances_top_half[i, feature_2]
+  if (!(feature_2 %in% names(good_feature_appearance_counts))) {
+    good_feature_appearance_counts[[feature_2]] <- 1
+  } else {
+    good_feature_appearance_counts[[feature_2]] <-
+      good_feature_appearance_counts[[feature_2]] + 1
+  }
+}
+
+good_feature_appearance_counts <-
+   unlist(good_feature_appearance_counts)
+
+hist(good_feature_appearance_counts)
+```
+
+We see that predictive power seems to concentrate in a much smaller number of features. Let's pick the features that appear over 30 times in the "good feature appearances".
+
+```{r}
+input_feature_names <-
+  names(good_feature_appearance_counts)[good_feature_appearance_counts > 30]
+
+input_feature_names
+```
+
+```{r}
+nb_input_features <- length(input_feature_names)
+
+X_train <- X_train[ , input_feature_names, with=FALSE]
+
+input_feature_classes <- sapply(X_train, class)
+
+input_feature_classes
+```
+
+It seems that **all of the remaining `r nb_input_features` strong features** are **numeric**! _(meaning the effort we spent on cleaning the categoricals has come to naught... but we couldn't have known that without trying)_
+
+
+```{r}
+# Prepare Validation & Test Data for evaluation
+prepare_oos_input_features <- function(X_OOS) {
+  X_OOS <- X_OOS[ , input_feature_names, with=FALSE]
+  for (numeric_col in input_feature_names) {
+    x <- X_OOS[[numeric_col]]
+    X_OOS[, numeric_col := as.numeric(x), with=FALSE]
+    X_OOS[is.na(x), numeric_col := numeric_input_feature_means[numeric_col], with=FALSE]
+  }
+  
+  # *** NOTE: ***
+  # If you also have categorical features in the final Training dat
+  # you'll need to do something to clean those categoricals in Validation and Test too;
+  # here we don't need to do that because our selected features are all numeric
+  
+  X_OOS
+}
+
+X_valid <- prepare_oos_input_features(X_valid)
+X_test <- prepare_oos_input_features(X_test)
+```
+
+
+```{r}
+stopCluster(cl)   # shut down the parallel computing cluster
+```

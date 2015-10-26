@@ -1,5 +1,5 @@
 ---
-title: "Homework 04: Orange's Customer Relationships: DATA PREPROCESSING Steps"
+title: "Homework 04: Orange's Customer Relationships: Churn Prediction"
 author: 'Chicago Booth ML Team'
 output: pdf_document
 fontsize: 12
@@ -8,6 +8,8 @@ geometry: margin=0.6in
 
 
 _**Note**: In order to illustrate the best practices, this script utilizes the popular [**caret**](http://topepo.github.io/caret) package, which wraps around underlying algorithms such as randomForest and GBM with a consistent interface. We also illutrate the use of **multi-core parallel computation** to speed up computer run-time._
+
+_**Note:**: This script takes a **long time** to run completely.
 
 
 #
@@ -351,7 +353,7 @@ for (i in 1 : (nb_input_features - 1)) {
    
     feature_pair_performances <- rbind(
       feature_pair_performances,
-      data.table(
+     data.table(
         feature_1=feature_1,
         feature_2=feature_2,
         deviance=2 * rf_model$results$logLoss))
@@ -409,11 +411,70 @@ input_feature_classes <- sapply(X_train, class)
 input_feature_classes
 ```
 
-It seems that **all of the remaining `r nb_input_features` strong features** are **numeric**! _(meaning the effort we spent on cleaning the categoricals has come to naught... but we couldn't have known that without trying)_
+It turns out that **all of the remaining `r nb_input_features` strong features** are **numeric**! _(meaning the effort we spent on cleaning the categoricals has come to naught... but we couldn't have known that without trying)_
 
+
+# Classification Models
+
+Let's train 2 types of classification models: a Random Forest and a Boosted Trees model:
 
 ```{r}
-# Prepare Validation & Test Data for evaluation
+caret_optimized_metric <- 'logLoss'   # equivalent to 1 / 2 of Deviance
+
+caret_train_control <- trainControl(
+  classProbs=TRUE,             # compute class probabilities
+  summaryFunction=mnLogLoss,   # equivalent to 1 / 2 of Deviance
+  method='repeatedcv',         # repeated Cross Validation
+  number=5,                    # 5 folds
+  repeats=3,                   # 2 repeats
+  allowParallel=TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+B <- 600
+
+rf_model <- train(
+  x=X_train,
+  y=churn_train,
+  method='parRF',     # parallel Random Forest
+  metric=caret_optimized_metric,
+  ntree=B,            # number of trees in the Random Forest
+  nodesize=100,       # minimum node size set small enough to allow for complex trees,
+                      # but not so small as to require too large B to eliminate high variance
+  importance=TRUE,    # evaluate importance of predictors
+  keep.inbag=TRUE,
+  trControl=caret_train_control,
+  tuneGrid=NULL)
+```
+
+```{r message=FALSE, warning=FALSE}
+B <- 1200
+
+boost_model <- train(
+  x=X_train,
+  y=churn_train,
+  method='gbm',       # Generalized Boosted Models
+  metric=caret_optimized_metric,
+  verbose=FALSE,
+  trControl=caret_train_control,
+  tuneGrid=expand.grid(
+    n.trees=B,              # number of trees
+    interaction.depth=10,   # max tree depth,
+    n.minobsinnode=100,     # minimum node size
+    shrinkage=0.01))        # shrinkage parameter, a.k.a. "learning rate"
+```
+
+We'll now evaluate the OOS performances of these 2 models on the Validation set to select the better one:
+
+```{r}
+low_prob <- 1e-6
+high_prob <- 1 - low_prob
+log_low_prob <- log(low_prob)
+log_high_prob <- log(high_prob)
+log_prob_thresholds <- seq(from=log_low_prob, to=log_high_prob, length.out=100)
+prob_thresholds <- exp(log_prob_thresholds)
+
+# Prepare Validation Data for evaluation
 prepare_oos_input_features <- function(X_OOS) {
   X_OOS <- X_OOS[ , input_feature_names, with=FALSE]
   for (numeric_col in input_feature_names) {
@@ -421,18 +482,74 @@ prepare_oos_input_features <- function(X_OOS) {
     X_OOS[, numeric_col := as.numeric(x), with=FALSE]
     X_OOS[is.na(x), numeric_col := numeric_input_feature_means[numeric_col], with=FALSE]
   }
-  
-  # *** NOTE: ***
-  # If you also have categorical features in the final Training dat
-  # you'll need to do something to clean those categoricals in Validation and Test too;
-  # here we don't need to do that because our selected features are all numeric
-  
   X_OOS
 }
 
 X_valid <- prepare_oos_input_features(X_valid)
-X_test <- prepare_oos_input_features(X_test)
+
+# *** NOTE: **
+# the below "bin_classif_eval" function is from the "EvaluationMetrics.R" helper script
+# in the "HelpR" GitHub repo
+
+rf_pred_probs <- predict(
+  rf_model, newdata=X_valid, type='prob')
+rf_oos_performance <- bin_classif_eval(
+  rf_pred_probs$yes, churn_valid, thresholds=prob_thresholds)
+
+boost_pred_probs <- predict(
+  boost_model, newdata=X_valid, type='prob')
+boost_oos_performance <- bin_classif_eval(
+  boost_pred_probs$yes, churn_valid, thresholds=prob_thresholds)
+
+
+plot(x=1 - rf_oos_performance$specificity,
+     y=rf_oos_performance$sensitivity,
+     type = "l", col='darkgreen', lwd=3,
+     xlim = c(0., 1.), ylim = c(0., 1.),
+     main = "ROC Curves (Validation Data)",
+     xlab = "1 - Specificity", ylab = "Sensitivity")
+abline(a=0,b=1,lty=2,col=8)
+lines(x=1 - boost_oos_performance$specificity,
+      y=boost_oos_performance$sensitivity,
+      col='green', lwd=3)
+legend('right', c('Random Forest', 'Boosted Trees'), 
+   lty=1, col=c('darkgreen', 'green'), lwd=3, cex=1.)
 ```
+
+It seems that although neither model seems super impressive &ndash; customer churn is probably a hard thing to predict very well &ndash; the Boosted Trees model offers a much better classification performance than the Random Forest. We now need to pick a decision threshold for the Boosted Trees model. If we are to be really rigorous, we'll need balance the costs of lost business and the costs of extra incentives to retain customers. Here, to make life simple, we'll pick a subjective threshold that enables us to anticipate **25%** of the delinquency cases:
+
+```{r}
+sensitivity_threshold <- .25
+i <- min(which(boost_oos_performance$sensitivity < sensitivity_threshold)) - 1
+selected_prob_threshold <- prob_thresholds[i]
+```
+
+The selected decision threshold is **`r formatC(selected_prob_threshold, format='f', digits=3)`** &ndash; meaning when we use the Boosted Tree model to predict on new data, we'll predict a customer churn when the predicted probability exceeds that threshold. The expected performance of the model at that threshold is as follows:
+
+```{r}
+boost_oos_performance[i, ]
+```
+
+Note that the precision of the model at this sensitivity threshold is rather low, meaning that there'll be many false positives. We'll probably need business insights to decide whether to contact certain customers over other, and what incentives to offer them.
+
+
+# Test Performance of Selected Model
+
+Let's then evaluate the performance of the selected Boosted Trees model, with a decision threshold at **`r formatC(selected_prob_threshold, format='f', digits=3)`**:
+
+```{r}
+X_test <- prepare_oos_input_features(X_test)
+
+boost_test_pred_probs <- predict(
+  boost_model, newdata=X_test, type='prob')
+
+boost_test_performance <- bin_classif_eval(
+  boost_test_pred_probs$yes, churn_test, thresholds=selected_prob_threshold)
+
+boost_test_performance
+```
+
+We can see that the Test performance is similar to what we've estimated from the Validation set.
 
 
 ```{r}

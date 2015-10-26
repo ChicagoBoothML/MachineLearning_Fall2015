@@ -82,6 +82,9 @@ _**Python code**:_ <br>
 
 _Homework assignment:_ See Problem 9.1 in Lecture notes for this week.
 
+- [model answers in R Markdown](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Used%20Cars/R/UsedCars_HW03ans.Rmd)
+- [model answers in iPython Notebook](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Used%20Cars/Python/UsedCars_HW03ans.ipynb)
+
 _Optional textbook reading:_ 
 An Introduction to Statistical Learning: Chapter 8
 
@@ -112,6 +115,8 @@ _**Python code**:_ <br>
 _Homework assignment:_  <br>
 [04_hw.pdf](Syllabus/04_hw.pdf) <br>
 Start early.
+
+- [model answers in R Markdown](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/KDD%20Cup%202009%20Orange%20Customer%20Relationships/R/KDDCup2009_OrgangeCustRel_Churn.Rmd); **note**: the whole thing takes a **long time** to run completely
 
 _Optional textbook reading:_ 
 An Introduction to Statistical Learning: Chapter 4 (we will not talk about linear discriminant analysis)

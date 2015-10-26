@@ -1,0 +1,252 @@
+---
+title: 'Used Cars: Homework 03'
+author: 'Chicago Booth ML Team'
+output: pdf_document
+fontsize: 12
+geometry: margin=0.6in
+---
+
+
+_**Note**: In order to illustrate the best practices, this homework answers script utilizes the popular [**caret**](http://topepo.github.io/caret) package, which wraps around underlying algorithms such as randomForest and GBM with a consistent interface. It's not hard to figure out how you could have written all this with the original randomForest / GBM packages. We also illutrate the use of **multi-core parallel computation** to speed up computer run-time (and, yes, salvage a bit of your laptop's subsequent eBay / Craigslist value...)._
+
+
+# Load Libraries & Modules; Set Randomizer Seed
+
+```{r message=FALSE, warning=FALSE}
+library(caret)
+library(data.table)
+library(doParallel)
+library(tree)
+
+# load modules from the common HelpR repo
+helpr_repo_raw_url <- 'https://raw.githubusercontent.com/ChicagoBoothML/HelpR/master'
+source(file.path(helpr_repo_raw_url, 'EvaluationMetrics.R'))
+
+# set randomizer's seed
+set.seed(99)   # Gretzky was #99
+```
+
+
+# Parallel Computation Setup
+
+Let's set up a parallel computing infrastructure (thanks to the excellent **`doParallel`** package by Microsoft subsidiary **Revolution Analytics**) to allow more efficient computation in the rest of this exercise:
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+cl <- makeCluster(detectCores() - 2)   # create a compute cluster using all CPU cores but 2
+clusterEvalQ(cl, library(foreach))
+registerDoParallel(cl)   # register this cluster
+```
+
+We have set up a compute cluster with **`r getDoParWorkers()`** worker nodes for computing.
+
+
+# Data Import
+
+```{r}
+# download data and read data into data.table format
+used_cars <- fread(
+  'https://raw.githubusercontent.com/ChicagoBoothML/DATA___UsedCars/master/UsedCars.csv',
+  stringsAsFactors=TRUE,
+  colClasses=c(price='numeric',
+               mileage='numeric',
+               year='numeric'))
+
+used_cars[, displacement := as.numeric(as.character(displacement))]
+
+# count number of samples
+nb_samples <- nrow(used_cars)
+
+used_cars
+```
+
+Just to sanity-check, the classes of the variables are:
+
+```{r}
+sapply(used_cars, class)
+```
+
+
+Let's now split the data set into a Training set for fitting models and a Test set for evaluating them:
+
+_(**note**: here we shall skip splitting a Validation set because we can use Out-of-Bag and Cross Validation RMSE estimates)_
+
+```{r}
+train_proportion <- .8
+train_indices <- createDataPartition(y=used_cars$price,
+                                     p=train_proportion,
+                                     list=FALSE)
+
+used_cars_train <- used_cars[train_indices, ]
+used_cars_test <- used_cars[-train_indices, ]
+```
+
+To sanity-check the representativeness of the split, we can examine the distributions of the _price_ variable in the three data sets:
+
+```{r}
+hist(used_cars$price)
+hist(used_cars_train$price)
+hist(used_cars_test$price)
+```
+
+
+# Models with 2 Predictor Variables _mileage_ & _year_
+
+## Single Tree models
+
+Let's try a rather small tree:
+
+```{r}
+mincut <- 3000    # smallest allowed node size
+minsize <- 6000   # minimum number of observations to include in either child node; NOTE: minsize >= 2x mincut
+mindev <- 1e-6    # minimum deviance gain for further tree split
+
+tree_2vars_small <- tree(price ~ mileage + year, data=used_cars_train,
+                         mincut=mincut, minsize=minsize, mindev=mindev)
+
+test_rmse_tree_2vars_small <- rmse(
+  y_hat=predict(tree_2vars_small, newdata=used_cars_test),
+  y=used_cars_test$price)
+```
+
+This small tree model has an OOS RMSE of $**`r formatC(test_rmse_tree_2vars_small, format='f', digits=0, big.mark=',')`**.
+
+And a big tree:
+
+```{r}
+mincut <- 3   # smallest allowed node size
+minsize <- 6   # minimum number of observations to include in either child node; NOTE: minsize >= 2x mincut
+mindev <- 1e-6   # minimum deviance gain for further tree split
+
+tree_2vars_big <- tree(price ~ mileage + year, data=used_cars_train,
+                       mincut=mincut, minsize=minsize, mindev=mindev)
+
+test_rmse_tree_2vars_big <- rmse(
+  y_hat=predict(tree_2vars_big, newdata=used_cars_test),
+  y=used_cars_test$price)
+```
+
+This big tree has an OOS RMSE of $**`r formatC(test_rmse_tree_2vars_big, format='f', digits=0, big.mark=',')`**.
+
+
+## Random Forest model
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+B <- 300   # number of trees in the Random Forest
+
+rf_2vars <- train(
+  price ~ mileage + year,
+  data=used_cars_train,
+  method='parRF',  # parallel Random Forest
+  ntree=B,         # number of trees in the Random Forest
+  nodesize=30,     # minimum node size set small enough to allow for complex trees,
+                   # but not so small as to require too large B to eliminate high variance
+  importance=TRUE, # evaluate importance of predictors
+  keep.inbag=TRUE,
+  trControl=trainControl(
+    method='oob',  # Out-of-Bag RMSE estimation
+    allowParallel=TRUE),
+  tuneGrid=NULL)
+
+test_rmse_rf_2vars <- rmse(
+  y_hat=predict(rf_2vars, newdata=used_cars_test),
+  y=used_cars_test$price)
+```
+
+This Random Forest model has an estimated OOB RMSE of $**`r formatC(min(rf_2vars$results$RMSE), format='f', digits=0, big.mark=',')`** based on the Training set, and a Test-set OOS RMSE of $**`r formatC(test_rmse_rf_2vars, format='f', digits=0, big.mark=',')`**.
+
+
+## Boosted Trees model
+
+```{r message=FALSE, warning=FALSE}
+B <- 1000
+
+boost_2vars <- train(
+  price ~ mileage + year,
+  data=used_cars_train,
+  method='gbm',           # Generalized Boosted Models
+  verbose=FALSE,
+  trControl=trainControl(
+    method='repeatedcv',  # repeated Cross Validation
+    number=5,             # number of CV folds
+    repeats=3,            # number of CV repeats
+    allowParallel=TRUE),
+  tuneGrid=expand.grid(
+    n.trees=B,            # number of trees
+    interaction.depth=5,  # max tree depth,
+    n.minobsinnode=100,   # minimum node size
+    shrinkage=.01))       # shrinkage parameter, a.k.a. "learning rate"
+
+test_rmse_boost_2vars <- rmse(
+  y_hat=predict(boost_2vars, newdata=used_cars_test),
+  y=used_cars_test$price)
+```
+
+This Boosted Trees model has an estimated OOS RMSE of **`r formatC(boost_2vars$results$RMSE, format='f', digits=0, big.mark=',')`** based on the Training set, and a Test-set OOS RMSE of **`r formatC(test_rmse_boost_2vars, format='f', digits=0, big.mark=',')`**.
+
+
+# Models with All Predictor Variables 
+
+Let's not even mess around with single trees and go straight to building Random Forest & Boosted Trees models predicting _price_ using all other variables.
+
+
+## Random Forest model
+
+```{r}
+B <- 300   # number of trees in the Random Forest
+
+rf_manyvars <- train(
+  price ~ .,
+  data=used_cars_train,
+  method='parRF',  # parallel Random Forest
+  ntree=B,         # number of trees in the Random Forest
+  nodesize=30,     # minimum node size set small enough to allow for complex trees,
+                   # but not so small as to require too large B to eliminate high variance
+  importance=TRUE, # evaluate importance of predictors
+  keep.inbag=TRUE,
+  trControl=trainControl(
+    method='oob',  # Out-of-Bag RMSE estimation
+    allowParallel=TRUE),
+  tuneGrid=NULL)
+
+test_rmse_rf_manyvars <- rmse(
+  y_hat=predict(rf_manyvars, newdata=used_cars_test),
+  y=used_cars_test$price)
+```
+
+This many-variable Random Forest model has an estimated OOB RMSE of $**`r formatC(min(rf_manyvars$results$RMSE), format='f', digits=0, big.mark=',')`** based on the Training set, and a Test-set OOS RMSE of $**`r formatC(test_rmse_rf_manyvars, format='f', digits=0, big.mark=',')`**.
+
+
+## Boosted Trees model
+
+```{r}
+B <- 1000
+
+boost_manyvars <- train(
+  price ~ .,
+  data=used_cars_train,
+  method='gbm',           # Generalized Boosted Models
+  verbose=FALSE,
+  trControl=trainControl(
+    method='repeatedcv',  # repeated Cross Validation
+    number=5,             # number of CV folds
+    repeats=3,            # number of CV repeats
+    allowParallel=TRUE),
+  tuneGrid=expand.grid(
+    n.trees=B,            # number of trees
+    interaction.depth=5,  # max tree depth,
+    n.minobsinnode=100,   # minimum node size
+    shrinkage=.01))       # shrinkage parameter, a.k.a. "learning rate"
+
+test_rmse_boost_manyvars <- rmse(
+  y_hat=predict(boost_manyvars, newdata=used_cars_test),
+  y=used_cars_test$price)
+```
+
+This Boosted Trees model has an estimated OOS RMSE of **`r formatC(boost_manyvars$results$RMSE, format='f', digits=0, big.mark=',')`** based on the Training set, and a Test-set OOS RMSE of **`r formatC(test_rmse_boost_manyvars, format='f', digits=0, big.mark=',')`**.
+
+
+Overall, this exercise shows the power of simple but extremely flexible trees-based methods such as Random Forest and Boosted Trees. When having many variables, all we have to do is to throw them into a trees ensemble!
+
+```{r}
+stopCluster(cl)   # shut down the parallel computing cluster
+```

@@ -142,6 +142,11 @@ Optional textbook reading:_
 An Introduction to Statistical Learning: Chapter 4, Section 6.2
 
 
+## Midterm Exam
+
+[**Midterm Exam Questions**](Syllabus/Midterm.pdf)
+
+
 ## Week 6
 
 _Lecture Slides:_ <br>

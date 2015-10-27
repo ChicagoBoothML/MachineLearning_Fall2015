@@ -82,7 +82,7 @@ Just to sanity-check, the classes of the variables are:
 sapply(tabloid_train, class)
 ```
 
-Out of the **`r formatC(nb_train_samples, format='d', big.mark=',')`** samples, the incidence of marketing-responsive purchase is **`r formatC(100 * sum(tabloid_train$purchase == 'responsive') / nb_train_samples, format='f', digits=2, big.mark=',')`%**. Note that this creates a "**skewed classes**" problem: one of the classes of cases (here the "delinquent" class) is significantly rarer than the other.
+Out of the **`r formatC(nb_train_samples, format='d', big.mark=',')`** samples, the incidence of marketing-responsive purchase is **`r formatC(100 * sum(tabloid_train$purchase == 'responsive') / nb_train_samples, format='f', digits=2, big.mark=',')`%**. Note that this creates a "**skewed classes**" problem: one of the classes of cases (here the "responsive" class) is significantly rarer than the other.
 
 _(**note**: in more extreme cases where one class is much, much rarer than the other to the order of 1000 or 10,000 times, our model fitting procedures would need to be tweaked; but this case is not so extreme)_
 

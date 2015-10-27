@@ -9,7 +9,7 @@ geometry: margin=0.6in
 
 _**Note**: In order to illustrate the best practices, this script utilizes the popular [**caret**](http://topepo.github.io/caret) package, which wraps around underlying algorithms such as randomForest and GBM with a consistent interface. We also illutrate the use of **multi-core parallel computation** to speed up computer run-time._
 
-_**Note:**: This script takes a **long time** to run completely.
+_**Note**: This script takes a **long time** to run completely._
 
 
 #

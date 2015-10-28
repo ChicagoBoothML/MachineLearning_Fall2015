@@ -116,7 +116,7 @@ _Homework assignment:_  <br>
 [04_hw.pdf](Syllabus/04_hw.pdf) <br>
 Start early.
 
-- [model answers in R Markdown](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/KDD%20Cup%202009%20Orange%20Customer%20Relationships/R/KDDCup2009_OrgangeCustRel_Churn.Rmd); **note**: the whole thing takes a **long time** to run completely
+- [model answers in R Markdown](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/KDD%20Cup%202009%20Orange%20Customer%20Relationships/R/KDDCup2009_OrangeCustRel_Churn.Rmd); **note**: the whole thing takes a **long time** to run completely
 - [model answers in iPython Notebook](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/KDD%20Cup%202009%20Orange%20Customer%20Relationships/Python/KDDCup2009_OrangeCustRel_Churn.ipynb); **note**: the whole thing takes a **long time** to run completely
 
 _Optional textbook reading:_ 

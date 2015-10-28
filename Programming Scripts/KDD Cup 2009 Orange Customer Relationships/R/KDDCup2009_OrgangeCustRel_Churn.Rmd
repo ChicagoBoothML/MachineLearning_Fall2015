@@ -516,7 +516,7 @@ legend('right', c('Random Forest', 'Boosted Trees'),
    lty=1, col=c('darkgreen', 'green'), lwd=3, cex=1.)
 ```
 
-It seems that although neither model seems super impressive &ndash; customer churn is probably a hard thing to predict very well &ndash; the Boosted Trees model offers a much better classification performance than the Random Forest. We now need to pick a decision threshold for the Boosted Trees model. If we are to be really rigorous, we'll need balance the costs of lost business and the costs of extra incentives to retain customers. Here, to make life simple, we'll pick a subjective threshold that enables us to anticipate **25%** of the delinquency cases:
+It seems that although neither model seems super impressive &ndash; customer churn is probably a hard thing to predict very well &ndash; the Boosted Trees model offers a much better classification performance than the Random Forest. We now need to pick a decision threshold for the Boosted Trees model. If we are to be really rigorous, we'll need balance the costs of lost business and the costs of extra incentives to retain customers. Here, to make life simple, we'll pick a subjective threshold that enables us to anticipate **25%** of the churn cases:
 
 ```{r}
 sensitivity_threshold <- .25

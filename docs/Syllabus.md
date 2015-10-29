@@ -142,7 +142,6 @@ _**R code**:_ <br>
 Optional textbook reading:_ 
 An Introduction to Statistical Learning: Chapter 4, Section 6.2
 
-
 ## Midterm Exam
 
 [**Midterm Exam Questions**](Syllabus/Midterm.pdf)
@@ -151,15 +150,23 @@ An Introduction to Statistical Learning: Chapter 4, Section 6.2
 ## Week 6
 
 _Lecture Slides:_ <br>
-[**Neural networks**](Syllabus/05_nn.pdf) <br>
-[**MNIST example**](Syllabus/05_mnist_example.pdf) <br>
+[**Neural networks**](Syllabus/06_nn.pdf) <br>
+[**MNIST example**](Syllabus/06_mnist_example.pdf) <br>
 
 _**R code**:_ <br>
 
-[05_tabloid_h2o.R](Syllabus/05_tabloid_h2o.R) <br>
-[05_tabloid_nnet.R](Syllabus/05_tabloid_nnet.R) <br>
-[05_helper.R](Syllabus/05_helper.R) <br>
-[05_h2o_mnist.R](Syllabus/05_h2o_mnist.R) <br>
+See our [GitHub](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/tree/master/Programming%20Scripts/Lecture06). <br>
+We suggest you do close the folder "Lecture06" or download all of its content, as the folder contains some pretrained models, which may take a long time to train again.
+
+In order to install h2o package, go to [http://h2o-release.s3.amazonaws.com/h2o/master/3232/index.html](http://h2o-release.s3.amazonaws.com/h2o/master/3232/index.html), click on "INSTALL IN R", and follow instructions.
+
+Alternatively, you can type the following in R:
+
+> source("https://raw.githubusercontent.com/ChicagoBoothML/HelpR/master/booth.ml.packages.R")
+
+
+_Homework assignment:_  <br>
+Will be posted after the midterm is due.
 
 _Optional textbook reading:_ 
 The Elements of Statistical Learning: Sections 11.3 - 11.5

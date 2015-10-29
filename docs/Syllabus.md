@@ -153,6 +153,9 @@ _Lecture Slides:_ <br>
 [**Neural networks**](Syllabus/06_nn.pdf) <br>
 [**MNIST example**](Syllabus/06_mnist_example.pdf) <br>
 
+[**ALVINN video**](http://watson.latech.edu/book/intelligence/intelligenceOverview5b4.html)
+
+
 _**R code**:_ <br>
 
 See our [GitHub](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/tree/master/Programming%20Scripts/Lecture06). <br>

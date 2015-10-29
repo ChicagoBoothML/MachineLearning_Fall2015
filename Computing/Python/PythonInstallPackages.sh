@@ -19,6 +19,7 @@ conda update scipy   # GGPlot installation may break SciPy
 
 pip install --upgrade GitPython
 pip install --upgrade GraphViz
+pip install --upgrade H2O
 pip install --upgrade Jupyter
 pip install --upgrade MkDocs
 pip install --upgrade NeuroLab

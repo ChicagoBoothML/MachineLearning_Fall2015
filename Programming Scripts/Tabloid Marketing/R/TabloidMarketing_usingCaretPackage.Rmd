@@ -246,13 +246,14 @@ tabloid_test <- fread(
 tabloid_test[ , purchase := factor(purchase,
                                    levels=c(0, 1), labels=y_classes)]
 
-boost_test_pred_probs <- predict(
-  boost_model, newdata=tabloid_test[, X_var_names, with=FALSE], type='prob')
+log_reg_test_pred_probs <- predict(
+  log_reg_model, newdata=tabloid_test[, X_var_names, with=FALSE], type='prob')
 
-boost_test_performance <- bin_classif_eval(
-  boost_test_pred_probs$responsive, tabloid_test$purchase,
+log_reg_test_performance <- bin_classif_eval(
+  log_reg_test_pred_probs$responsive, tabloid_test$purchase,
   thresholds=selected_prob_threshold)
-boost_test_performance
+
+log_reg_test_performance
 ```
 
 We can see that the Test performance is broadly similar to what we've estimated from the Validation set. The selected model works as expected: we'll get responsiveness from >70% of the targeted customers, but our reputation as a spamming organization will also be reinforced...

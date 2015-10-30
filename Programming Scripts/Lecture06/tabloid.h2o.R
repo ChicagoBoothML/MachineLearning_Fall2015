@@ -31,8 +31,8 @@ phatL$logit = matrix(phat,ncol=1) #logit phat
 
 ### fit h2o
 h2oServer <- h2o.init(ip="localhost", port=54321, max_mem_size="4g", nthreads=-1)
-train_hex = as.h2o(trainDf)
-test_hex = as.h2o(testDf)
+train_hex = as.h2o(trainDf, destination_frame = "tabloid_train")
+test_hex = as.h2o(testDf, destination_frame = "tabloid_test")
 
 if (file.exists(file.path(SCRIPTS_DIR, "tabloid", "model1"))) {
   model1 = h2o.loadModel(path = file.path(SCRIPTS_DIR, "tabloid", "model1"))
@@ -43,14 +43,14 @@ if (file.exists(file.path(SCRIPTS_DIR, "tabloid", "model1"))) {
           hidden=10,
           epochs=1000,
           export_weights_and_biases=T,
-          l1 = 1e-2
+          l1 = 1e-2,
+          model_id = "model1"
           )
+  h2o.saveModel(model1, path="tabloid")
 }
 
-
 phat = predict(model1, test_hex)
-phat = as.matrix( phat[,3] )
-phatL$h1n10 = phat
+phatL$h1n10 = as.matrix( phat[,3] )
 
 plot(phatL$logit, phatL$h1n10)
 
@@ -68,13 +68,14 @@ if (file.exists(file.path(SCRIPTS_DIR, "tabloid", "deep.model"))) {
                   epochs=500,
                   activation="RectifierWithDropout",
                   l1=1e-3,
-                  export_weights_and_biases=TRUE
+                  export_weights_and_biases=TRUE,
+                  model_id = "deep.model"
                   )
+  h2o.saveModel(deep.model, path="tabloid")
 }
 
 phat = predict(deep.model, test_hex)
-phat = as.matrix( phat[,3] )
-phatL$h2n10.10 = phat
+phatL$h2n10.10 = as.matrix( phat[,3] )
 
 pairs(phatL)
 

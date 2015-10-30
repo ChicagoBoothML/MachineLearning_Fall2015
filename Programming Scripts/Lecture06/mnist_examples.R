@@ -31,7 +31,7 @@ dim(digit.data$train$x)
 #
 
 show_digit(digit.data$train$x[1, ])
-show_digit(digit.data$train$x[2, ])
+show_digit(digit.data$train$x[2100, ])
 
 
 ####################################
@@ -40,23 +40,24 @@ show_digit(digit.data$train$x[2, ])
 ###
 ####################################
 
-if (file.exists("glmnet_mnist.RData")) {
-  load("glmnet_mnist.RData")
+if (file.exists("mnist.glmnet.RData")) {
+  load("mnist.glmnet.RData")
 } else {
   glm_fit = cv.glmnet(x=digit.data$train$x, y=as.factor(digit.data$train$y), 
                       family="multinomial",
                       type.logistic="modified.Newton")
-  save(glm_fit, file = "glmnet_mnist.RData")
+  save(glm_fit, file = "glmnet.mnist.RData")
 }
 
 phat = predict(glm_fit, digit.data$test$x, s=glm_fit$lambda.1se, type = "response")
-yhat = apply(phat,1,which.max)
+yhat = apply(phat,1,which.max) - 1
 ot = table(yhat, digit.data$test$y)
+print(ot)
 sum(diag(ot)) / 10000 # accuracy 
 
 plot(glm_fit)
 
-plot(glm_fit_ridge$glmnet.fit, xvar = "lambda")
+plot(glm_fit$glmnet.fit, xvar = "lambda")
 
 
 ####################################
@@ -66,7 +67,7 @@ plot(glm_fit_ridge$glmnet.fit, xvar = "lambda")
 ####################################
 
 if (file.exists("mnist.rf.mtry_28.RData")) {
-  load(fName)
+  load("mnist.rf.mtry_28.RData")
 } else {
   num_trees = 1000
   
@@ -86,8 +87,9 @@ if (file.exists("mnist.rf.mtry_28.RData")) {
 rf_28
 
 varImpPlot(rf_28, type=2, n.var=20, main="Variable importance")
-predicted.test = predict(rf_28, test)
-confusionMatrix(table(predicted.test,digit.data$test$y))
+predicted.test = predict(rf_28, digit.data$test$x)
+table(predicted.test,digit.data$test$y)
+
 
 ####################################
 ### 

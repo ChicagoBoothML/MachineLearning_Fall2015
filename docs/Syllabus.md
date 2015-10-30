@@ -169,7 +169,17 @@ Alternatively, you can type the following in R:
 
 
 _Homework assignment:_  <br>
-Will be posted after the midterm is due.
+
+[06_hw.pdf](Syllabus/06_hw.pdf) <br>
+[ParseData.R](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/UCI%20Human%20Activity%20Recognition%20Using%20Smartphones/R/ParseData.R)
+
+To load data use:
+
+> source("ParseData.R")
+>
+> data <- parse_human_activity_recog_data()
+
+Due Sunday, November 8.
 
 _Optional textbook reading:_ 
 The Elements of Statistical Learning: Sections 11.3 - 11.5

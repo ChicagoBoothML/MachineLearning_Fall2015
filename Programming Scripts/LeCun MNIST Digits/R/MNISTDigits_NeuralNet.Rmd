@@ -130,6 +130,10 @@ plot_mnist_images(first_layer_weights)
 
 From the visualization of the weights above, it seems that the hidden neurons have specialized themselves in detecting **useful local features** such as **strokes** and **hooks** that are present or missing in various types of digit images.
 
+```{r message=FALSE, warning=FALSE, results='hide'}
+h2o.shutdown(prompt=FALSE)   # shutdown H20 server
+```
+
 
 
 

@@ -167,6 +167,8 @@ Alternatively, you can type the following in R:
 
 > source("https://raw.githubusercontent.com/ChicagoBoothML/HelpR/master/booth.ml.packages.R")
 
+[MNISTDigits_NeuralNet.Rmd](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/LeCun%20MNIST%20Digits/R/MNISTDigits_NeuralNet.Rmd)
+
 _**Python code**_ <br>
 <a href="https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/LeCun%20MNIST%20Digits/Python/LeCun%20MNIST%20Digits%20--%20Classify%20by%20Neural%20Net%20(Keras%20package).ipynb">LeCun MNIST Digits -- Classify by Neural Net (Keras package).ipynb</a>
 

@@ -72,3 +72,8 @@ plot(x=boston_housing$lstat, y=boston_housing$medv)
 lines(x=boston_housing$lstat, y=boost_pred, col='orange', lwd=3)
 title('Correct Results from Model Trained with "x=model.matrix(...), y=..."')
 ```
+
+
+# Always use factor $y$ variable with character labels in classification problems
+
+When doing classification with **`caret`**, it is highly recommended that categorical $y$ variables are in the form of factor variables with character labels. Do not use factor variables with levels such as "0", "1", "2", etc.

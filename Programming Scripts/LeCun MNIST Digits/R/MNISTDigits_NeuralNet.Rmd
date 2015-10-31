@@ -1,0 +1,137 @@
+---
+title: "LeCun's MNIST Hand-Written Digits: Classification by Neural Networks"
+author: 'Chicago Booth ML Team'
+output: pdf_document
+fontsize: 12
+geometry: margin=0.6in
+---
+
+
+# Hand-Written Digits: Early Example of Optical Character Recognition
+
+Classifying hand-written digits was among pre-eminent early use-cases of Machine Learning in general, and of Neural Networks in particular. Not only does it illustrate the intuition behind, and the power of, Neural Networks' workings, the recognition of digits (and alphabetical letters) by Machine Learning formed the basis of **Optical Character Recoginition** (**OCR**) technologies and proved to be a big commercial win for savvy organizations. Among early users was the **U.S. Postal Service (USPS)**, who has automated the reading of the fronts of billions of envelopes and routing those envelopes to locations they are addressed to, with a high degree of accuracy.
+
+
+# (M)NIST Hand-Written Digits Data Sets
+
+The **National Institute of Standards and Technology** (**NIST**) collected a large set of hand-written digits and labeled them "0" &ndash; "9" for the purpose of training Machine Learning models to recognize them.
+
+[**Yann LeCun**](http://yann.lecun.com), one of the fathers of Deep Learning (the use of particular special kinds of Neural Network with many layers stacking on top of one another), and several of his colleagues subsequently modified the NIST data set to create a more representative one, producing **Mixed NIST** (**MNIST**) Hand-Written Digits, a highly popular benchmark data set nowadays.
+
+This script illustrates the training of a Neural Network to learn to recognize MNIST digits.
+
+
+# Load Libraries & Modules; Set Randomizer Seed
+  
+```{r message=FALSE, warning=FALSE}
+library(doParallel)
+library(h2o)
+
+# load modules from the helper scripts
+source('ParseData.R')
+source('Visualize.R')
+
+RANDOM_SEED = 99
+set.seed(RANDOM_SEED)
+```
+
+
+# Data Import
+
+```{r}
+# *************************************************************************************
+# NOTE: the following path is specific to my computer
+# You need to change it to a relevant folder on your computer containing the MNIST data
+
+DATA_FOLDER_PATH <- '/Cloud/Box Sync/Repos/DATA/DATA___LeCun___MNISTDigits'
+
+# *************************************************************************************
+
+data <- load_mnist(DATA_FOLDER_PATH)
+X_train <- data$train$x
+y_train <- data$train$y
+X_test <- data$test$x
+y_test <- data$test$y
+```
+
+Let's view some sample digit images:
+
+```{r}
+#   Pixels are organized into images like this:
+
+#   001 002 003 ... 026 027 028
+#   029 030 031 ... 054 055 056
+#   057 058 059 ... 082 083 084
+#    |   |   |  ...  |   |   |
+#   729 730 731 ... 754 755 756
+#   757 758 759 ... 782 783 784
+plot_mnist_images(X_train[1 : 100, ])
+```
+
+
+# Classification by Neural Network
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+# start or connect to h2o server
+h2o_server <- h2o.init(
+  ip="localhost",
+  port=54321,
+  max_mem_size="4g",
+  nthreads=detectCores() - 2)
+```
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+# we need to load data into h2o format
+train_data_h2o <- as.h2o(data.frame(x=X_train, y=y_train))
+test_data_h2o <- as.h2o(data.frame(x=X_test, y=y_test))
+
+predictor_indices <- 1 : 784
+response_index <- 785
+
+train_data_h2o[ , response_index] <- as.factor(train_data_h2o[ , response_index])
+test_data_h2o[ , response_index] <- as.factor(test_data_h2o[ , response_index])
+```
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+# Train Neural Network
+nn_model <- h2o.deeplearning(
+  x=predictor_indices, y=response_index,
+  training_frame=train_data_h2o,
+  balance_classes=TRUE,
+  activation="RectifierWithDropout",
+  input_dropout_ratio=.2,
+  classification_stop=-1,  # Turn off early stopping
+  l1=1e-5,                 # regularization
+  hidden=c(128,128,256),
+  epochs=10,
+  model_id = "NeuralNet_MNIST_001",
+  reproducible=TRUE,
+  seed=RANDOM_SEED,
+  export_weights_and_biases=TRUE,
+  ignore_const_cols=FALSE)
+```
+
+```{r}
+# Evaluate Performance on Test
+nn_test_performance = h2o.performance(nn_model, test_data_h2o)
+h2o.confusionMatrix(nn_test_performance)
+```
+
+
+## Analyze Features detected by Neural Network
+
+Let's now make some plots to see what features the Neural Network has detected in the process of classifying the MNIST images. We can vizualize the weights between the first and second network layer:
+  
+```{r}
+# extract weights from the first layer
+first_layer_weights <- h2o.weights(nn_model, matrix_id=1)
+plot_mnist_images(first_layer_weights)
+```
+
+From the visualization of the weights above, it seems that the hidden neurons have specialized themselves in detecting **useful local features** such as **strokes** and **hooks** that are present or missing in various types of digit images.
+
+
+
+
+
+

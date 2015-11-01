@@ -18,11 +18,17 @@ parse_human_activity_recog_data <- function(
   cat('   Parsing Train & Test Input Feature Data Sets... ')
   X_train_with_duplicates <- fread(
     file.path(data_path, train_subfolder_name, X_train_file_name),
-    header=FALSE, col.names=X_names_with_duplicates, colClasses='numeric')
+    header=FALSE,
+    col.names=X_names_with_duplicates,
+    colClasses='numeric',
+    showProgress=FALSE)
   X_train <- X_train_with_duplicates[ , X_unique_names, with=FALSE]
   X_test_with_duplicates <- fread(
     file.path(data_path, test_subfolder_name, X_test_file_name),
-    header=FALSE, col.names=X_names_with_duplicates, colClasses='numeric')
+    header=FALSE,
+    col.names=X_names_with_duplicates,
+    colClasses='numeric',
+    showProgress=FALSE)
   X_test <- X_test_with_duplicates[ , X_unique_names, with=FALSE]
   cat('done!\n')
   
@@ -33,14 +39,16 @@ parse_human_activity_recog_data <- function(
   y_train = factor(
     fread(
       file.path(data_path, train_subfolder_name, y_train_file_name),
-      header=FALSE)$V1,
+      header=FALSE,
+      showProgress=FALSE)$V1,
     levels=1 : 6,
     labels=y_class_labels)
   
   y_test = factor(
     fread(
       file.path(data_path, test_subfolder_name, y_test_file_name),
-      header=FALSE)$V1,
+      header=FALSE,
+      showProgress=FALSE)$V1,
     levels=1 : 6,
     labels=y_class_labels)
   cat('done!\n')

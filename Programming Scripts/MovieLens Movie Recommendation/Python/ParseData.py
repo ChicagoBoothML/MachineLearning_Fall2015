@@ -7,16 +7,18 @@ from ChicagoBoothML_Helpy.Print import printflush
 def parse_movielens_20m_data(
         data_path='https://raw.githubusercontent.com/ChicagoBoothML/DATA___MovieLens___20M/master'):
 
+    printflush('Parsing Movies...', end=' ')
     movies = read_csv(join(data_path, 'movies.csv'))
+    printflush('done!')
 
     NB_RATINGS_FILES = 10
-    printflush('Parsing %i Ratings Files:' % NB_RATINGS_FILES, end=' ')
+    printflush('Parsing %i Ratings Files...' % NB_RATINGS_FILES, end=' ')
     ratings = []
     for i in range(NB_RATINGS_FILES):
         ratings_file_name = 'ratings%02d.csv' % (i + 1)
         ratings.append(read_csv(join(data_path, ratings_file_name)))
         printflush(ratings_file_name, end=', ')
-    printflush()
+    printflush('done!')
     ratings = concat(ratings, ignore_index=True)
 
     return dict(movies=movies, ratings=ratings)

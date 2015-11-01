@@ -13,7 +13,7 @@ parse_human_activity_recog_data <- function(
     file.path(data_path, X_names_file_name),
     header=FALSE,
     drop=c(1),
-    sshowProgress=FALSE)$V2
+    showProgress=FALSE)$V2
   X_unique_names <- sort(unique(X_names_with_duplicates))
   cat('done!\n')
   

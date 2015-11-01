@@ -6,6 +6,10 @@ Go [**here**](http://git-scm.com/downloads) to download a graphical Git installe
 
 Run the installer and follow its instructions to install the software. Usually the default options are all we need for configuring Git.
 
+**Important Note for Windows Users**: after Git installation, please open your command-line terminal and run the following code:
+
+**`git config --system core.longpaths true`**
+
 
 # GitHub installation
 
@@ -21,6 +25,11 @@ Atlassian’s SourceTree is one of the best desktop apps for managing Git reposi
 - Go [**here**](http://www.sourcetreeapp.com) to download a graphical installer of SourceTree appropriate for your machine’s operating system (Mac / Windows).
 - Run the installer and follow its instructions to install the software into a folder you prefer.
 - Launch SourceTree after installation, follow the default recommended basic configurations, and log in with your GitHub account.
+
+**Important Note for Windows Users**: make sure SourceTree uses the "system" Git software (and _not_ its own "embedded" Git software), by:
+ 
+- Installing Git as instructed above; and
+- In SourceTree, adjust the following setting: go to _**Tools** > **Options** > **Git** > **Git Version**_  and select "**Use System Git**".
 
 
 # Clone / Sync the Course GitHub Repository to local folder

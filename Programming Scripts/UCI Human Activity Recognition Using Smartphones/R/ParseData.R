@@ -8,7 +8,7 @@ parse_human_activity_recog_data <- function(
   
   cat('Parsing Data Set "UCI Human Activity Recognition Using Smartphones"...\n')
   
-  cat("  Parsing Unique Input Features' (X's) Names... ")
+  cat("   sParsing Unique Input Features' (X's) Names... ")
   X_names_with_duplicates <- fread(
     file.path(data_path, X_names_file_name),
     header=FALSE,

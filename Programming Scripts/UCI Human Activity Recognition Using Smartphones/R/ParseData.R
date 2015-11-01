@@ -11,7 +11,9 @@ parse_human_activity_recog_data <- function(
   cat("  Parsing Unique Input Features' (X's) Names... ")
   X_names_with_duplicates <- fread(
     file.path(data_path, X_names_file_name),
-    header=FALSE, drop=c(1))$V2
+    header=FALSE,
+    drop=c(1),
+    sshowProgress=FALSE)$V2
   X_unique_names <- sort(unique(X_names_with_duplicates))
   cat('done!\n')
   

@@ -386,6 +386,16 @@
             "title": "Windows"
         }, 
         {
+            "location": "/Installation/Java Development Kit (JDK)/", 
+            "text": "Java Development Kit (JDK) installation\n\n\nCertain advanced Machine Learning packages leverage on a Java backend for faster processing.\n\n\nGo \nhere\n to download an appropriate installer for your machine\u2019s:\n\n\n\n\noperating system (Mac / Windows), and\n\n\nprocessor (32-bit / 64-bit)\n\n\n\n\nand follow the instructions.", 
+            "title": "Java Development Kit (JDK)"
+        }, 
+        {
+            "location": "/Installation/Java Development Kit (JDK)/#java-development-kit-jdk-installation", 
+            "text": "Certain advanced Machine Learning packages leverage on a Java backend for faster processing.  Go  here  to download an appropriate installer for your machine\u2019s:   operating system (Mac / Windows), and  processor (32-bit / 64-bit)   and follow the instructions.", 
+            "title": "Java Development Kit (JDK) installation"
+        }, 
+        {
             "location": "/Installation/Cygwin/", 
             "text": "Cygwin Installation\n\n\nCygWin is a command-line terminal that enables running Unix-style commands on Windows.\n\n\nGo \nhere\n to download an appropriate installer for your machine\u2019s processor (32-bit / 64-bit) and follow the instructions.", 
             "title": "Cygwin (for Windows users only)"

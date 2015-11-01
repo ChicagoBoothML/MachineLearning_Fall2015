@@ -1,5 +1,6 @@
 # The following will install necessary R packages for this course
 install.packages(c(
+  'arules',
   'bitops',
   'caTools',
   'caret',
@@ -14,15 +15,18 @@ install.packages(c(
   'knitr',
   'knitr',
   'markdown',
+  'Matrix',
   'MASS',
   'parRF',
   'randomForest',
   'rpart',
   'RCurl',
   'rmarkdown',
-  'ROCR'
+  'ROCR',
+  'recommenderlab',
+  'registry',
   'stepPlr',
   'tree',
   'yaml'),
-  dependencies = TRUE,
+  dependencies=TRUE,
   repos="http://cran.rstudio.com")

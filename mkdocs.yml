@@ -18,6 +18,7 @@ pages:
     - Python Anaconda, PyCharm IDE, and Conda & PyPI Packages: 'Installation/Python Anaconda, PyCharm IDE, and Conda & PyPI Packages.md'
     - Python Theano package: 'Installation/Python Theano.md'
     - TeX for rendering math: 'Installation/TeX.md'
+    - Java Development Kit (JDK): 'Installation/Java Development Kit (JDK).md'
     - Cygwin (for Windows users only): 'Installation/Cygwin.md'
   - Tutorials:
     - R Markdown: 'Tutorials/R Markdown Tutorial.md'

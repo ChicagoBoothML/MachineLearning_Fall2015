@@ -3,11 +3,15 @@ parse_movielens_20m_data <- function(
 
   library(data.table)
   
-  movies <- fread(file.path(data_path, 'movies.csv'))
+  cat('Parsing Movies... ')
+  movies <- fread(
+    file.path(data_path, 'movies.csv'),
+    showProgress=FALSE)
+  cat('done!\n')
   
   NB_RATINGS_FILES = 10
   
-  cat('Parsing ', NB_RATINGS_FILES, ' Ratings Files: ', sep='')
+  cat('Parsing ', NB_RATINGS_FILES, ' Ratings Files... ', sep='')
   ratings <- data.table(
     userId=integer(),
     movieId=integer(),

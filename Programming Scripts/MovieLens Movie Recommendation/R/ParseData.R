@@ -21,11 +21,12 @@ parse_movielens_20m_data <- function(
                  movieId='integer',
                  rating='numeric',
                  timestamp='character'),
-               stringsAsFactors=FALSE)
+               stringsAsFactors=FALSE,
+               showProgress=FALSE)
     ratings = rbind(ratings, r)
-    cat(ratings_file_name, ', ')
+    cat(ratings_file_name, ', ', sep='')
   }
-  cat('\n')
+  cat('done!\n')
     
   list(movies=movies, ratings=ratings)
 }

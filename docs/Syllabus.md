@@ -11,7 +11,7 @@ We will move at a pace dictated by class discussions. Please check this page oft
 | [**4**](#week-4)    | 10/15 &ndash; 10/17 | Categorical Outcomes and Classification Models                                   |
 | [**5**](#week-5)    | 10/22 &ndash; 10/24 | Logistic regression and Intro to Neural networks                                 |
 | [**6**](#week-6)    | 10/29 &ndash; 10/31 | Neural Networks                                                                  | 
-| 7                   | 11/5 &ndash; 11/7   | Recommender Systems                                                              |
+| [**7**](#week-7)    | 11/5 &ndash; 11/7   | Recommender Systems                                                              |
 | 8                   | 11/12 &ndash; 11/14 | Mining Network Data                                                              |
 | 9                   | 11/19 &ndash; 11/21 | Probabilistic Graphical Models; Hidden Markov Models; Naive Bayes                |
 | 10                  | 12/3 &ndash; 12/5   | Mining Time Series                                                               |
@@ -195,3 +195,28 @@ _Some h2o resources:_
 [Deep Learning](http://h2o-release.s3.amazonaws.com/h2o/master/3232/docs-website/h2o-docs/booklets/DeepLearning_Vignette.pdf) <br>
 [GLM](http://h2o-release.s3.amazonaws.com/h2o/master/3232/docs-website/h2o-docs/booklets/GLM_Vignette.pdf) <br>
 
+
+
+## Week 7
+
+_Lecture Slides:_ <br>
+
+
+_**R code**:_ <br>
+
+In this lecture, we will be using *recommenderlab* package.
+
+[recommenderlab: Reference manual](https://cran.r-project.org/web/packages/recommenderlab/recommenderlab.pdf) <br>
+[recommenderlab: Vignette](https://cran.r-project.org/web/packages/recommenderlab/vignettes/recommenderlab.pdf) <br>
+
+_**Python code**_ <br>
+
+
+_Homework assignment:_  <br>
+
+
+_Optional reading:_ 
+
+[Amazon.com Recommendations](http://www.cs.umd.edu/~samir/498/Amazon-Recommendations.pdf) <br>
+[Cold Start Problem](http://wanlab.poly.edu/recsys12/recsys/p115.pdf) <br>
+[Matrix Factorization Techniques For Recommender Systems](http://www2.research.att.com/~volinsky/papers/ieeecomputer.pdf) <br>

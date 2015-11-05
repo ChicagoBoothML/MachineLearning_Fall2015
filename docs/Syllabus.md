@@ -133,14 +133,13 @@ _Lecture Slides:_ <br>
 [**Logistic regression**](Syllabus/05_logistic_regression.pdf) <br>
 [**RMarkdown -- Logistic regression**](Syllabus/05_logistic_regression.zip) <br>
 
-
 _**R code**:_ <br>
 [lr_decision_surface.R](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Lecture05/lr_decision_surface.R) <br>
 [we8there.R](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Lecture05/we8there.R) <br>
 
-
 Optional textbook reading:_ 
 An Introduction to Statistical Learning: Chapter 4, Section 6.2
+
 
 ## Midterm Exam
 
@@ -170,7 +169,7 @@ Alternatively, you can type the following in R:
 [MNISTDigits_NeuralNet.Rmd](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/LeCun%20MNIST%20Digits/R/MNISTDigits_NeuralNet.Rmd)
 
 _**Python code**_ <br>
-[MNISTDigits_NeuralNet_KerasPackage.Rmd](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/LeCun%20MNIST%20Digits/Python/MNISTDigits_NeuralNet_KerasPackage.ipynb)
+[MNISTDigits_NeuralNet_KerasPackage.ipynb](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/LeCun%20MNIST%20Digits/Python/MNISTDigits_NeuralNet_KerasPackage.ipynb)
 
 
 _Homework assignment:_  <br>
@@ -194,7 +193,6 @@ _Some h2o resources:_
 [h2o package](http://h2o-release.s3.amazonaws.com/h2o/master/3232/docs-website/h2o-r/h2o_package.pdf) <br>
 [Deep Learning](http://h2o-release.s3.amazonaws.com/h2o/master/3232/docs-website/h2o-docs/booklets/DeepLearning_Vignette.pdf) <br>
 [GLM](http://h2o-release.s3.amazonaws.com/h2o/master/3232/docs-website/h2o-docs/booklets/GLM_Vignette.pdf) <br>
-
 
 
 ## Week 7

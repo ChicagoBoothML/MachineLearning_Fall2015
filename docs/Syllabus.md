@@ -159,7 +159,7 @@ _Lecture Slides:_ <br>
 _**R code**:_ <br>
 
 See our [GitHub](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/tree/master/Programming%20Scripts/Lecture06). <br>
-We suggest you do close the folder "Lecture06" or download all of its content, as the folder contains some pretrained models, which may take a long time to train again.
+We suggest you to clone the folder "Lecture06" or download all of its content, as the folder contains some pretrained models, which may take a long time to train again.
 
 In order to install h2o package, go to [http://h2o-release.s3.amazonaws.com/h2o/master/3232/index.html](http://h2o-release.s3.amazonaws.com/h2o/master/3232/index.html), click on "INSTALL IN R", and follow instructions.
 
@@ -200,9 +200,11 @@ _Some h2o resources:_
 ## Week 7
 
 _Lecture Slides:_ <br>
-
+[**Recommender Systems**](Syllabus/07_recSystems.pdf) <br>
 
 _**R code**:_ <br>
+
+See our [GitHub](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/tree/master/Programming%20Scripts/Lecture07). <br>
 
 In this lecture, we will be using *recommenderlab* package.
 
@@ -220,3 +222,4 @@ _Optional reading:_
 [Amazon.com Recommendations](http://www.cs.umd.edu/~samir/498/Amazon-Recommendations.pdf) <br>
 [Cold Start Problem](http://wanlab.poly.edu/recsys12/recsys/p115.pdf) <br>
 [Matrix Factorization Techniques For Recommender Systems](http://www2.research.att.com/~volinsky/papers/ieeecomputer.pdf) <br>
+[All Together Now: A Perspective on the Netflix Prize](http://www2.research.att.com/~volinsky/papers/chance.pdf)

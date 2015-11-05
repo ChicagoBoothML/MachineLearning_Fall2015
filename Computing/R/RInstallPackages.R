@@ -18,6 +18,7 @@ install.packages(c(
   'Matrix',
   'MASS',
   'parRF',
+  'proxy',
   'randomForest',
   'rpart',
   'RCurl',

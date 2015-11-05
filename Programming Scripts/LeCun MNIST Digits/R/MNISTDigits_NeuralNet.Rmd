@@ -28,8 +28,9 @@ library(doParallel)
 library(h2o)
 
 # load modules from the helper scripts
-source('ParseData.R')
-source('Visualize.R')
+folder_path <- 'https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/LeCun%20MNIST%20Digits/R'
+source(file.path(folder_path, 'ParseData.R'))
+source(file.path(folder_path, 'Visualize.R'))
 
 RANDOM_SEED = 99
 set.seed(RANDOM_SEED)

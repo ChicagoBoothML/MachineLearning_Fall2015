@@ -13,7 +13,6 @@ This script uses the [**MovieLens**](http://grouplens.org/datasets/movielens) da
 # Load Libraries & Helper Modules
 
 ```{r message=FALSE, warning=FALSE, results='hide'}
-library(proxy)
 library(recommenderlab)
 
 # source data parser from GitHub repo
@@ -108,6 +107,19 @@ item_based_cofi_rec <- Recommender(
   ))
 ```
 
+```{r}
+# Latent-Factor Collaborative Filtering Recommender
+# with matrix factorization by Singular-Value Decomposition (SVD)
+latent_factor_cofi_rec <- Recommender(
+  data=ratings_train,
+  method='SVD',           # Item-Based Collaborative Filtering
+  parameter=list(
+    categories=300,        # number of latent factors
+    normalize = "Z-score",
+    treat_na = "median"
+  ))
+```
+
 Now, we make predictions on the Test set and and evaluate these recommenders' OOS performances:
 
 ```{r}
@@ -149,6 +161,18 @@ item_based_cofi_rec_pred_acc <- calcPredictionAccuracy(
   ratings_test_unknown)
 
 item_based_cofi_rec_pred_acc
+```
+
+```{r}
+latent_factor_cofi_rec_pred <- predict(
+  latent_factor_cofi_rec,
+  ratings_test_known,
+  type='ratings')
+latent_factor_cofi_red_pred_acc <- calcPredictionAccuracy(
+  latent_factor_cofi_rec_pred,
+  ratings_test_unknown)
+
+latent_factor_cofi_red_pred_acc
 ```
 
 We can see that the User- and Item-based models perform much better than the Popularity-based model in terms of accuracy.

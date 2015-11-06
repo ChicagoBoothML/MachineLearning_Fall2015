@@ -1,0 +1,154 @@
+---
+title: "Recommendation Engine example: on MovieLens data set"
+author: 'Chicago Booth ML Team'
+output: pdf_document
+fontsize: 12
+geometry: margin=0.6in
+---
+
+
+This script uses the [**MovieLens**](http://grouplens.org/datasets/movielens) data set to illustrate personalized recommendation algorithms.
+
+
+# Load Libraries & Helper Modules
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+library(proxy)
+library(recommenderlab)
+
+# source data parser from GitHub repo
+source('https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/MovieLens%20Movie%20Recommendation/R/ParseData.R')
+```
+
+
+# Data Importing & Pre-Processing
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+data <- parse_movielens_1m_data()
+movies <- data$movies
+users <- data$users
+ratings <- data$ratings[ , .(user_id, movie_id, rating)]
+ratings[ , `:=`(user_id = factor(user_id),
+                movie_id = factor(movie_id))]
+```
+
+Let's examine the number of ratings per user and per movie:
+
+```{r}
+nb_ratings_per_user <-
+  dcast(ratings, user_id ~ ., fun.aggregate=length, value.var='rating')
+
+nb_ratings_per_movie <-
+  dcast(ratings, movie_id ~ ., fun.aggregate=length, value.var='rating')
+```
+
+Each user has rated at least `min(nb_ratings_per_user$.)` movies, and each movie has been rated by at least `min(nb_ratings_per_movie$.)` user.
+
+Let's now convert the **`ratings`** to a RecommenderLab-format Real-Valued Rating Matrix:
+
+```{r}
+ratings <- as(ratings, 'realRatingMatrix')
+
+ratings
+```
+
+
+# Split Ratings Data into Training & Test sets
+
+Let's now establish a RecommenderLab Evaluation Scheme, which involves splitting the **`ratings`** into a Training set and a Test set:
+
+```{r}
+train_proportion <- .5
+nb_of_given_ratings_per_test_user <- 10
+
+evaluation_scheme <- evaluationScheme(
+  ratings, 
+  method='split',
+  train=train_proportion,
+  k=1,
+  given=nb_of_given_ratings_per_test_user)
+
+evaluation_scheme
+```
+
+
+# Recommendation Models
+
+Let's now train a number of recommendation models:
+
+```{r}
+ratings_train <- getData(evaluation_scheme, 'train')
+
+# Popularity-based Recommender
+popular_rec <- Recommender(
+  data=ratings_train,
+  method='POPULAR')
+```
+
+```{r}
+# User-based Collaborative Filtering Recommender
+user_based_cofi_rec <- Recommender(
+  data=ratings_train,
+  method='UBCF',           # User-Based Collaborative Filtering
+  parameter=list(
+    normalize="Z-score",
+    method="Pearson",      # use Pearson correlation
+    nn=30                  # number of Nearest Neighbors for calibration
+  ))
+```
+
+```{r}
+# Item-based Collaborative Filtering Recommender
+item_based_cofi_rec <- Recommender(
+  data=ratings_train,
+  method='IBCF',           # Item-Based Collaborative Filtering
+  parameter=list(
+    normalize="Z-score",
+    method="Pearson"       # use Pearson correlation
+  ))
+```
+
+Now, we make predictions on the Test set and and evaluate these recommenders' OOS performances:
+
+```{r}
+ratings_test_known <- getData(evaluation_scheme, 'known')
+ratings_test_unknown <- getData(evaluation_scheme, 'unknown')
+```
+
+```{r}
+popular_rec_pred <- predict(
+  popular_rec,
+  ratings_test_known,
+  type='ratings')
+popular_rec_pred_acc <- calcPredictionAccuracy(
+  popular_rec_pred,
+  ratings_test_unknown)
+
+popular_rec_pred_acc
+```
+
+```{r}
+user_based_cofi_rec_pred <- predict(
+  user_based_cofi_rec,
+  ratings_test_known,
+  type='ratings')
+user_based_cofi_rec_pred_acc <- calcPredictionAccuracy(
+  user_based_cofi_rec_pred,
+  ratings_test_unknown)
+
+user_based_cofi_rec_pred_acc
+```
+
+```{r}
+item_based_cofi_rec_pred <- predict(
+  item_based_cofi_rec,
+  ratings_test_known,
+  type='ratings')
+item_based_cofi_rec_pred_acc <- calcPredictionAccuracy(
+  item_based_cofi_rec_pred,
+  ratings_test_unknown)
+
+item_based_cofi_rec_pred_acc
+```
+
+We can see that the User- and Item-based models perform much better than the Popularity-based model in terms of accuracy.

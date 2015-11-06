@@ -11,7 +11,8 @@ parse_movielens_1m_data <- function(
       movie_id='integer',
       movie='character',
       genres='character'),
-    stringsAsFactors=FALSE)
+    stringsAsFactors=FALSE,
+    showProgress=FALSE)
   # movies_lines <- readLines(file.path(data_path, 'movies.dat'))
   # movies_lines[3776] <- '3845::And God Created Woman (1956)::Drama'
   # movies <- as.data.table(read.table(
@@ -37,7 +38,8 @@ parse_movielens_1m_data <- function(
       age='character',
       occupation='character',
       zip_code='character'),
-    stringsAsFactors=TRUE)
+    stringsAsFactors=TRUE,
+    showProgress=FALSE)
   # users_lines <- readLines(file.path(data_path, 'users.dat'))
   # users <- as.data.table(read.table(
   #   text=gsub('::', '\t', users_lines),
@@ -94,7 +96,8 @@ parse_movielens_1m_data <- function(
       movie_id='integer',
       rating='numeric',
       timestamp='numeric'),
-    stringsAsFactors=FALSE)
+    stringsAsFactors=FALSE,
+    showProgress=FALSE)
   # ratings_lines <- readLines(file.path(data_path, 'ratings.dat'))
   # ratings <- as.data.table(read.table(
   #   text=gsub('::', '\t', ratings_lines),

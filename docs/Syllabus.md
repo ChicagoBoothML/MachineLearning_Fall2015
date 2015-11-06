@@ -203,13 +203,18 @@ _Lecture Slides:_ <br>
 _**R code**:_ <br>
 
 See our [GitHub](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/tree/master/Programming%20Scripts/Lecture07). <br>
+[MovieLens_MovieRecommendation.Rmd](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/MovieLens%20Movie%20Recommendation/R/MovieLens_MovieRecommendation.Rmd)
 
 In this lecture, we will be using *recommenderlab* package.
 
 [recommenderlab: Reference manual](https://cran.r-project.org/web/packages/recommenderlab/recommenderlab.pdf) <br>
 [recommenderlab: Vignette](https://cran.r-project.org/web/packages/recommenderlab/vignettes/recommenderlab.pdf) <br>
 
+
 _**Python code**_ <br>
+[MovieLens_MovieRecommendation.ipynb]
+
+- _note: this script requires installation of **Apache Spark**, and the Recommender functionalities of Spark MLlib are not as extensive as `recommenderlab` in R_
 
 
 _Homework assignment:_  <br>

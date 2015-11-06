@@ -117,6 +117,7 @@ parse_movielens_1m_data <- function(
   list(movies=movies, users=users, ratings=ratings)
 }
 
+
 parse_movielens_20m_data <- function(
   data_path='https://raw.githubusercontent.com/ChicagoBoothML/DATA___MovieLens___20M/master') {
 
@@ -151,10 +152,3 @@ parse_movielens_20m_data <- function(
     
   list(movies=movies, ratings=ratings)
 }
-
-
-
-
-
-
-

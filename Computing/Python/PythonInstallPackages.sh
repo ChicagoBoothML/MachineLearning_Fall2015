@@ -23,6 +23,7 @@ pip install --upgrade H2O
 pip install --upgrade Jupyter
 pip install --upgrade MkDocs
 pip install --upgrade NeuroLab
+pip install --upgrade Py4J
 pip install --upgrade PyReadLine
 pip install --upgrade Python-Markdown-Math
 

@@ -40,9 +40,8 @@ set.seed(RANDOM_SEED)
 # Data Import
 
 ```{r}
-DATA_FOLDER_PATH <- 'https://raw.githubusercontent.com/ChicagoBoothML/DATA___LeCun___MNISTDigits/master'
-
-data <- load_mnist(DATA_FOLDER_PATH)
+data <- load_mnist(
+  'https://raw.githubusercontent.com/ChicagoBoothML/DATA___LeCun___MNISTDigits/master')
 X_train <- data$train$x
 y_train <- data$train$y
 X_test <- data$test$x

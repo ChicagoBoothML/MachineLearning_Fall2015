@@ -202,8 +202,9 @@ _Lecture Slides:_ <br>
 
 _**R code**:_ <br>
 
-See our [GitHub](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/tree/master/Programming%20Scripts/Lecture07). <br>
-[MovieLens_MovieRecommendation.Rmd]
+[simpleScript.R](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Lecture07/simpleScript.R) This is a toy example illustrating how to compute similarities between users, recommend items and predict ratings. 
+
+[MovieLens_MovieRecommendation.Rmd](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/MovieLens%20Movie%20Recommendation/R/MovieLens_MovieRecommendation.Rmd)
 
 In this lecture, we will be using *recommenderlab* package.
 
@@ -218,6 +219,10 @@ _**Python code**_ <br>
 
 
 _Homework assignment:_  <br>
+
+[Assignment](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Lecture07/hw/hw.pdf?raw=true) <br>
+Data: [videoGames.json.gz](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Lecture07/hw/videoGames.json.gz?raw=true) <br>
+Starter script: [starterScript.R](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Lecture07/hw/starterScript.R?raw=true) 
 
 
 _Optional reading:_ 

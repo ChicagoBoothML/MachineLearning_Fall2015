@@ -12,7 +12,7 @@ We will move at a pace dictated by class discussions. Please check this page oft
 | [**5**](#week-5)    | 10/22 &ndash; 10/24 | Logistic regression and Intro to Neural networks                                 |
 | [**6**](#week-6)    | 10/29 &ndash; 10/31 | Neural Networks                                                                  | 
 | [**7**](#week-7)    | 11/5 &ndash; 11/7   | Recommender Systems                                                              |
-| 8                   | 11/12 &ndash; 11/14 | Mining Network Data                                                              |
+| [**8**](#week-7)    | 11/12 &ndash; 11/14 | Networks                                                                         |
 | 9                   | 11/19 &ndash; 11/21 | Probabilistic Graphical Models; Hidden Markov Models; Naive Bayes                |
 | 10                  | 12/3 &ndash; 12/5   | Mining Time Series                                                               |
 | 11                  | 12/11               | Final Project due                                                                |
@@ -231,3 +231,20 @@ _Optional reading:_
 [Cold Start Problem](http://wanlab.poly.edu/recsys12/recsys/p115.pdf) <br>
 [Matrix Factorization Techniques For Recommender Systems](http://www2.research.att.com/~volinsky/papers/ieeecomputer.pdf) <br>
 [All Together Now: A Perspective on the Netflix Prize](http://www2.research.att.com/~volinsky/papers/chance.pdf)
+
+
+## Week 8
+
+_Lecture Slides:_ <br>
+[**Networks**](Syllabus/08_networks.pdf) <br>
+
+_**R code**:_ <br>
+
+See our [GitHub](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/tree/master/Programming%20Scripts/Lecture08). <br>
+
+_Homework assignment:_  <br>
+
+
+_Optional reading:_ 
+
+See Chapters 3 and 4 of "Statistical Analysis of Network Data with R" (PDF available through UChicago library)

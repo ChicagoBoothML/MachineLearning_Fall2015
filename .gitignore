@@ -78,6 +78,9 @@ site/
 # Rplots.pdf
 *Rplots.pdf*
 
+# Apache Spark files
+*metastore_db*
+
 # Specific files & folders
 docs/Tutorials/R_Markdown_Tutorial.pdf
 docs/Tutorials/R_data.table_Tutorial.pdf

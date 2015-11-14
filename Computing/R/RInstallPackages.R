@@ -11,6 +11,7 @@ install.packages(c(
   'ggplot2',
   'h2o',
   'htmltools',
+  'iGraph',
   'kknn',
   'knitr',
   'knitr',

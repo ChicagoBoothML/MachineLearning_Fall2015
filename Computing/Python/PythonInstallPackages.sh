@@ -25,7 +25,9 @@ pip install --upgrade MkDocs
 pip install --upgrade NeuroLab
 pip install --upgrade Py4J
 pip install --upgrade PyReadLine
+pip install --upgrade Python-iGraph
 pip install --upgrade Python-Markdown-Math
+pip install --upgrade URLLib3
 
 pip uninstall PyParsing   # to install an older version compatible with PyDot (see Stack Overflow thread:
 # http://stackoverflow.com/questions/15951748/pydot-and-graphviz-error-couldnt-import-dot-parser-loading-of-dot-files-will)

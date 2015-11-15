@@ -9,11 +9,21 @@ geometry: margin=0.6in
 
 This script uses the [**MovieLens**](http://grouplens.org/datasets/movielens) data set to illustrate personalized recommendation algorithms.
 
+_**Note**: as of the date of writing, the **`recommenderlab`** package's default implementation of the Latent-Factor Collaborative Filtering / Singular Value Decomposition (SVD) method has a bug and produces dodgy performances. We'll not cover this method for now._
+
 
 # Load Libraries & Helper Modules
 
 ```{r message=FALSE, warning=FALSE, results='hide'}
+# load RecommenderLab package
 library(recommenderlab)
+
+# install & load RecommenderLabRats package from GitHub,
+# a package that has a better SVD implementation than the base package
+# install.packages('devtools')
+# library(devtools)
+# install_github('sanealytics/recommenderlabrats')
+# library(recommenderlabrats)
 
 # source data parser from GitHub repo
 source('https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/MovieLens%20Movie%20Recommendation/R/ParseData.R')
@@ -41,7 +51,7 @@ nb_ratings_per_movie <-
   dcast(ratings, movie_id ~ ., fun.aggregate=length, value.var='rating')
 ```
 
-Each user has rated at least `min(nb_ratings_per_user$.)` movies, and each movie has been rated by at least `min(nb_ratings_per_movie$.)` user.
+Each user has rated from `r formatC(min(nb_ratings_per_user$.), big.mark=',')` to `r formatC(max(nb_ratings_per_user$.), big.mark=',')` movies, and each movie has been rated by from `r formatC(min(nb_ratings_per_movie$.), big.mark=',')` to `r formatC(max(nb_ratings_per_movie$.), big.mark=',')` users.
 
 Let's now convert the **`ratings`** to a RecommenderLab-format Real-Valued Rating Matrix:
 
@@ -70,19 +80,78 @@ evaluation_scheme <- evaluationScheme(
 evaluation_scheme
 ```
 
+The data sets split out are as follows:
 
-# Recommendation Models
-
-Let's now train a number of recommendation models:
+- Training data:
 
 ```{r}
 ratings_train <- getData(evaluation_scheme, 'train')
 
-# Popularity-based Recommender
+ratings_train
+```
+
+- Test data: "known"/"given" ratings:
+
+```{r}
+ratings_test_known <- getData(evaluation_scheme, 'known')
+
+ratings_test_known
+```
+
+- Test data: "unknown" ratings to be predicted and evaluated against:
+
+```{r}
+ratings_test_unknown <- getData(evaluation_scheme, 'unknown')
+
+ratings_test_unknown
+```
+
+
+# Recommendation Models
+
+Let's now train a number of recommendation models. The methods available in the **`recommenderlab`** package are:
+
+```{r}
+recommenderRegistry$get_entry_names()
+```
+
+The descriptions and default parameters for the methods applicable to a Real Rating Matrix are as follows:
+
+```{r}
+recommenderRegistry$get_entries(dataType='realRatingMatrix')
+```
+
+
+## Popularity-Based Recommender
+
+The description and default parameters of this method in **`recommenderlab`** are as follows:
+
+```{r}
+recommenderRegistry$get_entry('POPULAR', dataType='realRatingMatrix')
+```
+
+We train a popularity-based recommender as follows:
+
+```{r}
 popular_rec <- Recommender(
   data=ratings_train,
   method='POPULAR')
+
+popular_rec
 ```
+
+
+## User-Based Collaborative-Filtering Recommender
+
+User-Based Collaborative Filtering("**UBCF**") assumes that users with similar preferences will rate items similarly. Thus missing ratings for a user can be predicted by first finding a _**neighborhood**_ of similar users and then aggregate the ratings of these users to form a prediction.
+
+The description and default parameters of this method in **`recommenderlab`** are as follows:
+
+```{r}
+recommenderRegistry$get_entry('UBCF', dataType='realRatingMatrix')
+```
+
+We train a UBCF recommender as follows:
 
 ```{r}
 # User-based Collaborative Filtering Recommender
@@ -90,11 +159,33 @@ user_based_cofi_rec <- Recommender(
   data=ratings_train,
   method='UBCF',           # User-Based Collaborative Filtering
   parameter=list(
-    normalize="Z-score",
-    method="Pearson",      # use Pearson correlation
+    normalize='center',    # normalizing by subtracting average rating per user;
+                           # note that we don't scale by standard deviations here;
+                           # we are assuming people rate on the same scale but have
+                           # different biases
+    method='Pearson',      # use Pearson correlation
     nn=30                  # number of Nearest Neighbors for calibration
   ))
+
+user_based_cofi_rec
 ```
+
+
+## Item-Based Collaborative-Filtering Recommender
+
+Item-Based Collaborative Filtering ("**IBCF**") is a model-based approach which produces recommendations based on the relationship between items inferred from the rating matrix. The assumption behind this approach is that users will prefer items that are similar to other items they like.
+
+The model-building step consists of calculating a similarity matrix containing all item-to-item
+similarities using a given similarity measure. Popular measures are Pearson correlation and
+Cosine similarity. For each item only a list of the $k$ most similar items and their similarity values are stored. The $k$ items which are most similar to item $i$ is denoted by the set $S(i)$ which can be seen as the neighborhood of size $k$ of the item. Retaining only $k$ similarities per item improves the space and time complexity significantly but potentially sacrifices some recommendation quality.
+
+The description and default parameters of this method in **`recommenderlab`** are as follows:
+
+```{r}
+recommenderRegistry$get_entry('IBCF', dataType='realRatingMatrix')
+```
+
+We train a IBCF recommender as follows:
 
 ```{r}
 # Item-based Collaborative Filtering Recommender
@@ -102,36 +193,61 @@ item_based_cofi_rec <- Recommender(
   data=ratings_train,
   method='IBCF',           # Item-Based Collaborative Filtering
   parameter=list(
-    normalize="Z-score",
-    method="Pearson"       # use Pearson correlation
+    normalize='center',    # normalizing by subtracting average rating per user;
+                           # note that we don't scale by standard deviations here;
+                           # we are assuming people rate on the same scale but have
+                           # different biases
+    method='Pearson',      # use Pearson correlation
+    k=100                  # number of Nearest Neighbors for calibration
   ))
+
+item_based_cofi_rec
 ```
+
+
+## Latent-Factor Collaborative-Filtering Recommender
+
+_**Note**: as of the date of writing, the **`recommenderlab`** package's default implementation of the Latent-Factor Collaborative Filtering / Singular Value Decomposition (SVD) method has a bug and produces dodgy performances. The code in this section is commented out for now._
+
+This approache uses Singular-Value Decomposition (SVD) to factor the Rating Matrix into a product of user-feature and item-feature matrices.
+
+The description and default parameters of this method in **`recommenderlab`** are as follows:
+
+```{r}
+recommenderRegistry$get_entry('SVD', dataType='realRatingMatrix')
+```
+
+We train a Latent-Factor CF recommender as follows:
 
 ```{r}
 # Latent-Factor Collaborative Filtering Recommender
 # with matrix factorization by Singular-Value Decomposition (SVD)
-latent_factor_cofi_rec <- Recommender(
-  data=ratings_train,
-  method='SVD',           # Item-Based Collaborative Filtering
-  parameter=list(
-    categories=300,        # number of latent factors
-    normalize = "Z-score",
-    treat_na = "median"
-  ))
+# latent_factor_cofi_rec <- Recommender(
+#   data=ratings_train,
+#   method='SVD',            # Item-Based Collaborative Filtering
+#   parameter=list(
+#     categories=30,         # number of latent factors
+#     normalize='center',    # normalizing by subtracting average rating per user;
+                           # note that we don't scale by standard deviations here;
+                           # we are assuming people rate on the same scale but have
+                           # different biases
+#     method='Pearson'       # use Pearson correlation
+#   ))
+
+# latent_factor_cofi_rec
 ```
+
+
+# Model Evaluation
 
 Now, we make predictions on the Test set and and evaluate these recommenders' OOS performances:
-
-```{r}
-ratings_test_known <- getData(evaluation_scheme, 'known')
-ratings_test_unknown <- getData(evaluation_scheme, 'unknown')
-```
 
 ```{r}
 popular_rec_pred <- predict(
   popular_rec,
   ratings_test_known,
   type='ratings')
+
 popular_rec_pred_acc <- calcPredictionAccuracy(
   popular_rec_pred,
   ratings_test_unknown)
@@ -144,6 +260,7 @@ user_based_cofi_rec_pred <- predict(
   user_based_cofi_rec,
   ratings_test_known,
   type='ratings')
+
 user_based_cofi_rec_pred_acc <- calcPredictionAccuracy(
   user_based_cofi_rec_pred,
   ratings_test_unknown)
@@ -156,6 +273,7 @@ item_based_cofi_rec_pred <- predict(
   item_based_cofi_rec,
   ratings_test_known,
   type='ratings')
+
 item_based_cofi_rec_pred_acc <- calcPredictionAccuracy(
   item_based_cofi_rec_pred,
   ratings_test_unknown)
@@ -164,15 +282,16 @@ item_based_cofi_rec_pred_acc
 ```
 
 ```{r}
-latent_factor_cofi_rec_pred <- predict(
-  latent_factor_cofi_rec,
-  ratings_test_known,
-  type='ratings')
-latent_factor_cofi_red_pred_acc <- calcPredictionAccuracy(
-  latent_factor_cofi_rec_pred,
-  ratings_test_unknown)
+# latent_factor_cofi_rec_pred <- predict(
+#   latent_factor_cofi_rec,
+#   ratings_test_known,
+#   type='ratings')
 
-latent_factor_cofi_red_pred_acc
+# latent_factor_cofi_red_pred_acc <- calcPredictionAccuracy(
+#   latent_factor_cofi_rec_pred,
+#   ratings_test_unknown)
+
+# latent_factor_cofi_red_pred_acc
 ```
 
-We can see that the User- and Item-based models perform much better than the Popularity-based model in terms of accuracy.
+We can see that the User- and Item-based models perform much better than the Popularity-based model in terms of accuracy. The User-based approach seems to work best with this Movie data set.

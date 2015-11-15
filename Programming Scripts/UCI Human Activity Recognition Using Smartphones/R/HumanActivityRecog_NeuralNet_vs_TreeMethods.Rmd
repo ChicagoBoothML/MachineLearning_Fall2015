@@ -1,0 +1,176 @@
+---
+title: "Human Activity Recognition: Classification by Neural Networks vs. Trees-Based Methods"
+author: 'Chicago Booth ML Team'
+output: pdf_document
+fontsize: 12
+geometry: margin=0.6in
+---
+
+
+_**note**: this script takes a long time to run in the Random Forest and Boosting sections. If you are not interested in either model, comment the relevant code chunks out to save run-time._
+
+
+# Load Libraries & Modules; Set Randomizer Seed
+
+```{r message=FALSE, warning=FALSE}
+library(caret)
+library(data.table)
+library(doParallel)
+library(h2o)
+
+# load data parser for the Human Activity Recog data set
+source('https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/UCI%20Human%20Activity%20Recognition%20Using%20Smartphones/R/ParseData.R')
+
+# set randomizer's seed
+RANDOM_SEED <- 99   # Gretzky
+set.seed(RANDOM_SEED)   
+```
+
+
+# Parallel Computation Setup
+
+Let's set up a parallel computing infrastructure (thanks to the excellent **`doParallel`** package by Microsoft subsidiary **Revolution Analytics**) to allow more efficient computation in the rest of this exercise:
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+cl <- makeCluster(detectCores() - 2)   # create a compute cluster using all CPU cores but 2
+clusterEvalQ(cl, library(foreach))
+registerDoParallel(cl)   # register this cluster
+```
+
+We have set up a compute cluster with **`r getDoParWorkers()`** worker nodes for computing.
+
+
+# Data Import & Pre-Processing
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+# download data using the provided data parser:
+data <- parse_human_activity_recog_data()
+X_train <- data$X_train
+y_train <- data$y_train
+X_test <- data$X_test
+y_test <- data$y_test
+```
+
+
+# Neural Network Model
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+# start or connect to h2o server
+h2o_server <- h2o.init(
+  ip="localhost",
+  port=54321,
+  max_mem_size="4g",
+  nthreads=detectCores() - 2)
+```
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+# we need to load data into h2o format
+train_data_h2o <- as.h2o(data.frame(x=X_train, y=y_train))
+test_data_h2o <- as.h2o(data.frame(x=X_test, y=y_test))
+
+predictor_indices <- 1 : 477
+response_index <- 478
+
+train_data_h2o[ , response_index] <- as.factor(train_data_h2o[ , response_index])
+test_data_h2o[ , response_index] <- as.factor(test_data_h2o[ , response_index])
+```
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+# Train Neural Network
+nn_model <- h2o.deeplearning(
+  x=predictor_indices, y=response_index,
+  training_frame=train_data_h2o,
+  balance_classes=TRUE,
+  activation="RectifierWithDropout",
+  input_dropout_ratio=.2,
+  classification_stop=-1,  # Turn off early stopping
+  l1=1e-5,                 # regularization
+  hidden=c(300, 200, 100),
+  epochs=10,
+  model_id = "NeuralNet_001",
+  reproducible=TRUE,
+  seed=RANDOM_SEED,
+  export_weights_and_biases=TRUE,
+  ignore_const_cols=TRUE)
+```
+
+```{r}
+# Evaluate Performance on Test
+nn_test_performance = h2o.performance(nn_model, test_data_h2o)
+h2o.confusionMatrix(nn_test_performance)
+```
+
+
+# Trees-Based Models
+
+Let's train 2 types of classification models: a Random Forest and a Boosted Trees model.
+
+```{r}
+caret_optimized_metric <- 'logLoss'   # equivalent to 1 / 2 of Deviance
+
+caret_train_control <- trainControl(
+  classProbs=TRUE,             # compute class probabilities
+  summaryFunction=mnLogLoss,   # equivalent to 1 / 2 of Deviance
+  method='repeatedcv',         # repeated Cross Validation
+  number=3,                    # number of folds
+  repeats=1,                   # number of repeats
+  allowParallel=TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+B <- 600
+
+rf_model <- train(
+  x=X_train,
+  y=y_train,
+  method='parRF',     # parallel Random Forest
+  metric=caret_optimized_metric,
+  ntree=B,            # number of trees in the Random Forest
+  nodesize=100,        # minimum node size set small enough to allow for complex trees,
+                      # but not so small as to require too large B to eliminate high variance
+  importance=TRUE,    # evaluate importance of predictors
+  keep.inbag=TRUE,
+  trControl=caret_train_control,
+  tuneGrid=NULL)
+```
+
+```{r message=FALSE, warning=FALSE}
+B <- 1200
+
+boost_model <- train(
+  x=X_train,
+  y=y_train,
+  method='gbm',       # Generalized Boosted Models
+  metric=caret_optimized_metric,
+  verbose=FALSE,
+  trControl=caret_train_control,
+  tuneGrid=expand.grid(
+    n.trees=B,              # number of trees
+    interaction.depth=10,   # max tree depth,
+    n.minobsinnode=100,     # minimum node size
+    shrinkage=0.01))        # shrinkage parameter, a.k.a. "learning rate"
+```
+
+We'll now evaluate the OOS performances of these 2 models on the Test set:
+
+```{r}
+rf_pred <- predict(
+  rf_model, newdata=X_test)
+rf_oos_accuracy <- sum(rf_pred == y_test) / length(y_test)
+
+boost_pred <- predict(
+  boost_model, newdata=X_test)
+boost_oos_accuracy <- sum(boost_pred == y_test) / length(y_test)
+```
+
+Here, the Random Forests and Boosted Trees model achieve out-of-sample accuracies of **`r formatC(100 * rf_oos_accuracy, format='f', digits=2)`**% and **`r formatC(100 * boost_oos_accuracy, format='f', digits=2)`**% respectively, after rather long training times.
+
+This illustrates that Neural Neuworks are often (but certainly not always) efficient in figuring out interactions among variables and estimating the influences of such interactions on the predictive outcomes at the same time.
+
+```{r}
+stopCluster(cl)   # shut down the parallel computing cluster
+```
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+h2o.shutdown(prompt=FALSE)   # shutdown H20 server
+```

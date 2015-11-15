@@ -36,3 +36,8 @@
 ## Other
 
 [**_4 Ways Cognitive Technologies Can Add Value to Consumer Products_**](http://dupress.com/articles/cognitive-technologies-consumer-products), 2015-06-03, Deloitte
+
+
+## Fun Stuff
+
+[**MarI/O**](http://www.youtube.com/watch?v=qv6UVOQ0F44), an A.I. program trained by Neural Networks and Reinforcement Learning to play the Super Mario game like a pro _(conbributed by Kirk Liu)_

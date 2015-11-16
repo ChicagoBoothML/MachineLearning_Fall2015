@@ -244,12 +244,16 @@ _Optional reading:_
 
 _Lecture Slides:_ <br>
 [**Networks**](Syllabus/08_networks.pdf) <br>
+[**Ego nets**](Syllabus/08_Akoglu.pdf)   Slides from [KDD tutorial]([http://www.cs.cmu.edu/~abeutel/kdd2015_tutorial/]) on Graph-Based User Behaviour Modeling 
 
 _**R code**:_ <br>
 
 See our [GitHub](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/tree/master/Programming%20Scripts/Lecture08). <br>
 
 _Homework assignment:_  <br>
+[Assignment](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Lecture08/hw/hw.pdf) <br>
+Data: [wikipedia.gml](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Lecture08/hw/wikipedia.gml?raw=true) <br>
+Starter script: [starterScript.R](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Lecture08/hw/starterScript.R) 
 
 
 _Optional reading:_ 

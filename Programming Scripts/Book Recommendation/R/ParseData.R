@@ -34,7 +34,8 @@ parse_book_crossing_data <- function(
     col.names=c('user_id', 'location', 'age'),
     colClasses='character',
     stringsAsFactors=FALSE,
-    na.strings=na_strings)
+    na.strings=na_strings,
+    showProgress=FALSE)
   users$user_id <- as.integer(users$user_id)
   users$age <- as.numeric(users$age)
   cat('done!\n')
@@ -46,7 +47,8 @@ parse_book_crossing_data <- function(
     col.names=c('user_id', 'isbn', 'book_rating'), 
     colClasses='character',
     stringsAsFactors=FALSE,
-    na.strings=na_strings)
+    na.strings=na_strings,
+    showProgress=FALSE)
   ratings$user_id <- as.integer(ratings$user_id)
   ratings$book_rating <- as.numeric(ratings$book_rating)
   cat('done!\n')

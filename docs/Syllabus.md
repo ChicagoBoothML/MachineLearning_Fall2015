@@ -145,6 +145,10 @@ An Introduction to Statistical Learning: Chapter 4, Section 6.2
 
 [**Midterm Exam Questions**](Syllabus/Midterm.pdf)
 
+- model answers in R Markdown:
+    - [Question 1]
+    - [Question 2]
+
 
 ## Week 6
 
@@ -176,6 +180,9 @@ _Homework assignment:_  <br>
 
 [06_hw.pdf](Syllabus/06_hw.pdf) <br>
 [ParseData.R](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/UCI%20Human%20Activity%20Recognition%20Using%20Smartphones/R/ParseData.R)
+
+- [model answers in R Markdown](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/UCI%20Human%20Activity%20Recognition%20Using%20Smartphones/R/HumanActivityRecog_NeuralNet_vs_TreeMethods.Rmd); **note**: the whole thing takes a **long time** to run completely
+- [model answers in iPython Notebook](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/UCI%20Human%20Activity%20Recognition%20Using%20Smartphones/Python/HumanActivityRecog_NeuralNet_vs_TreeMethods.ipynb); **note**: the whole thing takes a **long time** to run completely
 
 To load data use:
 
@@ -220,9 +227,9 @@ _**Python code**_ <br>
 
 _Homework assignment:_  <br>
 
-[Assignment](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Lecture07/hw/hw.pdf?raw=true) <br>
+[Assignment](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Lecture07/hw/hw.pdf) <br>
 Data: [videoGames.json.gz](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Lecture07/hw/videoGames.json.gz?raw=true) <br>
-Starter script: [starterScript.R](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Lecture07/hw/starterScript.R?raw=true) 
+Starter script: [starterScript.R](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Lecture07/hw/starterScript.R) 
 
 
 _Optional reading:_ 

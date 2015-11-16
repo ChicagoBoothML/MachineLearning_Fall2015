@@ -32,7 +32,7 @@ def parse_human_activity_recog_data(
 
     printflush("   Parsing Unique Input Features' (X's) Names... ", end='')
     X_names_with_duplicates = read_csv(
-        join(data_path, X_names_file_name),
+        join(data_path, X_names_file_name).replace('\\', '/'),
         delim_whitespace=True, header=None, index_col=0).iloc[:, 0]
     X_name_counts = Counter(X_names_with_duplicates)
     X_unique_names = list(X_name_counts)
@@ -41,12 +41,12 @@ def parse_human_activity_recog_data(
 
     printflush('   Parsing Train & Test Input Feature Data Sets... ', end='')
     X_train_with_duplicates = read_csv(
-        join(data_path, train_subfolder_name, X_train_file_name),
+        join(data_path, train_subfolder_name, X_train_file_name).replace('\\', '/'),
         delim_whitespace=True, header=None, index_col=False,
         names=X_names_with_duplicates,
         dtype=float, error_bad_lines=False, warn_bad_lines=True)
     X_test_with_duplicates = read_csv(
-        join(data_path, test_subfolder_name, X_test_file_name),
+        join(data_path, test_subfolder_name, X_test_file_name).replace('\\', '/'),
         delim_whitespace=True, header=None, index_col=False,
         names=X_names_with_duplicates,
         dtype=float, error_bad_lines=False, warn_bad_lines=True)
@@ -76,13 +76,13 @@ def parse_human_activity_recog_data(
     y_class_labels = 'Walking', 'WalkingUpstairs', 'WalkingDownstairs', 'Sitting', 'Standing', 'Laying'
 
     y_train = read_csv(
-        join(data_path, train_subfolder_name, y_train_file_name),
+        join(data_path, train_subfolder_name, y_train_file_name).replace('\\', '/'),
         sep=' ', header=None, dtype=int).iloc[:, 0].astype('category')
     y_train.cat.rename_categories(y_class_labels, inplace=True)
     y_train = y_train.loc[X_train.index]
 
     y_test = read_csv(
-        join(data_path, test_subfolder_name, y_test_file_name),
+        join(data_path, test_subfolder_name, y_test_file_name).replace('\\', '/'),
         sep=' ', header=None, dtype=int).iloc[:, 0].astype('category')
     y_test.cat.rename_categories(y_class_labels, inplace=True)
     y_test = y_test.loc[X_test.index]

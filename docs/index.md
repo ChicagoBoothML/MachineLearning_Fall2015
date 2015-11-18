@@ -181,6 +181,7 @@ There will be **8 homework assignments** that will be due weekly except week 1 a
 These assignments can be done in groups (max size 4).
 You should submit only one write-up per group.
 Homework should be submitted through Chalk.
+Only top 7 submissions count towards your grade.
 
 There is a **take-home midterm** that will be posted in week 5 and will be due in week 6.
 You must work individually on the midterm.

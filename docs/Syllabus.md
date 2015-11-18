@@ -12,9 +12,9 @@ We will move at a pace dictated by class discussions. Please check this page oft
 | [**5**](#week-5)    | 10/22 &ndash; 10/24 | Logistic regression and Intro to Neural networks                                 |
 | [**6**](#week-6)    | 10/29 &ndash; 10/31 | Neural Networks                                                                  | 
 | [**7**](#week-7)    | 11/5 &ndash; 11/7   | Recommender Systems                                                              |
-| [**8**](#week-7)    | 11/12 &ndash; 11/14 | Networks                                                                         |
-| 9                   | 11/19 &ndash; 11/21 | Probabilistic Graphical Models; Hidden Markov Models; Naive Bayes                |
-| 10                  | 12/3 &ndash; 12/5   | Mining Time Series                                                               |
+| [**8**](#week-8)    | 11/12 &ndash; 11/14 | Networks                                                                         |
+| [**9**](#weeks-9-10) | 11/19 &ndash; 11/21 | Naive Bayes; Probabilistic Graphical Models                                      |
+| [**10**](#weeks-9-10) | 12/3 &ndash; 12/5   | Hidden Markov Models (If time permits: anomaly detection in time series)         |
 | 11                  | 12/11               | Final Project due                                                                |
 
 
@@ -259,3 +259,25 @@ Starter script: [starterScript.R](https://raw.githubusercontent.com/ChicagoBooth
 _Optional reading:_ 
 
 See Chapters 3 and 4 of "Statistical Analysis of Network Data with R" (PDF available through UChicago library)
+
+
+## Weeks 9-10
+
+_Lecture Slides:_ <br>
+
+_**R code**:_ <br>
+
+See our [GitHub](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/tree/master/Programming%20Scripts/Lecture09). <br>
+
+_Homework assignment:_  <br>
+<!---
+[Assignment](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Lecture09/hw/hw.pdf) <br>
+Data: <br>
+Starter script: [starterScript.R](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Lecture09/hw/starterScript.R) 
+-->
+
+
+_Optional reading:_
+
+[Andrew Moore's basic probability tutorial](http://www.autonlab.org/tutorials/prob18.pdf) <br>
+[Rabiner's Detailed HMMs Tutorial](References/hmms-rabiner.pdf)

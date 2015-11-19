@@ -264,10 +264,14 @@ See Chapters 3 and 4 of "Statistical Analysis of Network Data with R" (PDF avail
 ## Weeks 9-10
 
 _Lecture Slides:_ <br>
+[**Probabilistic Graphical Models**](Syllabus/09_pgm.pdf) <br>
 
 _**R code**:_ <br>
 
-See our [GitHub](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/tree/master/Programming%20Scripts/Lecture09). <br>
+[NB_reviews.R](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Lecture09/NB_reviews.R). <br>
+Large Movie Review Dataset can be downloaded from [here](http://ai.stanford.edu/~amaas/data/sentiment/index.html).  <br>
+Direct link to data: [aclImdb_v1.tar.gz](http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz)
+
 
 _Homework assignment:_  <br>
 <!---
@@ -280,4 +284,6 @@ Starter script: [starterScript.R](https://raw.githubusercontent.com/ChicagoBooth
 _Optional reading:_
 
 [Andrew Moore's basic probability tutorial](http://www.autonlab.org/tutorials/prob18.pdf) <br>
-[Rabiner's Detailed HMMs Tutorial](References/hmms-rabiner.pdf)
+[Rabiner's Detailed HMMs Tutorial](References/hmms-rabiner.pdf)  <br>
+[Text mining package](https://cran.r-project.org/web/packages/tm/vignettes/tm.pdf)  <br>
+[Graphical Models with R](http://pi.lib.uchicago.edu/1001/cat/bib/8873052)   

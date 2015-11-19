@@ -85,7 +85,7 @@ nb_model = naiveBayes(nb_df_train, scores_train)
 
 # compute training error
 if (file.exists("nb_train_predictions.RData")) {
-  load("nb_train_predictions.Rdata")
+  load("nb_train_predictions.RData")
 } else {
   nb_train_predictions = predict(nb_model, nb_df_train) 
   save(nb_train_predictions, file = "nb_train_predictions.RData")

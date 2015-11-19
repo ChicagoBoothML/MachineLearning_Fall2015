@@ -12,6 +12,7 @@ install.packages(c(
   'h2o',
   'htmltools',
   'iGraph',
+  'jsonlite',
   'kknn',
   'knitr',
   'knitr',

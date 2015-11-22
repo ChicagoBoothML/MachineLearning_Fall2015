@@ -3,19 +3,19 @@
 The schedule below is tentative and subject to change, depending on time and class interests.
 We will move at a pace dictated by class discussions. Please check this page often for updates.
 
-| Week                | Date                | Content                                                                          |
-|:--------------------|:--------------------|:---------------------------------------------------------------------------------|
-| [**1**](#weeks-1-2) | 9/24 &ndash; 9/26   | Intro to  Machine Learning; Nearest Neighbours; Bias-Variance Trade-Off          |
-| [**2**](#weeks-1-2) | 10/1 &ndash; 10/3   | Cross Validation                                                                 |
-| [**3**](#week-3)    | 10/8 &ndash; 10/10  | Decision Trees; Bagging and Random Forests; Boosting and Boosted Additive Models |
-| [**4**](#week-4)    | 10/15 &ndash; 10/17 | Categorical Outcomes and Classification Models                                   |
-| [**5**](#week-5)    | 10/22 &ndash; 10/24 | Logistic regression and Intro to Neural networks                                 |
-| [**6**](#week-6)    | 10/29 &ndash; 10/31 | Neural Networks                                                                  | 
-| [**7**](#week-7)    | 11/5 &ndash; 11/7   | Recommender Systems                                                              |
-| [**8**](#week-8)    | 11/12 &ndash; 11/14 | Networks                                                                         |
-| [**9**](#weeks-9-10) | 11/19 &ndash; 11/21 | Naive Bayes; Probabilistic Graphical Models                                      |
+| Week                  | Date                | Content                                                                          |
+|:----------------------|:--------------------|:---------------------------------------------------------------------------------|
+| [**1**](#weeks-1-2)   | 9/24 &ndash; 9/26   | Intro to  Machine Learning; Nearest Neighbours; Bias-Variance Trade-Off          |
+| [**2**](#weeks-1-2)   | 10/1 &ndash; 10/3   | Cross Validation                                                                 |
+| [**3**](#week-3)      | 10/8 &ndash; 10/10  | Decision Trees; Bagging and Random Forests; Boosting and Boosted Additive Models |
+| [**4**](#week-4)      | 10/15 &ndash; 10/17 | Categorical Outcomes and Classification Models                                   |
+| [**5**](#week-5)      | 10/22 &ndash; 10/24 | Logistic regression and Intro to Neural networks                                 |
+| [**6**](#week-6)      | 10/29 &ndash; 10/31 | Neural Networks                                                                  | 
+| [**7**](#week-7)      | 11/5 &ndash; 11/7   | Recommender Systems                                                              |
+| [**8**](#week-8)      | 11/12 &ndash; 11/14 | Networks                                                                         |
+| [**9**](#weeks-9-10)  | 11/19 &ndash; 11/21 | Naive Bayes; Probabilistic Graphical Models                                      |
 | [**10**](#weeks-9-10) | 12/3 &ndash; 12/5   | Hidden Markov Models (If time permits: anomaly detection in time series)         |
-| 11                  | 12/11               | Final Project due                                                                |
+| 11                    | 12/11               | Final Project due                                                                |
 
 
 ## Weeks 1-2
@@ -274,12 +274,9 @@ Direct link to data: [aclImdb_v1.tar.gz](http://ai.stanford.edu/~amaas/data/sent
 
 
 _Homework assignment:_  <br>
-<!---
-[Assignment](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/Lecture09/hw/hw.pdf) <br>
-Data: <br>
+[Assignment](Syllabus/09_hw.pdf) <br>
+Data: [emails.cvs](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Lecture09/hw/emails.csv)<br>
 Starter script: [starterScript.R](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Lecture09/hw/starterScript.R) 
--->
-
 
 _Optional reading:_
 

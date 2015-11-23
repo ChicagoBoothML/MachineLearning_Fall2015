@@ -146,8 +146,8 @@ An Introduction to Statistical Learning: Chapter 4, Section 6.2
 [**Midterm Exam Questions**](Syllabus/Midterm.pdf)
 
 - model answers in R Markdown:
-    - [Question 1]
-    - [Question 2]
+    - [Question 1](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Transport%20Accidents/R/TransportAccidents_MidtermAns.Rmd)
+    - [Question 2](https://raw.githubusercontent.com/ChicagoBoothML/MachineLearning_Fall2015/master/Programming%20Scripts/Tabloid%20Marketing/R/TabloidMarketing_MidtermAns.Rmd)
 
 
 ## Week 6

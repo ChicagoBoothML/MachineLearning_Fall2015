@@ -424,7 +424,9 @@ We can see that the Test performance is similar to what we've estimated from the
 
 # 3. Estimating the Effect of Alcohol
 
-The effect of alcohol usage on the odds of non-fatal and fatal injuries can be estimated using logistic regressions. Refer to Matt Taddy's _Big Data_ course for relevant techniques.
+A simple thing we can do to measure the impact of __including the Alcohol variable__ is to run models with and without the Alcohol variable and see if the results are very different (for this mid-term, we only expect such a simple answer). 
+
+If we use logistic regression for interpretability, the __treatment effect__ of alcohol usage on the odds of non-fatal and fatal injuries can be estimated using techniques discussed in Matt Taddy's _Big Data_ course.
 
 
 ```{r}

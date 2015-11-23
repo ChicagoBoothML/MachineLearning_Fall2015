@@ -306,52 +306,7 @@ It seems all models agree that _iRecMer1_ and _nTab_ are highly influential vari
 
 # 3) Optimal Targeted Marketing Decision 
 
-```{r}
-cost_per_targeted_customer <- .8
-benefit_per_responsive_customer <- 10.
-```
-
-Let's assume that it costs $**`r formatC(cost_per_targeted_customer, format='f', digits=2)`** to mail out an incentive package to a customer, and that a **responsive** customer yields a financial gain of $**`r formatC(benefit_per_responsive_customer, format='f', digits=2)`** to the company. We need to use these to determine the decision threshold for whether to do targeted marketing to a customer or not.
-
-The expected financial gain from targeting a customer is:
-
-$$
-EU = precision \times \text{benefit per responsive customer} - \text{cost per targeted customer}
-$$
-
-The lowest precision threshold for profitability is hence:
-
-```{r}
-precision_threshold <- cost_per_targeted_customer / benefit_per_responsive_customer
-```
-
-The corresponding probability threshold is:
-
-```{r}
-i <- min(which(boost_4var_oos_performance$precision > precision_threshold))
-selected_prob_threshold <- prob_thresholds[i]
-```
-
-The selected decision threshold is **`r formatC(selected_prob_threshold, format='f', digits=3)`**. The expected performance of the model at that threshold is as follows:
-
-```{r}
-boost_4var_oos_performance[i, ]
-```
-
-Let's now evaluate the performance of the selected 4-variable Boosted Trees model, with a decision threshold at **`r formatC(selected_prob_threshold, format='f', digits=3)`**:
-
-```{r}
-boost_4var_test_pred_probs <- predict(
-  boost_model_4var, newdata=tabloid_test[, X_4var_names, with=FALSE], type='prob')
-
-boost_4var_test_performance <- bin_classif_eval(
-  boost_4var_test_pred_probs$responsive, tabloid_test$purchase,
-  thresholds=selected_prob_threshold)
-
-boost_4var_test_performance
-```
-
-We can see that the Test performance is broadly similar to what we've estimated from the Validation set.
+Now that we have the estimated model, you can use techniques discussed in Lecture 4 Section 4 _Decision Theory & Expected Utility_ to decide on the optimal decision threshold and the derived benefit per customer. 
 
 
 ```{r}

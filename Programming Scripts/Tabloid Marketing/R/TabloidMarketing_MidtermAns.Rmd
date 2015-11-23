@@ -1,0 +1,359 @@
+---
+title: "Midterm Question 02: Tabloid Marketing"
+author: 'Chicago Booth ML Team'
+output: pdf_document
+fontsize: 12
+geometry: margin=0.6in
+---
+
+
+_**Note**: In order to illustrate the best practices, this script utilizes the popular [**caret**](http://topepo.github.io/caret) package, which wraps around underlying algorithms such as randomForest and GBM with a consistent interface. We also illutrate the use of **multi-core parallel computation** to speed up computer run-time._
+
+
+# Load Libraries & Modules; Set Randomizer Seed
+
+```{r message=FALSE, warning=FALSE}
+library(caret)
+library(data.table)
+library(doParallel)
+
+# load modules from the common HelpR repo
+helpr_repo_raw_url <- 'https://raw.githubusercontent.com/ChicagoBoothML/HelpR/master'
+source(file.path(helpr_repo_raw_url, 'EvaluationMetrics.R'))
+
+# set randomizer's seed
+set.seed(99)   # Gretzky was #99
+```
+
+
+# Parallel Computation Setup
+
+Let's set up a parallel computing infrastructure (thanks to the excellent **`doParallel`** package by Microsoft subsidiary **Revolution Analytics**) to allow more efficient computation in the rest of this exercise:
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+cl <- makeCluster(detectCores() - 2)   # create a compute cluster using all CPU cores but 2
+clusterEvalQ(cl, library(foreach))
+registerDoParallel(cl)   # register this cluster
+```
+
+We have set up a compute cluster with **`r getDoParWorkers()`** worker nodes for computing.
+
+
+# Data Import & Pre-Processing
+
+```{r}
+# download data and read data into data.table format
+tabloid <- fread(
+  'https://raw.githubusercontent.com/ChicagoBoothML/DATA__Tabloid/master/Tabloid_9Vars_20kSamples.csv',
+  colClasses=c(
+    purchase='integer',
+    nTab='numeric',
+    moCbook='numeric',
+    iRecMer1='numeric',
+    propSpec='numeric',
+    recW4='numeric',
+    moShoe='numeric',
+    nWoApp='numeric',
+    nMen='numeric',
+    llDol='numeric'))
+tabloid[ , purchase := factor(purchase, levels=c(0, 1),
+                              labels=c('non_responsive', 'responsive'))]
+
+nb_samples <- nrow(tabloid)
+
+tabloid
+```
+
+Just to sanity-check, the classes of the variables are:
+
+```{r}
+sapply(tabloid, function(col) {
+  if (class(col) == 'factor') {
+    levels(col)
+  } else {
+    paste('[', class(col), ']', sep='')
+  }
+})
+```
+
+Out of the **`r formatC(nb_samples, format='d', big.mark=',')`** samples, the incidence of marketing-responsive purchase is **`r formatC(100 * sum(tabloid$purchase == 'responsive') / nb_samples, format='f', digits=2, big.mark=',')`%**. Note that this creates a "**skewed classes**" problem: one of the classes of cases (here the "responsive" class) is significantly rarer than the other.
+
+_(**note**: in more extreme cases where one class is much, much rarer than the other to the order of 1000 or 10,000 times, our model fitting procedures would need to be tweaked; but this case is not so extreme)_
+
+We don't have a missing data problem with this data set:
+
+```{r}
+sapply(tabloid, function(col) sum(is.na(col)))
+```
+
+Let's split the data set into a Training set, a Validation set and a Test set:
+
+```{r}
+train_valid_proportion <- .75
+train_valid_indices <- createDataPartition(
+  y=tabloid$purchase,
+  p=train_valid_proportion,
+  list=FALSE)
+tabloid_train_valid <- tabloid[train_valid_indices, ]
+tabloid_test <- tabloid[-train_valid_indices, ]
+
+train_proportion_of_train_valid <- 2 / 3
+train_indices <- createDataPartition(
+  y=tabloid_train_valid$purchase,
+  p=train_proportion_of_train_valid,
+  list=FALSE)
+tabloid_train <- tabloid_train_valid[train_indices, ]
+tabloid_valid <- tabloid_train_valid[-train_indices, ]
+```
+
+Just to sanity-check that the data sets have been split representatively by **`caret`**: the responsive incidences in the Training and Validation sets are as follows:
+
+```{r}
+data_sets <- list(
+  train=tabloid_train,
+  valid=tabloid_valid,
+  test=tabloid_test)
+
+data_set_summaries <- data.table(
+  data_set=character(),
+  nb_samples=numeric(),
+  responsive_proportion=numeric())
+
+for (data_set_name in names(data_sets)) {
+  purchase_responsiveness <- data_sets[[data_set_name]]$purchase
+  data_set_nb_samples <- length(purchase_responsiveness)
+  data_set_summaries <- rbind(data_set_summaries, data.table(
+    data_set=data_set_name,
+    nb_samples=data_set_nb_samples,
+    responsive_proportion=sum(purchase_responsiveness == 'responsive') / data_set_nb_samples))
+}
+
+data_set_summaries
+```
+
+
+# 1 & 2) Classification Models
+
+Let's train 2 types of classification models: a Random Forest and a Boosted Trees model. For each type, we'll build 2 models, one using 4 predictor variables and one using all 9 predictor variables.
+
+
+```{r}
+X_4var_names <- c(
+  'nTab',
+  'moCbook',
+  'iRecMer1',
+  'llDol')
+X_9var_names <- c(
+  X_4var_names,
+  'recW4',
+  'moShoe',
+  'nWoApp',
+  'nMen')
+```
+
+```{r}
+caret_optimized_metric <- 'logLoss'   # equivalent to 1 / 2 of Deviance
+
+caret_train_control <- trainControl(
+  classProbs=TRUE,             # compute class probabilities
+  summaryFunction=mnLogLoss,   # equivalent to 1 / 2 of Deviance
+  method='repeatedcv',         # repeated Cross Validation
+  number=5,                    # number of folds
+  repeats=3,                   # number of repeats
+  allowParallel=TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+B <- 1200
+
+rf_model_4var <- train(
+  x=tabloid_train[, X_4var_names, with=FALSE],
+  y=tabloid_train$purchase,
+  method='parRF',     # parallel Random Forest
+  metric=caret_optimized_metric,
+  ntree=B,            # number of trees in the Random Forest
+  nodesize=30,        # minimum node size set small enough to allow for complex trees,
+                      # but not so small as to require too large B to eliminate high variance
+  importance=TRUE,    # evaluate importance of predictors
+  keep.inbag=TRUE,
+  trControl=caret_train_control,
+  tuneGrid=NULL)
+```
+
+```{r message=FALSE, warning=FALSE}
+B <- 1200
+
+rf_model_9var <- train(
+  x=tabloid_train[, X_9var_names, with=FALSE],
+  y=tabloid_train$purchase,
+  method='parRF',     # parallel Random Forest
+  metric=caret_optimized_metric,
+  ntree=B,            # number of trees in the Random Forest
+  nodesize=30,        # minimum node size set small enough to allow for complex trees,
+                      # but not so small as to require too large B to eliminate high variance
+  importance=TRUE,    # evaluate importance of predictors
+  keep.inbag=TRUE,
+  trControl=caret_train_control,
+  tuneGrid=NULL)
+```
+
+```{r message=FALSE, warning=FALSE}
+B <- 2400
+
+boost_model_4var <- train(
+  x=tabloid_train[, X_4var_names, with=FALSE],
+  y=tabloid_train$purchase,
+  method='gbm',             # Generalized Boosted Models
+  metric=caret_optimized_metric,
+  verbose=FALSE,
+  trControl=caret_train_control,
+  tuneGrid=expand.grid(
+    n.trees=B,              # number of trees
+    interaction.depth=10,   # max tree depth,
+    n.minobsinnode=100,     # minimum node size
+    shrinkage=.01))         # shrinkage parameter, a.k.a. "learning rate"
+```
+
+```{r message=FALSE, warning=FALSE}
+B <- 2400
+
+boost_model_9var <- train(
+  x=tabloid_train[, X_9var_names, with=FALSE],
+  y=tabloid_train$purchase,
+  method='gbm',             # Generalized Boosted Models
+  metric=caret_optimized_metric,
+  verbose=FALSE,
+  trControl=caret_train_control,
+  tuneGrid=expand.grid(
+    n.trees=B,              # number of trees
+    interaction.depth=10,   # max tree depth,
+    n.minobsinnode=100,     # minimum node size
+    shrinkage=.01))         # shrinkage parameter, a.k.a. "learning rate"
+```
+
+We'll now evaluate the OOS performances of these 4 models on the Validation set to select a model we think is best:
+
+```{r}
+low_prob <- 1e-6
+high_prob <- 1 - low_prob
+log_low_prob <- log(low_prob)
+log_high_prob <- log(high_prob)
+log_prob_thresholds <- seq(from=log_low_prob, to=log_high_prob, length.out=100)
+prob_thresholds <- exp(log_prob_thresholds)
+
+# *** NOTE: **
+# the below "bin_classif_eval" function is from the "EvaluationMetrics.R" helper script
+# in the "HelpR" GitHub repo
+
+rf_4var_pred_probs <- predict(
+  rf_model_4var, newdata=tabloid_valid[ , X_4var_names, with=FALSE], type='prob')
+rf_4var_oos_performance <- bin_classif_eval(
+  rf_4var_pred_probs$responsive, tabloid_valid$purchase, thresholds=prob_thresholds)
+
+rf_9var_pred_probs <- predict(
+  rf_model_9var, newdata=tabloid_valid[ , X_9var_names, with=FALSE], type='prob')
+rf_9var_oos_performance <- bin_classif_eval(
+  rf_9var_pred_probs$responsive, tabloid_valid$purchase, thresholds=prob_thresholds)
+
+boost_4var_pred_probs <- predict(
+  boost_model_4var, newdata=tabloid_valid[ , X_4var_names, with=FALSE], type='prob')
+boost_4var_oos_performance <- bin_classif_eval(
+  boost_4var_pred_probs$responsive, tabloid_valid$purchase, thresholds=prob_thresholds)
+
+boost_9var_pred_probs <- predict(
+  boost_model_9var, newdata=tabloid_valid[ , X_9var_names, with=FALSE], type='prob')
+boost_9var_oos_performance <- bin_classif_eval(
+  boost_9var_pred_probs$responsive, tabloid_valid$purchase, thresholds=prob_thresholds)
+
+
+plot(x=1 - rf_4var_oos_performance$specificity,
+     y=rf_4var_oos_performance$sensitivity,
+     type='l', col='darkgreen', lwd=3,
+     xlim=c(0., 1.), ylim = c(0., 1.),
+     main='ROC Curves (Validation Data)',
+     xlab='1 - Specificity', ylab='Sensitivity')
+abline(a=0, b=1, lty=2, col=8)
+lines(x=1 - boost_4var_oos_performance$specificity,
+      y=boost_4var_oos_performance$sensitivity,
+      col='green', lwd=3)
+lines(x=1 - rf_9var_oos_performance$specificity,
+      y=rf_9var_oos_performance$sensitivity,
+      col='red', lwd=3)
+lines(x=1 - boost_9var_oos_performance$specificity,
+      y=boost_9var_oos_performance$sensitivity,
+      col='orange', lwd=3)
+legend('bottomright', c('Random Forest (4 predictors)', 'Boosted Trees (4 predictors)',
+                         'Random Forest (9 predictors)', 'Boosted Trees (9 predictors)'), 
+   lty=1, col=c('darkgreen', 'green', 'red', 'orange'), lwd=3, cex=1.)
+```
+
+We can see that all 4 models have very similar OOS performances. Let's look at their variable importances:
+
+```{r}
+varImpPlot(rf_model_4var$finalModel,
+           main="Random Forest (4 predictors)'s Variable Importance")
+plot(summary(boost_model_4var$finalModel, plotit=FALSE),
+     main="Boosted Trees Model (4 predictors)'s Variable Importance")
+varImpPlot(rf_model_9var$finalModel,
+           main="Random Forest (9 predictors)'s Variable Importance")
+plot(summary(boost_model_9var$finalModel, plotit=FALSE),
+     main="Boosted Trees Model (9 predictors)'s Variable Importance",
+     las=2)
+```
+
+It seems all models agree that _iRecMer1_ and _nTab_ are highly influential variables, while the rankings of other variables are more mixed. For simplicity, we'll select the 4-predictor Boosted Trees model as the model of our choice.
+
+
+# 3) Optimal Targeted Marketing Decision 
+
+```{r}
+cost_per_targeted_customer <- .8
+benefit_per_responsive_customer <- 10.
+```
+
+Let's assume that it costs $**`r formatC(cost_per_targeted_customer, format='f', digits=2)`** to mail out an incentive package to a customer, and that a **responsive** customer yields a financial gain of $**`r formatC(benefit_per_responsive_customer, format='f', digits=2)`** to the company. We need to use these to determine the decision threshold for whether to do targeted marketing to a customer or not.
+
+The expected financial gain from targeting a customer is:
+
+$$
+EU = precision \times \text{benefit per responsive customer} - \text{cost per targeted customer}
+$$
+
+The lowest precision threshold for profitability is hence:
+
+```{r}
+precision_threshold <- cost_per_targeted_customer / benefit_per_responsive_customer
+```
+
+The corresponding probability threshold is:
+
+```{r}
+i <- min(which(boost_4var_oos_performance$precision > precision_threshold))
+selected_prob_threshold <- prob_thresholds[i]
+```
+
+The selected decision threshold is **`r formatC(selected_prob_threshold, format='f', digits=3)`**. The expected performance of the model at that threshold is as follows:
+
+```{r}
+boost_4var_oos_performance[i, ]
+```
+
+Let's now evaluate the performance of the selected 4-variable Boosted Trees model, with a decision threshold at **`r formatC(selected_prob_threshold, format='f', digits=3)`**:
+
+```{r}
+boost_4var_test_pred_probs <- predict(
+  boost_model_4var, newdata=tabloid_test[, X_4var_names, with=FALSE], type='prob')
+
+boost_4var_test_performance <- bin_classif_eval(
+  boost_4var_test_pred_probs$responsive, tabloid_test$purchase,
+  thresholds=selected_prob_threshold)
+
+boost_4var_test_performance
+```
+
+We can see that the Test performance is broadly similar to what we've estimated from the Validation set.
+
+
+```{r}
+stopCluster(cl)   # shut down the parallel computing cluster
+```

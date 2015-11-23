@@ -1,0 +1,432 @@
+---
+title: "Midterm Question 01: Transport Accidents"
+author: 'Chicago Booth ML Team'
+output: pdf_document
+fontsize: 12
+geometry: margin=0.6in
+---
+
+
+_**Note**: In order to illustrate the best practices, this script utilizes the popular [**caret**](http://topepo.github.io/caret) package, which wraps around underlying algorithms such as randomForest and GBM with a consistent interface. We also illutrate the use of **multi-core parallel computation** to speed up computer run-time._
+
+
+# Load Libraries & Modules; Set Randomizer Seed
+
+```{r message=FALSE, warning=FALSE}
+library(caret)
+library(data.table)
+library(doParallel)
+
+# load modules from the common HelpR repo
+helpr_repo_raw_url <- 'https://raw.githubusercontent.com/ChicagoBoothML/HelpR/master'
+source(file.path(helpr_repo_raw_url, 'EvaluationMetrics.R'))
+
+# set randomizer's seed
+set.seed(99)   # Gretzky was #99
+```
+
+
+# Parallel Computation Setup
+
+Let's set up a parallel computing infrastructure (thanks to the excellent **`doParallel`** package by Microsoft subsidiary **Revolution Analytics**) to allow more efficient computation in the rest of this exercise:
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+cl <- makeCluster(detectCores() - 2)   # create a compute cluster using all CPU cores but 2
+clusterEvalQ(cl, library(foreach))
+registerDoParallel(cl)   # register this cluster
+```
+
+We have set up a compute cluster with **`r getDoParWorkers()`** worker nodes for computing.
+
+
+# Data Import & Cleaning
+
+```{r}
+accidents <- fread(
+  'https://raw.githubusercontent.com/ChicagoBoothML/DATA___TransportAccidents/master/Accidents.csv',
+  colClasses=c(
+    HOUR_I_R='integer',   # 1=rush hour, 0=not (rush = 6-9 am, 4-7 pm)
+    ALCHL_I='integer',   # Alcohol involved = 1, not involved = 2
+    ALIGN_I='integer',   # 1 = straight, 2 = curve
+    STRATUM_R='integer',   # 1= NASS Crashes Involving At Least One Passenger Vehicle Towed Due To Damage; 0=not
+    WRK_ZONE='integer',   # 1= yes, 0= no
+    WKDY_I_R='integer',   # 1=weekday, 0=weekend
+    INT_HWY='integer',   # Interstate? 1=yes, 0= no
+    LGTCON_I_R='integer',   # Light conditions - 1=day, 2=dark (including dawn/dusk), 3=dark, but lighted,4=dawn or dusk
+    MANCOL_I_R='integer',   # 0=no collision, 1=head-on, 2=other form of collision
+    PED_ACC_R='integer',   # 1=pedestrian/cyclist involved, 0=not
+    RELJCT_I_R='integer',   # 1=accident at intersection/interchange, 0=not at intersection
+    REL_RWY_R='integer',   # 1=accident on roadway, 0=not on roadway 
+    PROFIL_I_R='integer',   # 1= level, 0=other
+    SPD_LIM='numeric',   # Speed limit, miles per hour 
+    SUR_COND='integer',   # Surface conditions (1=dry, 2=wet, 3=snow/slush, 4=ice, 5=sand/dirt/oil, 8=other, 9=unknown)
+    TRAF_CON_R='integer',   # Traffic control device: 0=none, 1=signal, 2=other (sign, officer)
+    TRAF_WAY='integer',   # 1=two-way traffic, 2=divided hwy, 3=one-way road
+    VEH_INVL='numeric',   # Number of vehicles involved
+    WEATHER_R='integer',   # 1=no adverse conditions, 2=rain, snow or other adverse condition
+    INJURY_CRASH='integer',   # 1=yes, 0= no
+    NO_INJ_I='numeric',   # Number of injuries
+    PRPTYDMG_CRASH='integer',   # 1=property damage, 2=no property damage
+    FATALITIES='integer',   # 1= yes, 0= no
+    MAX_SEV_IR='integer'   # 0=no injury, 1=non-fatal inj., 2=fatal inj.
+    ))
+
+accidents[ , `:=`(
+  HOUR_I_R=factor(HOUR_I_R, levels=c(0, 1),
+                  labels=c('non_rush_hour', 'rush_hour')),
+  ALCHL_I=factor(ALCHL_I, levels=c(1, 2),
+                 labels=c('alcohol', 'no_alcohol')),
+  ALIGN_I=factor(ALIGN_I, levels=c(1, 2),
+                 labels=c('straight_road', 'curved_road')),
+  STRATUM_R=factor(STRATUM_R, levels=c(0, 1),
+                   labels=c('no_other_vehicles_towed', 'other_vehicles_towed')),
+  WRK_ZONE=factor(WRK_ZONE, levels=c(0, 1),
+                  labels=c('not_work_zone', 'work_zone')),
+  WKDY_I_R=factor(WKDY_I_R, levels=c(0, 1),
+                  labels=c('weekend', 'weekday')),
+  INT_HWY=factor(INT_HWY, levels=c(0, 1, 9),
+                 labels=c('not_interstate', 'interstate', 'unknown')),
+  LGTCON_I_R=factor(LGTCON_I_R, levels=c(1, 2, 3),
+                    labels=c('day', 'dark', 'dark_but_lighted')),
+  MANCOL_I_R=factor(MANCOL_I_R, levels=c(0, 1, 2),
+                    labels=c('no_collison', 'head_on_collison', 'other_collison')),
+  PED_ACC_R=factor(PED_ACC_R, levels=c(0, 1),
+                   labels=c('no_pedestrian_or_cyclist_involved', 'pedestrian_or_cyclist_involved')),
+  RELJCT_I_R=factor(RELJCT_I_R, levels=c(0, 1),
+                    labels=c('not_at_intersection', 'at_intersection')),
+  REL_RWY_R=factor(REL_RWY_R, levels=c(0, 1),
+                   labels=c('not_on_roadway', 'on_roadway')),
+  PROFIL_I_R=factor(PROFIL_I_R, levels=c(0, 1),
+                    labels=c('other', 'level')),
+  SUR_COND=factor(SUR_COND, levels=c(1, 2, 3, 4, 9),
+                  labels=c('dry', 'wet', 'snow_or_slush', 'ice', 'unknown')),
+  TRAF_CON_R=factor(TRAF_CON_R, levels=c(0, 1, 2),
+                    labels=c('no_traffic_control', 'signal_traffic_control', 'other_traffic_control')),
+  TRAF_WAY=factor(TRAF_WAY, levels=c(1, 2, 3),
+                  labels=c('two_way_traffic', 'divided_highway', 'one_way_road')),
+  WEATHER_R=factor(WEATHER_R, levels=c(1, 2),
+                   labels=c('no_adverse_weather', 'adverse_weather')),
+  INJURY_CRASH=factor(INJURY_CRASH, levels=c(0, 1),
+                      labels=c('no_injury', 'injury')),
+  PRPTYDMG_CRASH=factor(PRPTYDMG_CRASH, levels=c(0, 1),
+                        labels=c('no_property_damage', 'property_damage')),
+  FATALITIES=factor(FATALITIES, levels=c(0, 1),
+                    labels=c('no_fatalities', 'fatalities')),
+  MAX_SEV_IR=factor(MAX_SEV_IR, levels=c(0, 1, 2),
+                    labels=c('no_injury', 'non_fatal_injury', 'fatal_injury')))]
+
+nb_samples <- nrow(accidents)
+```
+
+We have **`r formatC(nb_samples, big.mark=',')`** samples with the following variables:
+
+```{r}
+sapply(accidents, function(col) {
+  if (class(col) == 'factor') {
+    levels(col)
+  } else {
+    paste('[', class(col), ']', sep='')
+  }
+})
+```
+
+It seems we do not have a missing data problem:
+
+```{r}
+sapply(accidents, function(col) sum(is.na(col)) / nb_samples)
+```
+
+
+# 1. Variable Chosen to Predict: _MAX\_SEV\_IR_
+
+This script shall focus on predicting the variable _MAX\_SEV\_IR_ (severity of injury). Good prediction of this variable is very important as the emergency care resources for serious injuries are highly limited. Also, we need different resources for dealing with fatal and non-fatal injuries.
+
+Before building predictive models, let's split the data set into a Training set, a Validation set and a Test set:
+
+```{r}
+train_valid_proportion <- .5
+train_valid_indices <- createDataPartition(
+  y=accidents$MAX_SEV_IR,
+  p=train_valid_proportion,
+  list=FALSE)
+accidents_train_valid <- accidents[train_valid_indices, ]
+accidents_test <- accidents[-train_valid_indices, ]
+
+train_proportion_of_train_valid <- .75
+train_indices <- createDataPartition(
+  y=accidents_train_valid$MAX_SEV_IR,
+  p=train_proportion_of_train_valid,
+  list=FALSE)
+accidents_train <- accidents_train_valid[train_indices, ]
+accidents_valid <- accidents_train_valid[-train_indices, ]
+```
+
+Just to double-check that the data have been split representatively, the proportions of the 3 categories of the injury severity in the 3 data sets are as follows:
+
+```{r}
+data_sets <- list(
+  train=accidents_train,
+  valid=accidents_valid,
+  test=accidents_test)
+
+data_set_summaries <- data.table(
+  data_set=character(),
+  nb_samples=numeric(),
+  no_injury_proportion=numeric(),
+  non_fatal_injury_proportion=numeric(),
+  fatal_injury_proportion=numeric())
+
+for (data_set_name in names(data_sets)) {
+  injury_severity <- data_sets[[data_set_name]]$MAX_SEV_IR
+  data_set_nb_samples <- length(injury_severity)
+  data_set_summaries <- rbind(data_set_summaries, data.table(
+    data_set=data_set_name,
+    nb_samples=data_set_nb_samples,
+    no_injury_proportion=sum(injury_severity == 'no_injury') / data_set_nb_samples,
+    non_fatal_injury_proportion=sum(injury_severity == 'non_fatal_injury') / data_set_nb_samples,
+    fatal_injury_proportion=sum(injury_severity == 'fatal_injury') / data_set_nb_samples))
+}
+
+data_set_summaries
+```
+
+Note that while there are about equal numbers of non-injuries and non-fatal injuries in the data sets, fatal injuries are much rarer, in the order of 1%. This poses a skewed-classes challenge, and we'll need to take extra care in evaluating our models.
+
+
+# 2. Classification Models
+
+Let's try to predict the injury severity by the following predictor variables, which can be known via reporting remotely, without the response team having reached the actual accident site
+
+```{r}
+X_var_names <- c(
+  'HOUR_I_R',
+  'ALIGN_I',
+  'STRATUM_R',
+  'WRK_ZONE',
+  'WKDY_I_R',
+  'INT_HWY',
+  'LGTCON_I_R',
+  'MANCOL_I_R',
+  'PED_ACC_R',
+  'RELJCT_I_R',
+  'REL_RWY_R',
+  'PROFIL_I_R',
+  'SPD_LIM',
+  'SUR_COND',
+  'TRAF_CON_R',
+  'TRAF_WAY',
+  'VEH_INVL',
+  'WEATHER_R')
+```
+
+Let's train 2 types of classification models: a Random Forest and a Boosted Trees model:
+
+```{r}
+caret_optimized_metric <- 'logLoss'   # multinomial Cross Entropy
+
+caret_train_control <- trainControl(
+  classProbs=TRUE,             # compute class probabilities
+  summaryFunction=mnLogLoss,   # multinomial Cross Entropy
+  method='repeatedcv',         # repeated Cross Validation
+  number=5,                    # number of folds
+  repeats=3,                   # number of repeats
+  allowParallel=TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+B <- 600
+
+rf_model <- train(
+  x=accidents_train[ , X_var_names, with=FALSE],
+  y=accidents_train$MAX_SEV_IR,
+  method='parRF',     # parallel Random Forest
+  metric=caret_optimized_metric,
+  ntree=B,            # number of trees in the Random Forest
+  nodesize=100,       # minimum node size set small enough to allow for complex trees,
+                      # but not so small as to require too large B to eliminate high variance
+  importance=TRUE,    # evaluate importance of predictors
+  keep.inbag=TRUE,
+  trControl=caret_train_control,
+  tuneGrid=NULL)
+```
+
+```{r message=FALSE, warning=FALSE}
+B <- 1200
+
+boost_model <- train(
+  x=accidents_train[ , X_var_names, with=FALSE],
+  y=accidents_train$MAX_SEV_IR,
+  method='gbm',             # Generalized Boosted Models
+  metric=caret_optimized_metric,
+  verbose=FALSE,
+  trControl=caret_train_control,
+  tuneGrid=expand.grid(
+    n.trees=B,              # number of trees
+    interaction.depth=10,   # max tree depth,
+    n.minobsinnode=100,     # minimum node size
+    shrinkage=.01))         # shrinkage parameter, a.k.a. "learning rate"
+```
+
+We'll now evaluate the OOS performances of these 2 models on the Validation set to select the better one:
+
+```{r}
+low_prob <- 1e-6
+high_prob <- 1 - low_prob
+log_low_prob <- log(low_prob)
+log_high_prob <- log(high_prob)
+log_prob_thresholds <- seq(from=log_low_prob, to=log_high_prob, length.out=100)
+prob_thresholds <- exp(log_prob_thresholds)
+
+# *** NOTE: **
+# the below "bin_classif_eval" function is from the "EvaluationMetrics.R" helper script
+# in the "HelpR" GitHub repo
+
+X_valid <- accidents_valid[ , X_var_names, with=FALSE]
+y_valid <- accidents_valid$MAX_SEV_IR
+
+
+rf_pred_probs <- predict(
+  rf_model, newdata=X_valid, type='prob')
+
+rf_oos_performance___no_injury <- bin_classif_eval(
+  rf_pred_probs$no_injury, y_valid == 'no_injury', thresholds=prob_thresholds)
+
+rf_oos_performance___non_fatal_injury <- bin_classif_eval(
+  rf_pred_probs$non_fatal_injury, y_valid == 'non_fatal_injury', thresholds=prob_thresholds)
+
+rf_oos_performance___fatal_injury <- bin_classif_eval(
+  rf_pred_probs$fatal_injury, y_valid == 'fatal_injury', thresholds=prob_thresholds)
+
+
+boost_pred_probs <- predict(
+  boost_model, newdata=X_valid, type='prob')
+
+boost_oos_performance___no_injury <- bin_classif_eval(
+  boost_pred_probs$no_injury, y_valid == 'no_injury', thresholds=prob_thresholds)
+
+boost_oos_performance___non_fatal_injury <- bin_classif_eval(
+  boost_pred_probs$non_fatal_injury, y_valid == 'non_fatal_injury', thresholds=prob_thresholds)
+
+boost_oos_performance___fatal_injury <- bin_classif_eval(
+  boost_pred_probs$fatal_injury, y_valid == 'fatal_injury', thresholds=prob_thresholds)
+```
+
+```{r}
+plot(x=1 - rf_oos_performance___no_injury$specificity,
+     y=rf_oos_performance___no_injury$sensitivity,
+     type='l', col='darkgreen', lwd=3,
+     xlim=c(0., 1.), ylim = c(0., 1.),
+     main='ROC Curves (Validation): positives = NO_INJURY',
+     xlab='1 - Specificity', ylab='Sensitivity')
+abline(a=0, b=1, lty=2, col=8)
+lines(x=1 - boost_oos_performance___no_injury$specificity,
+      y=boost_oos_performance___no_injury$sensitivity,
+      col='green', lwd=3)
+legend('right', c('Random Forest', 'Boosted Trees'), 
+   lty=1, col=c('darkgreen', 'green'), lwd=3, cex=1.)
+```
+
+```{r}
+plot(x=1 - rf_oos_performance___non_fatal_injury$specificity,
+     y=rf_oos_performance___non_fatal_injury$sensitivity,
+     type='l', col='darkgreen', lwd=3,
+     xlim=c(0., 1.), ylim = c(0., 1.),
+     main='ROC Curves (Validation): positives = NON_FATAL_INJURY',
+     xlab='1 - Specificity', ylab='Sensitivity')
+abline(a=0, b=1, lty=2, col=8)
+lines(x=1 - boost_oos_performance___non_fatal_injury$specificity,
+      y=boost_oos_performance___non_fatal_injury$sensitivity,
+      col='green', lwd=3)
+legend('right', c('Random Forest', 'Boosted Trees'), 
+   lty=1, col=c('darkgreen', 'green'), lwd=3, cex=1.)
+```
+
+```{r}
+plot(x=1 - rf_oos_performance___fatal_injury$specificity,
+     y=rf_oos_performance___fatal_injury$sensitivity,
+     type='l', col='darkgreen', lwd=3,
+     xlim=c(0., 1.), ylim = c(0., 1.),
+     main='ROC Curves (Validation): positives = FATAL_INJURY',
+     xlab='1 - Specificity', ylab='Sensitivity')
+abline(a=0, b=1, lty=2, col=8)
+lines(x=1 - boost_oos_performance___non_fatal_injury$specificity,
+      y=boost_oos_performance___non_fatal_injury$sensitivity,
+      col='green', lwd=3)
+legend('right', c('Random Forest', 'Boosted Trees'), 
+   lty=1, col=c('darkgreen', 'green'), lwd=3, cex=1.)
+```
+
+It seems that we are detecting some significant signals in the prediction of all 3 categories of injury severity, and that the OOS performances of the Random Forest and Boosted Tree models are comparable. Let's pick the Boosted Trees model as our model of choice.
+
+In terms of decision making, we need to decide subjectively when to dispatch resources to deal with non-fatal and fatal injuries. Let's say we want to prepare for at least 80% of non-fatal injuries:
+
+```{r}
+non_fatal_injury_sensitivity_threshold <- .8
+i <- min(which(
+  boost_oos_performance___non_fatal_injury$sensitivity < non_fatal_injury_sensitivity_threshold)) - 1
+non_fatal_injury_selected_prob_threshold <- prob_thresholds[i]
+```
+
+The performance of the model in predicting non-fatal injury at this decision threshold of **`r formatC(non_fatal_injury_selected_prob_threshold, format='f', digits=3)`** is as follows:
+
+```{r}
+boost_oos_performance___non_fatal_injury[i, ]
+```
+
+It's good to see that our non-fatal injury predictive **precision** at this threshold is quite respectable, at **`r formatC(boost_oos_performance___non_fatal_injury[i, precision], format='f', digits=3)`**, i.e. we would be wrong less than half of the time.
+
+Similarly, let's decide to get prepared for fatal injuries in about 10% of the time (we may want to be less sensitive to fatal injuries because the corresponding resources are more expensive to deploy, and there is not an element of life-saving urgency):
+
+```{r}
+fatal_injury_sensitivity_threshold <- .1
+i <- min(which(
+  boost_oos_performance___fatal_injury$sensitivity < fatal_injury_sensitivity_threshold)) - 1
+fatal_injury_selected_prob_threshold <- prob_thresholds[i]
+```
+
+The performance of the model in predicting fatal injury at this decision threshold of **`r formatC(fatal_injury_selected_prob_threshold, format='f', digits=3)`** is as follows:
+
+```{r}
+boost_oos_performance___fatal_injury[i, ]
+```
+
+In this case, our non-fatal injury predictive **precision** at this threshold is not great, at **`r formatC(boost_oos_performance___fatal_injury[i, precision], format='f', digits=3)`**, i.e. we would be prepared for fatal injuries in many cases where there are actually none.
+
+
+# Test Performance of Selected Model
+
+Let's then evaluate the performance of the selected Boosted Trees model, with decision thresholds for non-fatal injuries and fatal injuries at **`r formatC(non_fatal_injury_selected_prob_threshold, format='f', digits=3)`** and **`r formatC(fatal_injury_selected_prob_threshold, format='f', digits=3)`**:
+
+```{r}
+X_test <- accidents_test[ , X_var_names, with=FALSE]
+y_test <- accidents_test$MAX_SEV_IR
+
+boost_test_pred_probs <- predict(
+  boost_model, newdata=X_test, type='prob')
+
+boost_test_performance___non_fatal_injury <- bin_classif_eval(
+  boost_test_pred_probs$non_fatal_injury, y_test == 'non_fatal_injury',
+  thresholds=non_fatal_injury_selected_prob_threshold)
+
+boost_test_performance___non_fatal_injury
+```
+
+```{r}
+boost_test_performance___fatal_injury <- bin_classif_eval(
+  boost_test_pred_probs$fatal_injury, y_test == 'fatal_injury',
+  thresholds=fatal_injury_selected_prob_threshold)
+
+boost_test_performance___fatal_injury
+```
+
+We can see that the Test performance is similar to what we've estimated from the Validation set.
+
+
+# 3. Estimating the Effect of Alcohol
+
+The effect of alcohol usage on the odds of non-fatal and fatal injuries can be estimated using logistic regressions. Refer to Matt Taddy's _Big Data_ course for relevant techniques.
+
+
+```{r}
+stopCluster(cl)   # shut down the parallel computing cluster
+```

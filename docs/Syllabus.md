@@ -265,6 +265,8 @@ See Chapters 3 and 4 of "Statistical Analysis of Network Data with R" (PDF avail
 
 _Lecture Slides:_ <br>
 [**Probabilistic Graphical Models**](Syllabus/09_pgm.pdf) <br>
+[**Example PGM**](Syllabus/09_dag_example.pdf) <br>
+[**Hidden Markov Models**](Syllabus/10_hmm.pdf) <br>
 
 _**R code**:_ <br>
 
@@ -283,4 +285,6 @@ _Optional reading:_
 [Andrew Moore's basic probability tutorial](http://www.autonlab.org/tutorials/prob18.pdf) <br>
 [Rabiner's Detailed HMMs Tutorial](References/hmms-rabiner.pdf)  <br>
 [Text mining package](https://cran.r-project.org/web/packages/tm/vignettes/tm.pdf)  <br>
-[Graphical Models with R](http://pi.lib.uchicago.edu/1001/cat/bib/8873052)   
+[Graphical Models with R](http://pi.lib.uchicago.edu/1001/cat/bib/8873052)   <br>
+[HMM Tutorial](https://www.cs.sjsu.edu/~stamp/RUA/HMM.pdf) <br>
+[Animated HMM Tutorial](http://www.comp.leeds.ac.uk/roger/HiddenMarkovModels/html_dev/main.html)

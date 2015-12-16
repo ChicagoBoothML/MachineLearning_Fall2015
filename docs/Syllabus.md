@@ -220,9 +220,9 @@ In this lecture, we will be using *recommenderlab* package.
 
 
 _**Python code**_ <br>
-[MovieLens_MovieRecommendation.ipynb]
+[MovieLens_LatentFactorRec.ipynb](https://github.com/ChicagoBoothML/MachineLearning_Fall2015/blob/master/Programming%20Scripts/MovieLens%20Movie%20Recommendation/Python/MovieLens_LatentFactorRec.ipynb)
 
-- _**note**: this script requires **Apache Spark** to be install; also, the Recommender functionalities of Spark MLlib are not as extensive as `recommenderlab` in R_
+- _**note**: this script requires **Apache Spark** to be installed_
 
 
 _Homework assignment:_  <br>

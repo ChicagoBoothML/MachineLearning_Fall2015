@@ -1,0 +1,245 @@
+---
+title: 'Boston Housing: KNN; Bias-Variance Trade-Off; Cross Validation'
+author: 'Chicago Booth ML Team'
+output: pdf_document
+fontsize: 12
+geometry: margin=0.6in
+---
+
+
+# OVERVIEW
+
+This R Markdown script uses the **_Boston Housing_** data set to illustrate the following:
+
+- The **$k$-Nearest Neighbors** (**KNN**) algorithm;
+- The **Bias-Variance Trade-Off**; and
+- The use of **Cross Validation** to estimate Out-of-Sample (OOS) prediction error and determine optimal hyper-parameters, in this case the number of nearest neighbors $k$.
+
+
+# _first, some boring logistics..._
+
+Let's first load some necessary R packages and helper functions and set the random number generator's seed:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+# Install necessary packages, just in case they are not yet installed
+install.packages(c('data.table', 'ggplot2', 'kknn'),
+                 dependencies=TRUE,
+                 repos='http://cran.rstudio.com')
+```
+
+```{r message=FALSE}
+# load CRAN libraries from CRAN packages
+library(data.table)
+library(ggplot2)
+library(kknn)
+# load modules from the common HelpR repo
+helpr_repo_raw_url <- 'https://raw.githubusercontent.com/ChicagoBoothML/HelpR/master'
+source(file.path(helpr_repo_raw_url, 'docv.R'))   # this has docvknn used below
+
+# set randomizer's seed
+set.seed(99)   # Gretzky was #99
+```
+
+
+# **Boston Housing** Data Set
+
+Let's then look at the **Boston Housing** data set:
+
+```{r results='hold'}
+# download data and read data into data.table format
+boston_housing <- fread(
+  'https://raw.githubusercontent.com/ChicagoBoothML/DATA___BostonHousing/master/BostonHousing.csv')
+# count number of samples
+nb_samples <- nrow(boston_housing)
+# sort data set by increasing lstat
+setkey(boston_housing, lstat)
+boston_housing
+```
+
+This data set has **`r formatC(nb_samples, big.mark=',')`** samples.
+
+We'll focus on **using the _lstat_ variable to predict the _medv_ variable**. Let's first plot them against each other:
+
+```{r fig.width=8, fig.heigth=6}
+plot_boston_housing_data <- function(boston_housing_data,
+                                     title='Boston Housing: medv vs. lstat',
+                                     plot_predicted=TRUE) {
+  g <- ggplot(boston_housing_data) +
+    geom_point(aes(x=lstat, y=medv, color='actual'), size=2) +
+    ggtitle(title) +
+    xlab('medv') + ylab('lstat')
+  
+  if (plot_predicted) {
+    g <- g +
+      geom_line(aes(x=lstat, y=predicted_medv, color='predicted'), size=0.6) +
+      scale_colour_manual(name='medv',
+                          values=c(actual='blue', predicted='darkorange'))
+  } else {
+    g <- g +
+      scale_colour_manual(name='medv',
+                          values=c(actual='blue'))
+  }
+  
+  g <- g +
+    theme(plot.title=element_text(face='bold', size=24),
+        axis.title=element_text(face='italic', size=18))
+  
+  g
+}
+
+plot_boston_housing_data(boston_housing, plot_predicted=FALSE)
+```
+
+
+# $k$-Nearest Neighbors algorithm and Bias-Variance Trade-Off
+
+```{r}
+try_k <- 5
+```
+
+Let's now try fitting a KNN predictor, with $k$ = `r try_k`, of _medv_ from _lstat_, using the entire `r formatC(nb_samples, big.mark=',')` samples:
+
+```{r fig.width=8, fig.height=6}
+knn_model <- kknn(medv ~ lstat,
+                  train=boston_housing, test=boston_housing[, .(lstat)],
+                  k=try_k, kernel='rectangular')
+boston_housing[, predicted_medv := knn_model$fitted.values]
+
+plot_boston_housing_data(boston_housing, title=paste('KNN Model with k =', try_k))
+```
+
+With $k$ = `r try_k` &ndash; a small number of nearest neighbors &ndash; we have a very "squiggly" predictor, which **fits the training data well** but is **over-sensitive to small changes** in the _lstat_ variable. We call this a **LOW-BIAS**, **HIGH-VARIANCE** predictor. We don't like it.
+
+```{r}
+try_k <- 200
+```
+
+Now, with, say, $k$ = `r try_k`, we have the following:
+
+```{r fig.width=8, fig.height=6}
+knn_model <- kknn(medv ~ lstat,
+                  train=boston_housing, test=boston_housing[, .(lstat)],
+                  k=try_k, kernel='rectangular')
+boston_housing[, predicted_medv := knn_model$fitted.values]
+
+plot_boston_housing_data(boston_housing, title=paste('KNN Model with k =', try_k))
+```
+
+_Meh..._, we're not exactly jumping around with joy with this one, either. The predictor line is **not over-sensitive**, but **too "smooth" and too simple**, **not responding sufficiently to significant changes** in _lstat_. We call this a **HIGH-BIAS, LOW-VARIANCE** predictor.
+
+```{r}
+try_k <- 50
+```
+
+Let's try something in between, say, $k$ = `r try_k`, to see if we have any better luck:
+
+```{r fig.width=8, fig.height=6}
+knn_model <- kknn(medv ~ lstat,
+                  train=boston_housing, test=boston_housing[, .(lstat)],
+                  k=try_k, kernel='rectangular')
+boston_housing[, predicted_medv := knn_model$fitted.values]
+
+plot_boston_housing_data(boston_housing, title=paste('KNN Model with k =', try_k))
+```
+
+Now, this looks pretty reasonable, and we'd think this predictor would **generalize well** when facing new, not yet seen, data. This is a **low-bias**, **low-variance** predictor. We love ones like this.
+
+Hence, the key take-away is that, throughout a range of **hyper-parameter** $k$ from small to large, we have seen a spectrum of corresponding predictors from "low-bias high-variance" to "high-bias low-variance". This phenomenon is called the **BIAS-VARIANCE TRADE OFF**, a fundamental concept in Machine Learning that is applicable to not only KNN alone but to all modeling methods.
+
+The bias-variance trade-off concerns the **generalizability of a trained predictor** in light of new data it's not seen before. If a predictor has high bias and/or high variance, it will not do well in new cases. **Good, generalizable predictors** need to have **both low bias and low variance**.
+
+
+# Out-of-Sample Error and Cross-Validation
+
+To **quantify the generalizability of a predictor**, we need to estimate its **out-of-sample (OOS) error**, i.e. a certain measure of **how well the predictor performs on data not used in its training process**.
+
+A popular way to produce such OOS error estimates is to perform **cross validation**. Refer to lecture slides or [here](http://en.wikipedia.org/wiki/Cross-validation_(statistics)) for discussions on cross validation.
+
+```{r}
+NB_CROSS_VALIDATION_FOLDS <- 5
+NB_CROSS_VALIDATIONS <- 6
+```
+
+Now, let's consider [**Root Mean Square Error** (**RMSE**)](http://en.wikipedia.org/wiki/Root-mean-square_deviation) as our predictor-goodness evaluation criterion and use `r NB_CROSS_VALIDATION_FOLDS`-fold cross validation `r NB_CROSS_VALIDATIONS` times to pick a KNN predictor that has satisfactory RMSE.
+
+```{r results='hide'}
+k_range = 2 : 200
+cross_validations_rmse = data.table(k=k_range, cv_avg_rmse=0.)
+for (i in 1 : NB_CROSS_VALIDATIONS) {
+  this_cross_validation_rmse =
+    sqrt(docvknn(boston_housing[, .(lstat)], boston_housing$medv,
+                 k=k_range, nfold=NB_CROSS_VALIDATION_FOLDS,
+                 verbose=FALSE) / nb_samples)
+  cross_validations_rmse[, (paste('cv_',  i, '_rmse', sep=''))] =
+    this_cross_validation_rmse
+  cross_validations_rmse[, cv_avg_rmse := cv_avg_rmse +
+                           (this_cross_validation_rmse - cv_avg_rmse) / i]
+}
+```
+
+```{r}
+g <- ggplot(cross_validations_rmse)
+
+for (i in 1 : NB_CROSS_VALIDATIONS) {
+  g <- g + geom_line(aes_string(x='-log(k)', y=(paste('cv_',  i, '_rmse', sep='')),
+                                color=i), linetype='dotted', size=0.6)
+}
+
+g <- g +
+  geom_line(aes(x=-log(k), y=cv_avg_rmse),
+            color='black', size=1) +
+  ggtitle('Cross Validations') +
+  xlab('Model Complexity (-log K)') + ylab('OOS RMSE') +
+  guides(color=FALSE) + 
+  theme(plot.title=element_text(face='bold', size=24),
+        axis.title=element_text(face='italic', size=18))
+
+g
+```
+
+```{r}
+best_k = k_range[which.min(cross_validations_rmse$cv_avg_rmse)]
+```
+
+From the above plot, the best $k$, one that minimizes the average cross-validation RMSE, is **`r best_k`**, which produces the following predictor:
+
+```{r fig.width=8, fig.height=6}
+knn_model <- kknn(medv ~ lstat,
+                  train=boston_housing, test=boston_housing[, .(lstat)],
+                  k=best_k, kernel='rectangular')
+boston_housing[, predicted_medv := knn_model$fitted.values]
+
+plot_boston_housing_data(boston_housing, title=paste('KNN Model with k =', best_k))
+```
+
+
+# _BONUS:_ implementation by the _caret_ package
+
+[**_caret_**](http://topepo.github.io/caret/index.html) is a popular R package that provides standardized interfaces with 200+ Machine Learning algorithms.
+
+Much of the above procedures can be re-done very succinctly with _caret_ as follows:
+
+```{r message=FALSE, warning=FALSE}
+library(caret)
+```
+
+```{r}
+cross_validated_knn_model =
+  train(medv ~ lstat, data=boston_housing,
+        method='kknn',
+        tuneGrid=expand.grid(kmax=200,
+                             kernel='rectangular',
+                             distance=2),
+        trControl=trainControl(method='repeatedcv',
+                               number=NB_CROSS_VALIDATION_FOLDS,
+                               repeats=NB_CROSS_VALIDATIONS,
+                               allowParallel=TRUE))
+
+cross_validated_knn_model
+```
+
+```{r}
+best_k = cross_validated_knn_model$finalModel$best.parameters$k
+```
+
+The best $k$ identified by _caret_ is **`r best_k`**. Note that there can be a range of acceptable "best" hyper-parameters because of randomization.

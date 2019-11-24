@@ -1,0 +1,265 @@
+---
+title: 'Boston Housing: Decision Trees; Bagging and Random Forests; Boosting and Boosted Additive Models'
+author: 'Chicago Booth ML Team'
+output: pdf_document
+fontsize: 12
+geometry: margin=0.6in
+---
+
+
+# OVERVIEW
+
+This R Markdown script uses the **_Boston Housing_** data set to illustrate
+
+- **Decision Trees** and trees-related **_ensemble modeling_** methods:
+- **Random Forests**, which are based on **Bootstrap Aggregating** ("**Bagging**") applied to trees; and 
+- **Boosted Additive (Trees) Models**.
+
+
+# _first, some boring logistics..._
+
+Let's first load some necessary R packages and set the random number generator's seed:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+# Install necessary packages, just in case they are not yet installed
+install.packages(c('data.table',
+                   'gbm',
+                   'ggplot2',
+                   'randomForest',
+                   'tree'),
+                 dependencies=TRUE,
+                 repos='http://cran.rstudio.com')
+```
+
+```{r message=FALSE}
+# load CRAN libraries from CRAN packages
+library(data.table)
+library(gbm)
+library(ggplot2)
+library(randomForest)
+library(tree)
+
+# set randomizer's seed
+set.seed(99)   # Gretzky was #99
+```
+
+
+# Boston Housing Data Set
+
+Let's then look at the **Boston Housing** data set:
+
+```{r results='hold'}
+# download data and read data into data.table format
+boston_housing <- fread(
+  'https://raw.githubusercontent.com/ChicagoBoothML/DATA___BostonHousing/master/BostonHousing.csv')
+
+# sort data table by 'lstat'
+setkey(boston_housing, lstat)
+
+# count number of samples
+nb_samples <- nrow(boston_housing)
+
+boston_housing
+```
+
+This data set has **`r formatC(nb_samples, big.mark=',')`** samples.
+
+
+# Models with 1 Predictor
+
+For illustrative purposes, let's look at simple single-predictor models predicting the _medv_ variable by the _lstat_ variable. A plot of these variables against each other is as follows:
+
+```{r fig.width=8, fig.heigth=6}
+plot_boston_housing_data <- function(boston_housing_data,
+                                     title='Boston Housing: medv vs. lstat',
+                                     plot_predicted=TRUE) {
+  g <- ggplot(boston_housing_data) +
+    geom_point(aes(x=lstat, y=medv, color='actual'), size=2) +
+    ggtitle(title) +
+    xlab('medv') + ylab('lstat')
+  
+  if (plot_predicted) {
+    g <- g +
+      geom_line(aes(x=lstat, y=predicted_medv, color='predicted'), size=0.6) +
+      scale_colour_manual(name='medv',
+                          values=c(actual='blue', predicted='darkorange'))
+  } else {
+    g <- g +
+      scale_colour_manual(name='medv',
+                          values=c(actual='blue'))
+  }
+  
+  g <- g +
+    theme(plot.title=element_text(face='bold', size=24),
+        axis.title=element_text(face='italic', size=18))
+  
+  g
+}
+
+plot_boston_housing_data(boston_housing, plot_predicted=FALSE)
+```
+
+
+## Single Decision Trees
+
+Let's now play with a few single decision trees:
+
+```{r}
+mincut <- 100   # smallest allowed node size
+minsize <- 200   # minimum number of observations to include in either child node; NOTE: minsize >= 2x mincut
+mindev <- 1e-6   # minimum deviance gain for further tree split
+
+tree_model <- tree(medv ~ lstat, data=boston_housing,
+                   mincut=mincut, minsize=minsize, mindev=mindev)
+boston_housing[, predicted_medv := predict(tree_model, newdata=boston_housing)]
+
+plot_boston_housing_data(boston_housing)
+```
+
+We see that with the above tuning parameters, the tree model is a **fairly simple, crude step function**. This function seems to have **high bias** and **low variance**.
+
+Let's try bigger, more complex tree:
+
+```{r}
+mincut <- 5   # allow smaller minimum node size, corresponding to finer cuts
+minsize <- 10   # minsize >= 2x mincut
+
+tree_model <- tree(medv ~ lstat, data=boston_housing,
+                   mincut=mincut, minsize=minsize, mindev=mindev)
+boston_housing[, predicted_medv := predict(tree_model, newdata=boston_housing)]
+
+plot_boston_housing_data(boston_housing)
+```
+
+Now, with the new parameters, we have a more complex model that is **low-bias**, **high-variance**.
+
+Fitting a good model with a single tree is difficult, largely because a single tree is fit using a greedy heuristic that may not be optimal in the first place.
+
+In practice, trees are almost always used in an **ensemble modeling** manner. The computational inexpensiveness of individual trees allow numerous trees to be fitted in acceptable run times, and collected into an "ensemble" of fitted models, the predictions of which are combined in certain ways. Two prominent ensemble methods are **bagging** (**_bootstrap aggregating_**) and **boosting**.
+
+
+## Bagging and Random Forests
+
+With the [**bagging**](http://en.wikipedia.org/wiki/Bootstrap_aggregating) method, $B$ models of a certain kind (usually, but not necessarily, tree models) are fitted on $B$ bootstrap samples of the training data set, and their **predictions are averaged** to produce the ensemble prediction function.
+
+- Each **individual model** among the $B$ model should be a **sufficiently-complex, low-bias** model &ndash; which also means that each individual model is likely to have **high variance**;
+- The low bias of each model will result in an **average ensemble model that also has low bias**; and
+- In order to make the ensemble model also have low variance, we select a large enough number $B$, so that individual models' high variances offset each other in the aggregate!
+
+The application of "bagging" using tree models is called **Random Forest**:
+
+```{r message=FALSE}
+B <- 5000   # number of trees in the Random Forest
+
+rf_model <- randomForest(medv ~ lstat, data=boston_housing,
+                         ntree=B,     # number of trees in the Random Forest
+                         nodesize=25, # minimum node size set small enough to allow for complex trees,
+                                      # but not so small as to require too large B to eliminate high variance
+                         keep.inbag=TRUE)
+
+boston_housing[, predicted_medv := predict(rf_model, newdata=boston_housing)]
+
+plot_boston_housing_data(boston_housing)
+```
+
+We can see that the average prediction of `r B` trees in the Random Forest, though not a totally smooth function, does well in capturing the signal in the data. We'd be reasonably happy with such a predictive model. The estimated Out-of-Bag (OOB) RMSE of this model is **`r formatC(sqrt(mean(rf_model$mse)), format='f', digits=3)`**.
+
+
+## Boosting
+
+With the [**boosting**](http://en.wikipedia.org/wiki/Boosting_(machine_learning)) method, we successively advance towards a good model fit by adding up small fractions / proportions of relatively simple models that have low variances but possibly high biases. The key intuition is as follows:
+
+- Because individual models are simple and have low variance, the combined additive ensemble model is also likely to have low variance; and
+- Because models are successively fit to capture the residuals left over from the previous models, models' biases are likely to offset each other, resulting in an additive ensemble model with low bias!
+
+Let's now build a tree ensemble using boosting:
+
+```{r message=FALSE}
+# *** IMPORTANT NOTE ***
+# By right, we should be able to easily estimate the OOS RMSE from the Boosted Model
+# using GBM's own built-in Cross Validation procedure.
+# However, there is currently a BUG that prevents us from using GBM Cross Validation
+# in univariate cases.
+# Hence, below, we manually produce a training set and a test set to estimate OOS RMSE
+
+train_indices <- sort(sample.int(nb_samples, round(.8 * nb_samples)))
+boston_housing_train <- boston_housing[train_indices, ]
+boston_housing_test <- boston_housing[-train_indices, ]
+
+boost_model <- gbm(medv ~ lstat, data=boston_housing_train, distribution='gaussian',
+                   n.trees=B,           # number of trees
+                   interaction.depth=5, # max tree depth
+                   n.minobsinnode=40,   # minimum node size, here set higher to avoid high variance
+                   shrinkage=0.001,     # shrinkage term, or procedure's "learning rate"
+                   bag.fraction=1.,
+                   train.fraction=1.)
+
+predicted_medv_test = predict(boost_model, newdata=boston_housing_test, n.trees=B)
+oos_rmse = sqrt(mean((predicted_medv_test - boston_housing_test$medv) ^ 2))
+
+# *** IMPORTANT NOTE ***
+# The commented-out code below is an alterative GBM function call that, by right,
+# should produce the same results; however, there seems to be a BUG with this GBM.FIT function
+# resulting in different predictions on test data. DON'T use GBM.FIT.
+#
+# boost_model <- gbm.fit(x=boston_housing[, .(lstat)], y=boston_housing$medv, distribution='gaussian',
+#                        n.trees=B,           
+#                        interaction.depth=5, 
+#                        n.minobsinnode=40,  
+#                        shrinkage=0.001)
+
+boston_housing[, predicted_medv := predict(boost_model, newdata=boston_housing, n.trees=B)]
+
+plot_boston_housing_data(boston_housing)
+```
+
+This Boosted Trees ensemble model also looks sound, and has an estimated OOS RSME of **`r formatC(oos_rmse, format='f', digits=3)`**.
+
+
+# Multivariate Models
+
+Besides their computation inexpensiveness, another _huge_ advantage of using trees-based algorithms is that they are very scalable to multivariate models, and deals with variable interactions very nicely without the need of standard scaling.
+
+Let's build multivariate Random Forest and Boosted Trees models to predict _medv_ using all other variables in the Boston Housing data set:
+
+```{r}
+boston_housing[, predicted_medv := NULL]   # remove prediction results column
+boston_housing <- boston_housing[sample.int(nb_samples), ]   # shuffle data for more accurate Cross Validation
+
+B <- 10000
+
+rf_model <- randomForest(medv ~ ., data=boston_housing,
+                         ntree=B,     # number of trees in the Random Forest
+                         nodesize=25, # minimum node size set small enough to allow for complex trees,
+                                      # but not so small as to require too large B to eliminate high variance
+                         importance=TRUE,
+                         keep.inbag=TRUE)
+
+boost_model <- gbm(medv ~ ., data=boston_housing, distribution='gaussian',
+                   n.trees=B,            # number of trees
+                   interaction.depth=10, # max tree depth
+                   n.minobsinnode=40,    # minimum node size, here set higher to avoid high variance
+                   shrinkage=0.01,       # shrinkage term, or procedure's "learning rate"
+                   bag.fraction=1.,
+                   train.fraction=1.,
+                   cv.folds=10)          # 10-fold Cross Validation to estimate OOS RMSE
+```
+
+The multivariate Random Forest has an estimated OOB RMSE of **`r formatC(sqrt(mean(rf_model$mse)), format='f', digits=3)`**, clearly better than that of the univariate Random Forest model.
+
+The multivariate Boosted Trees model has an estimated Cross Validation-estimated OOS RMSE of **`r  formatC(sqrt(mean(boost_model$cv.error)), format='f', digits=3)`**, again a clear improvement from the univariate Boosted Trees model.
+
+We can also see that the two models' prediction are pretty aligned:
+
+```{r}
+plot(rf_model$predicted, boost_model$fit)
+title('Random Forest vs. Boosted Trees predictions')
+```
+
+
+The two models also agree on the most important variables:
+
+```{r}
+varImpPlot(rf_model, main="Random Forest's Variable Importance")
+plot(summary(boost_model, plotit=FALSE), main="Boosted Trees Model's Variable Importance")
+```
